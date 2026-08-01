@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANTMATRIX AI | Live Breakout ML & Quant Trading Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN (Deferred for non-blocking load) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <link rel="stylesheet" href="styles.css?v=1.0.5">
+    <script src="data.js?v=1.0.5"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i class="fa-solid me-1 fa-chart-line"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">QUANT<span class="highlight">MATRIX</span></span>
+                    <span class="brand-sub">INSTITUTIONAL AI</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+            </nav>
+
+            <div class="macro-widget card-glass">
+                <div class="widget-header">
+                    <i class="fa-solid fa-globe"></i> Macro Regime
+                </div>
+                <div class="macro-badge-container">
+                    <div class="regime-item">
+                        <span class="lbl">NIFTY 50</span>
+                        <span id="nifty-regime-badge" class="badge badge-bullish">BULLISH</span>
+                    </div>
+                    <div class="regime-item">
+                        <span class="lbl">India VIX</span>
+                        <span id="vix-badge" class="badge badge-cyan"><i class="fa-solid fa-shield-cat"></i> 11.76 (Low)</span>
+                    </div>
+                    <div class="regime-item">
+                        <span class="lbl">Win Boost</span>
+                        <span id="macro-mult-badge" class="badge badge-gold">+8% (1.08x)</span>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navbar Disclaimer Header -->
+            <header class="top-header card-glass">
+                <div class="header-title" style="width: 100%;">
+                    <p class="subtitle disclaimer-text"><i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-gold); margin-right: 6px;"></i> <strong>Disclaimer:</strong> This platform provides educational market analysis only. It is not financial advice, investment advice, or a buy/sell recommendation. Market movement is uncertain, and predictions may be wrong.</p>
+                </div>
+            </header>
+
+            <!-- Executive Metric KPI Cards -->
+            <section class="kpi-grid">
+                <div class="kpi-card card-glass glow-emerald">
+                    <div class="kpi-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">High Conviction Signals</span>
+                        <span class="kpi-value" id="kpi-high-conviction">0</span>
+                        <span class="kpi-sub green-text"><i class="fa-solid fa-arrow-trend-up"></i> Top Quality Setups</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card card-glass glow-cyan">
+                    <div class="kpi-icon icon-cyan"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Top Model Win Prob %</span>
+                        <span class="kpi-value" id="kpi-top-winprob">-- %</span>
+                        <span class="kpi-sub cyan-text" id="kpi-top-stock">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Controls & Filters Bar -->
+            <section class="controls-bar card-glass">
+                <div class="tabs-container">
+                    <button class="tab-btn active" data-filter="ALL"><i class="fa-solid fa-layer-group"></i> All Setups (<span id="count-all">0</span>)</button>
+                    <button class="tab-btn tab-green" data-filter="🟢 HIGH CONVICTION BUY"><i class="fa-solid fa-circle"></i> High Conviction (<span id="count-high">0</span>)</button>
+                    <button class="tab-btn tab-yellow" data-filter="🟡 MODERATE BUY"><i class="fa-solid fa-triangle-exclamation"></i> Moderate Buy (<span id="count-mod">0</span>)</button>
+                    <button class="tab-btn tab-red" data-filter="🔴 AVOID / HOLD"><i class="fa-solid fa-ban"></i> Avoid / Hold (<span id="count-avoid">0</span>)</button>
+                </div>
+
+                <div class="controls-right">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="Search ticker symbol...">
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="view-cards" title="Card View"><i class="fa-solid fa-border-all"></i></button>
+                        <button class="view-btn" id="view-table" title="Table View"><i class="fa-solid fa-list"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cards Container -->
+            <section class="cards-grid" id="cards-container">
+                <!-- Dynamically Rendered by app.js -->
+            </section>
+
+            <!-- Institutional Table View (Hidden by default) -->
+            <section class="table-container card-glass hidden" id="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Signal</th>
+                            <th>CMP (₹)</th>
+                            <th>Buy Entry Range</th>
+                            <th>Max Chase</th>
+                            <th>Today's Exp. Close</th>
+                            <th>Win Prob %</th>
+                            <th>Risk:Reward</th>
+                            <th>Target Price</th>
+                            <th>Stop Loss</th>
+                            <th>Key Drivers</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Dynamically Rendered -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay hidden" id="stock-modal">
+        <div class="modal-card card-glass tier-3-modal">
+            <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+
+            <!-- Modal Header -->
+            <div class="deep-modal-header">
+                <div class="deep-title-group">
+                    <h2><span id="modal-stock-name">STOCK</span> – 3-Tier Deep Analysis</h2>
+                    <div class="deep-subtitle">
+                        Current Market Price: <span id="modal-cmp" class="highlight-cmp">₹0.00</span> • 
+                        Signal: <span id="modal-signal-badge" class="badge">SIGNAL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-Tier Pill Navigation Tabs -->
+            <div class="tier-nav-bar">
+                <button class="tier-tab-btn active" data-tab="tab-fundamental"><i class="fa-solid fa-building-columns"></i> 1. Fundamental Analysis</button>
+                <button class="tier-tab-btn" data-tab="tab-technical"><i class="fa-solid fa-chart-column"></i> 2. Technical Analysis</button>
+                <button class="tier-tab-btn" data-tab="tab-quant"><i class="fa-solid fa-chart-line"></i> 3. Quant & ML Forecast</button>
+                <button class="tier-tab-btn" data-tab="tab-car"><i class="fa-solid fa-layer-group"></i> 4. CAR Super Breakout Analysis</button>
+            </div>
+
+            <!-- Modal Body Content Panes -->
+            <div class="tier-tab-content">
+
+                <!-- TIER 1: FUNDAMENTAL ANALYSIS PANE -->
+                <div class="tier-pane active" id="tab-fundamental">
+                    <div class="metrics-card-grid">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">SECTOR</span>
+                            <span class="m-value" id="m-sector">--</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">MARKET CAP (CR.)</span>
+                            <span class="m-value" id="m-mcap">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">TRAILING P/E RATIO</span>
+                            <span class="m-value" id="m-pe">0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">YOY REVENUE GROWTH</span>
+                            <span class="m-value green-text" id="m-revgrowth">+0.0%</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">PROFIT MARGINS</span>
+                            <span class="m-value" id="m-margins">0.00%</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">RETURN ON EQUITY</span>
+                            <span class="m-value" id="m-roe">0.00%</span>
+                        </div>
+                    </div>
+
+                    <div class="synthesis-box card-glass-inner">
+                        <div class="synthesis-title"><i class="fa-solid fa-building-columns"></i> Fundamental Synthesis:</div>
+                        <p id="synthesis-fundamental-text">Loading synthesis narrative...</p>
+                    </div>
+                </div>
+
+                <!-- TIER 2: TECHNICAL ANALYSIS PANE -->
+                <div class="tier-pane" id="tab-technical">
+                    <div class="metrics-card-grid">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">RSI (14 DAYS)</span>
+                            <span class="m-value cyan-text" id="m-rsi">61.58</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">MACD HISTOGRAM</span>
+                            <span class="m-value green-text" id="m-macd-hist">+3.23</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">MACD LINE / SIGNAL</span>
+                            <span class="m-value" id="m-macd-line">-- / --</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">30-DAY DMA</span>
+                            <span class="m-value" id="m-dma30">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">200-DAY DMA (+%)</span>
+                            <span class="m-value green-text" id="m-dma200">₹0.00 (+0.0%)</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">ATR (14 DAYS)</span>
+                            <span class="m-value" id="m-atr">₹0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="synthesis-box card-glass-inner">
+                        <div class="synthesis-title"><i class="fa-solid fa-chart-line"></i> Technical Synthesis:</div>
+                        <p id="synthesis-technical-text">Loading synthesis narrative...</p>
+                    </div>
+                </div>
+
+                <!-- TIER 3: QUANT & ML FORECAST PANE -->
+                <div class="tier-pane" id="tab-quant">
+
+                    <!-- Interactive 5-Day Trajectory Chart -->
+                    <div class="forecast-chart-container card-glass-inner" style="height: 240px; margin-bottom: 20px; position: relative;">
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+
+                    <div class="metrics-card-grid-quant">
+                        <div class="metric-card card-glass-inner glow-gold">
+                            <span class="m-label"><i class="fa-solid fa-robot"></i> 10-MODEL CONSENSUS</span>
+                            <span class="m-value green-text" id="m-quant-consensus">85.7%</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-chart-pie"></i> AVG OUT-OF-SAMPLE R²</span>
+                            <span class="m-value cyan-text" id="m-quant-r2">-0.77</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-percent"></i> AVG MODEL MAE (%)</span>
+                            <span class="m-value gold-text" id="m-quant-mae">2.28%</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-bullseye"></i> TODAY'S EXP. CLOSE</span>
+                            <span class="m-value green-text" id="m-quant-1dclose">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-arrow-trend-up"></i> TODAY'S TARGET HIGH</span>
+                            <span class="m-value green-text" id="m-quant-1dhigh">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-arrow-trend-down"></i> TODAY'S EXPECTED LOW</span>
+                            <span class="m-value red-text" id="m-quant-1dlow">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-flag-checkered"></i> 5D EXPECTED CLOSE</span>
+                            <span class="m-value cyan-text" id="m-quant-5dclose">₹0.00 (+0.0%)</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-arrow-trend-up"></i> 5D MAX TARGET HIGH</span>
+                            <span class="m-value green-text" id="m-quant-maxhigh">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label"><i class="fa-solid fa-arrow-trend-down"></i> 5D EXPECTED LOW</span>
+                            <span class="m-value red-text" id="m-quant-5dlow">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">DYNAMIC STOP LOSS</span>
+                            <span class="m-value red-text" id="m-quant-stoploss">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">RISK-TO-REWARD RATIO</span>
+                            <span class="m-value" id="m-quant-rr">0.32 : 1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TIER 4: CAR SUPER BREAKOUT ANALYSIS PANE -->
+                <div class="tier-pane" id="tab-car">
+                    <div class="metrics-card-grid">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">CURRENT MARKET PRICE (CMP)</span>
+                            <span class="m-value green-text" id="m-car-cmp">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">30-DAY DMA</span>
+                            <span class="m-value" id="m-car-dma30">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">50-DAY DMA</span>
+                            <span class="m-value" id="m-car-dma50">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">200-DAY DMA</span>
+                            <span class="m-value" id="m-car-dma200">₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">DISTANCE FROM 200 DMA (%)</span>
+                            <span class="m-value green-text" id="m-car-dist200">+0.0%</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">CAR GOLDEN STACK STATUS</span>
+                            <span class="m-value green-text" id="m-car-status">CMP > 30 > 50 > 200</span>
+                        </div>
+                    </div>
+
+                    <div class="synthesis-box card-glass-inner">
+                        <div class="synthesis-title"><i class="fa-solid fa-layer-group"></i> CAR Super Breakout Analysis:</div>
+                        <p id="synthesis-car-text">Loading CAR breakout synthesis...</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=1.0.5"></script>
+</body>
+</html>

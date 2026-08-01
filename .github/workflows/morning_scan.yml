@@ -1,0 +1,44 @@
+name: Morning 8:30 AM Pre-Market Scan & ML Predictions
+
+on:
+  schedule:
+    # Runs Monday through Friday at 03:00 UTC (8:30 AM IST)
+    - cron: '0 3 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-scanner-and-predictor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install yfinance pandas numpy scikit-learn requests beautifulsoup4 openpyxl
+
+      - name: Step 1 & 2 — Run Scanner & Fetch Market Breakouts
+        run: |
+          python Initialization.py
+
+      - name: Step 3 & 4 — Run ML Quant Predictor Engine
+        run: |
+          python ml_quant_predictor.py
+
+      - name: Step 5 — Commit and Push Updated Predictions & Web Dashboard Payload
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Final_Breakout_List.xlsx Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-Update: 8:30 AM Pre-Market Scan & Predictions [skip ci]" && git push)
