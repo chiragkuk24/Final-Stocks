@@ -97,6 +97,45 @@ function initApp() {
 
         // 3. Render Cards & Table
         renderFilteredView();
+
+        // 4. Render Post-Market Analysis if available
+        renderPostMarketAnalysis();
+    }
+
+    // Render Post-Market Accuracy Section
+    function renderPostMarketAnalysis() {
+        const section = document.getElementById('post-market-section');
+        if (!section || !dashboardData || !dashboardData.validation) return;
+
+        const v = dashboardData.validation;
+        section.style.display = 'block';
+
+        document.getElementById('post-market-timestamp').textContent = `Validated: ${v.validated_at || '--'}`;
+        const accEl = document.getElementById('post-accuracy-pct');
+        accEl.textContent = `${v.accuracy_pct}%`;
+        accEl.className = `post-kpi-value ${v.accuracy_pct >= 70 ? 'green-text' : (v.accuracy_pct >= 50 ? 'gold-text' : 'red-text')}`;
+
+        document.getElementById('post-hit-count').textContent = `${v.target_hit_count} / ${v.total_evaluated}`;
+        document.getElementById('post-total-evaluated').textContent = v.total_evaluated;
+
+        const tbody = document.getElementById('post-accuracy-table-body');
+        if (!tbody || !v.details) return;
+
+        tbody.innerHTML = v.details.map(d => {
+            const isHit = d.Accuracy_Status.includes('HIT');
+            const signalClass = d.Live_Signal.includes('HIGH') ? 'badge-green' : (d.Live_Signal.includes('MODERATE') ? 'badge-yellow' : 'badge-red');
+            return `
+            <tr>
+                <td style="font-weight: 800; font-family: var(--font-heading);">${d.Stock}</td>
+                <td><span class="badge ${signalClass}">${d.Live_Signal}</span></td>
+                <td>₹${d.Pred_Close}</td>
+                <td style="font-weight: 700; color: ${isHit ? 'var(--accent-emerald)' : 'var(--text-main)'};">₹${d.Actual_Close}</td>
+                <td style="color: var(--accent-cyan);">₹${d.Actual_High}</td>
+                <td style="color: var(--accent-red);">₹${d.Actual_Low}</td>
+                <td style="color: ${d.Error_Pct <= 2.5 ? 'var(--accent-emerald)' : 'var(--accent-red)'}; font-weight: 600;">${d.Error_Pct}%</td>
+                <td class="${isHit ? 'hit-cell' : 'miss-cell'}">${d.Accuracy_Status}</td>
+            </tr>`;
+        }).join('');
     }
 
     // Filter & Search Logic

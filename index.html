@@ -135,6 +135,59 @@
                     </tbody>
                 </table>
             </section>
+            <!-- Post-Market Analysis Section -->
+            <section class="post-market-section card-glass" id="post-market-section" style="display:none;">
+                <div class="post-market-header">
+                    <h2><i class="fa-solid fa-chart-bar"></i> 4:00 PM Post-Market Accuracy Analysis</h2>
+                    <span class="post-market-timestamp" id="post-market-timestamp">Validated: --</span>
+                </div>
+
+                <!-- Summary KPIs -->
+                <div class="post-kpi-grid">
+                    <div class="post-kpi-card card-glass-inner glow-gold">
+                        <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="post-kpi-data">
+                            <span class="post-kpi-label">Overall Accuracy</span>
+                            <span class="post-kpi-value green-text" id="post-accuracy-pct">--%</span>
+                        </div>
+                    </div>
+                    <div class="post-kpi-card card-glass-inner">
+                        <div class="post-kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="post-kpi-data">
+                            <span class="post-kpi-label">Target Hits</span>
+                            <span class="post-kpi-value green-text" id="post-hit-count">-- / --</span>
+                        </div>
+                    </div>
+                    <div class="post-kpi-card card-glass-inner">
+                        <div class="post-kpi-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <div class="post-kpi-data">
+                            <span class="post-kpi-label">Setups Evaluated</span>
+                            <span class="post-kpi-value cyan-text" id="post-total-evaluated">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accuracy Table -->
+                <div class="post-table-wrapper">
+                    <table class="data-table post-accuracy-table">
+                        <thead>
+                            <tr>
+                                <th>Stock</th>
+                                <th>Signal</th>
+                                <th>Pred. Close</th>
+                                <th>Actual Close</th>
+                                <th>Actual High</th>
+                                <th>Actual Low</th>
+                                <th>Error %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="post-accuracy-table-body">
+                            <!-- Dynamically Rendered -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </main>
     </div>
 
