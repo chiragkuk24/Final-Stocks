@@ -52,6 +52,7 @@ function initApp() {
             pagePostmarket.style.display = '';
             navPostmarket.classList.add('active');
             navDashboard.classList.remove('active');
+            renderPostMarketAnalysis();
         }
     }
 
@@ -128,8 +129,12 @@ function initApp() {
 
     // Render Post-Market Accuracy Section
     function renderPostMarketAnalysis() {
-        const section = document.getElementById('post-market-section');
-        if (!section || !dashboardData || !dashboardData.validation) return;
+        if (!dashboardData || !dashboardData.validation) {
+            // No validation data yet — show placeholder message
+            const tbody = document.getElementById('post-accuracy-table-body');
+            if (tbody) tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:24px;">Post-market validation data will appear after 4:00 PM IST on weekdays.</td></tr>';
+            return;
+        }
 
         const v = dashboardData.validation;
 
