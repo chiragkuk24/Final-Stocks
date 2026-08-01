@@ -31,7 +31,8 @@
             </div>
 
             <nav class="nav-menu">
-                <a href="#" class="nav-item active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                <a href="#" class="nav-item active" id="nav-dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Post-Market Analysis</a>
             </nav>
 
             <div class="macro-widget card-glass">
@@ -65,129 +66,124 @@
                 </div>
             </header>
 
-            <!-- Executive Metric KPI Cards -->
-            <section class="kpi-grid">
-                <div class="kpi-card card-glass glow-emerald">
-                    <div class="kpi-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
-                    <div class="kpi-data">
-                        <span class="kpi-label">High Conviction Signals</span>
-                        <span class="kpi-value" id="kpi-high-conviction">0</span>
-                        <span class="kpi-sub green-text"><i class="fa-solid fa-arrow-trend-up"></i> Top Quality Setups</span>
-                    </div>
-                </div>
+            <!-- ======= PAGE VIEW: DASHBOARD ======= -->
+            <div id="page-dashboard">
 
-                <div class="kpi-card card-glass glow-cyan">
-                    <div class="kpi-icon icon-cyan"><i class="fa-solid fa-trophy"></i></div>
-                    <div class="kpi-data">
-                        <span class="kpi-label">Top Model Win Prob %</span>
-                        <span class="kpi-value" id="kpi-top-winprob">-- %</span>
-                        <span class="kpi-sub cyan-text" id="kpi-top-stock">--</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Controls & Filters Bar -->
-            <section class="controls-bar card-glass">
-                <div class="tabs-container">
-                    <button class="tab-btn active" data-filter="ALL"><i class="fa-solid fa-layer-group"></i> All Setups (<span id="count-all">0</span>)</button>
-                    <button class="tab-btn tab-green" data-filter="🟢 HIGH CONVICTION BUY"><i class="fa-solid fa-circle"></i> High Conviction (<span id="count-high">0</span>)</button>
-                    <button class="tab-btn tab-yellow" data-filter="🟡 MODERATE BUY"><i class="fa-solid fa-triangle-exclamation"></i> Moderate Buy (<span id="count-mod">0</span>)</button>
-                    <button class="tab-btn tab-red" data-filter="🔴 AVOID / HOLD"><i class="fa-solid fa-ban"></i> Avoid / Hold (<span id="count-avoid">0</span>)</button>
-                </div>
-
-                <div class="controls-right">
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="search-input" placeholder="Search ticker symbol...">
-                    </div>
-                    <div class="view-toggle">
-                        <button class="view-btn active" id="view-cards" title="Card View"><i class="fa-solid fa-border-all"></i></button>
-                        <button class="view-btn" id="view-table" title="Table View"><i class="fa-solid fa-list"></i></button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Cards Container -->
-            <section class="cards-grid" id="cards-container">
-                <!-- Dynamically Rendered by app.js -->
-            </section>
-
-            <!-- Institutional Table View (Hidden by default) -->
-            <section class="table-container card-glass hidden" id="table-container">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Stock</th>
-                            <th>Signal</th>
-                            <th>CMP (₹)</th>
-                            <th>Buy Entry Range</th>
-                            <th>Max Chase</th>
-                            <th>Today's Exp. Close</th>
-                            <th>Win Prob %</th>
-                            <th>Risk:Reward</th>
-                            <th>Target Price</th>
-                            <th>Stop Loss</th>
-                            <th>Key Drivers</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <!-- Dynamically Rendered -->
-                    </tbody>
-                </table>
-            </section>
-            <!-- Post-Market Analysis Section -->
-            <section class="post-market-section card-glass" id="post-market-section">
-                <div class="post-market-header">
-                    <h2><i class="fa-solid fa-chart-bar"></i> 4:00 PM Post-Market Accuracy Analysis</h2>
-                    <span class="post-market-timestamp" id="post-market-timestamp">Validated: --</span>
-                </div>
-
-                <!-- Summary KPIs -->
-                <div class="post-kpi-grid">
-                    <div class="post-kpi-card card-glass-inner glow-gold">
-                        <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
-                        <div class="post-kpi-data">
-                            <span class="post-kpi-label">Overall Accuracy</span>
-                            <span class="post-kpi-value green-text" id="post-accuracy-pct">--%</span>
+                <!-- Executive Metric KPI Cards -->
+                <section class="kpi-grid">
+                    <div class="kpi-card card-glass glow-emerald">
+                        <div class="kpi-icon icon-emerald"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">High Conviction Signals</span>
+                            <span class="kpi-value" id="kpi-high-conviction">0</span>
+                            <span class="kpi-sub green-text"><i class="fa-solid fa-arrow-trend-up"></i> Top Quality Setups</span>
                         </div>
                     </div>
-                    <div class="post-kpi-card card-glass-inner">
-                        <div class="post-kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
-                        <div class="post-kpi-data">
-                            <span class="post-kpi-label">Target Hits</span>
-                            <span class="post-kpi-value green-text" id="post-hit-count">-- / --</span>
+                    <div class="kpi-card card-glass glow-cyan">
+                        <div class="kpi-icon icon-cyan"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Top Model Win Prob %</span>
+                            <span class="kpi-value" id="kpi-top-winprob">-- %</span>
+                            <span class="kpi-sub cyan-text" id="kpi-top-stock">--</span>
                         </div>
                     </div>
-                    <div class="post-kpi-card card-glass-inner">
-                        <div class="post-kpi-icon"><i class="fa-solid fa-layer-group"></i></div>
-                        <div class="post-kpi-data">
-                            <span class="post-kpi-label">Setups Evaluated</span>
-                            <span class="post-kpi-value cyan-text" id="post-total-evaluated">--</span>
-                        </div>
-                    </div>
-                </div>
+                </section>
 
-                <!-- Accuracy Table -->
-                <div class="post-table-wrapper">
-                    <table class="data-table post-accuracy-table">
+                <!-- Controls & Filters Bar -->
+                <section class="controls-bar card-glass">
+                    <div class="tabs-container">
+                        <button class="tab-btn active" data-filter="ALL"><i class="fa-solid fa-layer-group"></i> All Setups (<span id="count-all">0</span>)</button>
+                        <button class="tab-btn tab-green" data-filter="🟢 HIGH CONVICTION BUY"><i class="fa-solid fa-circle"></i> High Conviction (<span id="count-high">0</span>)</button>
+                        <button class="tab-btn tab-yellow" data-filter="🟡 MODERATE BUY"><i class="fa-solid fa-triangle-exclamation"></i> Moderate Buy (<span id="count-mod">0</span>)</button>
+                        <button class="tab-btn tab-red" data-filter="🔴 AVOID / HOLD"><i class="fa-solid fa-ban"></i> Avoid / Hold (<span id="count-avoid">0</span>)</button>
+                    </div>
+                    <div class="controls-right">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="search-input" placeholder="Search ticker symbol...">
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" id="view-cards" title="Card View"><i class="fa-solid fa-border-all"></i></button>
+                            <button class="view-btn" id="view-table" title="Table View"><i class="fa-solid fa-list"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cards Container -->
+                <section class="cards-grid" id="cards-container"></section>
+
+                <!-- Table View -->
+                <section class="table-container card-glass hidden" id="table-container">
+                    <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Stock</th>
-                                <th>Signal</th>
-                                <th>Pred. Close</th>
-                                <th>Actual Close</th>
-                                <th>Actual High</th>
-                                <th>Actual Low</th>
-                                <th>Error %</th>
-                                <th>Status</th>
+                                <th>Stock</th><th>Signal</th><th>CMP (₹)</th>
+                                <th>Buy Entry Range</th><th>Max Chase</th>
+                                <th>Today's Exp. Close</th><th>Win Prob %</th>
+                                <th>Risk:Reward</th><th>Target Price</th>
+                                <th>Stop Loss</th><th>Key Drivers</th>
                             </tr>
                         </thead>
-                        <tbody id="post-accuracy-table-body">
-                            <!-- Dynamically Rendered -->
-                        </tbody>
+                        <tbody id="table-body"></tbody>
                     </table>
-                </div>
-            </section>
+                </section>
+
+            </div>
+            <!-- ======= END PAGE VIEW: DASHBOARD ======= -->
+
+            <!-- ======= PAGE VIEW: POST-MARKET ANALYSIS ======= -->
+            <div id="page-postmarket" style="display:none;">
+
+                <section class="post-market-section card-glass">
+                    <div class="post-market-header">
+                        <h2><i class="fa-solid fa-chart-bar"></i> 4:00 PM Post-Market Accuracy Analysis</h2>
+                        <span class="post-market-timestamp" id="post-market-timestamp">Validated: --</span>
+                    </div>
+
+                    <!-- Summary KPIs -->
+                    <div class="post-kpi-grid">
+                        <div class="post-kpi-card card-glass-inner glow-gold">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Overall Accuracy</span>
+                                <span class="post-kpi-value green-text" id="post-accuracy-pct">--%</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Target Hits</span>
+                                <span class="post-kpi-value green-text" id="post-hit-count">-- / --</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-layer-group"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Setups Evaluated</span>
+                                <span class="post-kpi-value cyan-text" id="post-total-evaluated">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accuracy Table -->
+                    <div class="post-table-wrapper">
+                        <table class="data-table post-accuracy-table">
+                            <thead>
+                                <tr>
+                                    <th>Stock</th><th>Signal</th>
+                                    <th>Pred. Close</th><th>Actual Close</th>
+                                    <th>Actual High</th><th>Actual Low</th>
+                                    <th>Error %</th><th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="post-accuracy-table-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+            <!-- ======= END PAGE VIEW: POST-MARKET ANALYSIS ======= -->
+
         </main>
     </div>
 

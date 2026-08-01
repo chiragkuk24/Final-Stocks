@@ -35,6 +35,30 @@ function initApp() {
     const modal = document.getElementById('stock-modal');
     const modalClose = document.getElementById('modal-close');
 
+    // Sidebar Navigation Switching
+    const navDashboard = document.getElementById('nav-dashboard');
+    const navPostmarket = document.getElementById('nav-postmarket');
+    const pageDashboard = document.getElementById('page-dashboard');
+    const pagePostmarket = document.getElementById('page-postmarket');
+
+    function switchPage(page) {
+        if (page === 'dashboard') {
+            pageDashboard.style.display = '';
+            pagePostmarket.style.display = 'none';
+            navDashboard.classList.add('active');
+            navPostmarket.classList.remove('active');
+        } else {
+            pageDashboard.style.display = 'none';
+            pagePostmarket.style.display = '';
+            navPostmarket.classList.add('active');
+            navDashboard.classList.remove('active');
+        }
+    }
+
+    if (navDashboard) navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); });
+    if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
+
+
     // Fetch Dashboard Data (Prioritizes window.DASHBOARD_DATA for CORS-free instant load)
     function loadDashboardData() {
         if (window.DASHBOARD_DATA && window.DASHBOARD_DATA.predictions && window.DASHBOARD_DATA.predictions.length > 0) {
