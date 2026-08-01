@@ -108,7 +108,6 @@ function initApp() {
         if (!section || !dashboardData || !dashboardData.validation) return;
 
         const v = dashboardData.validation;
-        section.style.display = 'block';
 
         document.getElementById('post-market-timestamp').textContent = `Validated: ${v.validated_at || '--'}`;
         const accEl = document.getElementById('post-accuracy-pct');
