@@ -33,9 +33,9 @@ def advanced_stock_scanner(ticker_list):
     for ticker in ticker_list:
         try:
             # 1. डेटा डाउनलोड करना (Data Fetching)
-            # यहाँ हम पिछले 2 साल (period="2y") का रोज़ाना (interval="1d") डेटा डाउनलोड कर रहे हैं।
+            # यहाँ हम All-Time (period="max") का रोज़ाना (interval="1d") डेटा डाउनलोड कर रहे हैं।
             # 200 DMA निकालने के लिए हमें कम से कम 200 दिन का डेटा चाहिए ही होता है।
-            data = yf.download(ticker, period="2y", interval="1d", progress=False)
+            data = yf.download(ticker, period="max", interval="1d", progress=False)
 
             # अगर कोई शेयर बाज़ार में नया आया है और उसका 200 दिन का डेटा ही नहीं है, तो उसे छोड़ कर अगले शेयर पर जाओ।
             if data.empty or len(data) < 200:

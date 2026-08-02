@@ -85,7 +85,7 @@ def fetch_macro_volatility_regime():
     nifty_state, vix_val, vix_regime, multiplier = "BULLISH", 13.5, "LOW_VOLATILITY", 1.05
 
     try:
-        nifty = yf.download("^NSEI", period="1y", interval="1d", progress=False)
+        nifty = yf.download("^NSEI", period="max", interval="1d", progress=False)
         if isinstance(nifty.columns, pd.MultiIndex):
             nifty.columns = nifty.columns.get_level_values(0)
         close = nifty['Close'].squeeze()
@@ -583,7 +583,7 @@ def predict_stock_price_action(symbol: str, macro_info: dict, account_capital: f
     print(f"📊 Live Trading Analytics for: {symbol} [VIX: {vix_val} ({vix_regime})]")
     print(f"=======================================================")
 
-    ticker_df = yf.download(symbol, period="2y", interval="1d", progress=False)
+    ticker_df = yf.download(symbol, period="max", interval="1d", progress=False)
     if ticker_df.empty or len(ticker_df) < 200:
         print(f"[WARN] Insufficient historical data for {symbol}.")
         return None
@@ -823,7 +823,7 @@ def predict_index_price_action(symbol: str, index_name: str, macro_info: dict) -
     print(f"📈 ML & Quant 5-Day Forecast Engine for Index: {index_name} ({symbol})")
     print(f"=======================================================")
 
-    ticker_df = yf.download(symbol, period="2y", interval="1d", progress=False)
+    ticker_df = yf.download(symbol, period="max", interval="1d", progress=False)
     if ticker_df.empty or len(ticker_df) < 150:
         print(f"[WARN] Insufficient history for index {symbol}.")
         return None
