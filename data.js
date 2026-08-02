@@ -1409,7 +1409,7 @@ window.DASHBOARD_DATA = {
     }
   ],
   "validation": {
-    "validated_at": "2026-08-02 03:57:23",
+    "validated_at": "2026-08-02 09:29:58",
     "total_evaluated": 20,
     "target_hit_count": 20,
     "accuracy_pct": 100.0,

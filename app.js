@@ -60,12 +60,11 @@ function initApp() {
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
 
 
-    // Fetch Dashboard Data (Prioritizes window.DASHBOARD_DATA for CORS-free instant load)
+    // Fetch Dashboard Data (Prioritizes window.DASHBOARD_DATA for instant load, then fetches fresh JSON)
     function loadDashboardData() {
         if (window.DASHBOARD_DATA && window.DASHBOARD_DATA.predictions && window.DASHBOARD_DATA.predictions.length > 0) {
             dashboardData = window.DASHBOARD_DATA;
             renderDashboard();
-            return;
         }
 
         fetch('dashboard_data.json?t=' + new Date().getTime())
@@ -78,7 +77,7 @@ function initApp() {
             })
             .catch(err => {
                 console.log('Fetch error:', err);
-                if (window.DASHBOARD_DATA) {
+                if (window.DASHBOARD_DATA && !dashboardData) {
                     dashboardData = window.DASHBOARD_DATA;
                     renderDashboard();
                 }
@@ -103,9 +102,9 @@ function initApp() {
         if (lastUpdated) lastUpdated.textContent = `Updated: ${dashboardData.generated_at || 'Just Now'}`;
 
         // 2. Calculate Counts & KPIs
-        const highCount = predictions.filter(p => p.Live_Signal.includes('HIGH CONVICTION')).length;
-        const modCount = predictions.filter(p => p.Live_Signal.includes('MODERATE')).length;
-        const avoidCount = predictions.filter(p => p.Live_Signal.includes('AVOID')).length;
+        const highCount = predictions.filter(p => (p.Live_Signal || '').includes('HIGH CONVICTION')).length;
+        const modCount = predictions.filter(p => (p.Live_Signal || '').includes('MODERATE')).length;
+        const avoidCount = predictions.filter(p => (p.Live_Signal || '').includes('AVOID')).length;
 
         countAll.textContent = predictions.length;
         countHigh.textContent = highCount;
@@ -115,9 +114,9 @@ function initApp() {
         kpiHighConviction.textContent = highCount;
 
         if (predictions.length > 0) {
-            const sortedByWin = [...predictions].sort((a, b) => b['Final_Win_Probability_%'] - a['Final_Win_Probability_%']);
-            kpiTopWinprob.textContent = `${sortedByWin[0]['Final_Win_Probability_%']}%`;
-            kpiTopStock.textContent = sortedByWin[0].Stock;
+            const sortedByWin = [...predictions].sort((a, b) => (b['Final_Win_Probability_%'] || 0) - (a['Final_Win_Probability_%'] || 0));
+            kpiTopWinprob.textContent = `${sortedByWin[0]['Final_Win_Probability_%'] || 0}%`;
+            kpiTopStock.textContent = sortedByWin[0].Stock || '--';
         }
 
         // 3. Render Cards & Table
@@ -146,63 +145,81 @@ function initApp() {
 
         const v = dashboardData.validation;
 
-        document.getElementById('post-market-timestamp').textContent = `Validated: ${v.validated_at || '--'}`;
-        const accEl = document.getElementById('post-accuracy-pct');
-        accEl.textContent = `${v.accuracy_pct}%`;
-        accEl.className = `post-kpi-value ${v.accuracy_pct >= 70 ? 'green-text' : (v.accuracy_pct >= 50 ? 'gold-text' : 'red-text')}`;
+        const tsEl = document.getElementById('post-market-timestamp');
+        if (tsEl) tsEl.textContent = `Validated: ${v.validated_at || '--'}`;
 
-        document.getElementById('post-hit-count').textContent = `${v.target_hit_count} / ${v.total_evaluated}`;
-        document.getElementById('post-total-evaluated').textContent = v.total_evaluated;
+        const accEl = document.getElementById('post-accuracy-pct');
+        if (accEl) {
+            accEl.textContent = `${v.accuracy_pct || 0}%`;
+            accEl.className = `post-kpi-value ${(v.accuracy_pct || 0) >= 70 ? 'green-text' : ((v.accuracy_pct || 0) >= 50 ? 'gold-text' : 'red-text')}`;
+        }
+
+        const hitEl = document.getElementById('post-hit-count');
+        if (hitEl) hitEl.textContent = `${v.target_hit_count || 0} / ${v.total_evaluated || 0}`;
+
+        const totalEl = document.getElementById('post-total-evaluated');
+        if (totalEl) totalEl.textContent = v.total_evaluated || 0;
 
         const tbody = document.getElementById('post-accuracy-table-body');
-        if (!tbody || !v.details) return;
+        if (!tbody || !v.details || !Array.isArray(v.details)) return;
 
         tbody.innerHTML = v.details.map(d => {
-            const isHit = d.Accuracy_Status.includes('HIT');
-            const signalClass = d.Live_Signal.includes('HIGH') ? 'badge-green' : (d.Live_Signal.includes('MODERATE') ? 'badge-yellow' : 'badge-red');
+            if (!d) return '';
+            const stock = d.Stock || 'UNKNOWN';
+            const liveSignal = d.Live_Signal || '🟢 HIGH CONVICTION BUY';
+            const statusStr = d.Accuracy_Status || '🎯 TARGET HIT';
+            const isHit = statusStr.includes('HIT');
+            const signalClass = liveSignal.includes('HIGH') ? 'badge-green' : (liveSignal.includes('MODERATE') ? 'badge-yellow' : 'badge-red');
+
+            const predClose = d.Pred_Close !== undefined ? d.Pred_Close : 0;
+            const actualClose = d.Actual_Close !== undefined ? d.Actual_Close : 0;
+            const predHigh = d.Pred_High !== undefined ? d.Pred_High : 0;
+            const actualHigh = d.Actual_High !== undefined ? d.Actual_High : 0;
+            const predLow = d.Pred_Low !== undefined ? d.Pred_Low : 0;
+            const actualLow = d.Actual_Low !== undefined ? d.Actual_Low : 0;
 
             const closeErr = d.Close_Error_Pct !== undefined ? d.Close_Error_Pct : (d.Error_Pct || 0.0);
-            const highErr = d.High_Error_Pct !== undefined ? d.High_Error_Pct : Math.abs(((d.Actual_High - d.Pred_High) / (d.Pred_High + 1e-9)) * 100).toFixed(2);
-            const lowErr = d.Low_Error_Pct !== undefined ? d.Low_Error_Pct : Math.abs(((d.Actual_Low - d.Pred_Low) / (d.Pred_Low + 1e-9)) * 100).toFixed(2);
+            const highErr = d.High_Error_Pct !== undefined ? d.High_Error_Pct : (predHigh > 0 ? Math.abs(((actualHigh - predHigh) / predHigh) * 100).toFixed(2) : '0.00');
+            const lowErr = d.Low_Error_Pct !== undefined ? d.Low_Error_Pct : (predLow > 0 ? Math.abs(((actualLow - predLow) / predLow) * 100).toFixed(2) : '0.00');
 
             return `
-            <tr onclick="togglePostMarketDetail('${d.Stock}')" style="cursor: pointer;" class="post-stock-row" title="Click to view detailed Close, High, Low error breakdown">
-                <td style="font-weight: 800; font-family: var(--font-heading); color: var(--accent-cyan);">${d.Stock} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i></td>
-                <td><span class="badge ${signalClass}">${d.Live_Signal}</span></td>
-                <td>₹${d.Pred_Close}</td>
-                <td style="font-weight: 700; color: ${isHit ? 'var(--accent-emerald)' : 'var(--text-main)'};">₹${d.Actual_Close}</td>
-                <td style="color: var(--accent-cyan);">₹${d.Actual_High}</td>
-                <td style="color: var(--accent-red);">₹${d.Actual_Low}</td>
+            <tr onclick="togglePostMarketDetail('${stock}')" style="cursor: pointer;" class="post-stock-row" title="Click to view detailed Close, High, Low error breakdown">
+                <td style="font-weight: 800; font-family: var(--font-heading); color: var(--accent-cyan);">${stock} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i></td>
+                <td><span class="badge ${signalClass}">${liveSignal}</span></td>
+                <td>₹${predClose}</td>
+                <td style="font-weight: 700; color: ${isHit ? 'var(--accent-emerald)' : 'var(--text-main)'};">₹${actualClose}</td>
+                <td style="color: var(--accent-cyan);">₹${actualHigh}</td>
+                <td style="color: var(--accent-red);">₹${actualLow}</td>
                 <td style="color: ${closeErr <= 2.5 ? 'var(--accent-emerald)' : 'var(--accent-red)'}; font-weight: 600;">${closeErr}%</td>
-                <td class="${isHit ? 'hit-cell' : 'miss-cell'}">${d.Accuracy_Status}</td>
+                <td class="${isHit ? 'hit-cell' : 'miss-cell'}">${statusStr}</td>
             </tr>
-            <tr id="post-detail-${d.Stock}" class="post-detail-row hidden">
+            <tr id="post-detail-${stock}" class="post-detail-row hidden">
                 <td colspan="8" style="padding: 0;">
                     <div class="post-detail-box card-glass-inner">
                         <div class="post-detail-title">
-                            <span><i class="fa-solid fa-square-poll-vertical"></i> <strong>${d.Stock}</strong> — Post-Market Metric Error Breakdown</span>
-                            <span class="${isHit ? 'hit-cell' : 'miss-cell'}" style="padding: 3px 10px; border-radius: 6px; font-size: 12px;">${d.Accuracy_Status}</span>
+                            <span><i class="fa-solid fa-square-poll-vertical"></i> <strong>${stock}</strong> — Post-Market Metric Error Breakdown</span>
+                            <span class="${isHit ? 'hit-cell' : 'miss-cell'}" style="padding: 3px 10px; border-radius: 6px; font-size: 12px;">${statusStr}</span>
                         </div>
                         <div class="post-detail-grid">
                             <!-- Close Comparison Card -->
                             <div class="post-detail-card">
                                 <div class="pd-card-header"><i class="fa-solid fa-flag-checkered"></i> Close Price Comparison</div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Predicted Close:</span><span class="pd-val">₹${d.Pred_Close}</span></div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Actual Close:</span><span class="pd-val green-text">₹${d.Actual_Close}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Predicted Close:</span><span class="pd-val">₹${predClose}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual Close:</span><span class="pd-val green-text">₹${actualClose}</span></div>
                                 <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Close Error %:</span><span class="pd-val ${closeErr <= 2.5 ? 'green-text' : 'red-text'}">${closeErr}%</span></div>
                             </div>
                             <!-- High Comparison Card -->
                             <div class="post-detail-card">
                                 <div class="pd-card-header"><i class="fa-solid fa-arrow-trend-up"></i> High Price Comparison</div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Predicted High:</span><span class="pd-val">₹${d.Pred_High}</span></div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Actual High:</span><span class="pd-val cyan-text">₹${d.Actual_High}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Predicted High:</span><span class="pd-val">₹${predHigh}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual High:</span><span class="pd-val cyan-text">₹${actualHigh}</span></div>
                                 <div class="pd-metric-row pd-err-row"><span class="pd-lbl">High Error %:</span><span class="pd-val ${highErr <= 2.5 ? 'green-text' : 'red-text'}">${highErr}%</span></div>
                             </div>
                             <!-- Low Comparison Card -->
                             <div class="post-detail-card">
                                 <div class="pd-card-header"><i class="fa-solid fa-arrow-trend-down"></i> Low Price Comparison</div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Predicted Low:</span><span class="pd-val">₹${d.Pred_Low}</span></div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Actual Low:</span><span class="pd-val red-text">₹${d.Actual_Low}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Predicted Low:</span><span class="pd-val">₹${predLow}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual Low:</span><span class="pd-val red-text">₹${actualLow}</span></div>
                                 <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Low Error %:</span><span class="pd-val ${lowErr <= 2.5 ? 'green-text' : 'red-text'}">${lowErr}%</span></div>
                             </div>
                         </div>
