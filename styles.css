@@ -2624,10 +2624,12 @@ body {
     .pipeline-diagram-grid {
         flex-direction: column;
         align-items: stretch;
+        gap: 6px;
     }
     .pipeline-connector {
         transform: rotate(90deg);
         padding: 4px 0;
+        align-self: center;
     }
     .about-data-stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2637,8 +2639,78 @@ body {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    #page-about .usmarkets-section {
+        padding: 14px 10px !important;
+    }
+    #page-about .card-glass-inner {
+        padding: 16px 12px !important;
+        margin-bottom: 18px !important;
+    }
+    #page-about h2 {
+        font-size: 1.1rem !important;
+        line-height: 1.35 !important;
+    }
+    #page-about h3 {
+        font-size: 1.02rem !important;
+        line-height: 1.35 !important;
+        flex-wrap: wrap;
+    }
+    .about-models-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !original;
+    }
+    .pipeline-step-card {
+        min-width: 100% !important;
+        padding: 14px 12px !important;
+    }
+    .step-number {
+        font-size: 1rem !important;
+        top: 8px !important;
+        right: 10px !important;
+    }
+    .step-title {
+        font-size: 0.88rem !important;
+    }
+    .step-desc {
+        font-size: 0.74rem !important;
+    }
+    .about-model-card {
+        padding: 14px 12px !important;
+    }
+    .model-header {
+        font-size: 0.86rem !important;
+        flex-wrap: wrap;
+    }
+    .model-desc {
+        font-size: 0.75rem !important;
+    }
+}
+
+@media (max-width: 550px) {
     .about-data-stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    .about-stat-card {
+        padding: 14px 12px !important;
+    }
+    .about-stat-card .stat-number {
+        font-size: 1.6rem !important;
+    }
+    .about-stat-card .stat-label {
+        font-size: 0.8rem !important;
+    }
+    .about-stat-card .stat-sub {
+        font-size: 0.72rem !important;
+    }
+    .guide-card {
+        padding: 14px 12px !important;
+    }
+    .guide-title {
+        font-size: 0.88rem !important;
+    }
+    .guide-list li {
+        font-size: 0.76rem !important;
     }
 }
