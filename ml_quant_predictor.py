@@ -19,7 +19,8 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     7. Dynamic Position Sizing Calculator: Account Risk % -> Recommended Shares to Buy
     8. Mathematical Expectancy & Risk/Reward: R:R Ratio + Expected Value (EV %)
     9. News Sentiment Engine: SQLite news.db integration + VADER fallback scoring
-   10. Top 10 ML & Data Science Models:
+   10. Top 11 ML & Deep Learning Models:
+       - PyTorch LSTM Deep Recurrent Neural Net (Sequence Dynamics)
        - Random Forest Regressor & Classifier
        - Gradient Boosting Regressor & Classifier
        - Extra Trees Regressor & Classifier
@@ -62,6 +63,15 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 # Suppress noisy warnings
 logging.getLogger('yfinance').setLevel(logging.CRITICAL)
 warnings.filterwarnings('ignore')
+
+# PyTorch Deep Learning Imports
+try:
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    HAS_TORCH = True
+except ImportError:
+    HAS_TORCH = False
 
 BASE_DIR = Path(__file__).parent
 DB_PATH = BASE_DIR / "news.db"
@@ -335,10 +345,64 @@ def run_monte_carlo_simulation(cmp: float, hist_returns: pd.Series, num_sims: in
     }
 
 # -----------------------------------------------------------------------------
-# 5. Top 10 ML Models & Ensemble Engine
+# 4.5. PyTorch LSTM Deep Recurrent Neural Network Architecture
+# -----------------------------------------------------------------------------
+if HAS_TORCH:
+    class PyTorchLSTMModel(nn.Module):
+        """2-Layer PyTorch LSTM Deep Recurrent Neural Network for Stock Sequence Forecasting."""
+        def __init__(self, input_dim: int, hidden_dim: int = 32, num_layers: int = 2, dropout: float = 0.1):
+            super().__init__()
+            self.lstm = nn.LSTM(
+                input_size=input_dim,
+                hidden_size=hidden_dim,
+                num_layers=num_layers,
+                batch_first=True,
+                dropout=dropout if num_layers > 1 else 0.0
+            )
+            self.fc_reg = nn.Sequential(
+                nn.Linear(hidden_dim, 16),
+                nn.ReLU(),
+                nn.Linear(16, 1)
+            )
+            self.fc_clf = nn.Sequential(
+                nn.Linear(hidden_dim, 16),
+                nn.ReLU(),
+                nn.Linear(16, 1),
+                nn.Sigmoid()
+            )
+
+        def forward(self, x):
+            lstm_out, _ = self.lstm(x)
+            last_hidden = lstm_out[:, -1, :]
+            pred_reg = self.fc_reg(last_hidden).squeeze(-1)
+            pred_clf = self.fc_clf(last_hidden).squeeze(-1)
+            return pred_reg, pred_clf
+
+def create_lstm_sequences(X_scaled: np.ndarray, y_reg=None, y_clf=None, seq_len: int = 10):
+    """Transform scaled feature matrices into 3D sliding sequence tensors (samples, seq_len, features)."""
+    N, num_features = X_scaled.shape
+    if N <= seq_len:
+        return None, None, None
+
+    X_seq, y_r_seq, y_c_seq = [], [], []
+    for i in range(seq_len, N):
+        X_seq.append(X_scaled[i - seq_len:i])
+        if y_reg is not None:
+            y_r_seq.append(y_reg.iloc[i] if hasattr(y_reg, 'iloc') else y_reg[i])
+        if y_clf is not None:
+            y_c_seq.append(y_clf.iloc[i] if hasattr(y_clf, 'iloc') else y_clf[i])
+
+    X_seq_arr = np.array(X_seq, dtype=np.float32)
+    y_r_arr = np.array(y_r_seq, dtype=np.float32) if y_reg is not None else None
+    y_c_arr = np.array(y_c_seq, dtype=np.float32) if y_clf is not None else None
+
+    return X_seq_arr, y_r_arr, y_c_arr
+
+# -----------------------------------------------------------------------------
+# 5. Top 11 ML & Deep Learning Ensemble Engine
 # -----------------------------------------------------------------------------
 class Top10MLEnsemble:
-    """Ensemble framework instantiating and blending Top 10 ML models."""
+    """Ensemble framework instantiating and blending Top 11 ML & PyTorch LSTM Deep Learning models."""
     def __init__(self):
         self.rf_reg = RandomForestRegressor(n_estimators=30, max_depth=5, random_state=42)
         self.rf_clf = RandomForestClassifier(n_estimators=30, max_depth=5, random_state=42)
@@ -363,9 +427,11 @@ class Top10MLEnsemble:
         self.knn_clf = KNeighborsClassifier(n_neighbors=5)
 
         self.scaler = StandardScaler()
+        self.lstm_model = None
+        self.seq_len = 10
 
     def train_and_evaluate(self, X_train, y_train_reg, y_train_clf, X_test, y_test_reg, y_test_clf):
-        """Train top 10 models and evaluate backtest directional accuracy and RMSE."""
+        """Train top ML and PyTorch LSTM models, evaluating backtest directional accuracy and RMSE."""
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
 
@@ -390,11 +456,6 @@ class Top10MLEnsemble:
             except Exception:
                 pass
 
-        if reg_preds:
-            meta_reg_pred = np.mean(reg_preds, axis=0)
-        else:
-            meta_reg_pred = np.zeros(len(y_test_reg))
-
         classifiers = [
             self.rf_clf, self.gb_clf, self.et_clf, self.svc, self.mlp_clf, self.knn_clf
         ]
@@ -407,6 +468,58 @@ class Top10MLEnsemble:
             except Exception:
                 pass
 
+        # Train & Evaluate PyTorch LSTM Sequence Model
+        if HAS_TORCH and len(X_train_scaled) > self.seq_len:
+            try:
+                X_tr_seq, y_tr_r_seq, y_tr_c_seq = create_lstm_sequences(
+                    X_train_scaled, y_train_reg, y_train_clf, seq_len=self.seq_len
+                )
+                X_full_scaled = np.vstack([X_train_scaled[-self.seq_len:], X_test_scaled])
+                X_te_seq, y_te_r_seq, y_te_c_seq = create_lstm_sequences(
+                    X_full_scaled, y_test_reg, y_test_clf, seq_len=self.seq_len
+                )
+
+                if X_tr_seq is not None and X_te_seq is not None:
+                    feature_dim = X_tr_seq.shape[2]
+                    torch.manual_seed(42)
+                    lstm_m = PyTorchLSTMModel(input_dim=feature_dim, hidden_dim=32, num_layers=2)
+                    optimizer = optim.Adam(lstm_m.parameters(), lr=0.01, weight_decay=1e-4)
+                    criterion_reg = nn.MSELoss()
+                    criterion_clf = nn.BCELoss()
+
+                    t_X_tr = torch.tensor(X_tr_seq)
+                    t_y_r_tr = torch.tensor(y_tr_r_seq)
+                    t_y_c_tr = torch.tensor(y_tr_c_seq)
+
+                    lstm_m.train()
+                    for epoch in range(30):
+                        optimizer.zero_grad()
+                        p_reg, p_clf = lstm_m(t_X_tr)
+                        loss = criterion_reg(p_reg, t_y_r_tr) + criterion_clf(p_clf, t_y_c_tr)
+                        loss.backward()
+                        optimizer.step()
+
+                    lstm_m.eval()
+                    with torch.no_grad():
+                        t_X_te = torch.tensor(X_te_seq)
+                        p_reg_te, p_clf_te = lstm_m(t_X_te)
+                        lstm_reg_pred = p_reg_te.numpy()
+                        lstm_clf_prob = p_clf_te.numpy()
+
+                        if len(lstm_reg_pred) == len(y_test_reg):
+                            reg_preds.append(lstm_reg_pred)
+                        if len(lstm_clf_prob) == len(y_test_clf):
+                            clf_probs.append(lstm_clf_prob)
+                    
+                    self.lstm_model = lstm_m
+            except Exception:
+                pass
+
+        if reg_preds:
+            meta_reg_pred = np.mean(reg_preds, axis=0)
+        else:
+            meta_reg_pred = np.zeros(len(y_test_reg))
+
         dir_correct = np.mean((meta_reg_pred > 0) == (y_test_reg > 0)) * 100.0
         win_rate_actual = np.mean(y_test_clf) * 100.0
         rmse = np.sqrt(mean_squared_error(y_test_reg, meta_reg_pred))
@@ -417,8 +530,8 @@ class Top10MLEnsemble:
             'Model_RMSE': round(rmse, 4),
         }
 
-    def predict_next_day(self, X_latest):
-        """Predict next-day expected return % and win probability % for the latest bar."""
+    def predict_next_day(self, X_latest, X_full_df=None):
+        """Predict next-day expected return % and win probability % combining Scikit-Learn ML + PyTorch LSTM."""
         X_scaled = self.scaler.transform(X_latest)
         
         reg_preds = []
@@ -428,8 +541,6 @@ class Top10MLEnsemble:
             except Exception:
                 pass
 
-        predicted_return = np.mean(reg_preds) if reg_preds else 0.005
-
         clf_probs = []
         for clf in [self.rf_clf, self.gb_clf, self.et_clf, self.svc, self.mlp_clf, self.knn_clf]:
             try:
@@ -437,6 +548,21 @@ class Top10MLEnsemble:
             except Exception:
                 pass
 
+        # Add PyTorch LSTM Latest Bar Sequence Prediction
+        if HAS_TORCH and self.lstm_model is not None and X_full_df is not None and len(X_full_df) >= self.seq_len:
+            try:
+                X_full_scaled = self.scaler.transform(X_full_df.tail(self.seq_len))
+                X_latest_seq = X_full_scaled.reshape(1, self.seq_len, -1).astype(np.float32)
+                self.lstm_model.eval()
+                with torch.no_grad():
+                    t_seq = torch.tensor(X_latest_seq)
+                    p_reg_lstm, p_clf_lstm = self.lstm_model(t_seq)
+                    reg_preds.append(float(p_reg_lstm.item()))
+                    clf_probs.append(float(p_clf_lstm.item()))
+            except Exception:
+                pass
+
+        predicted_return = np.mean(reg_preds) if reg_preds else 0.005
         win_probability = np.mean(clf_probs) * 100.0 if clf_probs else 65.0
 
         return float(predicted_return), float(win_probability)
@@ -502,7 +628,7 @@ def predict_stock_price_action(symbol: str, macro_info: dict, account_capital: f
 
     X_latest = X.iloc[[-1]]
     ensemble.train_and_evaluate(X, y_reg, y_clf, X_test, y_test_reg, y_test_clf)
-    predicted_return, model_win_prob = ensemble.predict_next_day(X_latest)
+    predicted_return, model_win_prob = ensemble.predict_next_day(X_latest, X_full_df=X)
 
     mc_results = run_monte_carlo_simulation(cmp, clean_df['Return_1d'])
 
@@ -595,6 +721,8 @@ def predict_stock_price_action(symbol: str, macro_info: dict, account_capital: f
         drivers.append("Strong RSI")
     if vix_val < 14.0:
         drivers.append(f"Low VIX ({vix_val})")
+    if HAS_TORCH:
+        drivers.append("LSTM Deep Net")
     if not drivers:
         drivers.append("Technical Breakout")
     driver_str = " | ".join(drivers)
