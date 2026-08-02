@@ -42,4 +42,4 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add Final_Breakout_List.xlsx Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-Update: 9:30 AM Pre-Market Scan & Predictions [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-Update: 8:30 AM Pre-Market Scan & Predictions [skip ci]" && git push)
