@@ -2422,3 +2422,223 @@ body {
 
 
 }
+
+/* ==========================================================================
+   About & System Architecture Section Styles
+   ========================================================================== */
+.pipeline-diagram-grid {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.pipeline-step-card {
+    flex: 1;
+    min-width: 170px;
+    background: rgba(22, 32, 54, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: var(--transition);
+}
+
+.pipeline-step-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 230, 153, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.step-number {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 1.15rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    color: rgba(255, 255, 255, 0.12);
+}
+
+.step-icon {
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+}
+
+.step-title {
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.step-desc {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 12px;
+    flex-grow: 1;
+}
+
+.step-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+}
+
+.pipeline-connector {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.about-models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+
+.about-model-card {
+    background: rgba(22, 32, 54, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+
+.about-model-card:hover {
+    border-color: rgba(0, 191, 255, 0.3);
+    background: rgba(22, 32, 54, 0.85);
+}
+
+.model-header {
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.model-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-bottom: 12px;
+}
+
+.about-data-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.about-stat-card {
+    background: rgba(22, 32, 54, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: 18px 16px;
+    text-align: center;
+}
+
+.about-stat-card .stat-number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.about-stat-card .stat-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.about-stat-card .stat-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+}
+
+.about-userguide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.guide-card {
+    background: rgba(22, 32, 54, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: 18px 16px;
+}
+
+.guide-title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    padding-bottom: 8px;
+}
+
+.guide-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.guide-list li {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+
+@media (max-width: 1024px) {
+    .pipeline-diagram-grid {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .pipeline-connector {
+        transform: rotate(90deg);
+        padding: 4px 0;
+    }
+    .about-data-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .about-userguide-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-data-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

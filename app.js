@@ -35,7 +35,7 @@ function initApp() {
     const modal = document.getElementById('stock-modal');
     const modalClose = document.getElementById('modal-close');
 
-    // Sidebar Navigation Elements (7 Sections)
+    // Sidebar Navigation Elements (8 Sections)
     const navUsmarkets = document.getElementById('nav-usmarkets');
     const navNewsfeeds = document.getElementById('nav-newsfeeds');
     const navNifty = document.getElementById('nav-nifty');
@@ -43,6 +43,7 @@ function initApp() {
     const navDashboard = document.getElementById('nav-dashboard');
     const navPostmarket = document.getElementById('nav-postmarket');
     const navIndexPostmarket = document.getElementById('nav-index-postmarket');
+    const navAbout = document.getElementById('nav-about');
 
     const pageUsmarkets = document.getElementById('page-usmarkets');
     const pageNewsfeeds = document.getElementById('page-newsfeeds');
@@ -51,6 +52,7 @@ function initApp() {
     const pageDashboard = document.getElementById('page-dashboard');
     const pagePostmarket = document.getElementById('page-postmarket');
     const pageIndexPostmarket = document.getElementById('page-index-postmarket');
+    const pageAbout = document.getElementById('page-about');
 
     function switchPage(page) {
         if (pageUsmarkets) pageUsmarkets.style.display = 'none';
@@ -60,6 +62,7 @@ function initApp() {
         if (pageDashboard) pageDashboard.style.display = 'none';
         if (pagePostmarket) pagePostmarket.style.display = 'none';
         if (pageIndexPostmarket) pageIndexPostmarket.style.display = 'none';
+        if (pageAbout) pageAbout.style.display = 'none';
 
         if (navUsmarkets) navUsmarkets.classList.remove('active');
         if (navNewsfeeds) navNewsfeeds.classList.remove('active');
@@ -68,6 +71,7 @@ function initApp() {
         if (navDashboard) navDashboard.classList.remove('active');
         if (navPostmarket) navPostmarket.classList.remove('active');
         if (navIndexPostmarket) navIndexPostmarket.classList.remove('active');
+        if (navAbout) navAbout.classList.remove('active');
 
         if (page === 'usmarkets') {
             if (pageUsmarkets) pageUsmarkets.style.display = '';
@@ -91,6 +95,9 @@ function initApp() {
             if (pageIndexPostmarket) pageIndexPostmarket.style.display = '';
             if (navIndexPostmarket) navIndexPostmarket.classList.add('active');
             renderIndexPostMarketAnalysis();
+        } else if (page === 'about') {
+            if (pageAbout) pageAbout.style.display = '';
+            if (navAbout) navAbout.classList.add('active');
         } else {
             // Default: Dashboard
             if (pageDashboard) pageDashboard.style.display = '';
@@ -129,6 +136,7 @@ function initApp() {
     if (navDashboard) navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); });
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
     if (navIndexPostmarket) navIndexPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('index-postmarket'); });
+    if (navAbout) navAbout.addEventListener('click', (e) => { e.preventDefault(); switchPage('about'); });
 
 
     // Fetch Dashboard Data (Prioritizes window.DASHBOARD_DATA for instant load, then fetches fresh JSON)

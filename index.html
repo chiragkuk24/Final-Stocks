@@ -41,6 +41,7 @@
                 <a href="#" class="nav-item active" id="nav-dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Stocks Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-index-postmarket"><i class="fa-solid fa-chart-pie"></i> Indexes Post-Market Analysis</a>
+                <a href="#" class="nav-item" id="nav-about"><i class="fa-solid fa-circle-info text-purple"></i> About</a>
             </nav>
 
             <div class="macro-widget card-glass">
@@ -430,6 +431,295 @@
                 </section>
             </div>
             <!-- ======= END SECTION 7: INDEXES POST-MARKET ANALYSIS ======= -->
+
+            <!-- ======= SECTION 8: ABOUT & SYSTEM ARCHITECTURE ======= -->
+            <div id="page-about" style="display: none;">
+                <section class="usmarkets-section card-glass">
+                    <div class="usmarkets-header" style="border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 16px; margin-bottom: 24px;">
+                        <div class="header-left">
+                            <h2><i class="fa-solid fa-circle-info text-purple"></i> QUANTMATRIX AI – System Architecture & Comprehensive Overview</h2>
+                            <p class="subtitle">Institutional Multi-Pillar Machine Learning, Stochastic Monte Carlo Engine & Live Post-Market Validation Protocol</p>
+                        </div>
+                        <span class="usmarkets-live-badge" style="background: rgba(157, 78, 221, 0.15); border-color: rgba(157, 78, 221, 0.3); color: var(--accent-purple);">
+                            <i class="fa-solid fa-brain"></i> Institutional AI Engine v1.0
+                        </span>
+                    </div>
+
+                    <!-- 1. SYSTEM ARCHITECTURE VISUAL DIAGRAM / PIPELINE -->
+                    <div class="card-glass-inner" style="padding: 24px; margin-bottom: 28px; border-left: 4px solid var(--accent-purple);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent-purple); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-diagram-project"></i> 1. System Architecture & End-to-End Data Pipeline
+                        </h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px;">
+                            The high-level analytical pipeline ingests real-time market data, calculates 30+ technical & fundamental metrics, runs 11 ML ensembles and a 1,000-path Monte Carlo simulator, and outputs validated trading orders.
+                        </p>
+
+                        <!-- Pipeline Flowchart Grid -->
+                        <div class="pipeline-diagram-grid">
+                            <!-- Stage 1 -->
+                            <div class="pipeline-step-card glow-cyan">
+                                <div class="step-number">01</div>
+                                <div class="step-icon"><i class="fa-solid fa-database text-cyan"></i></div>
+                                <div class="step-title">Data Ingestion</div>
+                                <div class="step-desc">1–2 Yrs Historical OHLCV Price Action, Intraday Feeds, India VIX (^INDIAVIX) & Fundamentals via Yahoo Finance API.</div>
+                                <div class="step-tag"><i class="fa-solid fa-server"></i> 500+ Daily Bars</div>
+                            </div>
+
+                            <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                            <!-- Stage 2 -->
+                            <div class="pipeline-step-card glow-gold">
+                                <div class="step-number">02</div>
+                                <div class="step-icon"><i class="fa-solid fa-sliders text-gold"></i></div>
+                                <div class="step-title">Feature Engineering</div>
+                                <div class="step-desc">Computes 30/50/200 DMAs, RSI(14), MACD, ATR Envelopes, TTM Squeeze, Floor Pivots, Volatility & Sharpe Ratios.</div>
+                                <div class="step-tag"><i class="fa-solid fa-calculator"></i> 30+ Metrics / Bar</div>
+                            </div>
+
+                            <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                            <!-- Stage 3 -->
+                            <div class="pipeline-step-card glow-purple">
+                                <div class="step-number">03</div>
+                                <div class="step-icon"><i class="fa-solid fa-brain text-purple"></i></div>
+                                <div class="step-title">11 ML Ensembles + PyTorch</div>
+                                <div class="step-desc">Parallel model execution: PyTorch LSTM, Random Forest, XGBoost, LightGBM, ExtraTrees, AdaBoost, MLP, Ridge & SVM.</div>
+                                <div class="step-tag"><i class="fa-solid fa-microchip"></i> 11 AI Ensembles</div>
+                            </div>
+
+                            <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                            <!-- Stage 4 -->
+                            <div class="pipeline-step-card glow-emerald">
+                                <div class="step-number">04</div>
+                                <div class="step-icon"><i class="fa-solid fa-chart-line text-emerald"></i></div>
+                                <div class="step-title">1,000 Path Monte Carlo</div>
+                                <div class="step-desc">Runs 1,000 empirical stochastic price simulations to build 95% Confidence Intervals & 5-Day Trajectory Curves.</div>
+                                <div class="step-tag"><i class="fa-solid fa-dice"></i> 1,000 Simulations</div>
+                            </div>
+
+                            <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                            <!-- Stage 5 -->
+                            <div class="pipeline-step-card glow-red">
+                                <div class="step-number">05</div>
+                                <div class="step-icon"><i class="fa-solid fa-shield-halved text-red"></i></div>
+                                <div class="step-title">Signals & Live Scorecard</div>
+                                <div class="step-desc">Generates EV %, Win Prob %, Entry Ranges, Stop Loss, and validates accuracy at 4:00 PM IST close.</div>
+                                <div class="step-tag"><i class="fa-solid fa-flag-checkered"></i> 4:00 PM IST Audit</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MACHINE LEARNING MODELS USED -->
+                    <div class="card-glass-inner" style="padding: 24px; margin-bottom: 28px; border-left: 4px solid var(--accent-cyan);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent-cyan); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-microchip"></i> 2. Machine Learning & Deep Learning Models Architecture
+                        </h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                            QUANTMATRIX AI employs a multi-model consensus strategy combining 11 state-of-the-art machine learning algorithms to eliminate individual model bias and capture both linear and non-linear market patterns.
+                        </p>
+
+                        <div class="about-models-grid">
+                            <!-- Model 1 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-network-wired text-purple"></i> 1. PyTorch LSTM Neural Network</div>
+                                <div class="model-desc">Deep Recurrent Neural Network with Long Short-Term Memory cells. Captures multi-day sequential dependencies, momentum inertia, and complex non-linear price trajectory curves.</div>
+                                <span class="badge badge-purple">Deep Learning Time-Series</span>
+                            </div>
+
+                            <!-- Model 2 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-tree text-emerald"></i> 2. Random Forest (Classifier & Regressor)</div>
+                                <div class="model-desc">Ensemble of de-correlated decision trees constructed over randomized feature subsets. Reduces prediction variance and prevents overfitting on noisy intraday bars.</div>
+                                <span class="badge badge-green">Tree Ensemble</span>
+                            </div>
+
+                            <!-- Model 3 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-bolt text-gold"></i> 3. XGBoost (Extreme Gradient Boosting)</div>
+                                <div class="model-desc">Optimized regularized gradient boosting framework. Uses exact greedy algorithm splits with L1/L2 regularization to handle high-dimensional momentum inputs.</div>
+                                <span class="badge badge-yellow">Gradient Boosting</span>
+                            </div>
+
+                            <!-- Model 4 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-feather text-cyan"></i> 4. LightGBM (Light Gradient Boosted Machine)</div>
+                                <div class="model-desc">Leaf-wise tree growth engine providing rapid training speeds and exceptional accuracy on volatile price breakout features.</div>
+                                <span class="badge badge-cyan">Fast Tree Boosting</span>
+                            </div>
+
+                            <!-- Model 5 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-layer-group text-blue"></i> 5. Gradient Boosting Machine (GBM)</div>
+                                <div class="model-desc">Sequential additive tree model that minimizes residual prediction loss iteratively, establishing strong baseline directional momentum predictions.</div>
+                                <span class="badge badge-cyan">Additive Boosting</span>
+                            </div>
+
+                            <!-- Model 6 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-cubes text-emerald"></i> 6. Extra Trees (Extremely Randomized Trees)</div>
+                                <div class="model-desc">Randomizes cut-point choices when splitting tree nodes, significantly reducing structural variance caused by unexpected gap ups or downs.</div>
+                                <span class="badge badge-green">Variance Reduction</span>
+                            </div>
+
+                            <!-- Model 7 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-bullseye text-gold"></i> 7. AdaBoost (Adaptive Boosting)</div>
+                                <div class="model-desc">Focuses sequentially on difficult, high-volatility trading setups by increasing weights on misclassified historical market regimes.</div>
+                                <span class="badge badge-yellow">Adaptive Learner</span>
+                            </div>
+
+                            <!-- Model 8 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-brain text-purple"></i> 8. Multi-Layer Perceptron (MLP Neural Net)</div>
+                                <div class="model-desc">Fully connected deep neural network with ReLU activation functions and Dropout regularization for non-linear pattern synthesis across multi-timeframe DMAs.</div>
+                                <span class="badge badge-purple">Artificial Neural Net</span>
+                            </div>
+
+                            <!-- Model 9 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-vector-square text-cyan"></i> 9. Support Vector Machine (SVM / SVR)</div>
+                                <div class="model-desc">Constructs optimal decision hyperplanes with non-linear Radial Basis Function (RBF) kernels to isolate bullish momentum breakout zones.</div>
+                                <span class="badge badge-cyan">Hyperplane Separator</span>
+                            </div>
+
+                            <!-- Model 10 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-sliders text-emerald"></i> 10. L2 Regularized Ridge Classifier</div>
+                                <div class="model-desc">Linear classification model with Tikhonov (L2) regularization. Prevents multi-collinearity issues across highly correlated technical indicators (RSI, MACD).</div>
+                                <span class="badge badge-green">L2 Regularized</span>
+                            </div>
+
+                            <!-- Model 11 -->
+                            <div class="about-model-card">
+                                <div class="model-header"><i class="fa-solid fa-calculator text-gold"></i> 11. Logistic & Bayesian Probabilistic Meta-Scorer</div>
+                                <div class="model-desc">Meta-ensemble calibrator that aggregates outputs from all 10 base models and scales them into a single, calibrated Win Probability percentage (0% to 100%).</div>
+                                <span class="badge badge-gold">Meta Calibrator</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. DATA VOLUME & MONTE CARLO SIMULATIONS -->
+                    <div class="card-glass-inner" style="padding: 24px; margin-bottom: 28px; border-left: 4px solid var(--accent-emerald);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent-emerald); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-database"></i> 3. Data Volume, Input Features & Monte Carlo Engine
+                        </h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                            Models are trained on extensive multi-year historical datasets and dynamic volatility feeds to simulate real-world market distributions.
+                        </p>
+
+                        <div class="about-data-stats-grid">
+                            <div class="about-stat-card">
+                                <div class="stat-number green-text">500+</div>
+                                <div class="stat-label">Daily Bars / Ticker</div>
+                                <div class="stat-sub">1 to 2 Years of continuous OHLCV price action history fetched via Yahoo Finance API.</div>
+                            </div>
+                            <div class="about-stat-card">
+                                <div class="stat-number cyan-text">30+</div>
+                                <div class="stat-label">Engineered Features</div>
+                                <div class="stat-sub">Multi-timeframe DMAs (30, 50, 200), RSI(14), MACD, ATR, Floor Pivots, Volatility & Slope.</div>
+                            </div>
+                            <div class="about-stat-card">
+                                <div class="stat-number gold-text">1,000</div>
+                                <div class="stat-label">Monte Carlo Paths</div>
+                                <div class="stat-sub">Stochastic empirical simulations executed per asset to construct 95% Confidence Intervals.</div>
+                            </div>
+                            <div class="about-stat-card">
+                                <div class="stat-number purple-text">100%</div>
+                                <div class="stat-label">Out-of-Sample Testing</div>
+                                <div class="stat-sub">Rigorous walk-forward validation preventing data leakage and look-ahead bias.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. HOW ACCURACY IS CALCULATED -->
+                    <div class="card-glass-inner" style="padding: 24px; margin-bottom: 28px; border-left: 4px solid var(--accent-gold);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-calculator"></i> 4. How Accuracy is Calculated (Post-Market Audit Protocol)
+                        </h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                            Every single prediction generated by the engine is automatically audited against official exchange closing prices at <strong>4:00 PM IST</strong> following market close.
+                        </p>
+
+                        <div class="accuracy-formula-grid" style="margin-bottom: 20px;">
+                            <div class="metric-card card-glass-inner" style="padding: 16px; border-left: 3px solid var(--accent-emerald);">
+                                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald); text-transform: uppercase; margin-bottom: 8px;">
+                                    <i class="fa-solid fa-circle-check"></i> Criterion A: Directional Accuracy
+                                </div>
+                                <div style="font-size: 0.82rem; color: var(--text-main); font-family: monospace; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 4px; margin-bottom: 8px;">
+                                    (Actual Close - CMP) × (Pred Close - CMP) > 0
+                                </div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                    Validates whether the stock/index moved in the predicted bullish or bearish direction relative to morning CMP.
+                                </div>
+                            </div>
+
+                            <div class="metric-card card-glass-inner" style="padding: 16px; border-left: 3px solid var(--accent-cyan);">
+                                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 8px;">
+                                    <i class="fa-solid fa-bullseye"></i> Criterion B: Closing Price Tolerance
+                                </div>
+                                <div style="font-size: 0.82rem; color: var(--text-main); font-family: monospace; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 4px; margin-bottom: 8px;">
+                                    |Actual Close - Pred Close| / Pred Close ≤ 2.5%
+                                </div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                    Validates whether the 4:00 PM IST actual market closing price landed within 2.5% tolerance of the predicted close.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accuracy-formula-footer-banner">
+                            <div>
+                                <span style="font-size: 0.78rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-square-root-variable"></i> Overall Accuracy Formula</span>
+                                <div style="font-size: 0.95rem; font-weight: 700; color: #fff; margin-top: 4px; font-family: var(--font-heading);">
+                                    Overall Accuracy % = (Total Target Hits / Total Setups Evaluated) × 100
+                                </div>
+                            </div>
+                            <span class="badge badge-yellow" style="padding: 6px 14px; font-size: 0.82rem;">🎯 Target Hit = Criterion A OR Criterion B</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. ESSENTIAL USER GUIDE BEFORE USING DASHBOARD -->
+                    <div class="card-glass-inner" style="padding: 24px; border-left: 4px solid var(--accent-red);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent-red); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-book-open"></i> 5. What You Need to Know Before Using This Dashboard
+                        </h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                            To maximize your trading efficiency and manage risk effectively, understand these core dashboard concepts:
+                        </p>
+
+                        <div class="about-userguide-grid">
+                            <div class="guide-card">
+                                <div class="guide-title"><i class="fa-solid fa-signal text-emerald"></i> Signal Conviction Levels</div>
+                                <ul class="guide-list">
+                                    <li><span class="badge badge-green">HIGH CONVICTION</span> Win Prob ≥ 60%, EV ≥ +2.5%, Risk-Reward ≥ 1.5. Premium institutional setups.</li>
+                                    <li><span class="badge badge-yellow">MODERATE</span> Win Prob 52% - 59%, positive EV. Standard breakout candidates.</li>
+                                    <li><span class="badge badge-red">AVOID</span> Win Prob &lt; 52% or negative EV. Non-favorable risk profiles.</li>
+                                </ul>
+                            </div>
+
+                            <div class="guide-card">
+                                <div class="guide-title"><i class="fa-solid fa-crosshair text-cyan"></i> Entry & Chase Price Rules</div>
+                                <ul class="guide-list">
+                                    <li><strong>Buy Entry Range:</strong> Optimal price range to accumulate positions.</li>
+                                    <li><strong>Max Chase Price:</strong> Strict execution boundary — NEVER buy above this level if stock gaps up.</li>
+                                    <li><strong>Dynamic Stop Loss:</strong> ATR-calculated floor for systematic risk management.</li>
+                                </ul>
+                            </div>
+
+                            <div class="guide-card">
+                                <div class="guide-title"><i class="fa-solid fa-scale-balanced text-gold"></i> Risk-to-Reward & EV %</div>
+                                <ul class="guide-list">
+                                    <li><strong>Expected Value (EV %):</strong> Mathematical expectancy combining win probability and payout ratio.</li>
+                                    <li><strong>Risk-to-Reward:</strong> Aim for setups with Risk-Reward ratio ≥ 1.5 : 1.</li>
+                                    <li><strong>Position Sizing:</strong> Calculates exact shares based on 2% risk limit on ₹500,000 capital.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION 8: ABOUT & SYSTEM ARCHITECTURE ======= -->
 
         </main>
     </div>
