@@ -977,14 +977,14 @@ function initApp() {
 
                         <div class="idx-trajectory-box">
                             <div class="idx-traj-title"><i class="fa-solid fa-chart-line"></i> 5-Day Trajectory Curve</div>
-                            <table class="idx-traj-table">
+                            <div class="idx-table-wrapper"><table class="idx-traj-table">
                                 <thead>
                                     <tr><th>Day</th><th>Exp. Close</th><th>Exp. High</th><th>Exp. Low</th></tr>
                                 </thead>
                                 <tbody>
                                     ${trajRows}
                                 </tbody>
-                            </table>
+                            </table></div>
                         </div>
                     </div>
 
@@ -1064,7 +1064,7 @@ function initApp() {
                 </div>
 
                 <!-- CMP & Probable Next-Day Closing Banner -->
-                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: rgba(0, 191, 255, 0.05); border: 1px solid rgba(0, 191, 255, 0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;">
+                <div class="idx-banner-container">
                     <div>
                         <span style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">CURRENT INDEX LEVEL (CMP)</span>
                         <div style="display: flex; align-items: baseline; gap: 10px;">
@@ -1074,7 +1074,7 @@ function initApp() {
                             </span>
                         </div>
                     </div>
-                    <div style="text-align: right;">
+                    <div class="idx-banner-right">
                         <span style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;"><i class="fa-solid fa-bullseye"></i> PROBABLE NEXT-DAY CLOSING</span>
                         <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); font-family: var(--font-heading);">
                             ₹${safeFmt(probClose)}
@@ -1092,7 +1092,7 @@ function initApp() {
 
                 <!-- TIER 1: TECHNICAL ANALYSIS PANE -->
                 <div class="tier-pane active" id="pane-idx-tech-${prefix}" style="display: block;">
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                    <div class="idx-metrics-grid">
                         <div class="metric-card card-glass-inner">
                             <span class="m-label">30-DAY DMA</span>
                             <span class="m-value">₹${safeFmt(idx.DMA_30, 0)}</span>
@@ -1111,7 +1111,7 @@ function initApp() {
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                    <div class="idx-metrics-grid">
                         <div class="metric-card card-glass-inner">
                             <span class="m-label">RSI (14) MOMENTUM</span>
                             <span class="m-value gold-text">${idx.RSI_14 || '--'}</span>
@@ -1132,7 +1132,7 @@ function initApp() {
 
                     <div class="idx-trajectory-box" style="margin-bottom: 16px;">
                         <div class="idx-traj-title"><i class="fa-solid fa-table-cells"></i> Intraday Floor Pivot Points</div>
-                        <table class="idx-traj-table">
+                        <div class="idx-table-wrapper"><table class="idx-traj-table">
                             <thead>
                                 <tr><th>Support 2 (S2)</th><th>Support 1 (S1)</th><th>Pivot Point (PP)</th><th>Resistance 1 (R1)</th><th>Resistance 2 (R2)</th></tr>
                             </thead>
@@ -1145,7 +1145,7 @@ function initApp() {
                                     <td class="green-text">₹${safeFmt(idx.Pivot_R2, 0)}</td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table></div>
                     </div>
 
                     <div class="idx-synthesis-text">
@@ -1155,7 +1155,7 @@ function initApp() {
 
                 <!-- TIER 2: QUANT & ML FORECAST PANE -->
                 <div class="tier-pane" id="pane-idx-quant-${prefix}" style="display: none;">
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                    <div class="idx-metrics-grid">
                         <div class="metric-card card-glass-inner">
                             <span class="m-label">20D ANN. VOLATILITY</span>
                             <span class="m-value gold-text">${idx['Vol_20d_Annualized_%'] || '14.2'}%</span>
@@ -1176,7 +1176,7 @@ function initApp() {
 
                     <div class="idx-trajectory-box" style="margin-bottom: 16px;">
                         <div class="idx-traj-title"><i class="fa-solid fa-calculator"></i> Monte Carlo 1,000 Path 95% Confidence Intervals</div>
-                        <table class="idx-traj-table">
+                        <div class="idx-table-wrapper"><table class="idx-traj-table">
                             <thead>
                                 <tr><th>95% CI Expected Low</th><th>Empirical Median</th><th>95% CI Expected High</th><th>Monte Carlo Win Prob</th></tr>
                             </thead>
@@ -1188,7 +1188,7 @@ function initApp() {
                                     <td class="gold-text">${idx['MC_Win_Probability_%'] || idx['Final_Win_Probability_%'] || '58.5'}%</td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table></div>
                     </div>
 
                     <div class="idx-synthesis-text" style="background: rgba(16, 185, 129, 0.04); border-left-color: var(--accent-emerald);">
@@ -1198,7 +1198,7 @@ function initApp() {
 
                 <!-- TIER 3: PROBABLE CLOSING & TRAJECTORY PANE -->
                 <div class="tier-pane" id="pane-idx-closing-${prefix}" style="display: none;">
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                    <div class="idx-metrics-grid">
                         <div class="metric-card card-glass-inner">
                             <span class="m-label">PROBABLE DAY 1 CLOSE</span>
                             <span class="m-value gold-text">₹${safeFmt(probClose)}</span>
@@ -1219,14 +1219,14 @@ function initApp() {
 
                     <div class="idx-trajectory-box" style="margin-bottom: 16px;">
                         <div class="idx-traj-title"><i class="fa-solid fa-chart-line"></i> 5-Day Probable Closing Trajectory Curve</div>
-                        <table class="idx-traj-table">
+                        <div class="idx-table-wrapper"><table class="idx-traj-table">
                             <thead>
                                 <tr><th>Day</th><th>Probable Close</th><th>Expected High</th><th>Expected Low</th></tr>
                             </thead>
                             <tbody>
                                 ${trajRows}
                             </tbody>
-                        </table>
+                        </table></div>
                     </div>
 
                     <div class="idx-synthesis-text" style="background: rgba(0, 191, 255, 0.04); border-left-color: var(--accent-cyan);">
@@ -1352,7 +1352,7 @@ function initApp() {
                                     <td style="text-align: center;" class="${isLowGreen ? 'hit-cell' : 'miss-cell'}">${isLowGreen ? '🛡️ Support Retained' : '⚠️ Support Floor Breached'}</td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table></div>
                     </div>
 
                     <div class="idx-synthesis-text" style="background: rgba(245, 158, 11, 0.04); border-left-color: var(--accent-gold);">
