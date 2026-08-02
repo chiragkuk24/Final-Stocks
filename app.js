@@ -1063,7 +1063,7 @@ function initApp() {
                     <span class="idx-bias-badge ${biasClass}" style="font-size: 0.9rem; padding: 6px 14px;">${idx.Bias || 'NEUTRAL'}</span>
                 </div>
 
-                <!-- CMP & Probable Next-Day Closing Banner -->
+                <!-- CMP & Today's Probable Closing Banner -->
                 <div class="idx-banner-container">
                     <div>
                         <span style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">CURRENT INDEX LEVEL (CMP)</span>
@@ -1075,7 +1075,7 @@ function initApp() {
                         </div>
                     </div>
                     <div class="idx-banner-right">
-                        <span style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;"><i class="fa-solid fa-bullseye"></i> PROBABLE NEXT-DAY CLOSING</span>
+                        <span style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;"><i class="fa-solid fa-bullseye"></i> TODAY'S PROBABLE CLOSING</span>
                         <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); font-family: var(--font-heading);">
                             ₹${safeFmt(probClose)}
                         </div>
@@ -1200,7 +1200,7 @@ function initApp() {
                 <div class="tier-pane" id="pane-idx-closing-${prefix}" style="display: none;">
                     <div class="idx-metrics-grid">
                         <div class="metric-card card-glass-inner">
-                            <span class="m-label">PROBABLE DAY 1 CLOSE</span>
+                            <span class="m-label">TODAY'S PROBABLE CLOSE</span>
                             <span class="m-value gold-text">₹${safeFmt(probClose)}</span>
                         </div>
                         <div class="metric-card card-glass-inner">
