@@ -2799,7 +2799,7 @@
     "scanned_at": "2026-08-02 15:12:57"
   },
   "validation": {
-    "validated_at": "2026-08-02 15:49:19",
+    "validated_at": "2026-08-02 15:51:42",
     "total_evaluated": 15,
     "target_hit_count": 15,
     "accuracy_pct": 100.0,
