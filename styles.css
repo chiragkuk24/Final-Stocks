@@ -2658,7 +2658,7 @@ body {
     }
     .about-models-grid {
         grid-template-columns: 1fr !important;
-        gap: 10px !original;
+        gap: 10px !important;
     }
     .pipeline-step-card {
         min-width: 100% !important;
