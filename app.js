@@ -1291,18 +1291,24 @@ function initApp() {
             const isCloseGreen = actualClose >= predClose;
             const closeColorClass = isCloseGreen ? 'green-text' : 'red-text';
             const closeDiffStr = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)} (${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%)`;
+            const closeDiffNum = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)}`;
+            const closePctStr = `${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%`;
 
             const highDiff = actualHigh - predHigh;
             const highVarPct = predHigh > 0 ? (highDiff / predHigh) * 100 : 0;
             const isHighGreen = actualHigh >= predHigh;
             const highColorClass = isHighGreen ? 'green-text' : 'red-text';
             const highDiffStr = `${highDiff >= 0 ? '+' : ''}${highDiff.toFixed(2)} (${highVarPct >= 0 ? '+' : ''}${highVarPct.toFixed(2)}%)`;
+            const highDiffNum = `${highDiff >= 0 ? '+' : ''}${highDiff.toFixed(2)}`;
+            const highPctStr = `${highVarPct >= 0 ? '+' : ''}${highVarPct.toFixed(2)}%`;
 
             const lowDiff = actualLow - predLow;
             const lowVarPct = predLow > 0 ? (lowDiff / predLow) * 100 : 0;
             const isLowGreen = actualLow >= predLow;
             const lowColorClass = isLowGreen ? 'green-text' : 'red-text';
             const lowDiffStr = `${lowDiff >= 0 ? '+' : ''}${lowDiff.toFixed(2)} (${lowVarPct >= 0 ? '+' : ''}${lowVarPct.toFixed(2)}%)`;
+            const lowDiffNum = `${lowDiff >= 0 ? '+' : ''}${lowDiff.toFixed(2)}`;
+            const lowPctStr = `${lowVarPct >= 0 ? '+' : ''}${lowVarPct.toFixed(2)}%`;
 
             const isHit = actualClose >= predLow * 0.985;
             const statusBadge = isHit ? '<span class="post-badge hit">🛡️ Target Range Hit</span>' : '<span class="post-badge miss">⚠️ Pullback</span>';
@@ -1323,10 +1329,10 @@ function initApp() {
                             <thead>
                                 <tr>
                                     <th style="text-align: left;">Price Metric</th>
-                                    <th style="text-align: center;">Actual Price (4:00 PM)</th>
-                                    <th style="text-align: center;">Predicted Model Level</th>
-                                    <th style="text-align: center;">Variance (Diff & %)</th>
-                                    <th style="text-align: center;">Validation Status</th>
+                                    <th style="text-align: center;">Actual Closing</th>
+                                    <th style="text-align: center;">Predicted Closing</th>
+                                    <th style="text-align: center;">Variance</th>
+                                    <th style="text-align: center;">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1334,22 +1340,22 @@ function initApp() {
                                     <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-flag-checkered text-cyan"></i> Close Price</td>
                                     <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">₹${safeFmt(actualClose)}</td>
                                     <td style="text-align: center; font-weight: 700;">₹${safeFmt(predClose)}</td>
-                                    <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">${closeDiffStr}</td>
-                                    <td style="text-align: center;" class="${isCloseGreen ? 'hit-cell' : 'miss-cell'}">${isCloseGreen ? '🎯 Target Hit' : '⚠️ Below Target Close'}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">${closeDiffNum}</td>
+                                    <td style="text-align: center;" class="${isCloseGreen ? 'hit-cell' : 'miss-cell'}">${isCloseGreen ? `🎯 ${closePctStr} Target Hit` : `⚠️ ${closePctStr} Below Target Close`}</td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-arrow-trend-up text-emerald"></i> High Price</td>
                                     <td style="text-align: center; font-weight: 700;" class="${highColorClass}">₹${safeFmt(actualHigh)}</td>
                                     <td style="text-align: center; font-weight: 700;">₹${safeFmt(predHigh)}</td>
-                                    <td style="text-align: center; font-weight: 700;" class="${highColorClass}">${highDiffStr}</td>
-                                    <td style="text-align: center;" class="${isHighGreen ? 'hit-cell' : 'miss-cell'}">${isHighGreen ? '🛡️ Target Retained' : '⚠️ Below Target High'}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${highColorClass}">${highDiffNum}</td>
+                                    <td style="text-align: center;" class="${isHighGreen ? 'hit-cell' : 'miss-cell'}">${isHighGreen ? `🛡️ ${highPctStr} Target Retained` : `⚠️ ${highPctStr} Below Target High`}</td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-arrow-trend-down text-red"></i> Low Price</td>
                                     <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">₹${safeFmt(actualLow)}</td>
                                     <td style="text-align: center; font-weight: 700;">₹${safeFmt(predLow)}</td>
-                                    <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">${lowDiffStr}</td>
-                                    <td style="text-align: center;" class="${isLowGreen ? 'hit-cell' : 'miss-cell'}">${isLowGreen ? '🛡️ Support Retained' : '⚠️ Support Floor Breached'}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">${lowDiffNum}</td>
+                                    <td style="text-align: center;" class="${isLowGreen ? 'hit-cell' : 'miss-cell'}">${isLowGreen ? `🛡️ ${lowPctStr} Support Retained` : `⚠️ ${lowPctStr} Support Floor Breached`}</td>
                                 </tr>
                             </tbody>
                         </table></div>
