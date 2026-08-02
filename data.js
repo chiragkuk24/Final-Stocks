@@ -3449,9 +3449,9 @@ window.DASHBOARD_DATA = {
     "scanned_at": "2026-08-02 10:25:46"
   },
   "validation": {
-    "validated_at": "2026-08-02 15:51:42",
-    "total_evaluated": 15,
-    "target_hit_count": 15,
+    "validated_at": "2026-08-02 10:27:31",
+    "total_evaluated": 20,
+    "target_hit_count": 20,
     "accuracy_pct": 100.0,
     "details": [
       {
@@ -3469,6 +3469,54 @@ window.DASHBOARD_DATA = {
         "Close_Error_Pct": 0.79,
         "High_Error_Pct": 1.97,
         "Low_Error_Pct": 0.32
+      },
+      {
+        "Stock": "ULTRACEMCO",
+        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "CMP": 11903.0,
+        "Pred_Low": 11731.98,
+        "Pred_High": 12148.58,
+        "Pred_Close": 11998.22,
+        "Actual_Close": 11903.0,
+        "Actual_High": 12009.0,
+        "Actual_Low": 11799.0,
+        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
+        "Error_Pct": 0.79,
+        "Close_Error_Pct": 0.79,
+        "High_Error_Pct": 1.15,
+        "Low_Error_Pct": 0.57
+      },
+      {
+        "Stock": "360ONE",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
+        "CMP": 1135.3,
+        "Pred_Low": 1113.98,
+        "Pred_High": 1153.71,
+        "Pred_Close": 1144.38,
+        "Actual_Close": 1135.3,
+        "Actual_High": 1166.0,
+        "Actual_Low": 1132.0,
+        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
+        "Error_Pct": 0.79,
+        "Close_Error_Pct": 0.79,
+        "High_Error_Pct": 1.07,
+        "Low_Error_Pct": 1.62
+      },
+      {
+        "Stock": "ALKEM",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
+        "CMP": 5751.5,
+        "Pred_Low": 5710.85,
+        "Pred_High": 5912.15,
+        "Pred_Close": 5797.51,
+        "Actual_Close": 5751.5,
+        "Actual_High": 5833.0,
+        "Actual_Low": 5735.0,
+        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
+        "Error_Pct": 0.79,
+        "Close_Error_Pct": 0.79,
+        "High_Error_Pct": 1.34,
+        "Low_Error_Pct": 0.42
       },
       {
         "Stock": "CIPLA",
@@ -3503,11 +3551,27 @@ window.DASHBOARD_DATA = {
         "Low_Error_Pct": 0.46
       },
       {
+        "Stock": "ASIANPAINT",
+        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "CMP": 2747.3,
+        "Pred_Low": 2707.04,
+        "Pred_High": 2803.2,
+        "Pred_Close": 2769.28,
+        "Actual_Close": 2747.3,
+        "Actual_High": 2774.9,
+        "Actual_Low": 2732.4,
+        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
+        "Error_Pct": 0.79,
+        "Close_Error_Pct": 0.79,
+        "High_Error_Pct": 1.01,
+        "Low_Error_Pct": 0.94
+      },
+      {
         "Stock": "HAL",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 4646.5,
-        "Pred_Low": 4548.57,
-        "Pred_High": 4711.2,
+        "Pred_Low": 4548.55,
+        "Pred_High": 4711.17,
         "Pred_Close": 4683.67,
         "Actual_Close": 4646.5,
         "Actual_High": 4669.0,
@@ -3583,22 +3647,6 @@ window.DASHBOARD_DATA = {
         "Low_Error_Pct": 0.85
       },
       {
-        "Stock": "PGEL",
-        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
-        "CMP": 613.35,
-        "Pred_Low": 590.26,
-        "Pred_High": 611.73,
-        "Pred_Close": 618.26,
-        "Actual_Close": 613.35,
-        "Actual_High": 627.45,
-        "Actual_Low": 608.0,
-        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
-        "Error_Pct": 0.79,
-        "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 2.57,
-        "Low_Error_Pct": 3.01
-      },
-      {
         "Stock": "SHRIRAMFIN",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 1046.7,
@@ -3615,6 +3663,22 @@ window.DASHBOARD_DATA = {
         "Low_Error_Pct": 0.95
       },
       {
+        "Stock": "PGEL",
+        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "CMP": 613.35,
+        "Pred_Low": 590.26,
+        "Pred_High": 611.73,
+        "Pred_Close": 618.26,
+        "Actual_Close": 613.35,
+        "Actual_High": 627.45,
+        "Actual_Low": 608.0,
+        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
+        "Error_Pct": 0.79,
+        "Close_Error_Pct": 0.79,
+        "High_Error_Pct": 2.57,
+        "Low_Error_Pct": 3.01
+      },
+      {
         "Stock": "GODREJPROP",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 2105.7,
@@ -3629,6 +3693,22 @@ window.DASHBOARD_DATA = {
         "Close_Error_Pct": 0.79,
         "High_Error_Pct": 5.01,
         "Low_Error_Pct": 3.39
+      },
+      {
+        "Stock": "SIEMENS",
+        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "CMP": 3760.0,
+        "Pred_Low": 3684.03,
+        "Pred_High": 3815.63,
+        "Pred_Close": 3790.08,
+        "Actual_Close": 3760.0,
+        "Actual_High": 3808.4,
+        "Actual_Low": 3662.1,
+        "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
+        "Error_Pct": 0.79,
+        "Close_Error_Pct": 0.79,
+        "High_Error_Pct": 0.19,
+        "Low_Error_Pct": 0.6
       },
       {
         "Stock": "TECHM",
@@ -3666,8 +3746,8 @@ window.DASHBOARD_DATA = {
         "Stock": "COFORGE",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 1721.0,
-        "Pred_Low": 1705.12,
-        "Pred_High": 1765.36,
+        "Pred_Low": 1705.15,
+        "Pred_High": 1765.38,
         "Pred_Close": 1734.77,
         "Actual_Close": 1721.0,
         "Actual_High": 1738.8,
@@ -3675,14 +3755,14 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.5,
-        "Low_Error_Pct": 1.37
+        "High_Error_Pct": 1.51,
+        "Low_Error_Pct": 1.38
       },
       {
         "Stock": "BHARATFORG",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 2199.8,
-        "Pred_Low": 2184.76,
+        "Pred_Low": 2184.77,
         "Pred_High": 2261.76,
         "Pred_Close": 2217.76,
         "Actual_Close": 2199.8,
@@ -3692,7 +3772,7 @@ window.DASHBOARD_DATA = {
         "Error_Pct": 0.81,
         "Close_Error_Pct": 0.81,
         "High_Error_Pct": 2.17,
-        "Low_Error_Pct": 1.06
+        "Low_Error_Pct": 1.07
       }
     ]
   }
