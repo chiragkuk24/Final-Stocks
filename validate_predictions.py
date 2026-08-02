@@ -6,7 +6,7 @@ r"""
   Location: d:\CNH\Final-Stocks\validate_predictions.py
 
   Actions:
-    1. Loads predictions generated during 8:30 AM pre-market scan
+    1. Loads predictions generated during 9:30 AM pre-market scan
     2. Downloads actual 4:00 PM closing price and daily high via yfinance
     3. Evaluates model accuracy & prediction range precision
     4. Updates dashboard_data.json & data.js with live accuracy scorecard
