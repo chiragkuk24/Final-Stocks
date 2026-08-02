@@ -864,15 +864,27 @@ def main():
     df_results.to_excel(export_path, index=False)
     print(f"\n✅ Live Trading Order Analytics Exported to: '{export_path.name}'")
 
-    # Export JSON payload for Web Dashboard
+    # Export JSON payload for Web Dashboard (Preserve existing validation data if present)
     json_path = BASE_DIR / "dashboard_data.json"
     data_js_path = BASE_DIR / "data.js"
+
+    existing_validation = None
+    if json_path.exists():
+        try:
+            with open(json_path, encoding='utf-8') as f:
+                old_data = json.load(f)
+                existing_validation = old_data.get('validation')
+        except Exception:
+            pass
 
     payload = {
         "macro": macro_info,
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "predictions": results
     }
+    if existing_validation:
+        payload["validation"] = existing_validation
+
     json_text = json.dumps(payload, indent=2)
     json_path.write_text(json_text, encoding="utf-8")
     data_js_path.write_text(f"window.DASHBOARD_DATA = {json_text};", encoding="utf-8")
