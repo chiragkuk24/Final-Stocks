@@ -1774,5 +1774,166 @@ body {
     .news-grid-feed { grid-template-columns: 1fr; }
 }
 
+/* ==========================================================================
+   NIFTY 50 & BANK NIFTY 5-Day ML Forecast Section
+   ========================================================================== */
+.index-forecast-section {
+    margin-bottom: 24px;
+    padding: 20px 24px;
+}
+
+.index-forecast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.index-forecast-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.index-forecast-badge {
+    background: rgba(0, 191, 255, 0.12);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    color: var(--accent-cyan);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.index-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.index-forecast-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+}
+
+.index-forecast-card:hover {
+    border-color: rgba(0, 191, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.idx-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.idx-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.idx-cmp {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.idx-bias-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+}
+
+.idx-metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+.idx-m-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.idx-m-item .lbl {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.idx-m-item .val {
+    font-weight: 700;
+    font-size: 0.92rem;
+    font-family: var(--font-heading);
+    color: #fff;
+}
+
+.idx-trajectory-box {
+    margin-top: 10px;
+}
+
+.idx-traj-title {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-cyan);
+    margin-bottom: 8px;
+}
+
+.idx-traj-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+}
+
+.idx-traj-table th, .idx-traj-table td {
+    padding: 6px 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.idx-traj-table th {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.idx-synthesis-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(0, 191, 255, 0.04);
+    border-left: 3px solid var(--accent-cyan);
+    border-radius: 4px;
+}
+
+@media (max-width: 900px) {
+    .index-cards-grid { grid-template-columns: 1fr; }
+    .idx-metrics-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+
 
 

@@ -166,7 +166,8 @@ function initApp() {
         // 3. Render Cards & Table
         renderFilteredView();
 
-        // 4. Render US Market Closing Feed & 30-Day Breakout Stock News Feed Scanner
+        // 4. Render NIFTY 50 & BANK NIFTY 5-Day ML Forecasts, US Market Feed & News Scanner
+        if (dashboardData.index_predictions) renderIndexForecasts(dashboardData.index_predictions);
         if (dashboardData.us_market) renderUSMarketFeed(dashboardData.us_market);
         if (dashboardData.breakout_news) renderBreakoutNewsScanner(dashboardData.breakout_news);
 
@@ -844,6 +845,95 @@ function initApp() {
                     <div class="news-footer">
                         <span class="news-publisher"><i class="fa-solid fa-newspaper"></i> ${art.publisher}</span>
                         <span class="news-time"><i class="fa-regular fa-clock"></i> ${art.relative_time}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /* ==========================================================================
+       NIFTY 50 & BANK NIFTY 5-Day ML Forecast Renderer
+       ========================================================================== */
+    function renderIndexForecasts(indexPredictions) {
+        const container = document.getElementById('index-forecast-container');
+        if (!container || !indexPredictions || indexPredictions.length === 0) return;
+
+        container.innerHTML = indexPredictions.map(idx => {
+            const isBull = idx.Bias.includes('BULLISH');
+            const biasClass = isBull ? 'sentiment-bullish' : (idx.Bias.includes('BEARISH') ? 'sentiment-bearish' : 'sentiment-neutral');
+            const chgIcon = idx.Change_Pct >= 0 ? '<i class="fa-solid fa-caret-up"></i>' : '<i class="fa-solid fa-caret-down"></i>';
+            const chgClass = idx.Change_Pct >= 0 ? 'green-text' : 'red-text';
+
+            const fcClose = idx.Forecast_5D_Close || [];
+            const fcHigh = idx.Forecast_5D_High || [];
+            const fcLow = idx.Forecast_5D_Low || [];
+
+            let trajRows = '';
+            for (let i = 1; i <= 5; i++) {
+                if (fcClose[i]) {
+                    trajRows += `
+                        <tr>
+                            <td><strong>Day ${i}</strong></td>
+                            <td class="green-text">₹${fcClose[i].toLocaleString()}</td>
+                            <td class="cyan-text">₹${fcHigh[i].toLocaleString()}</td>
+                            <td class="red-text">₹${fcLow[i].toLocaleString()}</td>
+                        </tr>
+                    `;
+                }
+            }
+
+            return `
+                <div class="index-forecast-card">
+                    <div>
+                        <div class="idx-card-top">
+                            <div>
+                                <div class="idx-title">${idx.Index_Name}</div>
+                                <div class="us-index-symbol">${idx.Symbol} • ${idx.Date}</div>
+                            </div>
+                            <span class="idx-bias-badge ${biasClass}">${idx.Bias}</span>
+                        </div>
+
+                        <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;">
+                            <span class="idx-cmp">₹${idx.CMP.toLocaleString('en-IN', {minimumFractionDigits: 2})}</span>
+                            <span class="${chgClass}" style="font-weight: 700; font-size: 0.95rem;">
+                                ${chgIcon} ${idx.Change >= 0 ? '+' : ''}${idx.Change.toFixed(2)} (${idx.Change_Pct >= 0 ? '+' : ''}${idx.Change_Pct.toFixed(2)}%)
+                            </span>
+                        </div>
+
+                        <div class="idx-metrics-row">
+                            <div class="idx-m-item">
+                                <span class="lbl">5D Target</span>
+                                <span class="val green-text">₹${idx.Target_5D.toLocaleString()}</span>
+                            </div>
+                            <div class="idx-m-item">
+                                <span class="lbl">5D Support</span>
+                                <span class="val red-text">₹${idx.Support_5D.toLocaleString()}</span>
+                            </div>
+                            <div class="idx-m-item">
+                                <span class="lbl">Win Prob %</span>
+                                <span class="val cyan-text">${idx['Final_Win_Probability_%']}%</span>
+                            </div>
+                            <div class="idx-m-item">
+                                <span class="lbl">RSI(14)</span>
+                                <span class="val gold-text">${idx.RSI_14}</span>
+                            </div>
+                        </div>
+
+                        <div class="idx-trajectory-box">
+                            <div class="idx-traj-title"><i class="fa-solid fa-chart-line"></i> 5-Day Trajectory Curve</div>
+                            <table class="idx-traj-table">
+                                <thead>
+                                    <tr><th>Day</th><th>Exp. Close</th><th>Exp. High</th><th>Exp. Low</th></tr>
+                                </thead>
+                                <tbody>
+                                    ${trajRows}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="idx-synthesis-text">
+                        <i class="fa-solid fa-brain"></i> ${idx.AI_Synthesis}
                     </div>
                 </div>
             `;
