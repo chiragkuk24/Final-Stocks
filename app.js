@@ -164,8 +164,8 @@ function initApp() {
 
         // 1. Render Macro Badges
         niftyBadge.textContent = macro.NIFTY_Regime || 'BULLISH';
-        if (macro.NIFTY_Regime === 'BULLISH') niftyBadge.className = 'badge badge-green';
-        else if (macro.NIFTY_Regime === 'BEARISH') niftyBadge.className = 'badge badge-red';
+        if (macro.NIFTY_Regime && (macro.NIFTY_Regime.includes('BULL') || macro.NIFTY_Regime === 'BULLISH')) niftyBadge.className = 'badge badge-green';
+        else if (macro.NIFTY_Regime && (macro.NIFTY_Regime.includes('BEAR') || macro.NIFTY_Regime === 'BEARISH')) niftyBadge.className = 'badge badge-red';
         else niftyBadge.className = 'badge badge-yellow';
 
         let vixRegimeShort = 'Low Fear';

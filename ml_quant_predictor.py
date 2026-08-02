@@ -94,11 +94,13 @@ def fetch_macro_volatility_regime():
         cmp = close.iloc[-1]
         
         if cmp > dma50 and dma50 > dma200:
-            nifty_state = "BULLISH"
+            nifty_state = "BULLISH CONTINUATION"
+        elif cmp < dma200:
+            nifty_state = "BEARISH PULLBACK"
         elif cmp < dma50 and dma50 < dma200:
             nifty_state = "BEARISH"
         else:
-            nifty_state = "NEUTRAL"
+            nifty_state = "CONSOLIDATION"
     except Exception:
         nifty_state = "BULLISH"
 
@@ -124,7 +126,7 @@ def fetch_macro_volatility_regime():
         vix_regime = "HIGH_FEAR (False Breakout Risk)"
         vix_mult = 0.85
 
-    nifty_mult = 1.05 if nifty_state == "BULLISH" else (0.90 if nifty_state == "BEARISH" else 1.00)
+    nifty_mult = 1.05 if "BULL" in nifty_state else (0.90 if "BEAR" in nifty_state else 1.00)
     multiplier = round(nifty_mult * vix_mult, 2)
 
     return {
@@ -1043,6 +1045,9 @@ def main():
         res_idx = predict_index_price_action(idx_sym, idx_name, macro_info)
         if res_idx:
             index_predictions.append(res_idx)
+            if idx_sym == '^NSEI' and 'Bias' in res_idx:
+                clean_bias = res_idx['Bias'].replace('🟢 ', '').replace('🔴 ', '').replace('🟡 ', '').strip()
+                macro_info['NIFTY_Regime'] = clean_bias
 
     breakout_symbols = []
 

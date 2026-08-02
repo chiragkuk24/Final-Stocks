@@ -1,6 +1,6 @@
 window.DASHBOARD_DATA = {
   "macro": {
-    "NIFTY_Regime": "NEUTRAL",
+    "NIFTY_Regime": "BEARISH PULLBACK",
     "India_VIX": 11.76,
     "VIX_Regime": "LOW_FEAR (Bullish Breakouts)",
     "Macro_Multiplier": 1.08
