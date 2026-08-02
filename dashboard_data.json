@@ -3491,7 +3491,7 @@
     "scanned_at": "2026-08-02 05:49:10"
   },
   "validation": {
-    "validated_at": "2026-08-02 09:29:58",
+    "validated_at": "2026-08-02 05:51:07",
     "total_evaluated": 20,
     "target_hit_count": 20,
     "accuracy_pct": 100.0,
@@ -3532,8 +3532,8 @@
         "Stock": "360ONE",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 1135.3,
-        "Pred_Low": 1113.98,
-        "Pred_High": 1153.71,
+        "Pred_Low": 1114.0,
+        "Pred_High": 1153.74,
         "Pred_Close": 1144.38,
         "Actual_Close": 1135.3,
         "Actual_High": 1166.0,
@@ -3541,7 +3541,7 @@
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.07,
+        "High_Error_Pct": 1.06,
         "Low_Error_Pct": 1.62
       },
       {
@@ -3565,7 +3565,7 @@
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 1473.2,
         "Pred_Low": 1431.86,
-        "Pred_High": 1388.21,
+        "Pred_High": 1388.25,
         "Pred_Close": 1484.99,
         "Actual_Close": 1473.2,
         "Actual_High": 1478.8,
@@ -3573,7 +3573,7 @@
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 6.53,
+        "High_Error_Pct": 6.52,
         "Low_Error_Pct": 2.13
       },
       {
@@ -3596,8 +3596,8 @@
         "Stock": "ASIANPAINT",
         "Live_Signal": "\ud83d\udfe2 HIGH CONVICTION BUY",
         "CMP": 2747.3,
-        "Pred_Low": 2707.04,
-        "Pred_High": 2803.2,
+        "Pred_Low": 2706.99,
+        "Pred_High": 2803.14,
         "Pred_Close": 2769.28,
         "Actual_Close": 2747.3,
         "Actual_High": 2774.9,
@@ -3612,8 +3612,8 @@
         "Stock": "HAL",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 4646.5,
-        "Pred_Low": 4548.64,
-        "Pred_High": 4711.27,
+        "Pred_Low": 4548.43,
+        "Pred_High": 4711.06,
         "Pred_Close": 4683.67,
         "Actual_Close": 4646.5,
         "Actual_High": 4669.0,
@@ -3621,8 +3621,8 @@
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 0.9,
-        "Low_Error_Pct": 0.93
+        "High_Error_Pct": 0.89,
+        "Low_Error_Pct": 0.94
       },
       {
         "Stock": "RECLTD",
@@ -3660,9 +3660,9 @@
         "Stock": "EICHERMOT",
         "Live_Signal": "\ud83d\udfe2 HIGH CONVICTION BUY",
         "CMP": 7833.5,
-        "Pred_Low": 7803.14,
+        "Pred_Low": 7803.37,
         "Pred_High": 8059.35,
-        "Pred_Close": 7920.64,
+        "Pred_Close": 7920.87,
         "Actual_Close": 7833.5,
         "Actual_High": 7899.0,
         "Actual_Low": 7794.0,
@@ -3692,8 +3692,8 @@
         "Stock": "SHRIRAMFIN",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 1046.7,
-        "Pred_Low": 1019.35,
-        "Pred_High": 1055.98,
+        "Pred_Low": 1019.37,
+        "Pred_High": 1056.01,
         "Pred_Close": 1055.07,
         "Actual_Close": 1046.7,
         "Actual_High": 1054.6,
@@ -3702,7 +3702,7 @@
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
         "High_Error_Pct": 0.13,
-        "Low_Error_Pct": 0.96
+        "Low_Error_Pct": 0.95
       },
       {
         "Stock": "PGEL",
@@ -3722,7 +3722,7 @@
       },
       {
         "Stock": "GODREJPROP",
-        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
+        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 2105.7,
         "Pred_Low": 2027.32,
         "Pred_High": 2032.25,
@@ -3740,8 +3740,8 @@
         "Stock": "SIEMENS",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 3760.0,
-        "Pred_Low": 3683.99,
-        "Pred_High": 3815.59,
+        "Pred_Low": 3684.03,
+        "Pred_High": 3815.63,
         "Pred_Close": 3790.08,
         "Actual_Close": 3760.0,
         "Actual_High": 3808.4,
@@ -3750,7 +3750,7 @@
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
         "High_Error_Pct": 0.19,
-        "Low_Error_Pct": 0.59
+        "Low_Error_Pct": 0.6
       },
       {
         "Stock": "TECHM",
@@ -3772,8 +3772,8 @@
         "Stock": "DIXON",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 14049.0,
-        "Pred_Low": 13634.58,
-        "Pred_High": 14126.3,
+        "Pred_Low": 13634.81,
+        "Pred_High": 14126.52,
         "Pred_Close": 14161.39,
         "Actual_Close": 14049.0,
         "Actual_High": 14589.0,
@@ -3781,7 +3781,7 @@
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 3.28,
+        "High_Error_Pct": 3.27,
         "Low_Error_Pct": 0.25
       },
       {
@@ -3804,7 +3804,7 @@
         "Stock": "BHARATFORG",
         "Live_Signal": "\ud83d\udfe2 HIGH CONVICTION BUY",
         "CMP": 2199.8,
-        "Pred_Low": 2184.77,
+        "Pred_Low": 2184.76,
         "Pred_High": 2261.76,
         "Pred_Close": 2217.76,
         "Actual_Close": 2199.8,
@@ -3814,7 +3814,7 @@
         "Error_Pct": 0.81,
         "Close_Error_Pct": 0.81,
         "High_Error_Pct": 2.17,
-        "Low_Error_Pct": 1.07
+        "Low_Error_Pct": 1.06
       }
     ]
   }
