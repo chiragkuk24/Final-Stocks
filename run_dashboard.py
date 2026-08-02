@@ -30,12 +30,19 @@ def main():
     print(" 🚀 QUANTMATRIX AI — Launching Live Web Dashboard...")
     print("="*70)
 
-    # 1. Run ML & Quant Predictor
-    print("\n[1/3] Running ML & Quant Prediction Engine...")
-    try:
-        subprocess.run([sys.executable, str(BASE_DIR / "ml_quant_predictor.py")], check=True)
-    except Exception as e:
-        print(f"[WARN] Engine execution notice: {e}")
+    json_path = BASE_DIR / "dashboard_data.json"
+    
+    # 1. Check if predictions data exists or if forced refresh requested
+    force_refresh = "--refresh" in sys.argv or not json_path.exists()
+
+    if force_refresh:
+        print("\n[1/3] Running ML & Quant Prediction Engine...")
+        try:
+            subprocess.run([sys.executable, str(BASE_DIR / "ml_quant_predictor.py")], check=True)
+        except Exception as e:
+            print(f"[WARN] Engine execution notice: {e}")
+    else:
+        print("\n[1/3] Using cached prediction data from 'dashboard_data.json' (Pass '--refresh' to re-train models).")
 
     # 2. Change directory to workspace
     os.chdir(BASE_DIR)
@@ -43,7 +50,10 @@ def main():
     # 3. Launch Web Browser
     url = f"http://localhost:{PORT}/index.html"
     print(f"\n[2/3] Opening Web Dashboard at: {url}")
-    webbrowser.open(url)
+    try:
+        webbrowser.open(url)
+    except Exception:
+        pass
 
     # 4. Start HTTP Web Server
     print(f"[3/3] Web Dashboard HTTP Server running on port {PORT}. Press Ctrl+C to stop.\n")

@@ -35,27 +35,71 @@ function initApp() {
     const modal = document.getElementById('stock-modal');
     const modalClose = document.getElementById('modal-close');
 
-    // Sidebar Navigation Switching
+    // Sidebar Navigation Elements (4 Sections)
+    const navUsmarkets = document.getElementById('nav-usmarkets');
+    const navNewsfeeds = document.getElementById('nav-newsfeeds');
     const navDashboard = document.getElementById('nav-dashboard');
     const navPostmarket = document.getElementById('nav-postmarket');
+
+    const pageUsmarkets = document.getElementById('page-usmarkets');
+    const pageNewsfeeds = document.getElementById('page-newsfeeds');
     const pageDashboard = document.getElementById('page-dashboard');
     const pagePostmarket = document.getElementById('page-postmarket');
 
     function switchPage(page) {
-        if (page === 'dashboard') {
-            pageDashboard.style.display = '';
-            pagePostmarket.style.display = 'none';
-            navDashboard.classList.add('active');
-            navPostmarket.classList.remove('active');
-        } else {
-            pageDashboard.style.display = 'none';
-            pagePostmarket.style.display = '';
-            navPostmarket.classList.add('active');
-            navDashboard.classList.remove('active');
+        if (pageUsmarkets) pageUsmarkets.style.display = 'none';
+        if (pageNewsfeeds) pageNewsfeeds.style.display = 'none';
+        if (pageDashboard) pageDashboard.style.display = 'none';
+        if (pagePostmarket) pagePostmarket.style.display = 'none';
+
+        if (navUsmarkets) navUsmarkets.classList.remove('active');
+        if (navNewsfeeds) navNewsfeeds.classList.remove('active');
+        if (navDashboard) navDashboard.classList.remove('active');
+        if (navPostmarket) navPostmarket.classList.remove('active');
+
+        if (page === 'usmarkets') {
+            if (pageUsmarkets) pageUsmarkets.style.display = '';
+            if (navUsmarkets) navUsmarkets.classList.add('active');
+        } else if (page === 'newsfeeds') {
+            if (pageNewsfeeds) pageNewsfeeds.style.display = '';
+            if (navNewsfeeds) navNewsfeeds.classList.add('active');
+        } else if (page === 'postmarket') {
+            if (pagePostmarket) pagePostmarket.style.display = '';
+            if (navPostmarket) navPostmarket.classList.add('active');
             renderPostMarketAnalysis();
+        } else {
+            // Default: Dashboard
+            if (pageDashboard) pageDashboard.style.display = '';
+            if (navDashboard) navDashboard.classList.add('active');
         }
+
+        // Auto close mobile drawer on section switch
+        closeMobileMenu();
     }
 
+    // Mobile Off-Canvas Sidebar Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const appSidebar = document.getElementById('app-sidebar');
+
+    function closeMobileMenu() {
+        if (appSidebar) appSidebar.classList.remove('mobile-open');
+        if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+    }
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            if (appSidebar) appSidebar.classList.toggle('mobile-open');
+            if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
+        });
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    if (navUsmarkets) navUsmarkets.addEventListener('click', (e) => { e.preventDefault(); switchPage('usmarkets'); });
+    if (navNewsfeeds) navNewsfeeds.addEventListener('click', (e) => { e.preventDefault(); switchPage('newsfeeds'); });
     if (navDashboard) navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); });
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
 
@@ -122,7 +166,11 @@ function initApp() {
         // 3. Render Cards & Table
         renderFilteredView();
 
-        // 4. Render Post-Market Analysis if available
+        // 4. Render US Market Closing Feed & 30-Day Breakout Stock News Feed Scanner
+        if (dashboardData.us_market) renderUSMarketFeed(dashboardData.us_market);
+        if (dashboardData.breakout_news) renderBreakoutNewsScanner(dashboardData.breakout_news);
+
+        // 5. Render Post-Market Analysis if available
         renderPostMarketAnalysis();
     }
 
@@ -619,6 +667,187 @@ function initApp() {
         btnExcel.addEventListener('click', () => {
             window.location.href = 'Breakout_ML_Quant_Predictions.xlsx';
         });
+    }
+
+    /* ==========================================================================
+       US Market Closing Live Feed Renderer
+       ========================================================================== */
+    function renderUSMarketFeed(usMarket) {
+        if (!usMarket) return;
+
+        const summaryText = document.getElementById('us-market-summary-text');
+        const timestamp = document.getElementById('us-market-timestamp');
+        const indicesGrid = document.getElementById('us-indices-grid');
+
+        if (summaryText) summaryText.textContent = usMarket.summary || 'US Market Closing data updated.';
+        if (timestamp) timestamp.textContent = `Updated: ${usMarket.updated_at || 'Recently'}`;
+
+        if (!indicesGrid || !usMarket.indices) return;
+
+        indicesGrid.innerHTML = usMarket.indices.map(idx => {
+            const isGain = idx.change_pct >= 0;
+            const trendClass = isGain ? 'index-bullish' : 'index-bearish';
+            const changeClass = isGain ? 'gain' : 'loss';
+            const icon = isGain ? '<i class="fa-solid fa-caret-up"></i>' : '<i class="fa-solid fa-caret-down"></i>';
+
+            return `
+                <div class="us-index-card ${trendClass}">
+                    <div class="us-index-top">
+                        <div>
+                            <div class="us-index-name">${idx.short_name}</div>
+                            <div class="us-index-symbol">${idx.symbol}</div>
+                        </div>
+                        <span class="us-market-status-badge">${idx.status || 'CLOSED'}</span>
+                    </div>
+                    <div class="us-index-price">$${idx.close_price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
+                    <div class="us-index-change ${changeClass}">
+                        ${icon} ${idx.change >= 0 ? '+' : ''}${idx.change.toFixed(2)} (${idx.change_pct >= 0 ? '+' : ''}${idx.change_pct.toFixed(2)}%)
+                    </div>
+                    <div class="us-index-range">
+                        <span>52W High: $${idx.week52_high.toLocaleString()}</span>
+                        <span>52W Low: $${idx.week52_low.toLocaleString()}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /* ==========================================================================
+       30-Day Breakout Stock News Feed Scanner Renderer
+       ========================================================================== */
+    let currentNewsStock = 'ALL';
+    let currentNewsSentiment = 'ALL';
+    let currentNewsSearch = '';
+
+    function renderBreakoutNewsScanner(breakoutNews) {
+        if (!breakoutNews) return;
+
+        const timestamp = document.getElementById('news-scanned-timestamp');
+        const kpiTotal = document.getElementById('news-kpi-total');
+        const kpiBullish = document.getElementById('news-kpi-bullish');
+        const kpiTopStock = document.getElementById('news-kpi-top-stock');
+        const kpiAvgScore = document.getElementById('news-kpi-avg-score');
+        const stockSelect = document.getElementById('news-stock-select');
+
+        if (timestamp) timestamp.textContent = `Scanned: ${breakoutNews.scanned_at || 'Recently'}`;
+        if (kpiTotal) kpiTotal.textContent = breakoutNews.total_articles || 0;
+        if (kpiBullish) kpiBullish.textContent = `${breakoutNews.bullish_pct || 0}%`;
+        if (kpiTopStock) kpiTopStock.textContent = breakoutNews.top_covered_stock || '--';
+        if (kpiAvgScore) {
+            const score = breakoutNews.avg_sentiment || 0;
+            kpiAvgScore.textContent = `${score >= 0 ? '+' : ''}${score.toFixed(2)}`;
+        }
+
+        // Populate stock dropdown if not already populated
+        if (stockSelect && stockSelect.options.length <= 1 && breakoutNews.stock_summaries) {
+            Object.keys(breakoutNews.stock_summaries).sort().forEach(stock => {
+                const opt = document.createElement('option');
+                opt.value = stock;
+                opt.textContent = `${stock} (${breakoutNews.stock_summaries[stock].total_articles} news)`;
+                stockSelect.appendChild(opt);
+            });
+
+            stockSelect.addEventListener('change', (e) => {
+                currentNewsStock = e.target.value;
+                renderFilteredNewsCards(breakoutNews);
+            });
+        }
+
+        // Bind sentiment tabs if not already bound
+        const newsTabs = document.querySelectorAll('.news-tab');
+        newsTabs.forEach(tab => {
+            if (!tab.dataset.bound) {
+                tab.dataset.bound = 'true';
+                tab.addEventListener('click', () => {
+                    newsTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentNewsSentiment = tab.dataset.sentiment;
+                    renderFilteredNewsCards(breakoutNews);
+                });
+            }
+        });
+
+        // Bind search box if not bound
+        const newsSearchInput = document.getElementById('news-search-input');
+        if (newsSearchInput && !newsSearchInput.dataset.bound) {
+            newsSearchInput.dataset.bound = 'true';
+            newsSearchInput.addEventListener('input', (e) => {
+                currentNewsSearch = e.target.value.toLowerCase().trim();
+                renderFilteredNewsCards(breakoutNews);
+            });
+        }
+
+        renderFilteredNewsCards(breakoutNews);
+    }
+
+    function renderFilteredNewsCards(breakoutNews) {
+        const container = document.getElementById('news-cards-container');
+        if (!container || !breakoutNews || !breakoutNews.articles) return;
+
+        let articles = breakoutNews.articles;
+
+        // Filter by stock
+        if (currentNewsStock !== 'ALL') {
+            articles = articles.filter(a => a.stock === currentNewsStock);
+        }
+
+        // Filter by sentiment
+        if (currentNewsSentiment !== 'ALL') {
+            articles = articles.filter(a => a.sentiment_label === currentNewsSentiment);
+        }
+
+        // Filter by keyword search
+        if (currentNewsSearch) {
+            articles = articles.filter(a =>
+                a.title.toLowerCase().includes(currentNewsSearch) ||
+                (a.snippet && a.snippet.toLowerCase().includes(currentNewsSearch)) ||
+                a.stock.toLowerCase().includes(currentNewsSearch) ||
+                a.publisher.toLowerCase().includes(currentNewsSearch)
+            );
+        }
+
+        if (articles.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 32px; color: var(--text-muted); background: rgba(255, 255, 255, 0.02); border-radius: 12px;">
+                    <i class="fa-solid fa-newspaper" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--text-dim);"></i>
+                    <p>No 30-day breakout news articles match your filter selection.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = articles.map(art => {
+            let sentClass = 'sentiment-neutral';
+            let sentIcon = '<i class="fa-solid fa-minus"></i>';
+            if (art.sentiment_label === 'BULLISH') {
+                sentClass = 'sentiment-bullish';
+                sentIcon = '<i class="fa-solid fa-circle-arrow-up"></i>';
+            } else if (art.sentiment_label === 'BEARISH') {
+                sentClass = 'sentiment-bearish';
+                sentIcon = '<i class="fa-solid fa-circle-arrow-down"></i>';
+            }
+
+            return `
+                <div class="news-card">
+                    <div>
+                        <div class="news-card-header">
+                            <span class="news-stock-badge">${art.stock}</span>
+                            <span class="news-sentiment-badge ${sentClass}">
+                                ${sentIcon} ${art.sentiment_label} (${art.sentiment_score >= 0 ? '+' : ''}${art.sentiment_score.toFixed(2)})
+                            </span>
+                        </div>
+                        <div class="news-title">
+                            <a href="${art.link}" target="_blank" rel="noopener noreferrer">${art.title}</a>
+                        </div>
+                        <div class="news-snippet">${art.snippet}</div>
+                    </div>
+                    <div class="news-footer">
+                        <span class="news-publisher"><i class="fa-solid fa-newspaper"></i> ${art.publisher}</span>
+                        <span class="news-time"><i class="fa-regular fa-clock"></i> ${art.relative_time}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 
     // Initial Load

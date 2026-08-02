@@ -882,6 +882,16 @@ def main():
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "predictions": results
     }
+    
+    # 8. Integrate US Market Closing Feed & 30-Day Breakout Stock News Feed Scanner
+    try:
+        from us_market_news_scanner import run_full_market_news_pipeline
+        market_news = run_full_market_news_pipeline(breakout_symbols)
+        payload["us_market"] = market_news.get("us_market")
+        payload["breakout_news"] = market_news.get("breakout_news")
+    except Exception as e:
+        print(f"[WARN] US Market & News Scanner integration notice: {e}")
+
     if existing_validation:
         payload["validation"] = existing_validation
 

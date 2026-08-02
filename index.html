@@ -17,9 +17,12 @@
 </head>
 <body>
 
+    <!-- Mobile Navigation Overlay & Header -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="app-sidebar">
             <div class="brand">
                 <div class="logo-icon">
                     <i class="fa-solid me-1 fa-chart-line"></i>
@@ -31,6 +34,8 @@
             </div>
 
             <nav class="nav-menu">
+                <a href="#" class="nav-item" id="nav-usmarkets"><i class="fa-solid fa-flag-usa text-blue"></i> US Markets</a>
+                <a href="#" class="nav-item" id="nav-newsfeeds"><i class="fa-solid fa-newspaper text-gold"></i> News Feeds</a>
                 <a href="#" class="nav-item active" id="nav-dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Post-Market Analysis</a>
             </nav>
@@ -59,6 +64,17 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
+            <!-- Mobile Sticky Top Bar -->
+            <div class="mobile-nav-bar card-glass">
+                <div class="brand-text">
+                    <span class="brand-name">QUANT<span class="highlight">MATRIX</span></span>
+                    <span class="brand-sub">INSTITUTIONAL AI</span>
+                </div>
+                <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
             <!-- Top Navbar Disclaimer Header -->
             <header class="top-header card-glass">
                 <div class="header-title" style="width: 100%;">
@@ -66,7 +82,103 @@
                 </div>
             </header>
 
-            <!-- ======= PAGE VIEW: DASHBOARD ======= -->
+            <!-- ======= SECTION 1: US MARKETS ======= -->
+            <div id="page-usmarkets" style="display:none;">
+                <section class="us-market-section card-glass">
+                    <div class="us-market-header">
+                        <div class="header-left">
+                            <h2><i class="fa-solid fa-flag-usa text-blue"></i> US Market Closing Live Feed</h2>
+                            <span class="us-market-status-badge"><i class="fa-solid fa-clock"></i> Daily Market Close</span>
+                        </div>
+                        <span class="us-market-timestamp" id="us-market-timestamp">Updated: --</span>
+                    </div>
+                    
+                    <div class="us-market-summary-box" id="us-market-summary-box">
+                        <i class="fa-solid fa-chart-line summary-icon"></i>
+                        <span id="us-market-summary-text">Loading live US market closing summary...</span>
+                    </div>
+
+                    <div class="us-indices-grid" id="us-indices-grid">
+                        <!-- Rendered dynamically by app.js -->
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION 1: US MARKETS ======= -->
+
+            <!-- ======= SECTION 2: NEWS FEEDS ======= -->
+            <div id="page-newsfeeds" style="display:none;">
+                <section class="news-scanner-section card-glass">
+                    <div class="news-scanner-header">
+                        <div class="header-title-box">
+                            <h2><i class="fa-solid fa-newspaper text-gold"></i> 30-Day Breakout Stocks News Feed Scanner</h2>
+                            <p class="subtitle">Scans sentiment-analyzed financial news feeds over the past 30 days for all final breakout stocks.</p>
+                        </div>
+                        <span class="news-timestamp" id="news-scanned-timestamp">Scanned: --</span>
+                    </div>
+
+                    <!-- News KPI Summary Bar -->
+                    <div class="news-kpi-grid">
+                        <div class="news-kpi-card card-glass-inner">
+                            <i class="fa-solid fa-file-lines news-kpi-icon icon-cyan"></i>
+                            <div class="news-kpi-info">
+                                <span class="lbl">Total Articles (30D)</span>
+                                <span class="val" id="news-kpi-total">0</span>
+                            </div>
+                        </div>
+                        <div class="news-kpi-card card-glass-inner">
+                            <i class="fa-solid fa-arrow-trend-up news-kpi-icon icon-green"></i>
+                            <div class="news-kpi-info">
+                                <span class="lbl">Bullish Coverage</span>
+                                <span class="val green-text" id="news-kpi-bullish">0%</span>
+                            </div>
+                        </div>
+                        <div class="news-kpi-card card-glass-inner">
+                            <i class="fa-solid fa-star news-kpi-icon icon-gold"></i>
+                            <div class="news-kpi-info">
+                                <span class="lbl">Top Mentioned Stock</span>
+                                <span class="val gold-text" id="news-kpi-top-stock">--</span>
+                            </div>
+                        </div>
+                        <div class="news-kpi-card card-glass-inner">
+                            <i class="fa-solid fa-gauge-simple-high news-kpi-icon icon-purple"></i>
+                            <div class="news-kpi-info">
+                                <span class="lbl">Mean Sentiment Score</span>
+                                <span class="val purple-text" id="news-kpi-avg-score">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Filter Controls Toolbar -->
+                    <div class="news-toolbar card-glass-inner">
+                        <div class="news-tool-group">
+                            <label for="news-stock-select"><i class="fa-solid fa-filter"></i> Filter Stock:</label>
+                            <select id="news-stock-select" class="news-dropdown">
+                                <option value="ALL">All Breakout Stocks</option>
+                            </select>
+                        </div>
+
+                        <div class="news-sentiment-tabs">
+                            <button class="news-tab active" data-sentiment="ALL">All News</button>
+                            <button class="news-tab tab-bullish" data-sentiment="BULLISH">🟢 Bullish</button>
+                            <button class="news-tab tab-neutral" data-sentiment="NEUTRAL">🟡 Neutral</button>
+                            <button class="news-tab tab-bearish" data-sentiment="BEARISH">🔴 Bearish</button>
+                        </div>
+
+                        <div class="news-search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="news-search-input" placeholder="Search news headlines or keywords...">
+                        </div>
+                    </div>
+
+                    <!-- News Cards Grid Feed -->
+                    <div class="news-grid-feed" id="news-cards-container">
+                        <!-- News cards rendered dynamically by app.js -->
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION 2: NEWS FEEDS ======= -->
+
+            <!-- ======= SECTION 3: DASHBOARD ======= -->
             <div id="page-dashboard">
 
                 <!-- Executive Metric KPI Cards -->
@@ -129,9 +241,9 @@
                 </section>
 
             </div>
-            <!-- ======= END PAGE VIEW: DASHBOARD ======= -->
+            <!-- ======= END SECTION 3: DASHBOARD ======= -->
 
-            <!-- ======= PAGE VIEW: POST-MARKET ANALYSIS ======= -->
+            <!-- ======= SECTION 4: POST-MARKET ANALYSIS ======= -->
             <div id="page-postmarket" style="display:none;">
 
                 <section class="post-market-section card-glass">
