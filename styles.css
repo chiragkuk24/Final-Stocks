@@ -2227,6 +2227,121 @@ body {
         padding: 16px 14px !important;
     }
 
+    /* ==========================================================================
+       3-Tier Modal & Deep Analysis Mobile Out-of-Frame Containment Fixes
+       ========================================================================== */
+    .modal-overlay {
+        padding: 10px !important;
+    }
+
+    .modal-card.tier-3-modal {
+        padding: 20px 14px !important;
+        border-radius: 14px !important;
+        max-height: 94vh !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+
+    .modal-close {
+        top: 14px !important;
+        right: 14px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 16px !important;
+    }
+
+    .deep-modal-header {
+        margin-bottom: 16px !important;
+        padding-right: 36px !important;
+    }
+
+    .deep-title-group h2 {
+        font-size: 1.15rem !important;
+        line-height: 1.3 !important;
+    }
+
+    .deep-subtitle {
+        font-size: 0.78rem !important;
+        flex-wrap: wrap;
+        gap: 6px !important;
+    }
+
+    .tier-nav-bar {
+        gap: 8px !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .tier-tab-btn {
+        padding: 8px 12px !important;
+        font-size: 0.78rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .tier-pane {
+        gap: 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .metrics-card-grid,
+    .metrics-card-grid-quant {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .metric-card {
+        padding: 12px 10px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        width: 100% !important;
+    }
+
+    .metric-card .m-label {
+        font-size: 0.7rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        line-height: 1.2 !important;
+    }
+
+    .metric-card .m-value {
+        font-size: 0.95rem !important;
+        word-break: break-all !important;
+        overflow-wrap: anywhere !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+    }
+
+    .synthesis-box {
+        padding: 14px 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    .synthesis-box p {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+        word-break: break-word !important;
+    }
+
+    .forecast-chart-container {
+        height: 180px !important;
+        padding: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+
 }
 
 @media (max-width: 480px) {
@@ -2253,5 +2368,33 @@ body {
     .idx-cmp {
         font-size: 1.4rem !important;
     }
+
+    .modal-overlay {
+        padding: 6px !important;
+    }
+
+    .modal-card.tier-3-modal {
+        padding: 16px 10px !important;
+        border-radius: 12px !important;
+    }
+
+    .deep-title-group h2 {
+        font-size: 1.05rem !important;
+    }
+
+    .tier-tab-btn {
+        padding: 7px 10px !important;
+        font-size: 0.74rem !important;
+    }
+
+    .metrics-card-grid,
+    .metrics-card-grid-quant {
+        grid-template-columns: 1fr !important;
+    }
+
+    .metric-card .m-value {
+        font-size: 0.88rem !important;
+    }
+
 
 }
