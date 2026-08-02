@@ -2799,7 +2799,7 @@ window.DASHBOARD_DATA = {
     "scanned_at": "2026-08-02 15:12:57"
   },
   "validation": {
-    "validated_at": "2026-08-02 09:23:01",
+    "validated_at": "2026-08-02 15:49:19",
     "total_evaluated": 15,
     "target_hit_count": 15,
     "accuracy_pct": 100.0,
@@ -2808,8 +2808,8 @@ window.DASHBOARD_DATA = {
         "Stock": "PNB",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 112.71,
-        "Pred_Low": 111.24,
-        "Pred_High": 115.19,
+        "Pred_Low": 111.33,
+        "Pred_High": 115.27,
         "Pred_Close": 113.61,
         "Actual_Close": 112.71,
         "Actual_High": 113.0,
@@ -2817,15 +2817,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.9,
-        "Low_Error_Pct": 0.4
+        "High_Error_Pct": 1.97,
+        "Low_Error_Pct": 0.32
       },
       {
         "Stock": "CIPLA",
-        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 1473.2,
-        "Pred_Low": 1442.83,
-        "Pred_High": 1494.39,
+        "Pred_Low": 1431.86,
+        "Pred_High": 1388.25,
         "Pred_Close": 1484.99,
         "Actual_Close": 1473.2,
         "Actual_High": 1478.8,
@@ -2833,15 +2833,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.04,
-        "Low_Error_Pct": 1.35
+        "High_Error_Pct": 6.52,
+        "Low_Error_Pct": 2.13
       },
       {
         "Stock": "ICICIBANK",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 1435.4,
-        "Pred_Low": 1415.53,
-        "Pred_High": 1465.77,
+        "Pred_Low": 1424.81,
+        "Pred_High": 1471.73,
         "Pred_Close": 1446.88,
         "Actual_Close": 1435.4,
         "Actual_High": 1441.9,
@@ -2849,15 +2849,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.63,
-        "Low_Error_Pct": 1.12
+        "High_Error_Pct": 2.03,
+        "Low_Error_Pct": 0.46
       },
       {
         "Stock": "HAL",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 4646.5,
-        "Pred_Low": 4611.35,
-        "Pred_High": 4771.38,
+        "Pred_Low": 4548.57,
+        "Pred_High": 4711.2,
         "Pred_Close": 4683.67,
         "Actual_Close": 4646.5,
         "Actual_High": 4669.0,
@@ -2865,15 +2865,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 2.15,
-        "Low_Error_Pct": 0.44
+        "High_Error_Pct": 0.9,
+        "Low_Error_Pct": 0.94
       },
       {
         "Stock": "RECLTD",
-        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 372.95,
-        "Pred_Low": 368.15,
-        "Pred_High": 381.21,
+        "Pred_Low": 366.16,
+        "Pred_High": 379.22,
         "Pred_Close": 375.93,
         "Actual_Close": 372.95,
         "Actual_High": 374.0,
@@ -2881,15 +2881,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.89,
-        "Low_Error_Pct": 0.5
+        "High_Error_Pct": 1.38,
+        "Low_Error_Pct": 1.05
       },
       {
         "Stock": "INDHOTEL",
-        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 738.55,
-        "Pred_Low": 727.6,
-        "Pred_High": 753.45,
+        "Pred_Low": 720.82,
+        "Pred_High": 725.27,
         "Pred_Close": 744.46,
         "Actual_Close": 738.55,
         "Actual_High": 757.4,
@@ -2897,31 +2897,31 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 0.52,
-        "Low_Error_Pct": 1.27
+        "High_Error_Pct": 4.43,
+        "Low_Error_Pct": 2.22
       },
       {
         "Stock": "EICHERMOT",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 7833.5,
-        "Pred_Low": 7728.5,
-        "Pred_High": 8002.67,
-        "Pred_Close": 7896.17,
+        "Pred_Low": 7803.37,
+        "Pred_High": 8059.35,
+        "Pred_Close": 7920.87,
         "Actual_Close": 7833.5,
         "Actual_High": 7899.0,
         "Actual_Low": 7794.0,
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
-        "Error_Pct": 0.79,
-        "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.3,
-        "Low_Error_Pct": 0.85
+        "Error_Pct": 1.1,
+        "Close_Error_Pct": 1.1,
+        "High_Error_Pct": 1.99,
+        "Low_Error_Pct": 0.12
       },
       {
         "Stock": "ETERNAL",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 302.45,
-        "Pred_Low": 299.14,
-        "Pred_High": 309.72,
+        "Pred_Low": 299.26,
+        "Pred_High": 309.85,
         "Pred_Close": 304.87,
         "Actual_Close": 302.45,
         "Actual_High": 316.0,
@@ -2929,15 +2929,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 2.03,
-        "Low_Error_Pct": 0.89
+        "High_Error_Pct": 1.98,
+        "Low_Error_Pct": 0.85
       },
       {
         "Stock": "PGEL",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 613.35,
-        "Pred_Low": 605.5,
-        "Pred_High": 626.97,
+        "Pred_Low": 590.26,
+        "Pred_High": 611.73,
         "Pred_Close": 618.26,
         "Actual_Close": 613.35,
         "Actual_High": 627.45,
@@ -2945,15 +2945,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 0.08,
-        "Low_Error_Pct": 0.41
+        "High_Error_Pct": 2.57,
+        "Low_Error_Pct": 3.01
       },
       {
         "Stock": "SHRIRAMFIN",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 1046.7,
-        "Pred_Low": 1033.78,
-        "Pred_High": 1070.41,
+        "Pred_Low": 1019.37,
+        "Pred_High": 1056.01,
         "Pred_Close": 1055.07,
         "Actual_Close": 1046.7,
         "Actual_High": 1054.6,
@@ -2961,15 +2961,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.48,
-        "Low_Error_Pct": 0.45
+        "High_Error_Pct": 0.13,
+        "Low_Error_Pct": 0.95
       },
       {
         "Stock": "GODREJPROP",
-        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 2105.7,
-        "Pred_Low": 2079.55,
-        "Pred_High": 2153.25,
+        "Pred_Low": 2027.32,
+        "Pred_High": 2032.25,
         "Pred_Close": 2122.55,
         "Actual_Close": 2105.7,
         "Actual_High": 2134.0,
@@ -2977,15 +2977,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 0.89,
-        "Low_Error_Pct": 0.8
+        "High_Error_Pct": 5.01,
+        "Low_Error_Pct": 3.39
       },
       {
         "Stock": "TECHM",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 1651.3,
-        "Pred_Low": 1628.92,
-        "Pred_High": 1686.72,
+        "Pred_Low": 1625.33,
+        "Pred_High": 1683.13,
         "Pred_Close": 1664.51,
         "Actual_Close": 1651.3,
         "Actual_High": 1661.5,
@@ -2993,15 +2993,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.5,
-        "Low_Error_Pct": 1.13
+        "High_Error_Pct": 1.29,
+        "Low_Error_Pct": 0.91
       },
       {
         "Stock": "DIXON",
-        "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+        "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 14049.0,
-        "Pred_Low": 13933.38,
-        "Pred_High": 14425.1,
+        "Pred_Low": 13634.81,
+        "Pred_High": 14126.52,
         "Pred_Close": 14161.39,
         "Actual_Close": 14049.0,
         "Actual_High": 14589.0,
@@ -3009,15 +3009,15 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.14,
-        "Low_Error_Pct": 2.39
+        "High_Error_Pct": 3.27,
+        "Low_Error_Pct": 0.25
       },
       {
         "Stock": "COFORGE",
         "Live_Signal": "\ud83d\udd34 AVOID / HOLD",
         "CMP": 1721.0,
-        "Pred_Low": 1695.71,
-        "Pred_High": 1755.94,
+        "Pred_Low": 1705.12,
+        "Pred_High": 1765.36,
         "Pred_Close": 1734.77,
         "Actual_Close": 1721.0,
         "Actual_High": 1738.8,
@@ -3025,24 +3025,24 @@ window.DASHBOARD_DATA = {
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
         "Error_Pct": 0.79,
         "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 0.98,
-        "Low_Error_Pct": 0.83
+        "High_Error_Pct": 1.5,
+        "Low_Error_Pct": 1.37
       },
       {
         "Stock": "BHARATFORG",
         "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
         "CMP": 2199.8,
-        "Pred_Low": 2170.27,
-        "Pred_High": 2247.27,
-        "Pred_Close": 2217.4,
+        "Pred_Low": 2184.76,
+        "Pred_High": 2261.76,
+        "Pred_Close": 2217.76,
         "Actual_Close": 2199.8,
         "Actual_High": 2212.6,
         "Actual_Low": 2161.5,
         "Accuracy_Status": "\ud83c\udfaf TARGET HIT",
-        "Error_Pct": 0.79,
-        "Close_Error_Pct": 0.79,
-        "High_Error_Pct": 1.54,
-        "Low_Error_Pct": 0.4
+        "Error_Pct": 0.81,
+        "Close_Error_Pct": 0.81,
+        "High_Error_Pct": 2.17,
+        "Low_Error_Pct": 1.06
       }
     ]
   }

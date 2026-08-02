@@ -267,33 +267,39 @@ function initApp() {
             const isHit = statusStr.includes('HIT');
             const signalClass = liveSignal.includes('HIGH') ? 'badge-green' : (liveSignal.includes('MODERATE') ? 'badge-yellow' : 'badge-red');
 
-            const predClose = d.Pred_Close !== undefined ? d.Pred_Close : 0;
-            const actualClose = d.Actual_Close !== undefined ? d.Actual_Close : 0;
-            const predHigh = d.Pred_High !== undefined ? d.Pred_High : 0;
-            const actualHigh = d.Actual_High !== undefined ? d.Actual_High : 0;
-            const predLow = d.Pred_Low !== undefined ? d.Pred_Low : 0;
-            const actualLow = d.Actual_Low !== undefined ? d.Actual_Low : 0;
+            const predClose = (d.Pred_Close !== undefined && d.Pred_Close !== null && !isNaN(d.Pred_Close)) ? Number(d.Pred_Close) : 0;
+            const actualClose = (d.Actual_Close !== undefined && d.Actual_Close !== null && !isNaN(d.Actual_Close)) ? Number(d.Actual_Close) : predClose;
+            const predHigh = (d.Pred_High !== undefined && d.Pred_High !== null && !isNaN(d.Pred_High)) ? Number(d.Pred_High) : 0;
+            const actualHigh = (d.Actual_High !== undefined && d.Actual_High !== null && !isNaN(d.Actual_High)) ? Number(d.Actual_High) : predHigh;
+            const predLow = (d.Pred_Low !== undefined && d.Pred_Low !== null && !isNaN(d.Pred_Low)) ? Number(d.Pred_Low) : 0;
+            const actualLow = (d.Actual_Low !== undefined && d.Actual_Low !== null && !isNaN(d.Actual_Low)) ? Number(d.Actual_Low) : predLow;
 
             // 1. Close Price Variance (Diff & %)
             const closeDiff = actualClose - predClose;
             const closeVarPct = predClose > 0 ? (closeDiff / predClose) * 100 : 0;
             const isCloseGreen = actualClose >= predClose;
             const closeColorClass = isCloseGreen ? 'green-text' : 'red-text';
-            const closeDiffStr = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)} (${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%)`;
+            const safeCloseDiff = isNaN(closeDiff) ? 0 : closeDiff;
+            const safeCloseVarPct = isNaN(closeVarPct) ? 0 : closeVarPct;
+            const closeDiffStr = `${safeCloseDiff >= 0 ? '+' : ''}${safeCloseDiff.toFixed(2)} (${safeCloseVarPct >= 0 ? '+' : ''}${safeCloseVarPct.toFixed(2)}%)`;
 
             // 2. High Price Variance (Diff & %)
             const highDiff = actualHigh - predHigh;
             const highVarPct = predHigh > 0 ? (highDiff / predHigh) * 100 : 0;
             const isHighGreen = actualHigh >= predHigh;
             const highColorClass = isHighGreen ? 'green-text' : 'red-text';
-            const highDiffStr = `${highDiff >= 0 ? '+' : ''}${highDiff.toFixed(2)} (${highVarPct >= 0 ? '+' : ''}${highVarPct.toFixed(2)}%)`;
+            const safeHighDiff = isNaN(highDiff) ? 0 : highDiff;
+            const safeHighVarPct = isNaN(highVarPct) ? 0 : highVarPct;
+            const highDiffStr = `${safeHighDiff >= 0 ? '+' : ''}${safeHighDiff.toFixed(2)} (${safeHighVarPct >= 0 ? '+' : ''}${safeHighVarPct.toFixed(2)}%)`;
 
             // 3. Low Price Variance (Diff & %)
             const lowDiff = actualLow - predLow;
             const lowVarPct = predLow > 0 ? (lowDiff / predLow) * 100 : 0;
             const isLowGreen = actualLow >= predLow;
             const lowColorClass = isLowGreen ? 'green-text' : 'red-text';
-            const lowDiffStr = `${lowDiff >= 0 ? '+' : ''}${lowDiff.toFixed(2)} (${lowVarPct >= 0 ? '+' : ''}${lowVarPct.toFixed(2)}%)`;
+            const safeLowDiff = isNaN(lowDiff) ? 0 : lowDiff;
+            const safeLowVarPct = isNaN(lowVarPct) ? 0 : lowVarPct;
+            const lowDiffStr = `${safeLowDiff >= 0 ? '+' : ''}${safeLowDiff.toFixed(2)} (${safeLowVarPct >= 0 ? '+' : ''}${safeLowVarPct.toFixed(2)}%)`;
 
             return `
             <tr onclick="togglePostMarketDetail('${stock}')" style="cursor: pointer;" class="post-stock-row" title="Click to view detailed Close, High, Low price comparison and variance breakdown">

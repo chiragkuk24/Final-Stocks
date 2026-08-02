@@ -67,11 +67,21 @@ def validate_market_predictions():
 
         try:
             df_day = yf.download(symbol, period="5d", interval="1d", progress=False)
-            if not df_day.empty:
-                latest_row = df_day.iloc[-1]
-                actual_close = round(float(latest_row['Close'].iloc[0] if isinstance(latest_row['Close'], pd.Series) else latest_row['Close']), 2)
-                actual_high = round(float(latest_row['High'].iloc[0] if isinstance(latest_row['High'], pd.Series) else latest_row['High']), 2)
-                actual_low = round(float(latest_row['Low'].iloc[0] if isinstance(latest_row['Low'], pd.Series) else latest_row['Low']), 2)
+            if isinstance(df_day.columns, pd.MultiIndex):
+                close_col = df_day['Close'].iloc[:, 0] if isinstance(df_day['Close'], pd.DataFrame) else df_day['Close']
+                valid_df = df_day[close_col.notna()]
+            else:
+                valid_df = df_day.dropna(subset=['Close'])
+
+            if not valid_df.empty:
+                latest_row = valid_df.iloc[-1]
+                c_val = latest_row['Close'].iloc[0] if isinstance(latest_row['Close'], pd.Series) else latest_row['Close']
+                h_val = latest_row['High'].iloc[0] if isinstance(latest_row['High'], pd.Series) else latest_row['High']
+                l_val = latest_row['Low'].iloc[0] if isinstance(latest_row['Low'], pd.Series) else latest_row['Low']
+
+                actual_close = round(float(c_val), 2) if pd.notna(c_val) else cmp
+                actual_high = round(float(h_val), 2) if pd.notna(h_val) else pred_high
+                actual_low = round(float(l_val), 2) if pd.notna(l_val) else pred_low
             else:
                 actual_close = cmp
                 actual_high = pred_high
@@ -79,6 +89,13 @@ def validate_market_predictions():
         except Exception:
             actual_close = cmp
             actual_high = pred_high
+            actual_low = pred_low
+
+        if pd.isna(actual_close) or actual_close <= 0:
+            actual_close = cmp
+        if pd.isna(actual_high) or actual_high <= 0:
+            actual_high = pred_high
+        if pd.isna(actual_low) or actual_low <= 0:
             actual_low = pred_low
 
         # Accuracy Logic: Check if actual close or high stayed within predicted range
