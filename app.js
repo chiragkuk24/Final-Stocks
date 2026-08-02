@@ -127,6 +127,14 @@ function initApp() {
         renderPostMarketAnalysis();
     }
 
+    // Global Post-Market Detail Toggle Handler
+    window.togglePostMarketDetail = function(stockSymbol) {
+        const detailRow = document.getElementById(`post-detail-${stockSymbol}`);
+        if (detailRow) {
+            detailRow.classList.toggle('hidden');
+        }
+    };
+
     // Render Post-Market Accuracy Section
     function renderPostMarketAnalysis() {
         if (!dashboardData || !dashboardData.validation) {
@@ -152,16 +160,54 @@ function initApp() {
         tbody.innerHTML = v.details.map(d => {
             const isHit = d.Accuracy_Status.includes('HIT');
             const signalClass = d.Live_Signal.includes('HIGH') ? 'badge-green' : (d.Live_Signal.includes('MODERATE') ? 'badge-yellow' : 'badge-red');
+
+            const closeErr = d.Close_Error_Pct !== undefined ? d.Close_Error_Pct : (d.Error_Pct || 0.0);
+            const highErr = d.High_Error_Pct !== undefined ? d.High_Error_Pct : Math.abs(((d.Actual_High - d.Pred_High) / (d.Pred_High + 1e-9)) * 100).toFixed(2);
+            const lowErr = d.Low_Error_Pct !== undefined ? d.Low_Error_Pct : Math.abs(((d.Actual_Low - d.Pred_Low) / (d.Pred_Low + 1e-9)) * 100).toFixed(2);
+
             return `
-            <tr>
-                <td style="font-weight: 800; font-family: var(--font-heading);">${d.Stock}</td>
+            <tr onclick="togglePostMarketDetail('${d.Stock}')" style="cursor: pointer;" class="post-stock-row" title="Click to view detailed Close, High, Low error breakdown">
+                <td style="font-weight: 800; font-family: var(--font-heading); color: var(--accent-cyan);">${d.Stock} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i></td>
                 <td><span class="badge ${signalClass}">${d.Live_Signal}</span></td>
                 <td>₹${d.Pred_Close}</td>
                 <td style="font-weight: 700; color: ${isHit ? 'var(--accent-emerald)' : 'var(--text-main)'};">₹${d.Actual_Close}</td>
                 <td style="color: var(--accent-cyan);">₹${d.Actual_High}</td>
                 <td style="color: var(--accent-red);">₹${d.Actual_Low}</td>
-                <td style="color: ${d.Error_Pct <= 2.5 ? 'var(--accent-emerald)' : 'var(--accent-red)'}; font-weight: 600;">${d.Error_Pct}%</td>
+                <td style="color: ${closeErr <= 2.5 ? 'var(--accent-emerald)' : 'var(--accent-red)'}; font-weight: 600;">${closeErr}%</td>
                 <td class="${isHit ? 'hit-cell' : 'miss-cell'}">${d.Accuracy_Status}</td>
+            </tr>
+            <tr id="post-detail-${d.Stock}" class="post-detail-row hidden">
+                <td colspan="8" style="padding: 0;">
+                    <div class="post-detail-box card-glass-inner">
+                        <div class="post-detail-title">
+                            <span><i class="fa-solid fa-square-poll-vertical"></i> <strong>${d.Stock}</strong> — Post-Market Metric Error Breakdown</span>
+                            <span class="${isHit ? 'hit-cell' : 'miss-cell'}" style="padding: 3px 10px; border-radius: 6px; font-size: 12px;">${d.Accuracy_Status}</span>
+                        </div>
+                        <div class="post-detail-grid">
+                            <!-- Close Comparison Card -->
+                            <div class="post-detail-card">
+                                <div class="pd-card-header"><i class="fa-solid fa-flag-checkered"></i> Close Price Comparison</div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Predicted Close:</span><span class="pd-val">₹${d.Pred_Close}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual Close:</span><span class="pd-val green-text">₹${d.Actual_Close}</span></div>
+                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Close Error %:</span><span class="pd-val ${closeErr <= 2.5 ? 'green-text' : 'red-text'}">${closeErr}%</span></div>
+                            </div>
+                            <!-- High Comparison Card -->
+                            <div class="post-detail-card">
+                                <div class="pd-card-header"><i class="fa-solid fa-arrow-trend-up"></i> High Price Comparison</div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Predicted High:</span><span class="pd-val">₹${d.Pred_High}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual High:</span><span class="pd-val cyan-text">₹${d.Actual_High}</span></div>
+                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">High Error %:</span><span class="pd-val ${highErr <= 2.5 ? 'green-text' : 'red-text'}">${highErr}%</span></div>
+                            </div>
+                            <!-- Low Comparison Card -->
+                            <div class="post-detail-card">
+                                <div class="pd-card-header"><i class="fa-solid fa-arrow-trend-down"></i> Low Price Comparison</div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Predicted Low:</span><span class="pd-val">₹${d.Pred_Low}</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual Low:</span><span class="pd-val red-text">₹${d.Actual_Low}</span></div>
+                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Low Error %:</span><span class="pd-val ${lowErr <= 2.5 ? 'green-text' : 'red-text'}">${lowErr}%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>`;
         }).join('');
     }

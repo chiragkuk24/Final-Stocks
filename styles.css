@@ -991,3 +991,98 @@ body {
     .post-market-header { flex-direction: column; gap: 10px; align-items: flex-start; }
 }
 
+/* Post-Market Expansion Drawer Styles */
+.post-stock-row {
+    transition: background 0.2s ease;
+}
+
+.post-stock-row:hover {
+    background: rgba(0, 191, 255, 0.08) !important;
+}
+
+.post-detail-row td {
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.post-detail-box {
+    padding: 16px 20px;
+    background: rgba(13, 21, 39, 0.85);
+    border-top: 1px solid rgba(0, 191, 255, 0.25);
+    border-bottom: 1px solid rgba(0, 191, 255, 0.25);
+    animation: fadeInDown 0.25s ease-out;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.post-detail-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    color: var(--accent-cyan);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.post-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.post-detail-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    transition: border-color 0.2s ease;
+}
+
+.post-detail-card:hover {
+    border-color: rgba(0, 191, 255, 0.3);
+}
+
+.pd-card-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pd-metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+}
+
+.pd-metric-row .pd-lbl {
+    color: var(--text-muted);
+}
+
+.pd-metric-row .pd-val {
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+
+.pd-err-row {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 800px) {
+    .post-detail-grid { grid-template-columns: 1fr; }
+}
+
+

@@ -92,6 +92,10 @@ def validate_market_predictions():
         else:
             status_str = "⚠️ OUTSIDE RANGE"
 
+        close_err_pct = round(abs((actual_close - pred_close) / (pred_close + 1e-9)) * 100.0, 2)
+        high_err_pct = round(abs((actual_high - pred_high) / (pred_high + 1e-9)) * 100.0, 2)
+        low_err_pct = round(abs((actual_low - pred_low) / (pred_low + 1e-9)) * 100.0, 2)
+
         val_entry = {
             "Stock": stock,
             "Live_Signal": item.get('Live_Signal', ''),
@@ -103,7 +107,10 @@ def validate_market_predictions():
             "Actual_High": actual_high,
             "Actual_Low": actual_low,
             "Accuracy_Status": status_str,
-            "Error_Pct": round(close_diff_pct, 2)
+            "Error_Pct": close_err_pct,
+            "Close_Error_Pct": close_err_pct,
+            "High_Error_Pct": high_err_pct,
+            "Low_Error_Pct": low_err_pct
         }
         validated_results.append(val_entry)
 
