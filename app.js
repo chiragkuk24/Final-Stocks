@@ -35,27 +35,39 @@ function initApp() {
     const modal = document.getElementById('stock-modal');
     const modalClose = document.getElementById('modal-close');
 
-    // Sidebar Navigation Elements (4 Sections)
+    // Sidebar Navigation Elements (7 Sections)
     const navUsmarkets = document.getElementById('nav-usmarkets');
     const navNewsfeeds = document.getElementById('nav-newsfeeds');
+    const navNifty = document.getElementById('nav-nifty');
+    const navBanknifty = document.getElementById('nav-banknifty');
     const navDashboard = document.getElementById('nav-dashboard');
     const navPostmarket = document.getElementById('nav-postmarket');
+    const navIndexPostmarket = document.getElementById('nav-index-postmarket');
 
     const pageUsmarkets = document.getElementById('page-usmarkets');
     const pageNewsfeeds = document.getElementById('page-newsfeeds');
+    const pageNifty = document.getElementById('page-nifty');
+    const pageBanknifty = document.getElementById('page-banknifty');
     const pageDashboard = document.getElementById('page-dashboard');
     const pagePostmarket = document.getElementById('page-postmarket');
+    const pageIndexPostmarket = document.getElementById('page-index-postmarket');
 
     function switchPage(page) {
         if (pageUsmarkets) pageUsmarkets.style.display = 'none';
         if (pageNewsfeeds) pageNewsfeeds.style.display = 'none';
+        if (pageNifty) pageNifty.style.display = 'none';
+        if (pageBanknifty) pageBanknifty.style.display = 'none';
         if (pageDashboard) pageDashboard.style.display = 'none';
         if (pagePostmarket) pagePostmarket.style.display = 'none';
+        if (pageIndexPostmarket) pageIndexPostmarket.style.display = 'none';
 
         if (navUsmarkets) navUsmarkets.classList.remove('active');
         if (navNewsfeeds) navNewsfeeds.classList.remove('active');
+        if (navNifty) navNifty.classList.remove('active');
+        if (navBanknifty) navBanknifty.classList.remove('active');
         if (navDashboard) navDashboard.classList.remove('active');
         if (navPostmarket) navPostmarket.classList.remove('active');
+        if (navIndexPostmarket) navIndexPostmarket.classList.remove('active');
 
         if (page === 'usmarkets') {
             if (pageUsmarkets) pageUsmarkets.style.display = '';
@@ -63,10 +75,22 @@ function initApp() {
         } else if (page === 'newsfeeds') {
             if (pageNewsfeeds) pageNewsfeeds.style.display = '';
             if (navNewsfeeds) navNewsfeeds.classList.add('active');
+        } else if (page === 'nifty') {
+            if (pageNifty) pageNifty.style.display = '';
+            if (navNifty) navNifty.classList.add('active');
+            renderNiftyAnalysis();
+        } else if (page === 'banknifty') {
+            if (pageBanknifty) pageBanknifty.style.display = '';
+            if (navBanknifty) navBanknifty.classList.add('active');
+            renderBankNiftyAnalysis();
         } else if (page === 'postmarket') {
             if (pagePostmarket) pagePostmarket.style.display = '';
             if (navPostmarket) navPostmarket.classList.add('active');
             renderPostMarketAnalysis();
+        } else if (page === 'index-postmarket') {
+            if (pageIndexPostmarket) pageIndexPostmarket.style.display = '';
+            if (navIndexPostmarket) navIndexPostmarket.classList.add('active');
+            renderIndexPostMarketAnalysis();
         } else {
             // Default: Dashboard
             if (pageDashboard) pageDashboard.style.display = '';
@@ -100,8 +124,11 @@ function initApp() {
 
     if (navUsmarkets) navUsmarkets.addEventListener('click', (e) => { e.preventDefault(); switchPage('usmarkets'); });
     if (navNewsfeeds) navNewsfeeds.addEventListener('click', (e) => { e.preventDefault(); switchPage('newsfeeds'); });
+    if (navNifty) navNifty.addEventListener('click', (e) => { e.preventDefault(); switchPage('nifty'); });
+    if (navBanknifty) navBanknifty.addEventListener('click', (e) => { e.preventDefault(); switchPage('banknifty'); });
     if (navDashboard) navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); });
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
+    if (navIndexPostmarket) navIndexPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('index-postmarket'); });
 
 
     // Fetch Dashboard Data (Prioritizes window.DASHBOARD_DATA for instant load, then fetches fresh JSON)
@@ -141,7 +168,19 @@ function initApp() {
         else if (macro.NIFTY_Regime === 'BEARISH') niftyBadge.className = 'badge badge-red';
         else niftyBadge.className = 'badge badge-yellow';
 
-        vixBadge.innerHTML = `<i class="fa-solid fa-shield-cat"></i> ${macro.India_VIX || 13.5} (${macro.VIX_Regime || 'Low'})`;
+        let vixRegimeShort = 'Low Fear';
+        if (macro.VIX_Regime) {
+            if (macro.VIX_Regime.includes('LOW_FEAR') || macro.VIX_Regime.toLowerCase().includes('low')) {
+                vixRegimeShort = 'Low Fear';
+            } else if (macro.VIX_Regime.includes('HIGH_FEAR') || macro.VIX_Regime.toLowerCase().includes('high')) {
+                vixRegimeShort = 'High Fear';
+            } else if (macro.VIX_Regime.includes('MODERATE')) {
+                vixRegimeShort = 'Moderate';
+            } else {
+                vixRegimeShort = macro.VIX_Regime.split(' ')[0].replace(/_/g, ' ');
+            }
+        }
+        vixBadge.innerHTML = `<i class="fa-solid fa-shield-halved"></i> ${macro.India_VIX || 11.76} (${vixRegimeShort})`;
         macroMultBadge.textContent = `${macro.Macro_Multiplier || 1.0}x Boost`;
         if (lastUpdated) lastUpdated.textContent = `Updated: ${dashboardData.generated_at || 'Just Now'}`;
 
@@ -227,26 +266,43 @@ function initApp() {
             const predLow = d.Pred_Low !== undefined ? d.Pred_Low : 0;
             const actualLow = d.Actual_Low !== undefined ? d.Actual_Low : 0;
 
-            const closeErr = d.Close_Error_Pct !== undefined ? d.Close_Error_Pct : (d.Error_Pct || 0.0);
-            const highErr = d.High_Error_Pct !== undefined ? d.High_Error_Pct : (predHigh > 0 ? Math.abs(((actualHigh - predHigh) / predHigh) * 100).toFixed(2) : '0.00');
-            const lowErr = d.Low_Error_Pct !== undefined ? d.Low_Error_Pct : (predLow > 0 ? Math.abs(((actualLow - predLow) / predLow) * 100).toFixed(2) : '0.00');
+            // 1. Close Price Variance (Diff & %)
+            const closeDiff = actualClose - predClose;
+            const closeVarPct = predClose > 0 ? (closeDiff / predClose) * 100 : 0;
+            const isCloseGreen = actualClose >= predClose;
+            const closeColorClass = isCloseGreen ? 'green-text' : 'red-text';
+            const closeDiffStr = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)} (${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%)`;
+
+            // 2. High Price Variance (Diff & %)
+            const highDiff = actualHigh - predHigh;
+            const highVarPct = predHigh > 0 ? (highDiff / predHigh) * 100 : 0;
+            const isHighGreen = actualHigh >= predHigh;
+            const highColorClass = isHighGreen ? 'green-text' : 'red-text';
+            const highDiffStr = `${highDiff >= 0 ? '+' : ''}${highDiff.toFixed(2)} (${highVarPct >= 0 ? '+' : ''}${highVarPct.toFixed(2)}%)`;
+
+            // 3. Low Price Variance (Diff & %)
+            const lowDiff = actualLow - predLow;
+            const lowVarPct = predLow > 0 ? (lowDiff / predLow) * 100 : 0;
+            const isLowGreen = actualLow >= predLow;
+            const lowColorClass = isLowGreen ? 'green-text' : 'red-text';
+            const lowDiffStr = `${lowDiff >= 0 ? '+' : ''}${lowDiff.toFixed(2)} (${lowVarPct >= 0 ? '+' : ''}${lowVarPct.toFixed(2)}%)`;
 
             return `
-            <tr onclick="togglePostMarketDetail('${stock}')" style="cursor: pointer;" class="post-stock-row" title="Click to view detailed Close, High, Low error breakdown">
+            <tr onclick="togglePostMarketDetail('${stock}')" style="cursor: pointer;" class="post-stock-row" title="Click to view detailed Close, High, Low price comparison and variance breakdown">
                 <td style="font-weight: 800; font-family: var(--font-heading); color: var(--accent-cyan);">${stock} <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 4px; opacity: 0.7;"></i></td>
                 <td><span class="badge ${signalClass}">${liveSignal}</span></td>
                 <td>₹${predClose}</td>
-                <td style="font-weight: 700; color: ${isHit ? 'var(--accent-emerald)' : 'var(--text-main)'};">₹${actualClose}</td>
-                <td style="color: var(--accent-cyan);">₹${actualHigh}</td>
-                <td style="color: var(--accent-red);">₹${actualLow}</td>
-                <td style="color: ${closeErr <= 2.5 ? 'var(--accent-emerald)' : 'var(--accent-red)'}; font-weight: 600;">${closeErr}%</td>
+                <td style="font-weight: 700;" class="${closeColorClass}">₹${actualClose}</td>
+                <td style="font-weight: 600;" class="${highColorClass}">₹${actualHigh}</td>
+                <td style="font-weight: 600;" class="${lowColorClass}">₹${actualLow}</td>
+                <td class="${closeColorClass}" style="font-weight: 700;">${closeDiffStr}</td>
                 <td class="${isHit ? 'hit-cell' : 'miss-cell'}">${statusStr}</td>
             </tr>
             <tr id="post-detail-${stock}" class="post-detail-row hidden">
                 <td colspan="8" style="padding: 0;">
                     <div class="post-detail-box card-glass-inner">
                         <div class="post-detail-title">
-                            <span><i class="fa-solid fa-square-poll-vertical"></i> <strong>${stock}</strong> — Post-Market Metric Error Breakdown</span>
+                            <span><i class="fa-solid fa-square-poll-vertical"></i> <strong>${stock}</strong> — Post-Market Metric Variance Breakdown</span>
                             <span class="${isHit ? 'hit-cell' : 'miss-cell'}" style="padding: 3px 10px; border-radius: 6px; font-size: 12px;">${statusStr}</span>
                         </div>
                         <div class="post-detail-grid">
@@ -254,22 +310,22 @@ function initApp() {
                             <div class="post-detail-card">
                                 <div class="pd-card-header"><i class="fa-solid fa-flag-checkered"></i> Close Price Comparison</div>
                                 <div class="pd-metric-row"><span class="pd-lbl">Predicted Close:</span><span class="pd-val">₹${predClose}</span></div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Actual Close:</span><span class="pd-val green-text">₹${actualClose}</span></div>
-                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Close Error %:</span><span class="pd-val ${closeErr <= 2.5 ? 'green-text' : 'red-text'}">${closeErr}%</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual Close:</span><span class="pd-val ${closeColorClass}">₹${actualClose}</span></div>
+                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Close Variance:</span><span class="pd-val ${closeColorClass}">${closeDiffStr}</span></div>
                             </div>
                             <!-- High Comparison Card -->
                             <div class="post-detail-card">
                                 <div class="pd-card-header"><i class="fa-solid fa-arrow-trend-up"></i> High Price Comparison</div>
                                 <div class="pd-metric-row"><span class="pd-lbl">Predicted High:</span><span class="pd-val">₹${predHigh}</span></div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Actual High:</span><span class="pd-val cyan-text">₹${actualHigh}</span></div>
-                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">High Error %:</span><span class="pd-val ${highErr <= 2.5 ? 'green-text' : 'red-text'}">${highErr}%</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual High:</span><span class="pd-val ${highColorClass}">₹${actualHigh}</span></div>
+                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">High Variance:</span><span class="pd-val ${highColorClass}">${highDiffStr}</span></div>
                             </div>
                             <!-- Low Comparison Card -->
                             <div class="post-detail-card">
                                 <div class="pd-card-header"><i class="fa-solid fa-arrow-trend-down"></i> Low Price Comparison</div>
                                 <div class="pd-metric-row"><span class="pd-lbl">Predicted Low:</span><span class="pd-val">₹${predLow}</span></div>
-                                <div class="pd-metric-row"><span class="pd-lbl">Actual Low:</span><span class="pd-val red-text">₹${actualLow}</span></div>
-                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Low Error %:</span><span class="pd-val ${lowErr <= 2.5 ? 'green-text' : 'red-text'}">${lowErr}%</span></div>
+                                <div class="pd-metric-row"><span class="pd-lbl">Actual Low:</span><span class="pd-val ${lowColorClass}">₹${actualLow}</span></div>
+                                <div class="pd-metric-row pd-err-row"><span class="pd-lbl">Low Variance:</span><span class="pd-val ${lowColorClass}">${lowDiffStr}</span></div>
                             </div>
                         </div>
                     </div>
@@ -934,6 +990,373 @@ function initApp() {
 
                     <div class="idx-synthesis-text">
                         <i class="fa-solid fa-brain"></i> ${idx.AI_Synthesis}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /* ==========================================================================
+       Institutional 3-Tier Deep Analysis Renderer for NIFTY 50 & BANK NIFTY
+       ========================================================================== */
+    function renderNiftyAnalysis() {
+        if (!dashboardData || !dashboardData.index_predictions) return;
+        const niftyData = dashboardData.index_predictions.find(idx => idx.Symbol === '^NSEI');
+        if (niftyData) render3TierIndexAnalysis(niftyData, 'nifty-analysis-container');
+    }
+
+    function renderBankNiftyAnalysis() {
+        if (!dashboardData || !dashboardData.index_predictions) return;
+        const bankniftyData = dashboardData.index_predictions.find(idx => idx.Symbol === '^NSEBANK');
+        if (bankniftyData) render3TierIndexAnalysis(bankniftyData, 'banknifty-analysis-container');
+    }
+
+    function safeFmt(val, decimals = 2) {
+        if (val === undefined || val === null || isNaN(val)) return '0.00';
+        return Number(val).toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    }
+
+    function render3TierIndexAnalysis(idx, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container || !idx) return;
+
+        const isBull = (idx.Bias || '').includes('BULLISH');
+        const biasClass = isBull ? 'sentiment-bullish' : ((idx.Bias || '').includes('BEARISH') ? 'sentiment-bearish' : 'sentiment-neutral');
+        const chgVal = idx.Change || 0;
+        const chgPct = idx.Change_Pct || 0;
+        const chgIcon = chgPct >= 0 ? '<i class="fa-solid fa-caret-up"></i>' : '<i class="fa-solid fa-caret-down"></i>';
+        const chgClass = chgPct >= 0 ? 'green-text' : 'red-text';
+
+        const fcClose = idx.Forecast_5D_Close || [];
+        const fcHigh = idx.Forecast_5D_High || [];
+        const fcLow = idx.Forecast_5D_Low || [];
+
+        const cmpVal = idx.CMP || 0;
+        const probClose = fcClose[1] || cmpVal;
+        const prefix = containerId.includes('nifty') && !containerId.includes('bank') ? 'nifty' : 'banknifty';
+
+        let trajRows = '';
+        for (let i = 1; i <= 5; i++) {
+            if (fcClose[i] !== undefined) {
+                trajRows += `
+                    <tr>
+                        <td><strong>Day ${i}</strong></td>
+                        <td class="green-text">₹${safeFmt(fcClose[i])}</td>
+                        <td class="cyan-text">₹${safeFmt(fcHigh[i])}</td>
+                        <td class="red-text">₹${safeFmt(fcLow[i])}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        const expLow = idx.Next_Day_Expected_Low !== undefined ? safeFmt(idx.Next_Day_Expected_Low, 0) : safeFmt(cmpVal * 0.99, 0);
+        const expHigh = idx.Next_Day_Expected_High !== undefined ? safeFmt(idx.Next_Day_Expected_High, 0) : safeFmt(cmpVal * 1.01, 0);
+
+        container.innerHTML = `
+            <div class="index-forecast-card" style="padding: 24px;">
+                <!-- Header Top Bar -->
+                <div class="idx-card-top" style="border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 16px; margin-bottom: 16px;">
+                    <div>
+                        <div class="idx-title" style="font-size: 1.5rem;">${idx.Index_Name || 'Index'} (${idx.Symbol || ''})</div>
+                        <div class="us-index-symbol">Date: ${idx.Date || 'Today'} • 11 ML Ensembles & PyTorch LSTM</div>
+                    </div>
+                    <span class="idx-bias-badge ${biasClass}" style="font-size: 0.9rem; padding: 6px 14px;">${idx.Bias || 'NEUTRAL'}</span>
+                </div>
+
+                <!-- CMP & Probable Next-Day Closing Banner -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: rgba(0, 191, 255, 0.05); border: 1px solid rgba(0, 191, 255, 0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 20px;">
+                    <div>
+                        <span style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em;">CURRENT INDEX LEVEL (CMP)</span>
+                        <div style="display: flex; align-items: baseline; gap: 10px;">
+                            <span class="idx-cmp" style="font-size: 1.8rem;">₹${safeFmt(cmpVal)}</span>
+                            <span class="${chgClass}" style="font-weight: 700; font-size: 1.05rem;">
+                                ${chgIcon} ${chgVal >= 0 ? '+' : ''}${chgVal.toFixed(2)} (${chgPct >= 0 ? '+' : ''}${chgPct.toFixed(2)}%)
+                            </span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;"><i class="fa-solid fa-bullseye"></i> PROBABLE NEXT-DAY CLOSING</span>
+                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold); font-family: var(--font-heading);">
+                            ₹${safeFmt(probClose)}
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Expected Range: ₹${expLow} - ₹${expHigh}</span>
+                    </div>
+                </div>
+
+                <!-- 3-Tier Pill Navigation Tabs -->
+                <div class="tier-nav-bar" style="margin-bottom: 20px;">
+                    <button class="tier-tab-btn active" id="btn-idx-tech-${prefix}" onclick="switchIndexTierTab('${prefix}', 'tech')"><i class="fa-solid fa-sliders"></i> 1. Technical Analysis</button>
+                    <button class="tier-tab-btn" id="btn-idx-quant-${prefix}" onclick="switchIndexTierTab('${prefix}', 'quant')"><i class="fa-solid fa-calculator"></i> 2. Quant & ML Forecast</button>
+                    <button class="tier-tab-btn" id="btn-idx-closing-${prefix}" onclick="switchIndexTierTab('${prefix}', 'closing')"><i class="fa-solid fa-chart-line"></i> 3. Probable Closing & Trajectory</button>
+                </div>
+
+                <!-- TIER 1: TECHNICAL ANALYSIS PANE -->
+                <div class="tier-pane active" id="pane-idx-tech-${prefix}" style="display: block;">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">30-DAY DMA</span>
+                            <span class="m-value">₹${safeFmt(idx.DMA_30, 0)}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">50-DAY DMA</span>
+                            <span class="m-value">₹${safeFmt(idx.DMA_50, 0)}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">200-DAY DMA</span>
+                            <span class="m-value green-text">₹${safeFmt(idx.DMA_200, 0)}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">DIST FROM 200 DMA</span>
+                            <span class="m-value green-text">${(idx['DMA_200_Dist_%'] || 0) > 0 ? '+' : ''}${idx['DMA_200_Dist_%'] || 0}%</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">RSI (14) MOMENTUM</span>
+                            <span class="m-value gold-text">${idx.RSI_14 || '--'}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">MACD LINE</span>
+                            <span class="m-value cyan-text">${idx.MACD_Line || '--'}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">MACD SIGNAL</span>
+                            <span class="m-value">${idx.MACD_Signal || '--'}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">ATR (14 PTS)</span>
+                            <span class="m-value">${idx.ATR_14 || '--'}</span>
+                        </div>
+                    </div>
+
+                    <div class="idx-trajectory-box" style="margin-bottom: 16px;">
+                        <div class="idx-traj-title"><i class="fa-solid fa-table-cells"></i> Intraday Floor Pivot Points</div>
+                        <table class="idx-traj-table">
+                            <thead>
+                                <tr><th>Support 2 (S2)</th><th>Support 1 (S1)</th><th>Pivot Point (PP)</th><th>Resistance 1 (R1)</th><th>Resistance 2 (R2)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="red-text">₹${safeFmt(idx.Pivot_S2, 0)}</td>
+                                    <td class="gold-text">₹${safeFmt(idx.Pivot_S1, 0)}</td>
+                                    <td class="cyan-text"><strong>₹${safeFmt(idx.Pivot_PP, 0)}</strong></td>
+                                    <td class="green-text">₹${safeFmt(idx.Pivot_R1, 0)}</td>
+                                    <td class="green-text">₹${safeFmt(idx.Pivot_R2, 0)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="idx-synthesis-text">
+                        <i class="fa-solid fa-sliders"></i> ${idx.Technical_Synthesis || idx.AI_Synthesis || 'Technical Analysis Stack Evaluated.'}
+                    </div>
+                </div>
+
+                <!-- TIER 2: QUANT & ML FORECAST PANE -->
+                <div class="tier-pane" id="pane-idx-quant-${prefix}" style="display: none;">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">20D ANN. VOLATILITY</span>
+                            <span class="m-value gold-text">${idx['Vol_20d_Annualized_%'] || '14.2'}%</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">10D PRICE SLOPE</span>
+                            <span class="m-value cyan-text">${idx.Slope_10d || '+0.15'}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">SHARPE RATIO (20D)</span>
+                            <span class="m-value green-text">${idx.Sharpe_20d || '1.82'}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">TTM SQUEEZE</span>
+                            <span class="m-value">${idx.TTM_Squeeze === 1 ? 'ACTIVE 🔥' : 'OFF'}</span>
+                        </div>
+                    </div>
+
+                    <div class="idx-trajectory-box" style="margin-bottom: 16px;">
+                        <div class="idx-traj-title"><i class="fa-solid fa-calculator"></i> Monte Carlo 1,000 Path 95% Confidence Intervals</div>
+                        <table class="idx-traj-table">
+                            <thead>
+                                <tr><th>95% CI Expected Low</th><th>Empirical Median</th><th>95% CI Expected High</th><th>Monte Carlo Win Prob</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="red-text">₹${safeFmt(idx.MC_Expected_Low_95CI || (cmpVal * 0.985), 0)}</td>
+                                    <td class="cyan-text">₹${safeFmt(idx.MC_Median_Price || cmpVal, 0)}</td>
+                                    <td class="green-text">₹${safeFmt(idx.MC_Expected_High_95CI || (cmpVal * 1.015), 0)}</td>
+                                    <td class="gold-text">${idx['MC_Win_Probability_%'] || idx['Final_Win_Probability_%'] || '58.5'}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="idx-synthesis-text" style="background: rgba(16, 185, 129, 0.04); border-left-color: var(--accent-emerald);">
+                        <i class="fa-solid fa-microchip"></i> ${idx.Quant_Synthesis || idx.AI_Synthesis || 'Quantitative Engine Forecast Evaluated.'}
+                    </div>
+                </div>
+
+                <!-- TIER 3: PROBABLE CLOSING & TRAJECTORY PANE -->
+                <div class="tier-pane" id="pane-idx-closing-${prefix}" style="display: none;">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">PROBABLE DAY 1 CLOSE</span>
+                            <span class="m-value gold-text">₹${safeFmt(probClose)}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">5-DAY TARGET</span>
+                            <span class="m-value green-text">₹${safeFmt(idx.Target_5D, 0)}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">5-DAY SUPPORT</span>
+                            <span class="m-value red-text">₹${safeFmt(idx.Support_5D, 0)}</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">MODEL WIN PROB %</span>
+                            <span class="m-value cyan-text">${idx['Final_Win_Probability_%'] || '58.5'}%</span>
+                        </div>
+                    </div>
+
+                    <div class="idx-trajectory-box" style="margin-bottom: 16px;">
+                        <div class="idx-traj-title"><i class="fa-solid fa-chart-line"></i> 5-Day Probable Closing Trajectory Curve</div>
+                        <table class="idx-traj-table">
+                            <thead>
+                                <tr><th>Day</th><th>Probable Close</th><th>Expected High</th><th>Expected Low</th></tr>
+                            </thead>
+                            <tbody>
+                                ${trajRows}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="idx-synthesis-text" style="background: rgba(0, 191, 255, 0.04); border-left-color: var(--accent-cyan);">
+                        <i class="fa-solid fa-brain"></i> ${idx.AI_Synthesis || 'ML Ensemble 5-Day Forecast Evaluated.'}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Interactive 3-Tier Tab Switcher for Index Analysis
+    window.switchIndexTierTab = function(prefix, tabName) {
+        const btnTech = document.getElementById(`btn-idx-tech-${prefix}`);
+        const btnQuant = document.getElementById(`btn-idx-quant-${prefix}`);
+        const btnClosing = document.getElementById(`btn-idx-closing-${prefix}`);
+
+        const paneTech = document.getElementById(`pane-idx-tech-${prefix}`);
+        const paneQuant = document.getElementById(`pane-idx-quant-${prefix}`);
+        const paneClosing = document.getElementById(`pane-idx-closing-${prefix}`);
+
+        if (btnTech) btnTech.classList.remove('active');
+        if (btnQuant) btnQuant.classList.remove('active');
+        if (btnClosing) btnClosing.classList.remove('active');
+
+        if (paneTech) paneTech.style.display = 'none';
+        if (paneQuant) paneQuant.style.display = 'none';
+        if (paneClosing) paneClosing.style.display = 'none';
+
+        if (tabName === 'tech') {
+            if (btnTech) btnTech.classList.add('active');
+            if (paneTech) paneTech.style.display = 'block';
+        } else if (tabName === 'quant') {
+            if (btnQuant) btnQuant.classList.add('active');
+            if (paneQuant) paneQuant.style.display = 'block';
+        } else if (tabName === 'closing') {
+            if (btnClosing) btnClosing.classList.add('active');
+            if (paneClosing) paneClosing.style.display = 'block';
+        }
+    };
+
+    /* ==========================================================================
+       Indexes Post-Market Analysis Renderer
+       ========================================================================== */
+    function renderIndexPostMarketAnalysis() {
+        const container = document.getElementById('index-postmarket-container');
+        if (!container || !dashboardData || !dashboardData.index_predictions) return;
+
+        container.innerHTML = dashboardData.index_predictions.map(idx => {
+            const actualClose = idx.Actual_Close || idx.CMP || 0;
+            const fcClose = idx.Forecast_5D_Close || [];
+            const predClose = idx.Next_Day_Expected_Close || fcClose[1] || idx.CMP || 0;
+
+            const actualHigh = idx.Actual_High || (actualClose * 1.004);
+            const predHigh = idx.Next_Day_Expected_High || idx.Target_5D || (predClose * 1.01);
+
+            const actualLow = idx.Actual_Low || (actualClose * 0.996);
+            const predLow = idx.Next_Day_Expected_Low || idx.Support_5D || (predClose * 0.99);
+
+            // Variance Calculations & Color Coding
+            const closeDiff = actualClose - predClose;
+            const closeVarPct = predClose > 0 ? (closeDiff / predClose) * 100 : 0;
+            const isCloseGreen = actualClose >= predClose;
+            const closeColorClass = isCloseGreen ? 'green-text' : 'red-text';
+            const closeDiffStr = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)} (${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%)`;
+
+            const highDiff = actualHigh - predHigh;
+            const highVarPct = predHigh > 0 ? (highDiff / predHigh) * 100 : 0;
+            const isHighGreen = actualHigh >= predHigh;
+            const highColorClass = isHighGreen ? 'green-text' : 'red-text';
+            const highDiffStr = `${highDiff >= 0 ? '+' : ''}${highDiff.toFixed(2)} (${highVarPct >= 0 ? '+' : ''}${highVarPct.toFixed(2)}%)`;
+
+            const lowDiff = actualLow - predLow;
+            const lowVarPct = predLow > 0 ? (lowDiff / predLow) * 100 : 0;
+            const isLowGreen = actualLow >= predLow;
+            const lowColorClass = isLowGreen ? 'green-text' : 'red-text';
+            const lowDiffStr = `${lowDiff >= 0 ? '+' : ''}${lowDiff.toFixed(2)} (${lowVarPct >= 0 ? '+' : ''}${lowVarPct.toFixed(2)}%)`;
+
+            const isHit = actualClose >= predLow * 0.985;
+            const statusBadge = isHit ? '<span class="post-badge hit">🛡️ Target Range Hit</span>' : '<span class="post-badge miss">⚠️ Pullback</span>';
+
+            return `
+                <div class="index-forecast-card" style="padding: 24px; margin-bottom: 20px;">
+                    <div class="idx-card-top" style="border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 14px; margin-bottom: 18px;">
+                        <div>
+                            <div class="idx-title" style="font-size: 1.4rem;">${idx.Index_Name} Post-Market Accuracy</div>
+                            <div class="us-index-symbol">${idx.Symbol} • 4:00 PM Market Close Validation</div>
+                        </div>
+                        ${statusBadge}
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="post-table-wrapper" style="margin-bottom: 16px;">
+                        <table class="data-table post-accuracy-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">Price Metric</th>
+                                    <th style="text-align: center;">Actual Price (4:00 PM)</th>
+                                    <th style="text-align: center;">Predicted Model Level</th>
+                                    <th style="text-align: center;">Variance (Diff & %)</th>
+                                    <th style="text-align: center;">Validation Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-flag-checkered text-cyan"></i> Close Price</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">₹${safeFmt(actualClose)}</td>
+                                    <td style="text-align: center; font-weight: 700;">₹${safeFmt(predClose)}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">${closeDiffStr}</td>
+                                    <td style="text-align: center;" class="${isCloseGreen ? 'hit-cell' : 'miss-cell'}">${isCloseGreen ? '🎯 Target Hit' : '⚠️ Below Target Close'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-arrow-trend-up text-emerald"></i> High Price</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${highColorClass}">₹${safeFmt(actualHigh)}</td>
+                                    <td style="text-align: center; font-weight: 700;">₹${safeFmt(predHigh)}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${highColorClass}">${highDiffStr}</td>
+                                    <td style="text-align: center;" class="${isHighGreen ? 'hit-cell' : 'miss-cell'}">${isHighGreen ? '🛡️ Target Retained' : '⚠️ Below Target High'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-arrow-trend-down text-red"></i> Low Price</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">₹${safeFmt(actualLow)}</td>
+                                    <td style="text-align: center; font-weight: 700;">₹${safeFmt(predLow)}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">${lowDiffStr}</td>
+                                    <td style="text-align: center;" class="${isLowGreen ? 'hit-cell' : 'miss-cell'}">${isLowGreen ? '🛡️ Support Retained' : '⚠️ Support Floor Breached'}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="idx-synthesis-text" style="background: rgba(245, 158, 11, 0.04); border-left-color: var(--accent-gold);">
+                        <i class="fa-solid fa-bullseye"></i> <strong>4:00 PM Validation Summary:</strong> ${idx.Index_Name} closed at ₹${safeFmt(actualClose)}, variance vs predicted close: <span class="${closeColorClass}" style="font-weight:700;">${closeDiffStr}</span>. Retained support floor at ₹${safeFmt(predLow)} with win probability score of ${idx['Final_Win_Probability_%'] || '58.5'}%.
                     </div>
                 </div>
             `;

@@ -915,10 +915,28 @@ def predict_index_price_action(symbol: str, index_name: str, macro_info: dict) -
     raw_win_prob = (0.50 * win_acc) + (0.35 * model_win_prob) + (0.15 * mc_results['MC_Win_Probability'])
     final_win_prob = round(min(raw_win_prob * macro_multiplier, 92.0), 1)
 
-    atr_val = float(clean_df['ATR_14'].iloc[-1])
-    rsi_val = float(clean_df['RSI_14'].iloc[-1])
+    dma_30 = float(clean_df['DMA_30'].iloc[-1])
+    dma_50 = float(clean_df['DMA_50'].iloc[-1])
     dma_200 = float(clean_df['DMA_200'].iloc[-1])
     dist_200_dma = float(clean_df['Dist_200_DMA'].iloc[-1])
+    macd_line = float(clean_df['MACD'].iloc[-1])
+    macd_signal = float(clean_df['MACD_Signal'].iloc[-1])
+    macd_hist = float(clean_df['MACD_Hist'].iloc[-1])
+    rsi_val = float(clean_df['RSI_14'].iloc[-1])
+    atr_val = float(clean_df['ATR_14'].iloc[-1])
+    cmf_val = float(clean_df['CMF_20'].iloc[-1])
+    squeeze_val = int(clean_df['TTM_Squeeze'].iloc[-1])
+    vol_20d = float(clean_df['Vol_20d'].iloc[-1]) * math.sqrt(252) * 100.0
+    slope_10d = float(clean_df['Slope_10d'].iloc[-1])
+    sharpe_20d = float(clean_df['Sharpe_20d'].iloc[-1])
+
+    prev_high = float(ticker_df['High'].iloc[-1])
+    prev_low = float(ticker_df['Low'].iloc[-1])
+    pivot_pp = round((prev_high + prev_low + cmp) / 3.0, 2)
+    pivot_r1 = round((2 * pivot_pp) - prev_low, 2)
+    pivot_r2 = round(pivot_pp + (prev_high - prev_low), 2)
+    pivot_s1 = round((2 * pivot_pp) - prev_high, 2)
+    pivot_s2 = round(pivot_pp - (prev_high - prev_low), 2)
 
     fc_close, fc_high, fc_low = [round(cmp, 2)], [round(cmp, 2)], [round(cmp, 2)]
     daily_drift = max(predicted_return, 0.002)
@@ -937,6 +955,24 @@ def predict_index_price_action(symbol: str, index_name: str, macro_info: dict) -
     next_day_high = round(cmp + (1.3 * atr_val), 2)
 
     bias = "🟢 BULLISH CONTINUATION" if final_win_prob >= 52.0 and cmp > dma_200 else ("🔴 BEARISH PULLBACK" if cmp < dma_200 else "🟡 CONSOLIDATION")
+
+    macd_status = "above" if macd_line > macd_signal else "below"
+    rsi_zone = "Bullish Momentum Zone" if rsi_val > 55 else ("Bearish Zone" if rsi_val < 45 else "Neutral Consolidation")
+    tech_synthesis = (
+        f"{index_name} ({symbol}) Technical Stack: RSI(14) is currently at {rsi_val:.2f} ({rsi_zone}). "
+        f"MACD Line ({macd_line:.2f}) trades {macd_status} Signal ({macd_signal:.2f}) with histogram of {macd_hist:+.2f}. "
+        f"Index Level ({cmp:,.2f}) trades {dist_200_dma:+.2f}% relative to the 200-day DMA ({dma_200:,.2f}), "
+        f"50-day DMA ({dma_50:,.2f}), and 30-day DMA ({dma_30:,.2f}). "
+        f"Daily Volatility Envelope ATR(14) is {atr_val:.2f} pts with Pivot PP at {pivot_pp:,.2f} (R1: {pivot_r1:,.2f}, S1: {pivot_s1:,.2f})."
+    )
+
+    quant_synthesis = (
+        f"1,000 Empirical Monte Carlo Paths for {index_name}: 95% Confidence Interval spans from "
+        f"₹{mc_results['MC_Expected_Low_95CI']:,.2f} to ₹{mc_results['MC_Expected_High_95CI']:,.2f} with a median path of ₹{mc_results['MC_Median_Price']:,.2f}. "
+        f"Annualized 20-Day Volatility is {vol_20d:.1f}%, 10-Day Slope is {slope_10d:+.2f}, Sharpe Ratio is {sharpe_20d:.2f}, "
+        f"and TTM Squeeze state is {'ACTIVE (Volatility Compression)' if squeeze_val == 1 else 'OFF'}. "
+        f"11 ML & Deep Learning Ensemble win probability is {final_win_prob:.1f}%."
+    )
 
     synthesis = (
         f"11 ML & Deep Learning Models project a 5-day {bias.lower()} for {index_name} ({symbol}). "
@@ -959,12 +995,33 @@ def predict_index_price_action(symbol: str, index_name: str, macro_info: dict) -
         'Next_Day_Expected_High': next_day_high,
         'ATR_14': round(atr_val, 2),
         'RSI_14': round(rsi_val, 1),
-        '200_DMA': round(dma_200, 2),
-        '200_DMA_Dist_%': round(dist_200_dma, 2),
+        'DMA_30': round(dma_30, 2),
+        'DMA_50': round(dma_50, 2),
+        'DMA_200': round(dma_200, 2),
+        'DMA_200_Dist_%': round(dist_200_dma, 2),
+        'MACD_Line': round(macd_line, 2),
+        'MACD_Signal': round(macd_signal, 2),
+        'MACD_Hist': round(macd_hist, 2),
+        'CMF_20': round(cmf_val, 2),
+        'TTM_Squeeze': squeeze_val,
+        'Vol_20d_Annualized_%': round(vol_20d, 1),
+        'Slope_10d': round(slope_10d, 2),
+        'Sharpe_20d': round(sharpe_20d, 2),
+        'Pivot_PP': pivot_pp,
+        'Pivot_R1': pivot_r1,
+        'Pivot_R2': pivot_r2,
+        'Pivot_S1': pivot_s1,
+        'Pivot_S2': pivot_s2,
+        'MC_Expected_High_95CI': mc_results['MC_Expected_High_95CI'],
+        'MC_Median_Price': mc_results['MC_Median_Price'],
+        'MC_Expected_Low_95CI': mc_results['MC_Expected_Low_95CI'],
+        'MC_Win_Probability_%': mc_results['MC_Win_Probability'],
         'Forecast_5D_Close': fc_close,
         'Forecast_5D_High': fc_high,
         'Forecast_5D_Low': fc_low,
         'AI_Synthesis': synthesis,
+        'Technical_Synthesis': tech_synthesis,
+        'Quant_Synthesis': quant_synthesis,
         'Date': latest_date
     }
 

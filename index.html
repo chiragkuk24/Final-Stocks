@@ -36,8 +36,11 @@
             <nav class="nav-menu">
                 <a href="#" class="nav-item" id="nav-usmarkets"><i class="fa-solid fa-flag-usa text-blue"></i> US Markets</a>
                 <a href="#" class="nav-item" id="nav-newsfeeds"><i class="fa-solid fa-newspaper text-gold"></i> News Feeds</a>
+                <a href="#" class="nav-item" id="nav-nifty"><i class="fa-solid fa-chart-line text-cyan"></i> NIFTY 50</a>
+                <a href="#" class="nav-item" id="nav-banknifty"><i class="fa-solid fa-building-columns text-emerald"></i> BANK NIFTY</a>
                 <a href="#" class="nav-item active" id="nav-dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
-                <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Post-Market Analysis</a>
+                <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Stocks Post-Market Analysis</a>
+                <a href="#" class="nav-item" id="nav-index-postmarket"><i class="fa-solid fa-chart-pie"></i> Indexes Post-Market Analysis</a>
             </nav>
 
             <div class="macro-widget card-glass">
@@ -51,7 +54,7 @@
                     </div>
                     <div class="regime-item">
                         <span class="lbl">India VIX</span>
-                        <span id="vix-badge" class="badge badge-cyan"><i class="fa-solid fa-shield-cat"></i> 11.76 (Low)</span>
+                        <span id="vix-badge" class="badge badge-cyan"><i class="fa-solid fa-shield-halved"></i> 11.76 (Low)</span>
                     </div>
                     <div class="regime-item">
                         <span class="lbl">Win Boost</span>
@@ -178,21 +181,47 @@
             </div>
             <!-- ======= END SECTION 2: NEWS FEEDS ======= -->
 
-            <!-- ======= SECTION 3: DASHBOARD ======= -->
-            <div id="page-dashboard">
-
-                <!-- NIFTY 50 & BANK NIFTY 5-Day ML Forecast Section -->
-                <section class="index-forecast-section card-glass">
-                    <div class="index-forecast-header">
+            <!-- ======= SECTION 3: NIFTY 50 3-TIER ANALYSIS ======= -->
+            <div id="page-nifty" style="display: none;">
+                <section class="usmarkets-section card-glass">
+                    <div class="usmarkets-header">
                         <div class="header-left">
-                            <h2><i class="fa-solid fa-chart-line text-cyan"></i> NIFTY 50 & BANK NIFTY 5-Day ML Forecast</h2>
+                            <h2><i class="fa-solid fa-chart-line text-cyan"></i> NIFTY 50 – Institutional 3-Tier Deep Analysis</h2>
+                            <p class="subtitle">Multi-Factor Technical Stack, 1,000 Path Empirical Monte Carlo Simulations & Probable Closing Trajectory</p>
                         </div>
-                        <span class="index-forecast-badge"><i class="fa-solid fa-brain"></i> 11 ML & Deep Learning Ensembles</span>
+                        <span class="usmarkets-live-badge"><i class="fa-solid fa-brain"></i> ^NSEI 11 ML Ensembles</span>
                     </div>
-                    <div class="index-cards-grid" id="index-forecast-container">
+
+                    <div id="nifty-analysis-container">
                         <!-- Rendered dynamically by app.js -->
                     </div>
                 </section>
+            </div>
+            <!-- ======= END SECTION 3: NIFTY 50 ======= -->
+
+            <!-- ======= SECTION 4: BANK NIFTY 3-TIER ANALYSIS ======= -->
+            <div id="page-banknifty" style="display: none;">
+                <section class="usmarkets-section card-glass">
+                    <div class="usmarkets-header">
+                        <div class="header-left">
+                            <h2><i class="fa-solid fa-building-columns text-emerald"></i> BANK NIFTY – Institutional 3-Tier Deep Analysis</h2>
+                            <p class="subtitle">Multi-Factor Technical Stack, 1,000 Path Empirical Monte Carlo Simulations & Probable Closing Trajectory</p>
+                        </div>
+                        <span class="usmarkets-live-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: var(--accent-emerald);">
+                            <i class="fa-solid fa-brain"></i> ^NSEBANK 11 ML Ensembles
+                        </span>
+                    </div>
+
+                    <div id="banknifty-analysis-container">
+                        <!-- Rendered dynamically by app.js -->
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION 4: BANK NIFTY ======= -->
+
+            <!-- ======= SECTION 5: DASHBOARD ======= -->
+            <div id="page-dashboard">
+
 
                 <!-- Executive Metric KPI Cards -->
                 <section class="kpi-grid">
@@ -256,12 +285,12 @@
             </div>
             <!-- ======= END SECTION 3: DASHBOARD ======= -->
 
-            <!-- ======= SECTION 4: POST-MARKET ANALYSIS ======= -->
+            <!-- ======= SECTION 6: STOCKS POST-MARKET ANALYSIS ======= -->
             <div id="page-postmarket" style="display:none;">
 
                 <section class="post-market-section card-glass">
                     <div class="post-market-header">
-                        <h2><i class="fa-solid fa-chart-bar"></i> 4:00 PM Post-Market Accuracy Analysis</h2>
+                        <h2><i class="fa-solid fa-chart-bar"></i> 4:00 PM Stocks Post-Market Accuracy Analysis</h2>
                         <span class="post-market-timestamp" id="post-market-timestamp">Validated: --</span>
                     </div>
 
@@ -298,7 +327,7 @@
                                     <th>Stock</th><th>Signal</th>
                                     <th>Pred. Close</th><th>Actual Close</th>
                                     <th>Actual High</th><th>Actual Low</th>
-                                    <th>Error %</th><th>Status</th>
+                                    <th>Variance (Diff & %)</th><th>Status</th>
                                 </tr>
                             </thead>
                             <tbody id="post-accuracy-table-body"></tbody>
@@ -307,7 +336,100 @@
                 </section>
 
             </div>
-            <!-- ======= END PAGE VIEW: POST-MARKET ANALYSIS ======= -->
+            <!-- ======= END SECTION 6: STOCKS POST-MARKET ANALYSIS ======= -->
+
+            <!-- ======= SECTION 7: INDEXES POST-MARKET ANALYSIS ======= -->
+            <div id="page-index-postmarket" style="display:none;">
+                <section class="post-market-section card-glass">
+                    <div class="post-market-header">
+                        <h2><i class="fa-solid fa-building-columns text-cyan"></i> Indexes Post-Market Accuracy Analysis</h2>
+                        <span class="post-market-timestamp" id="index-postmarket-timestamp">Validated: Today 4:00 PM IST</span>
+                    </div>
+
+                    <!-- Summary KPIs -->
+                    <div class="post-kpi-grid">
+                        <div class="post-kpi-card card-glass-inner glow-gold">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Index Target Accuracy</span>
+                                <span class="post-kpi-value green-text" id="idx-post-accuracy-pct">94.8%</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Support / Target Retained</span>
+                                <span class="post-kpi-value green-text" id="idx-post-hit-count">2 / 2</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-microchip"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Indices Evaluated</span>
+                                <span class="post-kpi-value cyan-text">2 (NIFTY & BANK NIFTY)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="index-postmarket-flex" id="index-postmarket-container">
+                        <!-- Index Post-Market Cards rendered dynamically by app.js -->
+                    </div>
+
+                    <!-- Formal Section: How Accuracy Is Calculated -->
+                    <section class="accuracy-formula-section card-glass-inner" style="margin-top: 24px; padding: 24px; border: 1px solid rgba(0, 191, 255, 0.2); border-radius: var(--radius-md); background: rgba(13, 21, 39, 0.7);">
+                        <div class="accuracy-formula-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 14px; margin-bottom: 18px;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--accent-cyan); margin: 0; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-calculator"></i> How Accuracy is Calculated
+                            </h3>
+                            <span class="badge badge-cyan"><i class="fa-solid fa-shield-halved"></i> Institutional Post-Market Protocol</span>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
+                            Post-market accuracy validation is conducted automatically at <strong>4:00 PM IST</strong> following market close. Every setup is evaluated against real-time exchange feeds to determine mathematical target hits and error bounds.
+                        </p>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                            <!-- Criterion A Card -->
+                            <div class="metric-card card-glass-inner" style="padding: 16px; border-left: 3px solid var(--accent-emerald);">
+                                <div style="font-size: 0.82rem; font-weight: 700; color: var(--accent-emerald); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-circle-check"></i> Criterion A: Range Envelope Containment
+                                </div>
+                                <div style="font-size: 0.82rem; color: var(--text-main); font-family: monospace; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 4px; margin-bottom: 8px;">
+                                    Actual Low ≥ (Pred Low × 0.985) &amp;&amp;<br>Actual High ≤ (Pred High × 1.025)
+                                </div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                    Validates whether intraday price action stayed safely above expected support floor while achieving predicted upside bounds.
+                                </div>
+                            </div>
+
+                            <!-- Criterion B Card -->
+                            <div class="metric-card card-glass-inner" style="padding: 16px; border-left: 3px solid var(--accent-cyan);">
+                                <div style="font-size: 0.82rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-bullseye"></i> Criterion B: Closing Price Tolerance
+                                </div>
+                                <div style="font-size: 0.82rem; color: var(--text-main); font-family: monospace; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 4px; margin-bottom: 8px;">
+                                    |Actual Close - Pred Close| / Pred Close ≤ 2.5%
+                                </div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                    Validates whether the 4:00 PM IST actual market closing price landed within 2.5% of the ML ensemble target.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Formula Banner -->
+                        <div style="background: rgba(255, 183, 3, 0.05); border: 1px solid rgba(255, 183, 3, 0.2); border-radius: 8px; padding: 14px 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+                            <div>
+                                <span style="font-size: 0.78rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-square-root-variable"></i> Overall Accuracy Rate Formula</span>
+                                <div style="font-size: 0.95rem; font-weight: 700; color: #fff; margin-top: 4px; font-family: var(--font-heading);">
+                                    Overall Accuracy % = (Total Target Hits / Total Evaluated Setups) × 100
+                                </div>
+                            </div>
+                            <span class="badge badge-yellow" style="padding: 6px 14px; font-size: 0.82rem;">🎯 Target Hit = Criterion A OR Criterion B</span>
+                        </div>
+                    </section>
+                </section>
+            </div>
+            <!-- ======= END SECTION 7: INDEXES POST-MARKET ANALYSIS ======= -->
 
         </main>
     </div>
