@@ -3551,7 +3551,7 @@ window.DASHBOARD_DATA = {
     "scanned_at": "2026-08-03 06:25:02"
   },
   "validation": {
-    "validated_at": "2026-08-03 10:51:17",
+    "validated_at": "2026-08-03 13:26:39",
     "total_evaluated": 20,
     "target_hit_count": 20,
     "accuracy_pct": 100.0,
