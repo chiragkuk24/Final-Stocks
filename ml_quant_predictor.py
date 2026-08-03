@@ -85,7 +85,7 @@ def fetch_macro_volatility_regime():
     nifty_state, vix_val, vix_regime, multiplier = "BULLISH", 13.5, "LOW_VOLATILITY", 1.05
 
     try:
-        nifty = yf.download("^NSEI", period="2y", interval="1d", progress=False)
+        nifty = yf.download("^NSEI", period="max", interval="1d", progress=False)
         if isinstance(nifty.columns, pd.MultiIndex):
             nifty.columns = nifty.columns.get_level_values(0)
         close = nifty['Close'].squeeze()
@@ -682,11 +682,10 @@ def predict_stock_price_action(symbol: str, macro_info: dict, account_capital: f
     buy_entry_max = round(cmp + (0.3 * atr_val), 2)
     max_chase_price = round(cmp + (0.8 * atr_val), 2)
 
-    # Dynamic Position Sizing (1.0% Capital Risk per Trade)
+    # Dynamic Risk Budgeting
     max_trade_risk_inr = account_capital * 0.01
     diff_risk = cmp - stop_loss
     per_share_risk = float(diff_risk) if not (math.isnan(diff_risk) or diff_risk <= 0) else 10.0
-    recommended_shares = max(int(max_trade_risk_inr / max(per_share_risk, 1.0)), 1)
 
     # Win Probability with Macro Multiplier
     raw_win_prob = (
@@ -770,7 +769,6 @@ def predict_stock_price_action(symbol: str, macro_info: dict, account_capital: f
         'CMP': round(cmp, 2),
         'Buy_Entry_Range': f"₹{buy_entry_min} - ₹{buy_entry_max}",
         'Max_Chase_Price': max_chase_price,
-        'Rec_Shares_To_Buy': recommended_shares,
         '30_DMA': round(dma_30, 2),
         '50_DMA': round(dma_50, 2),
         '200_DMA': round(dma_200, 2),
@@ -823,7 +821,7 @@ def predict_index_price_action(symbol: str, index_name: str, macro_info: dict) -
     print(f"📈 ML & Quant 5-Day Forecast Engine for Index: {index_name} ({symbol})")
     print(f"=======================================================")
 
-    ticker_df = yf.download(symbol, period="2y", interval="1d", progress=False)
+    ticker_df = yf.download(symbol, period="max", interval="1d", progress=False)
     if ticker_df.empty or len(ticker_df) < 150:
         print(f"[WARN] Insufficient history for index {symbol}.")
         return None
@@ -1082,7 +1080,7 @@ def main():
     print("="*110)
     
     summary_cols = [
-        'Stock', 'Live_Signal', 'CMP', 'Buy_Entry_Range', 'Max_Chase_Price', 'Rec_Shares_To_Buy',
+        'Stock', 'Live_Signal', 'CMP', 'Buy_Entry_Range', 'Max_Chase_Price',
         'Final_Win_Probability_%', 'Risk_Reward_Ratio', 'Expected_Value_EV_%',
         'Next_Day_Expected_Low', 'Next_Day_Expected_High', 'Target_Price', 'Stop_Loss',
         'Key_Drivers'
