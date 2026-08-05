@@ -2869,13 +2869,71 @@ body {
     border-radius: 20px;
 }
 
-/* Mobile Media Queries (<= 850px) */
+/* ==========================================================================
+   COMPREHENSIVE MOBILE & RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+/* Tablet & Mobile Screens (<= 992px) */
+@media (max-width: 992px) {
+    .mobile-nav-bar {
+        display: flex !important;
+        background: rgba(12, 17, 29, 0.95);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border-glass);
+    }
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: -290px !important;
+        width: 280px !important;
+        height: 100vh !important;
+        z-index: 1000 !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: none;
+    }
+    .sidebar.mobile-open {
+        transform: translateX(290px) !important;
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8) !important;
+    }
+    .main-content {
+        margin-left: 0 !important;
+        padding: 16px 14px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+    .top-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 14px !important;
+        padding: 16px !important;
+    }
+    .header-actions {
+        width: 100% !important;
+        display: flex !important;
+        gap: 10px !important;
+    }
+    .header-actions .btn {
+        flex: 1 !important;
+        justify-content: center !important;
+        font-size: 0.82rem !important;
+        padding: 10px 14px !important;
+    }
+    .learning-diagnostics-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+}
+
+/* Standard Mobile & Small Tablets (<= 850px) */
 @media (max-width: 850px) {
     .desktop-only-table {
         display: none !important;
     }
     .fut-mobile-cards-grid {
         display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
     }
     .futures-section {
         padding: 14px !important;
@@ -2887,6 +2945,7 @@ body {
     .controls-bar {
         flex-direction: column !important;
         align-items: stretch !important;
+        gap: 12px !important;
     }
     .filter-group {
         display: flex !important;
@@ -2908,28 +2967,104 @@ body {
     .tier-3-modal {
         width: 95vw !important;
         max-width: 95vw !important;
-        max-height: 90vh !important;
+        max-height: 92vh !important;
         padding: 16px !important;
         border-radius: 12px !important;
+        margin: 0 auto !important;
     }
-    .metrics-card-grid {
+    .metrics-card-grid,
+    .metrics-card-grid-quant {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
+        gap: 10px !important;
+    }
+    .idx-banner-container {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    .idx-metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    .post-kpi-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+    .news-kpi-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
     }
 }
 
+/* Medium Mobile Devices (<= 640px) */
+@media (max-width: 640px) {
+    .post-kpi-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    .us-indices-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    .news-cards-container {
+        grid-template-columns: 1fr !important;
+    }
+    .cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    .pipeline-diagram-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    .pipeline-connector {
+        transform: rotate(90deg) !important;
+        margin: 4px auto !important;
+    }
+}
+
+/* Small Mobile Devices (<= 480px) */
 @media (max-width: 480px) {
     .kpi-cards-grid {
         grid-template-columns: 1fr !important;
+        gap: 8px !important;
     }
     .fut-card-price-row {
         grid-template-columns: 1fr !important;
+        gap: 8px !important;
     }
-    .metrics-card-grid {
+    .metrics-card-grid,
+    .metrics-card-grid-quant,
+    .idx-metrics-grid {
         grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    .news-kpi-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
     }
     .deep-modal-header h2 {
-        font-size: 1.1rem !important;
+        font-size: 1.05rem !important;
+    }
+    .modal-tab-pills {
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        padding-bottom: 6px !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    .tab-pill {
+        flex: 0 0 auto !important;
+        font-size: 0.76rem !important;
+        padding: 6px 10px !important;
+    }
+    .post-market-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+    .post-market-timestamp {
+        align-self: flex-start !important;
     }
 }
 
