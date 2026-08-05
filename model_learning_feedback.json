@@ -1,0 +1,96 @@
+{
+  "updated_at": "2026-08-05 13:33:30",
+  "total_evaluations_analyzed": 36,
+  "overall_accuracy_pct": 63.9,
+  "overall_mae_close_pct": 1.89,
+  "category_summary": {
+    "Stock": {
+      "count": 17,
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 0.72,
+      "bias_close_pct": -0.72,
+      "mae_high_pct": 2.0,
+      "mae_low_pct": 1.7
+    },
+    "Index": {
+      "count": 2,
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 0.02,
+      "bias_close_pct": 0.01,
+      "mae_high_pct": 0.2,
+      "mae_low_pct": 0.15
+    },
+    "Futures": {
+      "count": 17,
+      "accuracy_pct": 23.5,
+      "mae_close_pct": 3.28,
+      "bias_close_pct": -3.28,
+      "mae_high_pct": 2.24,
+      "mae_low_pct": 1.07
+    }
+  },
+  "diagnostics": {
+    "what_went_right": [
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b957542.15 landed within 0.02% variance of Predicted Close \u20b957552.2.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b924531.6 landed within 0.03% variance of Predicted Close \u20b924523.85.",
+      "High Directional Precision in Stock setup 'PGEL': Actual Close \u20b9612.25 landed within 0.12% variance of Predicted Close \u20b9612.96.",
+      "High Directional Precision in Stock setup 'DIXON': Actual Close \u20b914349.0 landed within 0.42% variance of Predicted Close \u20b914409.36.",
+      "High Directional Precision in Stock setup 'GODREJPROP': Actual Close \u20b92122.7 landed within 0.48% variance of Predicted Close \u20b92132.93."
+    ],
+    "what_went_wrong": [
+      "Variance Outlier in Futures setup 'IEX (AUG-2026 FUT)': Overestimated target by 4.17% (Actual \u20b9129.85 vs Predicted \u20b9135.5).",
+      "Variance Outlier in Futures setup 'COFORGE (AUG-2026 FUT)': Overestimated target by 4.08% (Actual \u20b91780.5 vs Predicted \u20b91856.14).",
+      "Variance Outlier in Futures setup 'ETERNAL (AUG-2026 FUT)': Overestimated target by 4.06% (Actual \u20b9311.5 vs Predicted \u20b9324.67).",
+      "Variance Outlier in Futures setup '360ONE (AUG-2026 FUT)': Overestimated target by 3.89% (Actual \u20b91191.0 vs Predicted \u20b91239.18).",
+      "Variance Outlier in Futures setup 'DIXON (AUG-2026 FUT)': Overestimated target by 3.89% (Actual \u20b914349.0 vs Predicted \u20b914929.34)."
+    ],
+    "how_to_minimize_variance": [
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.89% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 2.01%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.31%. Applying dynamic floor pivot weighting to anchor stop losses."
+    ]
+  },
+  "bias_corrections": {
+    "overall_close_bias_pct": -1.887,
+    "overall_high_bias_pct": -0.781,
+    "overall_low_bias_pct": 1.006,
+    "symbol_bias_offsets": {
+      "360ONE": -0.943,
+      "360ONE (AUG-2026 FUT)": -3.888,
+      "ALKEM": -0.556,
+      "ALKEM (AUG-2026 FUT)": -2.555,
+      "ASIANPAINT": -0.722,
+      "ASIANPAINT (AUG-2026 FUT)": -2.886,
+      "BANK NIFTY": -0.017,
+      "CIPLA": -0.787,
+      "CIPLA (AUG-2026 FUT)": -3.137,
+      "COFORGE": -1.187,
+      "COFORGE (AUG-2026 FUT)": -4.075,
+      "DIXON": -0.419,
+      "DIXON (AUG-2026 FUT)": -3.887,
+      "EICHERMOT": -0.701,
+      "EICHERMOT (AUG-2026 FUT)": -2.579,
+      "ETERNAL": -0.619,
+      "ETERNAL (AUG-2026 FUT)": -4.056,
+      "GODREJPROP": -0.48,
+      "GODREJPROP (AUG-2026 FUT)": -3.848,
+      "HAL": -0.663,
+      "HAL (AUG-2026 FUT)": -2.302,
+      "IEX": -0.62,
+      "IEX (AUG-2026 FUT)": -4.17,
+      "INDHOTEL": -1.361,
+      "INDHOTEL (AUG-2026 FUT)": -3.332,
+      "NIFTY 50": 0.032,
+      "PGEL": -0.116,
+      "PGEL (AUG-2026 FUT)": -3.878,
+      "PNB": -0.898,
+      "PNB (AUG-2026 FUT)": -2.521,
+      "RECLTD": -0.93,
+      "RECLTD (AUG-2026 FUT)": -3.073,
+      "TECHM": -0.5,
+      "TECHM (AUG-2026 FUT)": -3.337,
+      "ULTRACEMCO": -0.671,
+      "ULTRACEMCO (AUG-2026 FUT)": -2.233
+    }
+  }
+}

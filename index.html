@@ -388,17 +388,34 @@
             </div>
             <!-- ======= END SECTION: CURRENT MONTH FUTURES ======= -->
 
-            <!-- ======= SECTION 6: STOCKS POST-MARKET ANALYSIS ======= -->
+            <!-- ======= SECTION 6: POST-MARKET ANALYSIS & LEARNING ENGINE ======= -->
             <div id="page-postmarket" style="display:none;">
 
                 <section class="post-market-section card-glass">
-                    <div class="post-market-header">
-                        <h2><i class="fa-solid fa-chart-bar"></i> 4:00 PM Stocks Post-Market Accuracy Analysis</h2>
+                    <div class="post-market-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                        <div>
+                            <h2><i class="fa-solid fa-chart-bar text-cyan"></i> 4:00 PM Post-Market Analysis & Learning Engine</h2>
+                            <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">Evaluates actual 4:00 PM IST market outcomes against ML predictions, exports 3-Sheet Excel/CSVs, and feeds residuals to the Self-Correcting Learning Engine.</p>
+                        </div>
                         <span class="post-market-timestamp" id="post-market-timestamp">Validated: --</span>
                     </div>
 
+                    <!-- Download Reports Action Bar -->
+                    <div class="card-glass-inner" style="padding: 16px 20px; margin-bottom: 24px; border-left: 4px solid var(--accent-gold); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                        <div>
+                            <span style="font-size: 0.88rem; font-weight: 700; color: #fff; display: block;"><i class="fa-solid fa-file-excel text-emerald"></i> Export 3-Book Post-Market Accuracy Reports & CSVs</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted);">Includes date-wise Actual Close, Pred Close, Actual High/Low, and Variance columns for Stocks, Indexes, and Futures.</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <a href="Post_Market_Accuracy_Report.xlsx" download class="btn btn-sm btn-green" style="font-size: 0.8rem; font-weight: 700;"><i class="fa-solid fa-file-excel"></i> 3-Sheet Excel (.xlsx)</a>
+                            <a href="Post_Market_Stocks_Validation.csv" download class="btn btn-sm btn-outline-cyan" style="font-size: 0.78rem;"><i class="fa-solid fa-file-csv"></i> Stocks CSV</a>
+                            <a href="Post_Market_Indexes_Validation.csv" download class="btn btn-sm btn-outline-cyan" style="font-size: 0.78rem;"><i class="fa-solid fa-file-csv"></i> Indexes CSV</a>
+                            <a href="Post_Market_Futures_Validation.csv" download class="btn btn-sm btn-outline-cyan" style="font-size: 0.78rem;"><i class="fa-solid fa-file-csv"></i> Futures CSV</a>
+                        </div>
+                    </div>
+
                     <!-- Summary KPIs -->
-                    <div class="post-kpi-grid">
+                    <div class="post-kpi-grid" style="margin-bottom: 24px;">
                         <div class="post-kpi-card card-glass-inner glow-gold">
                             <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
                             <div class="post-kpi-data">
@@ -416,30 +433,88 @@
                         <div class="post-kpi-card card-glass-inner">
                             <div class="post-kpi-icon"><i class="fa-solid fa-layer-group"></i></div>
                             <div class="post-kpi-data">
-                                <span class="post-kpi-label">Setups Evaluated</span>
+                                <span class="post-kpi-label">Total Evaluated Setups</span>
                                 <span class="post-kpi-value cyan-text" id="post-total-evaluated">--</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Accuracy Table -->
-                    <div class="post-table-wrapper">
+                    <!-- Autonomous Learning Engine Diagnostics Panel -->
+                    <div class="card-glass-inner" style="padding: 20px; margin-bottom: 24px; border-left: 4px solid var(--accent-purple);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--accent-purple); margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-brain"></i> Autonomous ML Learning Engine Diagnostics & Variance Minimization
+                        </h3>
+
+                        <div class="learning-diagnostics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+                            <!-- What Went Right -->
+                            <div style="background: rgba(0, 230, 153, 0.05); border: 1px solid rgba(0, 230, 153, 0.2); border-radius: 8px; padding: 14px;">
+                                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-circle-check"></i> 🟢 What Went Right
+                                </div>
+                                <ul id="learning-right-list" style="font-size: 0.78rem; color: var(--text-main); padding-left: 16px; margin: 0;">
+                                    <li>Loading high-precision predictions diagnostics...</li>
+                                </ul>
+                            </div>
+
+                            <!-- What Went Wrong -->
+                            <div style="background: rgba(255, 77, 109, 0.05); border: 1px solid rgba(255, 77, 109, 0.2); border-radius: 8px; padding: 14px;">
+                                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-triangle-exclamation"></i> 🔴 What Went Wrong
+                                </div>
+                                <ul id="learning-wrong-list" style="font-size: 0.78rem; color: var(--text-main); padding-left: 16px; margin: 0;">
+                                    <li>Loading variance outlier diagnostics...</li>
+                                </ul>
+                            </div>
+
+                            <!-- How to Minimize Variance -->
+                            <div style="background: rgba(255, 214, 10, 0.05); border: 1px solid rgba(255, 214, 10, 0.2); border-radius: 8px; padding: 14px;">
+                                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-lightbulb"></i> 💡 How to Minimize Variance in Future
+                                </div>
+                                <ul id="learning-minimize-list" style="font-size: 0.78rem; color: var(--text-main); padding-left: 16px; margin: 0;">
+                                    <li>Loading calibrated bias offset feedback plan...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Tab Bar & Accuracy Table -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                        <div class="filter-group">
+                            <button class="filter-btn active" id="post-tab-stocks" onclick="window.switchPostCategory('STOCKS')">Stocks Predictions</button>
+                            <button class="filter-btn" id="post-tab-indexes" onclick="window.switchPostCategory('INDEXES')">Indexes Predictions</button>
+                            <button class="filter-btn" id="post-tab-futures" onclick="window.switchPostCategory('FUTURES')">Futures Predictions</button>
+                        </div>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);" id="post-cat-count">Showing 0 entries</span>
+                    </div>
+
+                    <div class="post-table-wrapper card-glass-inner" style="padding: 14px; border-radius: 12px; overflow-x: auto;">
                         <table class="data-table post-accuracy-table">
                             <thead>
                                 <tr>
-                                    <th>Stock</th><th>Signal</th>
-                                    <th>Pred. Close</th><th>Actual Close</th>
-                                    <th>Actual High</th><th>Actual Low</th>
-                                    <th>Variance (Diff & %)</th><th>Status</th>
+                                    <th>Date</th>
+                                    <th>Stock / Index / Contract</th>
+                                    <th>Actual Close</th>
+                                    <th>Pred. Close</th>
+                                    <th>Variance (Close)</th>
+                                    <th>Actual High</th>
+                                    <th>Pred. High</th>
+                                    <th>Variance (High)</th>
+                                    <th>Actual Low</th>
+                                    <th>Pred. Low</th>
+                                    <th>Variance (Low)</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody id="post-accuracy-table-body"></tbody>
+                            <tbody id="post-accuracy-table-body">
+                                <tr><td colspan="12" style="text-align: center; padding: 20px; color: var(--text-muted);">Loading post-market validation data...</td></tr>
+                            </tbody>
                         </table>
                     </div>
                 </section>
 
             </div>
-            <!-- ======= END SECTION 6: STOCKS POST-MARKET ANALYSIS ======= -->
+            <!-- ======= END SECTION 6: POST-MARKET ANALYSIS ======= -->
 
             <!-- ======= SECTION 7: INDEXES POST-MARKET ANALYSIS ======= -->
             <div id="page-index-postmarket" style="display:none;">

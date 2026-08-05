@@ -1294,6 +1294,120 @@ function initApp() {
     };
 
     /* ==========================================================================
+       Post-Market 3-Category Analysis & Learning Engine Renderer
+       ========================================================================== */
+    let currentPostCategory = 'STOCKS';
+
+    window.switchPostCategory = function(cat) {
+        currentPostCategory = cat;
+        ['stocks', 'indexes', 'futures'].forEach(c => {
+            const btn = document.getElementById(`post-tab-${c}`);
+            if (btn) btn.classList.remove('active');
+        });
+        const activeBtn = document.getElementById(`post-tab-${cat.toLowerCase()}`);
+        if (activeBtn) activeBtn.classList.add('active');
+        renderPostMarketAnalysis();
+    };
+
+    function renderPostMarketAnalysis() {
+        if (!dashboardData || !dashboardData.validation) return;
+
+        const val = dashboardData.validation;
+        const learning = dashboardData.learning_feedback;
+
+        const elAcc = document.getElementById('post-accuracy-pct');
+        const elHits = document.getElementById('post-hit-count');
+        const elTotal = document.getElementById('post-total-evaluated');
+        const elTime = document.getElementById('post-market-timestamp');
+
+        if (elAcc) elAcc.textContent = `${val.accuracy_pct || 0}%`;
+        if (elHits) elHits.textContent = `${val.target_hit_count || 0} / ${val.total_evaluated || 0}`;
+        if (elTotal) elTotal.textContent = val.total_evaluated || 0;
+        if (elTime) elTime.textContent = `Validated: ${val.validated_at || 'Recently'}`;
+
+        // Populate Learning Engine Diagnostics Panel
+        if (learning && learning.diagnostics) {
+            const elRight = document.getElementById('learning-right-list');
+            const elWrong = document.getElementById('learning-wrong-list');
+            const elMinimize = document.getElementById('learning-minimize-list');
+
+            if (elRight && learning.diagnostics.what_went_right) {
+                elRight.innerHTML = learning.diagnostics.what_went_right.map(item => `<li>${item}</li>`).join('');
+            }
+            if (elWrong && learning.diagnostics.what_went_wrong) {
+                elWrong.innerHTML = learning.diagnostics.what_went_wrong.map(item => `<li>${item}</li>`).join('');
+            }
+            if (elMinimize && learning.diagnostics.how_to_minimize_variance) {
+                elMinimize.innerHTML = learning.diagnostics.how_to_minimize_variance.map(item => `<li>${item}</li>`).join('');
+            }
+        }
+
+        // Render Validation Table for Selected Category
+        const tbody = document.getElementById('post-accuracy-table-body');
+        const catCountEl = document.getElementById('post-cat-count');
+        if (!tbody) return;
+
+        let items = [];
+        if (currentPostCategory === 'STOCKS') {
+            items = val.details || [];
+        } else if (currentPostCategory === 'INDEXES') {
+            items = val.index_details || [];
+        } else if (currentPostCategory === 'FUTURES') {
+            items = val.futures_details || [];
+        }
+
+        if (catCountEl) catCountEl.textContent = `Showing ${items.length} ${currentPostCategory.toLowerCase()} evaluation entries`;
+
+        if (items.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="12" style="text-align: center; padding: 24px; color: var(--text-muted);">No post-market validation entries recorded for ${currentPostCategory}. Run post-market validation script.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = items.map(r => {
+            const name = r['Stock Name'] || r.Stock || r.Name || '';
+            const date = r.Date || 'Today';
+            const actC = r['Actual Close'] || r.Actual_Close || 0;
+            const predC = r['Predicted Close'] || r.Pred_Close || 0;
+            const varC = r['Variance (Close)'] !== undefined ? r['Variance (Close)'] : (actC - predC);
+
+            const actH = r['Actual High'] || r.Actual_High || 0;
+            const predH = r['Predicted High'] || r.Pred_High || 0;
+            const varH = r['Variance (High)'] !== undefined ? r['Variance (High)'] : (actH - predH);
+
+            const actL = r['Actual Low'] || r.Actual_Low || 0;
+            const predL = r['Predicted Low'] || r.Pred_Low || 0;
+            const varL = r['Variance (Low)'] !== undefined ? r['Variance (Low)'] : (actL - predL);
+
+            const status = r.Accuracy_Status || 'TARGET HIT';
+            const isHit = status.includes('HIT');
+
+            const varCClass = varC >= 0 ? 'green-text' : 'red-text';
+            const varHClass = varH >= 0 ? 'green-text' : 'red-text';
+            const varLClass = varL >= 0 ? 'green-text' : 'red-text';
+
+            return `
+                <tr>
+                    <td style="font-size: 0.78rem; color: var(--text-muted);">${date}</td>
+                    <td style="font-weight: 700; color: #fff;">${name}</td>
+                    <td style="font-weight: 700;">₹${safeFmt(actC)}</td>
+                    <td style="color: var(--text-muted);">₹${safeFmt(predC)}</td>
+                    <td class="${varCClass}" style="font-weight: 700;">${varC >= 0 ? '+' : ''}${safeFmt(varC)}</td>
+                    
+                    <td style="color: var(--accent-emerald);">₹${safeFmt(actH)}</td>
+                    <td style="color: var(--text-muted);">₹${safeFmt(predH)}</td>
+                    <td class="${varHClass}">${varH >= 0 ? '+' : ''}${safeFmt(varH)}</td>
+                    
+                    <td style="color: var(--accent-red);">₹${safeFmt(actL)}</td>
+                    <td style="color: var(--text-muted);">₹${safeFmt(predL)}</td>
+                    <td class="${varLClass}">${varL >= 0 ? '+' : ''}${safeFmt(varL)}</td>
+                    
+                    <td><span class="badge ${isHit ? 'badge-green' : 'badge-red'}">${status}</span></td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    /* ==========================================================================
        Indexes Post-Market Analysis Renderer
        ========================================================================== */
     function renderIndexPostMarketAnalysis() {

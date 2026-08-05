@@ -1272,11 +1272,21 @@ def main():
     data_js_path = BASE_DIR / "data.js"
 
     existing_validation = None
+    existing_learning = None
     if json_path.exists():
         try:
             with open(json_path, encoding='utf-8') as f:
                 old_data = json.load(f)
                 existing_validation = old_data.get('validation')
+                existing_learning = old_data.get('learning_feedback')
+        except Exception:
+            pass
+
+    feedback_file = BASE_DIR / "model_learning_feedback.json"
+    if feedback_file.exists() and not existing_learning:
+        try:
+            with open(feedback_file, encoding='utf-8') as f:
+                existing_learning = json.load(f)
         except Exception:
             pass
 
@@ -1299,6 +1309,8 @@ def main():
 
     if existing_validation:
         payload["validation"] = existing_validation
+    if existing_learning:
+        payload["learning_feedback"] = existing_learning
 
     json_text = json.dumps(payload, indent=2)
     json_path.write_text(json_text, encoding="utf-8")

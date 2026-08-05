@@ -33,9 +33,9 @@ jobs:
         run: |
           python validate_predictions.py
 
-      - name: Push Accuracy Scorecard to Web Dashboard
+      - name: Push 3-Sheet Excel, CSVs & Accuracy Scorecard to Web Dashboard
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dashboard_data.json data.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "📊 Auto-Update: 4:00 PM Post-Market Accuracy Validation [skip ci]" && git push)
+          git add Post_Market_Accuracy_Report.xlsx Post_Market_*.csv model_learning_feedback.json dashboard_data.json data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "📊 Auto-Update: 4:00 PM Post-Market 3-Sheet Validation & Learning Feedback [skip ci]" && git push)
