@@ -1,3 +1,2 @@
 Date,Stock Name,Actual Close,Predicted Close,Variance (Close),Actual High,Predicted High,Variance (High),Actual Low,Predicted Low,Variance (Low),Live_Signal,Accuracy_Status,Error_Pct
 2026-08-05,NIFTY 50,24624.65,24624.65,0.0,24677.6,24702.19,-24.59,24497.95,24522.54,-24.59,NEUTRAL,🎯 TARGET HIT,0.0
-2026-08-05,BANK NIFTY,57739.95,57739.95,0.0,57931.85,57962.41,-30.56,57456.35,57486.91,-30.56,NEUTRAL,🎯 TARGET HIT,0.0

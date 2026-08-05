@@ -246,23 +246,100 @@ def validate_market_predictions():
         "Live_Signal", "Accuracy_Status", "Error_Pct"
     ]
 
-    df_stocks = pd.DataFrame(stock_results)[export_cols] if stock_results else pd.DataFrame(columns=export_cols)
-    df_indexes = pd.DataFrame(index_results)[export_cols] if index_results else pd.DataFrame(columns=export_cols)
-    df_futures = pd.DataFrame(futures_results)[export_cols] if futures_results else pd.DataFrame(columns=export_cols)
+    df_stocks_new = pd.DataFrame(stock_results)[export_cols] if stock_results else pd.DataFrame(columns=export_cols)
+    df_indexes_new = pd.DataFrame(index_results)[export_cols] if index_results else pd.DataFrame(columns=export_cols)
+    df_futures_new = pd.DataFrame(futures_results)[export_cols] if futures_results else pd.DataFrame(columns=export_cols)
 
-    # 4. EXPORT 3-SHEET EXCEL WORKBOOK
-    with pd.ExcelWriter(EXCEL_PATH, engine='openpyxl') as writer:
-        df_stocks.to_excel(writer, sheet_name='Stocks Prediction', index=False)
-        df_indexes.to_excel(writer, sheet_name='Indexes Prediction', index=False)
-        df_futures.to_excel(writer, sheet_name='Futures Predictions', index=False)
+    # HELPER TO MERGE AND PRESERVE CUMULATIVE HISTORICAL RECORDS
+    def merge_cumulative(path, new_df):
+        if path.exists():
+            try:
+                old_df = pd.read_csv(path)
+                combined = pd.concat([old_df, new_df], ignore_index=True)
+                combined.drop_duplicates(subset=["Date", "Stock Name"], keep='last', inplace=True)
+                return combined
+            except Exception:
+                return new_df
+        return new_df
 
-    print(f"\n✅ 3-Sheet Excel Workbook Exported: '{EXCEL_PATH.name}' (Sheets: 'Stocks Prediction', 'Indexes Prediction', 'Futures Predictions')")
+    df_stocks = merge_cumulative(CSV_STOCKS_PATH, df_stocks_new)
+    df_indexes = merge_cumulative(CSV_INDEXES_PATH, df_indexes_new)
+    df_futures = merge_cumulative(CSV_FUTURES_PATH, df_futures_new)
 
-    # 5. EXPORT CSV FILES
+    # 4. EXPORT MASTER 3-SHEET EXCEL WORKBOOK (CUMULATIVE HISTORICAL DATA)
+    try:
+        with pd.ExcelWriter(EXCEL_PATH, engine='openpyxl') as writer:
+            df_stocks.to_excel(writer, sheet_name='Stocks Prediction', index=False)
+            df_indexes.to_excel(writer, sheet_name='Indexes Prediction', index=False)
+            df_futures.to_excel(writer, sheet_name='Futures Predictions', index=False)
+        print(f"\n✅ Master 3-Sheet Excel Workbook Exported: '{EXCEL_PATH.name}' (Sheets: 'Stocks Prediction', 'Indexes Prediction', 'Futures Predictions')")
+    except PermissionError:
+        print(f"\n[WARN] Could not write '{EXCEL_PATH.name}' because the file is open in Excel. Please close it.")
+    except Exception as e:
+        print(f"[WARN] Excel export notice for '{EXCEL_PATH.name}': {e}")
+
+    # 4B. EXPORT INDEXES DEDICATED 2-BOOK WORKBOOK (Strictly Separate Nifty 50 & Bank Nifty)
+    excel_indexes_path = BASE_DIR / "Post_Market_Indexes_Validation.xlsx"
+    df_banknifty = df_indexes[df_indexes['Stock Name'].str.contains('BANK NIFTY|BANK', case=False, na=False)]
+    df_nifty = df_indexes[(df_indexes['Stock Name'].str.contains('NIFTY 50|^NIFTY$', case=False, na=False)) & (~df_indexes['Stock Name'].str.contains('BANK', case=False, na=False))]
+    if df_nifty.empty:
+        df_nifty = df_indexes[~df_indexes['Stock Name'].str.contains('BANK', case=False, na=False)]
+
+    try:
+        with pd.ExcelWriter(excel_indexes_path, engine='openpyxl') as writer:
+            df_nifty.to_excel(writer, sheet_name='Nifty 50', index=False)
+            df_banknifty.to_excel(writer, sheet_name='Bank Nifty', index=False)
+        print(f"✅ Indexes Dedicated 2-Sheet Excel Workbook Exported: '{excel_indexes_path.name}' (Sheets: 'Nifty 50', 'Bank Nifty')")
+    except PermissionError:
+        print(f"[WARN] Could not write '{excel_indexes_path.name}' because the file is open in Excel. Please close it.")
+    except Exception as e:
+        print(f"[WARN] Excel export notice for '{excel_indexes_path.name}': {e}")
+
+    # Save separate CSVs for Nifty 50 and Bank Nifty as well
+    csv_nifty_path = BASE_DIR / "Post_Market_Nifty50_Validation.csv"
+    csv_banknifty_path = BASE_DIR / "Post_Market_BankNifty_Validation.csv"
+    try:
+        df_nifty.to_csv(csv_nifty_path, index=False)
+        df_banknifty.to_csv(csv_banknifty_path, index=False)
+        print(f"✅ Dedicated Index CSV Reports Saved: '{csv_nifty_path.name}', '{csv_banknifty_path.name}'")
+    except Exception as e:
+        print(f"[WARN] CSV export notice for Index CSVs: {e}")
+
+    # 4C. EXPORT STOCKS & FUTURES DEDICATED WORKBOOKS
+    excel_stocks_path = BASE_DIR / "Post_Market_Stocks_Validation.xlsx"
+    try:
+        with pd.ExcelWriter(excel_stocks_path, engine='openpyxl') as writer:
+            df_stocks.to_excel(writer, sheet_name='All Stocks Accuracy', index=False)
+            # Individual stock tabs for top symbols
+            for stock_name in df_stocks['Stock Name'].unique()[:20]:
+                clean_sheet = str(stock_name).replace(':', '_').replace('/', '_')[:30]
+                sub = df_stocks[df_stocks['Stock Name'] == stock_name]
+                sub.to_excel(writer, sheet_name=clean_sheet, index=False)
+        print(f"✅ Stocks Multi-Book Excel Workbook Exported: '{excel_stocks_path.name}'")
+    except PermissionError:
+        print(f"[WARN] Could not write '{excel_stocks_path.name}' because the file is open in Excel. Please close it.")
+    except Exception as e:
+        print(f"[WARN] Excel export notice for '{excel_stocks_path.name}': {e}")
+
+    excel_futures_path = BASE_DIR / "Post_Market_Futures_Validation.xlsx"
+    try:
+        with pd.ExcelWriter(excel_futures_path, engine='openpyxl') as writer:
+            df_futures.to_excel(writer, sheet_name='All Futures Accuracy', index=False)
+            for fut_name in df_futures['Stock Name'].unique()[:20]:
+                clean_sheet = str(fut_name).replace(':', '_').replace('/', '_')[:30]
+                sub = df_futures[df_futures['Stock Name'] == fut_name]
+                sub.to_excel(writer, sheet_name=clean_sheet, index=False)
+        print(f"✅ Futures Multi-Book Excel Workbook Exported: '{excel_futures_path.name}'")
+    except PermissionError:
+        print(f"[WARN] Could not write '{excel_futures_path.name}' because the file is open in Excel. Please close it.")
+    except Exception as e:
+        print(f"[WARN] Excel export notice for '{excel_futures_path.name}': {e}")
+
+    # 5. EXPORT CUMULATIVE CSV FILES
     df_stocks.to_csv(CSV_STOCKS_PATH, index=False)
     df_indexes.to_csv(CSV_INDEXES_PATH, index=False)
     df_futures.to_csv(CSV_FUTURES_PATH, index=False)
-    print(f"✅ CSV Reports Exported: '{CSV_STOCKS_PATH.name}', '{CSV_INDEXES_PATH.name}', '{CSV_FUTURES_PATH.name}'")
+    print(f"✅ Cumulative CSV Reports Saved: '{CSV_STOCKS_PATH.name}', '{CSV_INDEXES_PATH.name}', '{CSV_FUTURES_PATH.name}'")
 
     # 6. UPDATE DASHBOARD PAYLOAD
     stock_hits_pct = round((stock_hits / max(len(stock_predictions), 1)) * 100.0, 1)

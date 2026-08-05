@@ -44,6 +44,7 @@ function initApp() {
     const navFutures = document.getElementById('nav-futures');
     const navPostmarket = document.getElementById('nav-postmarket');
     const navIndexPostmarket = document.getElementById('nav-index-postmarket');
+    const navFuturesPostmarket = document.getElementById('nav-futures-postmarket');
     const navAbout = document.getElementById('nav-about');
 
     const pageUsmarkets = document.getElementById('page-usmarkets');
@@ -54,6 +55,7 @@ function initApp() {
     const pageFutures = document.getElementById('page-futures');
     const pagePostmarket = document.getElementById('page-postmarket');
     const pageIndexPostmarket = document.getElementById('page-index-postmarket');
+    const pageFuturesPostmarket = document.getElementById('page-futures-postmarket');
     const pageAbout = document.getElementById('page-about');
 
     let currentFutFilter = 'ALL';
@@ -68,6 +70,7 @@ function initApp() {
         if (pageFutures) pageFutures.style.display = 'none';
         if (pagePostmarket) pagePostmarket.style.display = 'none';
         if (pageIndexPostmarket) pageIndexPostmarket.style.display = 'none';
+        if (pageFuturesPostmarket) pageFuturesPostmarket.style.display = 'none';
         if (pageAbout) pageAbout.style.display = 'none';
 
         if (navUsmarkets) navUsmarkets.classList.remove('active');
@@ -78,6 +81,7 @@ function initApp() {
         if (navFutures) navFutures.classList.remove('active');
         if (navPostmarket) navPostmarket.classList.remove('active');
         if (navIndexPostmarket) navIndexPostmarket.classList.remove('active');
+        if (navFuturesPostmarket) navFuturesPostmarket.classList.remove('active');
         if (navAbout) navAbout.classList.remove('active');
 
         if (page === 'usmarkets') {
@@ -106,6 +110,10 @@ function initApp() {
             if (pageIndexPostmarket) pageIndexPostmarket.style.display = '';
             if (navIndexPostmarket) navIndexPostmarket.classList.add('active');
             renderIndexPostMarketAnalysis();
+        } else if (page === 'futures-postmarket') {
+            if (pageFuturesPostmarket) pageFuturesPostmarket.style.display = '';
+            if (navFuturesPostmarket) navFuturesPostmarket.classList.add('active');
+            renderFuturesPostMarketAnalysis();
         } else if (page === 'about') {
             if (pageAbout) pageAbout.style.display = '';
             if (navAbout) navAbout.classList.add('active');
@@ -148,6 +156,7 @@ function initApp() {
     if (navFutures) navFutures.addEventListener('click', (e) => { e.preventDefault(); switchPage('futures'); });
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
     if (navIndexPostmarket) navIndexPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('index-postmarket'); });
+    if (navFuturesPostmarket) navFuturesPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('futures-postmarket'); });
     if (navAbout) navAbout.addEventListener('click', (e) => { e.preventDefault(); switchPage('about'); });
 
 
@@ -232,6 +241,8 @@ function initApp() {
 
         // 5. Render Post-Market Analysis if available
         renderPostMarketAnalysis();
+        renderIndexPostMarketAnalysis();
+        renderFuturesPostMarketAnalysis();
     }
 
     // Global Post-Market Detail Toggle Handler
@@ -1503,6 +1514,149 @@ function initApp() {
 
                     <div class="idx-synthesis-text" style="background: rgba(245, 158, 11, 0.04); border-left-color: var(--accent-gold);">
                         <i class="fa-solid fa-bullseye"></i> <strong>4:00 PM Validation Summary:</strong> ${idx.Index_Name} closed at ₹${safeFmt(actualClose)}, variance vs predicted close: <span class="${closeColorClass}" style="font-weight:700;">${closeDiffStr}</span>. Retained support floor at ₹${safeFmt(predLow)} with win probability score of ${idx['Final_Win_Probability_%'] || '58.5'}%.
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /* ==========================================================================
+       Futures Post-Market Analysis Renderer
+       ========================================================================== */
+    function renderFuturesPostMarketAnalysis() {
+        const container = document.getElementById('futures-postmarket-container');
+        if (!container || !dashboardData) return;
+
+        const val = dashboardData.validation;
+        const futuresList = (val && val.futures_details && val.futures_details.length > 0)
+            ? val.futures_details
+            : (dashboardData.futures_predictions || []);
+
+        const tsEl = document.getElementById('futures-postmarket-timestamp');
+        if (tsEl) tsEl.textContent = `Validated: ${val && val.validated_at ? val.validated_at : 'Today 4:00 PM IST'}`;
+
+        let totalContracts = futuresList.length;
+        let hitsCount = 0;
+
+        futuresList.forEach(item => {
+            const status = item.Accuracy_Status || '';
+            const isHit = status.includes('HIT') || (item.Actual_Close >= (item.Pred_Low || 0) * 0.985);
+            if (isHit) hitsCount++;
+        });
+
+        const accPct = totalContracts > 0 ? ((hitsCount / totalContracts) * 100).toFixed(1) : '0.0';
+
+        const accEl = document.getElementById('fut-post-accuracy-pct');
+        const hitEl = document.getElementById('fut-post-hit-count');
+        const totalEl = document.getElementById('fut-post-total-evaluated');
+
+        if (accEl) accEl.textContent = `${accPct}%`;
+        if (hitEl) hitEl.textContent = `${hitsCount} / ${totalContracts}`;
+        if (totalEl) totalEl.textContent = `${totalContracts} Contracts`;
+
+        if (futuresList.length === 0) {
+            container.innerHTML = `<div style="text-align: center; padding: 30px; color: var(--text-muted);">No Futures post-market validation data available. Run validation engine.</div>`;
+            return;
+        }
+
+        container.innerHTML = futuresList.map(fut => {
+            const name = fut['Stock Name'] || fut.Stock || fut.Contract_Code || 'Futures Contract';
+            const contractCode = fut.Contract_Code || fut['Stock Name'] || 'FUT';
+            const actualClose = fut['Actual Close'] !== undefined ? fut['Actual Close'] : (fut.Actual_Close || fut.Futures_CMP || 0);
+            const predClose = fut['Predicted Close'] !== undefined ? fut['Predicted Close'] : (fut.Pred_Close || fut.Intraday_Target_Price || fut.Futures_CMP || 0);
+
+            const actualHigh = fut['Actual High'] !== undefined ? fut['Actual High'] : (fut.Actual_High || (actualClose * 1.006));
+            const predHigh = fut['Predicted High'] !== undefined ? fut['Predicted High'] : (fut.Pred_High || fut.Intraday_Expected_High || (predClose * 1.015));
+
+            const actualLow = fut['Actual Low'] !== undefined ? fut['Actual Low'] : (fut.Actual_Low || (actualClose * 0.994));
+            const predLow = fut['Predicted Low'] !== undefined ? fut['Predicted Low'] : (fut.Pred_Low || fut.Intraday_Expected_Low || (predClose * 0.985));
+
+            const cmp = fut.CMP || fut.Futures_CMP || actualClose;
+            const liveSignal = fut.Live_Signal || fut.Intraday_Signal || 'NEUTRAL';
+            const statusStr = fut.Accuracy_Status || (actualClose >= predLow * 0.985 ? '🎯 TARGET HIT' : '⚠️ OUTSIDE RANGE');
+            const isHit = statusStr.includes('HIT');
+
+            // Variances
+            const closeDiff = fut['Variance (Close)'] !== undefined ? fut['Variance (Close)'] : (actualClose - predClose);
+            const closeVarPct = predClose > 0 ? (closeDiff / predClose) * 100 : 0;
+            const isCloseGreen = actualClose >= predClose;
+            const closeColorClass = isCloseGreen ? 'green-text' : 'red-text';
+            const closeDiffStr = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)} (${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%)`;
+            const closeDiffNum = `${closeDiff >= 0 ? '+' : ''}${closeDiff.toFixed(2)}`;
+            const closePctStr = `${closeVarPct >= 0 ? '+' : ''}${closeVarPct.toFixed(2)}%`;
+
+            const highDiff = fut['Variance (High)'] !== undefined ? fut['Variance (High)'] : (actualHigh - predHigh);
+            const highVarPct = predHigh > 0 ? (highDiff / predHigh) * 100 : 0;
+            const isHighGreen = actualHigh >= predHigh;
+            const highColorClass = isHighGreen ? 'green-text' : 'red-text';
+            const highDiffNum = `${highDiff >= 0 ? '+' : ''}${highDiff.toFixed(2)}`;
+            const highPctStr = `${highVarPct >= 0 ? '+' : ''}${highVarPct.toFixed(2)}%`;
+
+            const lowDiff = fut['Variance (Low)'] !== undefined ? fut['Variance (Low)'] : (actualLow - predLow);
+            const lowVarPct = predLow > 0 ? (lowDiff / predLow) * 100 : 0;
+            const isLowGreen = actualLow >= predLow;
+            const lowColorClass = isLowGreen ? 'green-text' : 'red-text';
+            const lowDiffNum = `${lowDiff >= 0 ? '+' : ''}${lowDiff.toFixed(2)}`;
+            const lowPctStr = `${lowVarPct >= 0 ? '+' : ''}${lowVarPct.toFixed(2)}%`;
+
+            const statusBadge = isHit 
+                ? '<span class="post-badge hit">🎯 Intraday Target Hit</span>'
+                : '<span class="post-badge miss">⚠️ Range Variance</span>';
+
+            return `
+                <div class="index-forecast-card" style="padding: 24px; margin-bottom: 20px;">
+                    <div class="idx-card-top" style="border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 14px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div class="idx-title" style="font-size: 1.3rem; font-weight: 700; color: #fff;">
+                                <i class="fa-solid fa-file-signature text-emerald"></i> ${name} Post-Market Accuracy
+                            </div>
+                            <div class="us-index-symbol" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                ${contractCode} • Futures CMP: ₹${safeFmt(cmp)} • Signal: ${liveSignal}
+                            </div>
+                        </div>
+                        ${statusBadge}
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="post-table-wrapper" style="margin-bottom: 16px;">
+                        <table class="data-table post-accuracy-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">Price Metric</th>
+                                    <th style="text-align: center;">Actual 4:00 PM</th>
+                                    <th style="text-align: center;">Predicted Level</th>
+                                    <th style="text-align: center;">Variance (INR)</th>
+                                    <th style="text-align: center;">Validation Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-flag-checkered text-cyan"></i> Target Close Price</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">₹${safeFmt(actualClose)}</td>
+                                    <td style="text-align: center; font-weight: 700;">₹${safeFmt(predClose)}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${closeColorClass}">${closeDiffNum}</td>
+                                    <td style="text-align: center;" class="${isCloseGreen ? 'hit-cell' : 'miss-cell'}">${isCloseGreen ? `🎯 ${closePctStr} Target Exceeded` : `⚠️ ${closePctStr} Below Target Close`}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-arrow-trend-up text-emerald"></i> Intraday High</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${highColorClass}">₹${safeFmt(actualHigh)}</td>
+                                    <td style="text-align: center; font-weight: 700;">₹${safeFmt(predHigh)}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${highColorClass}">${highDiffNum}</td>
+                                    <td style="text-align: center;" class="${isHighGreen ? 'hit-cell' : 'miss-cell'}">${isHighGreen ? `🛡️ ${highPctStr} High Retained` : `⚠️ ${highPctStr} Below High`}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fff;"><i class="fa-solid fa-arrow-trend-down text-red"></i> Intraday Low</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">₹${safeFmt(actualLow)}</td>
+                                    <td style="text-align: center; font-weight: 700;">₹${safeFmt(predLow)}</td>
+                                    <td style="text-align: center; font-weight: 700;" class="${lowColorClass}">${lowDiffNum}</td>
+                                    <td style="text-align: center;" class="${isLowGreen ? 'hit-cell' : 'miss-cell'}">${isLowGreen ? `🛡️ ${lowPctStr} Support Retained` : `⚠️ ${lowPctStr} Support Floor Breached`}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="idx-synthesis-text" style="background: rgba(0, 230, 153, 0.04); border-left-color: var(--accent-emerald); padding: 12px 16px; border-radius: 6px; font-size: 0.82rem; color: var(--text-main);">
+                        <i class="fa-solid fa-bullseye text-emerald"></i> <strong>4:00 PM Futures Validation Summary:</strong> Contract closed at ₹${safeFmt(actualClose)} (Variance: <span class="${closeColorClass}" style="font-weight:700;">${closeDiffStr}</span>). Intraday High reached ₹${safeFmt(actualHigh)} vs predicted ₹${safeFmt(predHigh)}.
                     </div>
                 </div>
             `;

@@ -1185,6 +1185,92 @@ def predict_futures_price_action(stock_res: dict, macro_info: dict) -> dict:
         'Intraday_Synthesis': intraday_synthesis
     }
 
+def apply_autonomous_ml_learning_corrections(stock_preds, index_preds, futures_preds):
+    feedback_path = BASE_DIR / "model_learning_feedback.json"
+    if not feedback_path.exists():
+        print("[INFO] No previous 'model_learning_feedback.json' found. Predictions running with default model weights.")
+        return stock_preds, index_preds, futures_preds
+
+    try:
+        with open(feedback_path, encoding='utf-8') as f:
+            feedback = json.load(f)
+    except Exception as e:
+        print(f"[WARN] Could not parse learning feedback: {e}")
+        return stock_preds, index_preds, futures_preds
+
+    bias_corrections = feedback.get('bias_corrections', {})
+    symbol_offsets = bias_corrections.get('symbol_bias_offsets', {})
+    overall_close_bias = bias_corrections.get('overall_close_bias_pct', 0.0)
+    overall_high_bias = bias_corrections.get('overall_high_bias_pct', 0.0)
+    overall_low_bias = bias_corrections.get('overall_low_bias_pct', 0.0)
+
+    print("\n" + "="*85)
+    print(" 🤖 AUTONOMOUS ML FEEDBACK LOOP — Calibrating Model Predictions from Post-Market Data")
+    print("=====================================================================================")
+    print(f" • Loaded {len(symbol_offsets)} Symbol Bias Offsets from 'model_learning_feedback.json'")
+    print(f" • Overall Market Close Bias Correction: {overall_close_bias:+.2f}% | High Bias: {overall_high_bias:+.2f}% | Low Bias: {overall_low_bias:+.2f}%\n")
+
+    # 1. Calibrate Stocks Predictions
+    for item in stock_preds:
+        sym = item.get('Stock', '')
+        bias_pct = symbol_offsets.get(sym, overall_close_bias)
+        corr_factor = 1.0 + (bias_pct / 100.0)
+        
+        cmp = item.get('CMP', 0.0)
+        pred_close = item.get('Next_Day_Expected_Close', item.get('Target_Price', cmp))
+        pred_high = item.get('Next_Day_Expected_High', cmp * 1.02)
+        pred_low = item.get('Next_Day_Expected_Low', cmp * 0.98)
+
+        cal_close = round(float(pred_close * corr_factor), 2)
+        cal_high = round(float(pred_high * (1.0 + overall_high_bias / 100.0)), 2)
+        cal_low = round(float(pred_low * (1.0 + overall_low_bias / 100.0)), 2)
+
+        item['Next_Day_Expected_Close'] = cal_close
+        item['Target_Price'] = cal_close
+        item['Next_Day_Expected_High'] = max(cal_high, cal_close)
+        item['Next_Day_Expected_Low'] = min(cal_low, cmp)
+
+        abs_err = abs(bias_pct)
+        if abs_err < 1.0:
+            item['Final_Win_Probability_%'] = round(min(item.get('Final_Win_Probability_%', 50.0) + 2.5, 95.0), 1)
+        elif abs_err > 3.5:
+            item['Final_Win_Probability_%'] = round(max(item.get('Final_Win_Probability_%', 50.0) - 3.0, 30.0), 1)
+
+    # 2. Calibrate Index Predictions
+    for idx in index_preds:
+        sym = idx.get('Index_Name', idx.get('Symbol', ''))
+        bias_pct = symbol_offsets.get(sym, overall_close_bias)
+        corr_factor = 1.0 + (bias_pct / 100.0)
+
+        cmp = idx.get('Current_Level', idx.get('CMP', 0.0))
+        pred_close = idx.get('Next_Day_Expected_Close', cmp)
+        cal_close = round(float(pred_close * corr_factor), 2)
+        idx['Next_Day_Expected_Close'] = cal_close
+
+        if 'Forecast_5D_Close' in idx and isinstance(idx['Forecast_5D_Close'], list) and len(idx['Forecast_5D_Close']) > 1:
+            idx['Forecast_5D_Close'][1] = cal_close
+
+    # 3. Calibrate Futures Predictions
+    for fut in futures_preds:
+        code = fut.get('Contract_Code', fut.get('Stock', ''))
+        sym = fut.get('Stock', '')
+        bias_pct = symbol_offsets.get(code, symbol_offsets.get(sym, overall_close_bias))
+        corr_factor = 1.0 + (bias_pct / 100.0)
+
+        cmp = fut.get('Futures_CMP', 0.0)
+        pred_close = fut.get('Intraday_Target_Price', cmp)
+        cal_close = round(float(pred_close * corr_factor), 2)
+        fut['Intraday_Target_Price'] = cal_close
+
+        pred_high = fut.get('Intraday_Expected_High', cmp * 1.01)
+        fut['Intraday_Expected_High'] = round(float(pred_high * (1.0 + overall_high_bias / 100.0)), 2)
+
+        pred_low = fut.get('Intraday_Expected_Low', cmp * 0.99)
+        fut['Intraday_Expected_Low'] = round(float(pred_low * (1.0 + overall_low_bias / 100.0)), 2)
+
+    print(f"✅ Calibrated {len(stock_preds)} Stocks, {len(index_preds)} Indexes, and {len(futures_preds)} Futures predictions using autonomous learning feedback loop!\n")
+    return stock_preds, index_preds, futures_preds
+
 # -----------------------------------------------------------------------------
 # 7. Main Execution Engine
 # -----------------------------------------------------------------------------
@@ -1247,6 +1333,11 @@ def main():
     if not results:
         print("\n[ERROR] No valid predictions generated.")
         return
+
+    # APPLY AUTONOMOUS ML LEARNING CORRECTIONS FROM POST-MARKET DATA
+    results, index_predictions, futures_results = apply_autonomous_ml_learning_corrections(
+        results, index_predictions, futures_results
+    )
 
     df_results = pd.DataFrame(results)
     df_results = df_results.sort_values(by=['Expected_Value_EV_%', 'Final_Win_Probability_%'], ascending=[False, False])

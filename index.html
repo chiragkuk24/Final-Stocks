@@ -42,6 +42,7 @@
                 <a href="#" class="nav-item" id="nav-futures"><i class="fa-solid fa-file-contract text-emerald"></i> Current Month Futures</a>
                 <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Stocks Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-index-postmarket"><i class="fa-solid fa-chart-pie"></i> Indexes Post-Market Analysis</a>
+                <a href="#" class="nav-item" id="nav-futures-postmarket"><i class="fa-solid fa-file-signature text-emerald"></i> Futures Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-about"><i class="fa-solid fa-circle-info text-purple"></i> About</a>
             </nav>
 
@@ -555,6 +556,46 @@
                 </section>
             </div>
             <!-- ======= END SECTION 7: INDEXES POST-MARKET ANALYSIS ======= -->
+
+            <!-- ======= SECTION 7B: FUTURES POST-MARKET ANALYSIS ======= -->
+            <div id="page-futures-postmarket" style="display:none;">
+                <section class="post-market-section card-glass">
+                    <div class="post-market-header">
+                        <h2><i class="fa-solid fa-file-signature text-emerald"></i> Futures Post-Market Accuracy Analysis</h2>
+                        <span class="post-market-timestamp" id="futures-postmarket-timestamp">Validated: Today 4:00 PM IST</span>
+                    </div>
+
+                    <!-- Summary KPIs -->
+                    <div class="post-kpi-grid">
+                        <div class="post-kpi-card card-glass-inner glow-gold">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Futures Target Accuracy</span>
+                                <span class="post-kpi-value green-text" id="fut-post-accuracy-pct">--%</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Support / Target Retained</span>
+                                <span class="post-kpi-value green-text" id="fut-post-hit-count">-- / --</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-file-contract"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Contracts Evaluated</span>
+                                <span class="post-kpi-value cyan-text" id="fut-post-total-evaluated">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="futures-postmarket-flex" id="futures-postmarket-container">
+                        <!-- Futures Post-Market Cards rendered dynamically by app.js -->
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION 7B: FUTURES POST-MARKET ANALYSIS ======= -->
 
             <!-- ======= SECTION 8: ABOUT & SYSTEM ARCHITECTURE ======= -->
             <div id="page-about" style="display: none;">
