@@ -35,12 +35,13 @@ function initApp() {
     const modal = document.getElementById('stock-modal');
     const modalClose = document.getElementById('modal-close');
 
-    // Sidebar Navigation Elements (8 Sections)
+    // Sidebar Navigation Elements (9 Sections)
     const navUsmarkets = document.getElementById('nav-usmarkets');
     const navNewsfeeds = document.getElementById('nav-newsfeeds');
     const navNifty = document.getElementById('nav-nifty');
     const navBanknifty = document.getElementById('nav-banknifty');
     const navDashboard = document.getElementById('nav-dashboard');
+    const navFutures = document.getElementById('nav-futures');
     const navPostmarket = document.getElementById('nav-postmarket');
     const navIndexPostmarket = document.getElementById('nav-index-postmarket');
     const navAbout = document.getElementById('nav-about');
@@ -50,9 +51,13 @@ function initApp() {
     const pageNifty = document.getElementById('page-nifty');
     const pageBanknifty = document.getElementById('page-banknifty');
     const pageDashboard = document.getElementById('page-dashboard');
+    const pageFutures = document.getElementById('page-futures');
     const pagePostmarket = document.getElementById('page-postmarket');
     const pageIndexPostmarket = document.getElementById('page-index-postmarket');
     const pageAbout = document.getElementById('page-about');
+
+    let currentFutFilter = 'ALL';
+    let currentFutSearch = '';
 
     function switchPage(page) {
         if (pageUsmarkets) pageUsmarkets.style.display = 'none';
@@ -60,6 +65,7 @@ function initApp() {
         if (pageNifty) pageNifty.style.display = 'none';
         if (pageBanknifty) pageBanknifty.style.display = 'none';
         if (pageDashboard) pageDashboard.style.display = 'none';
+        if (pageFutures) pageFutures.style.display = 'none';
         if (pagePostmarket) pagePostmarket.style.display = 'none';
         if (pageIndexPostmarket) pageIndexPostmarket.style.display = 'none';
         if (pageAbout) pageAbout.style.display = 'none';
@@ -69,6 +75,7 @@ function initApp() {
         if (navNifty) navNifty.classList.remove('active');
         if (navBanknifty) navBanknifty.classList.remove('active');
         if (navDashboard) navDashboard.classList.remove('active');
+        if (navFutures) navFutures.classList.remove('active');
         if (navPostmarket) navPostmarket.classList.remove('active');
         if (navIndexPostmarket) navIndexPostmarket.classList.remove('active');
         if (navAbout) navAbout.classList.remove('active');
@@ -87,6 +94,10 @@ function initApp() {
             if (pageBanknifty) pageBanknifty.style.display = '';
             if (navBanknifty) navBanknifty.classList.add('active');
             renderBankNiftyAnalysis();
+        } else if (page === 'futures') {
+            if (pageFutures) pageFutures.style.display = '';
+            if (navFutures) navFutures.classList.add('active');
+            renderFuturesAnalysis();
         } else if (page === 'postmarket') {
             if (pagePostmarket) pagePostmarket.style.display = '';
             if (navPostmarket) navPostmarket.classList.add('active');
@@ -134,6 +145,7 @@ function initApp() {
     if (navNifty) navNifty.addEventListener('click', (e) => { e.preventDefault(); switchPage('nifty'); });
     if (navBanknifty) navBanknifty.addEventListener('click', (e) => { e.preventDefault(); switchPage('banknifty'); });
     if (navDashboard) navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); });
+    if (navFutures) navFutures.addEventListener('click', (e) => { e.preventDefault(); switchPage('futures'); });
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
     if (navIndexPostmarket) navIndexPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('index-postmarket'); });
     if (navAbout) navAbout.addEventListener('click', (e) => { e.preventDefault(); switchPage('about'); });
@@ -1381,6 +1393,261 @@ function initApp() {
                 </div>
             `;
         }).join('');
+    }
+
+    // -------------------------------------------------------------------------
+    // CURRENT MONTH FUTURES INTRADAY RENDERING ENGINE
+    // -------------------------------------------------------------------------
+    function renderFuturesAnalysis() {
+        if (!dashboardData || !dashboardData.futures_predictions) {
+            const futTableBody = document.getElementById('fut-table-body');
+            if (futTableBody) {
+                futTableBody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-muted);">No Current Month Futures data available. Run predictor engine to refresh.</td></tr>';
+            }
+            return;
+        }
+
+        const futuresList = dashboardData.futures_predictions;
+        const kpiFutCount = document.getElementById('kpi-fut-count');
+        const kpiFutTopWin = document.getElementById('kpi-fut-top-win');
+        const kpiFutHighSignals = document.getElementById('kpi-fut-high-signals');
+        const kpiFutAvgRange = document.getElementById('kpi-fut-avg-range');
+        const futTableBody = document.getElementById('fut-table-body');
+        const futuresTimestamp = document.getElementById('futures-timestamp');
+
+        if (futuresTimestamp && dashboardData.generated_at) {
+            futuresTimestamp.innerHTML = `<i class="fa-solid fa-clock"></i> Updated: ${dashboardData.generated_at}`;
+        }
+
+        if (kpiFutCount) kpiFutCount.textContent = futuresList.length;
+
+        let maxWin = 0;
+        let highCount = 0;
+        let totalRange = 0;
+
+        futuresList.forEach(item => {
+            const winVal = item['Intraday_Win_Probability_%'] || 0;
+            if (winVal > maxWin) maxWin = winVal;
+            
+            const sig = item['Intraday_Signal'] || '';
+            if (sig.includes('LONG BREAKOUT')) highCount++;
+            
+            const atrPct = ((item['ATR_14'] || 0) / (item['Futures_CMP'] || 1)) * 100;
+            totalRange += atrPct;
+        });
+
+        if (kpiFutTopWin) kpiFutTopWin.textContent = `${maxWin.toFixed(1)}%`;
+        if (kpiFutHighSignals) kpiFutHighSignals.textContent = highCount;
+        if (kpiFutAvgRange && futuresList.length > 0) {
+            const avgR = (totalRange / futuresList.length).toFixed(1);
+            kpiFutAvgRange.textContent = `±${avgR}%`;
+        }
+
+        let filtered = futuresList.filter(item => {
+            const sig = item['Intraday_Signal'] || '';
+            if (currentFutFilter === 'HIGH' && !sig.includes('LONG BREAKOUT')) return false;
+            if (currentFutFilter === 'MOD' && !sig.includes('SCALP')) return false;
+            if (currentFutFilter === 'AVOID' && !sig.includes('AVOID')) return false;
+
+            if (currentFutSearch) {
+                const stock = (item.Stock || '').toLowerCase();
+                const code = (item.Contract_Code || '').toLowerCase();
+                if (!stock.includes(currentFutSearch) && !code.includes(currentFutSearch)) return false;
+            }
+            return true;
+        });
+
+        const futMobileCards = document.getElementById('fut-mobile-cards');
+        if (!futTableBody) return;
+
+        if (filtered.length === 0) {
+            futTableBody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-muted);">No futures contracts match the selected filter.</td></tr>';
+            if (futMobileCards) {
+                futMobileCards.innerHTML = '<div style="text-align:center; padding: 24px; color: var(--text-muted);">No futures contracts match the selected filter.</div>';
+            }
+            return;
+        }
+
+        let html = '';
+        let mobileHtml = '';
+
+        filtered.forEach(item => {
+            const isHigh = item.Intraday_Signal && item.Intraday_Signal.includes('LONG BREAKOUT');
+            const isAvoid = item.Intraday_Signal && item.Intraday_Signal.includes('AVOID');
+            const badgeClass = isHigh ? 'badge-green' : (isAvoid ? 'badge-red' : 'badge-yellow');
+            
+            const basisSignClass = item.Basis_INR >= 0 ? 'green-text' : 'red-text';
+            const basisFormatted = `₹${item.Basis_INR >= 0 ? '+' : ''}${item.Basis_INR} (${item.Basis_Pct >= 0 ? '+' : ''}${item.Basis_Pct}%)`;
+
+            // Desktop / Tablet Table Row
+            html += `
+                <tr class="${isHigh ? 'highlight-row' : ''}">
+                    <td>
+                        <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">${item.Stock}</div>
+                        <div style="font-size: 0.76rem; color: var(--text-muted);">${item.Contract_Code} (${item.Expiry_Date})</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-emerald);">Lot: ${item.Lot_Size} shares (₹${item.Contract_Value_Lakhs}L)</div>
+                    </td>
+                    <td>
+                        <div><strong style="color:#fff;">Fut: ₹${item.Futures_CMP.toLocaleString('en-IN')}</strong></div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">Spot: ₹${item.Spot_CMP.toLocaleString('en-IN')}</div>
+                    </td>
+                    <td>
+                        <div class="${basisSignClass}" style="font-weight: 600;">${basisFormatted}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">${item['Cost_Of_Carry_%']}% CoC Ann.</div>
+                    </td>
+                    <td>
+                        <div style="font-weight: 600; color: var(--accent-gold);">${item.Intraday_Buy_Entry_Range}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Max Chase: ₹${item.Intraday_Max_Chase_Price}</div>
+                    </td>
+                    <td>
+                        <div style="font-size: 0.82rem;"><span class="red-text">L: ₹${item.Intraday_Expected_Low.toLocaleString('en-IN')}</span> — <span class="green-text">H: ₹${item.Intraday_Expected_High.toLocaleString('en-IN')}</span></div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">ATR(14): ₹${item.ATR_14}</div>
+                    </td>
+                    <td>
+                        <div><strong class="green-text">TP: ₹${item.Intraday_Target_Price.toLocaleString('en-IN')}</strong></div>
+                        <div style="font-size: 0.78rem;" class="red-text">SL: ₹${item.Intraday_Stop_Loss.toLocaleString('en-IN')}</div>
+                    </td>
+                    <td>
+                        <div style="font-size: 1.05rem; font-weight: 800;" class="${item['Intraday_Win_Probability_%'] >= 60 ? 'green-text' : 'cyan-text'}">${item['Intraday_Win_Probability_%']}%</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted);">RSI: ${item.RSI_14}</div>
+                    </td>
+                    <td>
+                        <div style="font-weight: 600;">${item.Risk_Reward_Ratio} : 1</div>
+                        <div style="font-size: 0.76rem;" class="${item['Expected_Value_EV_%'] >= 0 ? 'green-text' : 'red-text'}">EV: ${item['Expected_Value_EV_%'] >= 0 ? '+' : ''}${item['Expected_Value_EV_%']}%</div>
+                    </td>
+                    <td>
+                        <span class="badge ${badgeClass}">${item.Intraday_Signal}</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-cyan" onclick="window.showFuturesModal('${item.Stock}')"><i class="fa-solid fa-chart-pie"></i> Details</button>
+                    </td>
+                </tr>
+            `;
+
+            // Mobile Card
+            mobileHtml += `
+                <div class="fut-mobile-card card-glass-inner">
+                    <div class="fut-card-header">
+                        <div>
+                            <div class="fut-card-title">${item.Stock} <span class="fut-card-code">${item.Contract_Code}</span></div>
+                            <div class="fut-card-expiry"><i class="fa-solid fa-calendar-day text-emerald"></i> Exp: ${item.Expiry_Date} (${item.Days_To_Expiry} days left)</div>
+                        </div>
+                        <span class="badge ${badgeClass}">${item.Intraday_Signal}</span>
+                    </div>
+
+                    <div class="fut-card-price-row">
+                        <div class="fut-price-box">
+                            <span class="fut-box-label">FUTURES CMP</span>
+                            <span class="fut-box-val green-text">₹${item.Futures_CMP.toLocaleString('en-IN')}</span>
+                            <span class="fut-sub-val">Spot: ₹${item.Spot_CMP.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="fut-price-box">
+                            <span class="fut-box-label">BASIS / COC %</span>
+                            <span class="fut-box-val ${basisSignClass}">${basisFormatted}</span>
+                            <span class="fut-sub-val">${item['Cost_Of_Carry_%']}% CoC</span>
+                        </div>
+                    </div>
+
+                    <div class="fut-card-trade-grid">
+                        <div class="fut-trade-metric">
+                            <span class="m-label">INTRADAY BUY ENTRY RANGE</span>
+                            <span class="m-val gold-text">${item.Intraday_Buy_Entry_Range}</span>
+                        </div>
+                        <div class="fut-trade-metric">
+                            <span class="m-label">TARGET / STOP LOSS</span>
+                            <span class="m-val"><span class="green-text">TP: ₹${item.Intraday_Target_Price.toLocaleString('en-IN')}</span> | <span class="red-text">SL: ₹${item.Intraday_Stop_Loss.toLocaleString('en-IN')}</span></span>
+                        </div>
+                        <div class="fut-trade-metric">
+                            <span class="m-label">EXPECTED RANGE (LOW - HIGH)</span>
+                            <span class="m-val"><span class="red-text">L: ₹${item.Intraday_Expected_Low.toLocaleString('en-IN')}</span> - <span class="green-text">H: ₹${item.Intraday_Expected_High.toLocaleString('en-IN')}</span></span>
+                        </div>
+                        <div class="fut-trade-metric">
+                            <span class="m-label">WIN PROB & EV %</span>
+                            <span class="m-val cyan-text">${item['Intraday_Win_Probability_%']}% Win (EV: ${item['Expected_Value_EV_%']}%)</span>
+                        </div>
+                    </div>
+
+                    <div class="fut-card-footer">
+                        <span class="fut-margin-badge"><i class="fa-solid fa-vault"></i> Lot: ${item.Lot_Size} (Margin: ₹${item.Approx_Margin_Lakhs}L)</span>
+                        <button class="btn btn-sm btn-outline-cyan" onclick="window.showFuturesModal('${item.Stock}')"><i class="fa-solid fa-chart-pie"></i> Details</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        futTableBody.innerHTML = html;
+        if (futMobileCards) futMobileCards.innerHTML = mobileHtml;
+    }
+
+    window.filterFutures = function(filter) {
+        currentFutFilter = filter;
+        document.querySelectorAll('.filter-group button').forEach(btn => {
+            if (btn.id && btn.id.startsWith('fut-filter-')) {
+                btn.classList.remove('active');
+            }
+        });
+        const activeBtn = document.getElementById(`fut-filter-${filter.toLowerCase()}`);
+        if (activeBtn) activeBtn.classList.add('active');
+        renderFuturesAnalysis();
+    };
+
+    window.showFuturesModal = function(symbol) {
+        if (!dashboardData || !dashboardData.futures_predictions) return;
+        const item = dashboardData.futures_predictions.find(f => f.Stock === symbol);
+        if (!item) return;
+
+        // If spot prediction exists, populate all 4 tabs first
+        if (typeof window.openModal === 'function') {
+            window.openModal(symbol);
+        }
+
+        // Now populate the 5th tab (tab-futures)
+        const elFutCmp = document.getElementById('m-fut-cmp');
+        const elFutBasis = document.getElementById('m-fut-basis');
+        const elFutLot = document.getElementById('m-fut-lot');
+        const elFutEntry = document.getElementById('m-fut-entry');
+        const elFutRange = document.getElementById('m-fut-range');
+        const elFutTpSl = document.getElementById('m-fut-tp-sl');
+        const elFutRiskReward = document.getElementById('m-fut-risk-reward');
+        const elFutPivots = document.getElementById('m-fut-pivots');
+        const elFutSynth = document.getElementById('synthesis-futures-text');
+
+        if (elFutCmp) elFutCmp.textContent = `₹${item.Futures_CMP.toLocaleString('en-IN')} (Spot: ₹${item.Spot_CMP.toLocaleString('en-IN')})`;
+        if (elFutBasis) elFutBasis.textContent = `₹${item.Basis_INR >= 0 ? '+' : ''}${item.Basis_INR} (${item.Basis_Pct >= 0 ? '+' : ''}${item.Basis_Pct}%, ${item['Cost_Of_Carry_%']}% CoC)`;
+        if (elFutLot) elFutLot.textContent = `${item.Lot_Size} Shares (₹${item.Approx_Margin_Lakhs} Lakhs Margin)`;
+        if (elFutEntry) elFutEntry.textContent = `${item.Intraday_Buy_Entry_Range} (Max Chase: ₹${item.Intraday_Max_Chase_Price})`;
+        if (elFutRange) elFutRange.textContent = `Low: ₹${item.Intraday_Expected_Low.toLocaleString('en-IN')} | High: ₹${item.Intraday_Expected_High.toLocaleString('en-IN')}`;
+        if (elFutTpSl) elFutTpSl.textContent = `TP: ₹${item.Intraday_Target_Price.toLocaleString('en-IN')} | SL: ₹${item.Intraday_Stop_Loss.toLocaleString('en-IN')} (${item.Risk_Reward_Ratio} : 1)`;
+        if (elFutRiskReward) elFutRiskReward.textContent = `Risk: ₹${item.Per_Lot_Risk_INR.toLocaleString('en-IN')} | Reward: ₹${item.Per_Lot_Reward_INR.toLocaleString('en-IN')}`;
+        if (elFutPivots) elFutPivots.textContent = `VWAP: ₹${item.VWAP_Est} | PP: ₹${item.Pivot_PP} (R1: ₹${item.Pivot_R1}, S1: ₹${item.Pivot_S1})`;
+        if (elFutSynth) elFutSynth.textContent = item.Intraday_Synthesis || '';
+
+        // Update Header to reflect Futures Contract
+        const modalStockName = document.getElementById('modal-stock-name');
+        const modalCmp = document.getElementById('modal-cmp');
+        const signalBadge = document.getElementById('modal-signal-badge');
+
+        if (modalStockName) modalStockName.textContent = `${item.Stock} (${item.Contract_Code})`;
+        if (modalCmp) modalCmp.textContent = `Fut: ₹${item.Futures_CMP.toLocaleString('en-IN')}`;
+        if (signalBadge) {
+            signalBadge.textContent = item.Intraday_Signal;
+            signalBadge.className = `badge ${item.Intraday_Signal.includes('LONG BREAKOUT') ? 'badge-green' : (item.Intraday_Signal.includes('AVOID') ? 'badge-red' : 'badge-yellow')}`;
+        }
+
+        // Switch active tab to 5th tab (tab-futures)
+        switchModalTab('tab-futures');
+
+        // Show Modal by removing hidden class
+        const modal = document.getElementById('stock-modal');
+        if (modal) modal.classList.remove('hidden');
+    };
+
+    const futSearchInput = document.getElementById('fut-search-input');
+    if (futSearchInput) {
+        futSearchInput.addEventListener('input', (e) => {
+            currentFutSearch = e.target.value.toLowerCase().trim();
+            renderFuturesAnalysis();
+        });
     }
 
     // Initial Load

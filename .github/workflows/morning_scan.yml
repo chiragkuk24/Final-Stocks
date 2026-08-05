@@ -1,10 +1,10 @@
-name: Morning 8:30 AM & 9:30 AM Pre-Market Scan & ML Predictions
+name: Morning 5:30 AM & 6:30 AM Pre-Market Scan & ML Predictions
 
 on:
   schedule:
-    # Runs Monday through Friday at 03:00 UTC (8:30 AM IST) and 04:00 UTC (9:30 AM IST)
-    - cron: '0 3 * * 1-5'
-    - cron: '0 4 * * 1-5'
+    # Runs Monday through Friday at 00:00 UTC (5:30 AM IST) and 01:00 UTC (6:30 AM IST)
+    - cron: '0 0 * * 1-5'
+    - cron: '0 1 * * 1-5'
   workflow_dispatch:
 
 permissions:

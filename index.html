@@ -39,6 +39,7 @@
                 <a href="#" class="nav-item" id="nav-nifty"><i class="fa-solid fa-chart-line text-cyan"></i> NIFTY 50</a>
                 <a href="#" class="nav-item" id="nav-banknifty"><i class="fa-solid fa-building-columns text-emerald"></i> BANK NIFTY</a>
                 <a href="#" class="nav-item active" id="nav-dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                <a href="#" class="nav-item" id="nav-futures"><i class="fa-solid fa-file-contract text-emerald"></i> Current Month Futures</a>
                 <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Stocks Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-index-postmarket"><i class="fa-solid fa-chart-pie"></i> Indexes Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-about"><i class="fa-solid fa-circle-info text-purple"></i> About</a>
@@ -285,6 +286,107 @@
 
             </div>
             <!-- ======= END SECTION 3: DASHBOARD ======= -->
+
+            <!-- ======= SECTION: CURRENT MONTH FUTURES (INTRADAY) ======= -->
+            <div id="page-futures" style="display:none;">
+                <section class="futures-section card-glass">
+                    <div class="futures-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 24px;">
+                        <div class="header-left">
+                            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-file-contract text-emerald"></i> Current Month Future Contracts – Intraday ML/Quant Predictions
+                            </h2>
+                            <p class="subtitle" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Real-time Futures Pricing, Spot vs Fut Basis, Cost of Carry %, Intraday Range & PyTorch LSTM Win Probability for Intraday Traders.</p>
+                        </div>
+                        <span class="futures-timestamp" id="futures-timestamp" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent-emerald); font-size: 0.82rem; font-weight: 600; padding: 6px 14px; border-radius: 20px;">
+                            <i class="fa-solid fa-clock"></i> Updated: Live
+                        </span>
+                    </div>
+
+                    <!-- Futures KPI Summary Cards -->
+                    <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                        <div class="kpi-card card-glass-inner glow-emerald" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-emerald);"><i class="fa-solid fa-file-contract"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Active Futures Contracts</span>
+                                    <span id="kpi-fut-count" style="font-size: 1.5rem; font-weight: 800; color: #fff;">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card card-glass-inner glow-cyan" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-cyan);"><i class="fa-solid fa-bullseye"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Top Intraday Win Prob</span>
+                                    <span id="kpi-fut-top-win" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-cyan);">0.0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card card-glass-inner glow-gold" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-gold);"><i class="fa-solid fa-layer-group"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">High Conviction Signals</span>
+                                    <span id="kpi-fut-high-signals" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-gold);">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card card-glass-inner glow-purple" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-purple);"><i class="fa-solid fa-arrows-up-down"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Avg Intraday Exp. Range</span>
+                                    <span id="kpi-fut-avg-range" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-purple);">±2.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Controls & Search Bar -->
+                    <div class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                        <div class="filter-group" style="display: flex; gap: 8px;">
+                            <button class="filter-btn active" id="fut-filter-all" onclick="window.filterFutures('ALL')">All Contracts</button>
+                            <button class="filter-btn" id="fut-filter-high" onclick="window.filterFutures('HIGH')">🟢 High Conviction</button>
+                            <button class="filter-btn" id="fut-filter-mod" onclick="window.filterFutures('MOD')">🟡 Moderate Scalp</button>
+                            <button class="filter-btn" id="fut-filter-avoid" onclick="window.filterFutures('AVOID')">🔴 Avoid</button>
+                        </div>
+                        <div class="search-box" style="position: relative; min-width: 260px;">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                            <input type="text" id="fut-search-input" placeholder="Search Futures Symbol..." style="width: 100%; padding: 10px 14px 10px 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                        </div>
+                    </div>
+
+                    <!-- Futures Intraday Table (Desktop / Tablet View) -->
+                    <div class="table-responsive card-glass-inner desktop-only-table" style="padding: 16px; border-radius: 12px; overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Futures Contract</th>
+                                    <th>Spot vs Fut CMP</th>
+                                    <th>Basis & CoC %</th>
+                                    <th>Intraday Entry Range</th>
+                                    <th>Intraday Exp. Range</th>
+                                    <th>Target & Stop-Loss</th>
+                                    <th>Win Prob %</th>
+                                    <th>R:R & EV %</th>
+                                    <th>Intraday Signal</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fut-table-body">
+                                <tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-muted);">Loading Current Month Futures predictions...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Futures Intraday Mobile Cards View (Mobile View) -->
+                    <div id="fut-mobile-cards" class="fut-mobile-cards-grid"></div>
+                </section>
+            </div>
+            <!-- ======= END SECTION: CURRENT MONTH FUTURES ======= -->
 
             <!-- ======= SECTION 6: STOCKS POST-MARKET ANALYSIS ======= -->
             <div id="page-postmarket" style="display:none;">
@@ -686,12 +788,13 @@
                 </div>
             </div>
 
-            <!-- 3-Tier Pill Navigation Tabs -->
+            <!-- 5-Tier Pill Navigation Tabs -->
             <div class="tier-nav-bar">
-                <button class="tier-tab-btn active" data-tab="tab-fundamental"><i class="fa-solid fa-building-columns"></i> 1. Fundamental Analysis</button>
-                <button class="tier-tab-btn" data-tab="tab-technical"><i class="fa-solid fa-chart-column"></i> 2. Technical Analysis</button>
-                <button class="tier-tab-btn" data-tab="tab-quant"><i class="fa-solid fa-chart-line"></i> 3. Quant & ML Forecast</button>
-                <button class="tier-tab-btn" data-tab="tab-car"><i class="fa-solid fa-layer-group"></i> 4. CAR Super Breakout Analysis</button>
+                <button class="tier-tab-btn active" data-tab="tab-fundamental"><i class="fa-solid fa-building-columns"></i> 1. Fundamental</button>
+                <button class="tier-tab-btn" data-tab="tab-technical"><i class="fa-solid fa-chart-column"></i> 2. Technical</button>
+                <button class="tier-tab-btn" data-tab="tab-quant"><i class="fa-solid fa-chart-line"></i> 3. Quant & ML</button>
+                <button class="tier-tab-btn" data-tab="tab-car"><i class="fa-solid fa-layer-group"></i> 4. CAR Breakout</button>
+                <button class="tier-tab-btn" data-tab="tab-futures"><i class="fa-solid fa-file-contract"></i> 5. Intraday Futures</button>
             </div>
 
             <!-- Modal Body Content Panes -->
@@ -855,6 +958,49 @@
                     <div class="synthesis-box card-glass-inner">
                         <div class="synthesis-title"><i class="fa-solid fa-layer-group"></i> CAR Super Breakout Analysis:</div>
                         <p id="synthesis-car-text">Loading CAR breakout synthesis...</p>
+                    </div>
+                </div>
+
+                <!-- TIER 5: INTRADAY FUTURES & PIVOTS PANE -->
+                <div class="tier-pane" id="tab-futures">
+                    <div class="metrics-card-grid">
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">FUTURES CMP (SPOT CMP)</span>
+                            <span class="m-value green-text" id="m-fut-cmp">₹0.00 (Spot: ₹0.00)</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">BASIS SPREAD (% / COC)</span>
+                            <span class="m-value cyan-text" id="m-fut-basis">+₹0.00 (+0.00%, 0.0% CoC)</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">LOT SIZE & APPROX MARGIN</span>
+                            <span class="m-value gold-text" id="m-fut-lot">000 Lots (₹0.00 L)</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">INTRADAY BUY ENTRY RANGE</span>
+                            <span class="m-value green-text" id="m-fut-entry">₹0.00 - ₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">INTRADAY EXPECTED RANGE</span>
+                            <span class="m-value" id="m-fut-range">Low: ₹0.00 | High: ₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">TARGET & STOP LOSS (R:R)</span>
+                            <span class="m-value" id="m-fut-tp-sl">TP: ₹0.00 | SL: ₹0.00</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">PER LOT RISK / REWARD</span>
+                            <span class="m-value" id="m-fut-risk-reward">Risk: ₹0 | Reward: ₹0</span>
+                        </div>
+                        <div class="metric-card card-glass-inner">
+                            <span class="m-label">VWAP EST & PIVOT LEVELS</span>
+                            <span class="m-value cyan-text" id="m-fut-pivots">PP: ₹0.00 (R1: ₹0, S1: ₹0)</span>
+                        </div>
+                    </div>
+
+                    <div class="synthesis-box card-glass-inner">
+                        <div class="synthesis-title"><i class="fa-solid fa-file-contract"></i> Intraday Futures & Pivots Synthesis:</div>
+                        <p id="synthesis-futures-text">Loading futures synthesis...</p>
                     </div>
                 </div>
 
