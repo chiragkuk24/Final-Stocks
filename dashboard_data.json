@@ -3761,7 +3761,7 @@
     "scanned_at": "2026-08-05 13:37:37"
   },
   "validation": {
-    "validated_at": "2026-08-05 10:53:47",
+    "validated_at": "2026-08-05 12:25:32",
     "total_evaluated": 36,
     "target_hit_count": 24,
     "accuracy_pct": 100.0,
@@ -4493,7 +4493,7 @@
     ]
   },
   "learning_feedback": {
-    "updated_at": "2026-08-05 10:53:47",
+    "updated_at": "2026-08-05 12:25:32",
     "total_evaluations_analyzed": 36,
     "overall_accuracy_pct": 66.7,
     "overall_mae_close_pct": 2.11,
