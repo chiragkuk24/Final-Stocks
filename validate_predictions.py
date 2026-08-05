@@ -25,7 +25,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 import json
 import logging
 import warnings
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import yfinance as yf
 import pandas as pd
@@ -343,8 +343,13 @@ def validate_market_predictions():
 
     # 6. UPDATE DASHBOARD PAYLOAD
     stock_hits_pct = round((stock_hits / max(len(stock_predictions), 1)) * 100.0, 1)
+    IST = timezone(timedelta(hours=5, minutes=30))
+    now_ist = datetime.now(IST)
+    ist_time_str = now_ist.strftime("%d-%b-%Y %I:%M:%S %p IST")
+
     validation_summary = {
-        "validated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "validated_at": ist_time_str,
+        "pipeline_completed_ist": ist_time_str,
         "total_evaluated": len(stock_predictions) + len(index_predictions) + len(futures_predictions),
         "target_hit_count": stock_hits + index_hits + futures_hits,
         "accuracy_pct": stock_hits_pct,

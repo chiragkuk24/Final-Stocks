@@ -210,8 +210,13 @@ function initApp() {
             }
         }
         vixBadge.innerHTML = `<i class="fa-solid fa-shield-halved"></i> ${macro.India_VIX || 11.76} (${vixRegimeShort})`;
-        macroMultBadge.textContent = `${macro.Macro_Multiplier || 1.0}x Boost`;
-        if (lastUpdated) lastUpdated.textContent = `Updated: ${dashboardData.generated_at || 'Just Now'}`;
+        const pipelineTimeIST = dashboardData.pipeline_completed_ist || dashboardData.generated_at || 'Just Now';
+        if (lastUpdated) lastUpdated.textContent = `Updated: ${pipelineTimeIST}`;
+
+        const dashTs = document.getElementById('dashboard-pipeline-timestamp');
+        if (dashTs) {
+            dashTs.innerHTML = `<i class="fa-solid fa-calendar-check text-cyan"></i> Pipeline Completed: ${pipelineTimeIST}`;
+        }
 
         // 2. Calculate Counts & KPIs
         const highCount = predictions.filter(p => (p.Live_Signal || '').includes('HIGH CONVICTION')).length;
@@ -1334,7 +1339,10 @@ function initApp() {
         if (elAcc) elAcc.textContent = `${val.accuracy_pct || 0}%`;
         if (elHits) elHits.textContent = `${val.target_hit_count || 0} / ${val.total_evaluated || 0}`;
         if (elTotal) elTotal.textContent = val.total_evaluated || 0;
-        if (elTime) elTime.textContent = `Validated: ${val.validated_at || 'Recently'}`;
+        if (elTime) {
+            const completedAt = val.pipeline_completed_ist || dashboardData.pipeline_completed_ist || val.validated_at || 'Recently';
+            elTime.innerHTML = `<i class="fa-solid fa-clock text-cyan"></i> Validated at 4:00 PM IST &bull; Pipeline Finished: ${completedAt}`;
+        }
 
         // Populate Learning Engine Diagnostics Panel
         if (learning && learning.diagnostics) {
@@ -1424,6 +1432,13 @@ function initApp() {
     function renderIndexPostMarketAnalysis() {
         const container = document.getElementById('index-postmarket-container');
         if (!container || !dashboardData || !dashboardData.index_predictions) return;
+
+        const val = dashboardData.validation || {};
+        const idxTime = document.getElementById('index-postmarket-timestamp');
+        if (idxTime) {
+            const completedAt = val.pipeline_completed_ist || dashboardData.pipeline_completed_ist || 'Recently';
+            idxTime.innerHTML = `<i class="fa-solid fa-clock text-cyan"></i> Validated at 4:00 PM IST &bull; Pipeline Finished: ${completedAt}`;
+        }
 
         container.innerHTML = dashboardData.index_predictions.map(idx => {
             const actualClose = idx.Actual_Close || idx.CMP || 0;
@@ -1533,7 +1548,10 @@ function initApp() {
             : (dashboardData.futures_predictions || []);
 
         const tsEl = document.getElementById('futures-postmarket-timestamp');
-        if (tsEl) tsEl.textContent = `Validated: ${val && val.validated_at ? val.validated_at : 'Today 4:00 PM IST'}`;
+        if (tsEl) {
+            const completedAt = (val && val.pipeline_completed_ist) || dashboardData.pipeline_completed_ist || 'Recently';
+            tsEl.innerHTML = `<i class="fa-solid fa-clock text-emerald"></i> Validated at 4:00 PM IST &bull; Pipeline Finished: ${completedAt}`;
+        }
 
         let totalContracts = futuresList.length;
         let hitsCount = 0;
@@ -1683,8 +1701,9 @@ function initApp() {
         const futTableBody = document.getElementById('fut-table-body');
         const futuresTimestamp = document.getElementById('futures-timestamp');
 
-        if (futuresTimestamp && dashboardData.generated_at) {
-            futuresTimestamp.innerHTML = `<i class="fa-solid fa-clock"></i> Updated: ${dashboardData.generated_at}`;
+        if (futuresTimestamp) {
+            const finishedTime = dashboardData.pipeline_completed_ist || dashboardData.generated_at || 'Just Now';
+            futuresTimestamp.innerHTML = `<i class="fa-solid fa-clock text-emerald"></i> Pipeline Finished: ${finishedTime}`;
         }
 
         if (kpiFutCount) kpiFutCount.textContent = futuresList.length;

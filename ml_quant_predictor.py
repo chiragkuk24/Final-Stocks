@@ -43,7 +43,7 @@ import os
 import sqlite3
 import subprocess
 import warnings
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import numpy as np
@@ -1381,9 +1381,14 @@ def main():
         except Exception:
             pass
 
+    IST = timezone(timedelta(hours=5, minutes=30))
+    now_ist = datetime.now(IST)
+    ist_time_str = now_ist.strftime("%d-%b-%Y %I:%M:%S %p IST")
+
     payload = {
         "macro": macro_info,
-        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "generated_at": ist_time_str,
+        "pipeline_completed_ist": ist_time_str,
         "index_predictions": index_predictions,
         "predictions": results,
         "futures_predictions": futures_results
