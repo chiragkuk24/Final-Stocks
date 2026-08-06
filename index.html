@@ -40,9 +40,11 @@
                 <a href="#" class="nav-item" id="nav-banknifty"><i class="fa-solid fa-building-columns text-emerald"></i> BANK NIFTY</a>
                 <a href="#" class="nav-item active" id="nav-dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 <a href="#" class="nav-item" id="nav-futures"><i class="fa-solid fa-file-contract text-emerald"></i> Current Month Futures</a>
+                <a href="#" class="nav-item" id="nav-commodities"><i class="fa-solid fa-cubes text-gold"></i> Commodities</a>
                 <a href="#" class="nav-item" id="nav-postmarket"><i class="fa-solid fa-chart-bar"></i> Stocks Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-index-postmarket"><i class="fa-solid fa-chart-pie"></i> Indexes Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-futures-postmarket"><i class="fa-solid fa-file-signature text-emerald"></i> Futures Post-Market Analysis</a>
+                <a href="#" class="nav-item" id="nav-comm-postmarket"><i class="fa-solid fa-coins text-gold"></i> Commodities Post-Market Analysis</a>
                 <a href="#" class="nav-item" id="nav-about"><i class="fa-solid fa-circle-info text-purple"></i> About</a>
             </nav>
 
@@ -353,22 +355,40 @@
                         </div>
                     </div>
 
-                    <!-- Filter Controls & Search Bar -->
+                    <!-- Filter Controls, View Toggle & Search Bar -->
                     <div class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
-                        <div class="filter-group" style="display: flex; gap: 8px;">
+                        <div class="filter-group" style="display: flex; gap: 8px; flex-wrap: wrap;">
                             <button class="filter-btn active" id="fut-filter-all" onclick="window.filterFutures('ALL')">All Contracts</button>
                             <button class="filter-btn" id="fut-filter-high" onclick="window.filterFutures('HIGH')">🟢 High Conviction</button>
                             <button class="filter-btn" id="fut-filter-mod" onclick="window.filterFutures('MOD')">🟡 Moderate Scalp</button>
                             <button class="filter-btn" id="fut-filter-avoid" onclick="window.filterFutures('AVOID')">🔴 Avoid</button>
                         </div>
-                        <div class="search-box" style="position: relative; min-width: 260px;">
-                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
-                            <input type="text" id="fut-search-input" placeholder="Search Futures Symbol..." style="width: 100%; padding: 10px 14px 10px 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                        
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <!-- View Mode Toggle -->
+                            <div class="view-toggle-group" style="display: flex; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2px;">
+                                <button class="view-toggle-btn active" id="fut-view-cards" onclick="window.switchPageViewMode('futures', 'cards')" style="padding: 6px 12px; border: none; background: var(--accent-emerald); color: #000; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-border-all"></i> Cards View
+                                </button>
+                                <button class="view-toggle-btn" id="fut-view-table" onclick="window.switchPageViewMode('futures', 'table')" style="padding: 6px 12px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-table-list"></i> Table View
+                                </button>
+                            </div>
+
+                            <div class="search-box" style="position: relative; min-width: 220px;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="text" id="fut-search-input" placeholder="Search Futures Symbol..." style="width: 100%; padding: 8px 14px 8px 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Futures Intraday Table (Desktop / Tablet View) -->
-                    <div class="table-responsive card-glass-inner desktop-only-table" style="padding: 16px; border-radius: 12px; overflow-x: auto;">
+                    <!-- Futures Intraday Cards Grid View (Default Cards Layout) -->
+                    <div id="fut-cards-container" class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">Loading Current Month Futures prediction cards...</div>
+                    </div>
+
+                    <!-- Futures Intraday Table View (Secondary Toggleable View) -->
+                    <div id="fut-table-wrapper" class="table-responsive card-glass-inner" style="padding: 16px; border-radius: 12px; overflow-x: auto; display: none;">
                         <table class="data-table">
                             <thead>
                                 <tr>
@@ -389,12 +409,159 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <!-- Futures Intraday Mobile Cards View (Mobile View) -->
-                    <div id="fut-mobile-cards" class="fut-mobile-cards-grid"></div>
                 </section>
             </div>
             <!-- ======= END SECTION: CURRENT MONTH FUTURES ======= -->
+
+            <!-- ======= SECTION: COMMODITIES FUTURES (CURRENT MONTH) ======= -->
+            <div id="page-commodities" style="display:none;">
+                <section class="commodities-section card-glass">
+                    <div class="commodities-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 24px;">
+                        <div class="header-left">
+                            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-cubes text-gold"></i> Commodities Future Contracts – Current Month ML/Quant Predictions
+                            </h2>
+                            <p class="subtitle" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">MCX Real-time Spot & Market Futures Pricing, Basis, Lot Sizes, Margins & Intraday ML Signals for Gold, Silver, Natural Gas & Crude Oil.</p>
+                        </div>
+                        <span class="commodities-timestamp" id="commodities-timestamp" style="background: rgba(255, 215, 0, 0.15); border: 1px solid rgba(255, 215, 0, 0.3); color: var(--accent-gold); font-size: 0.82rem; font-weight: 600; padding: 6px 14px; border-radius: 20px;">
+                            <i class="fa-solid fa-clock"></i> Updated: Live
+                        </span>
+                    </div>
+
+                    <!-- Commodities KPI Summary Cards -->
+                    <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                        <div class="kpi-card card-glass-inner glow-gold" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-gold);"><i class="fa-solid fa-coins"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Active Commodity Contracts</span>
+                                    <span id="kpi-comm-count" style="font-size: 1.5rem; font-weight: 800; color: #fff;">8</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card card-glass-inner glow-cyan" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-cyan);"><i class="fa-solid fa-bullseye"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Top Intraday Win Prob</span>
+                                    <span id="kpi-comm-top-win" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-cyan);">0.0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card card-glass-inner glow-emerald" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-emerald);"><i class="fa-solid fa-fire"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Bullish Signals</span>
+                                    <span id="kpi-comm-high-signals" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-emerald);">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card card-glass-inner glow-purple" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="font-size: 1.8rem; color: var(--accent-purple);"><i class="fa-solid fa-shield-halved"></i></div>
+                                <div>
+                                    <span style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block;">Geopolitical Risk Level</span>
+                                    <span id="kpi-comm-geo-risk" style="font-size: 1.1rem; font-weight: 800; color: var(--accent-gold);">MODERATE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Global Geopolitical & Commodity News Feed Panel -->
+                    <div class="card-glass-inner" style="padding: 20px; margin-bottom: 24px; border-left: 4px solid var(--accent-gold);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                            <div>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff; display: flex; align-items: center; gap: 10px;">
+                                    <i class="fa-solid fa-earth-americas text-gold"></i> Global Geopolitical & Commodity News Catalyst Scanner
+                                </h3>
+                                <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Scans global war news, Middle East geopolitical tensions, OPEC supply decisions, and macro catalysts driving Gold, Silver, Natural Gas & Crude Oil.</p>
+                            </div>
+                            <span class="us-market-status-badge" id="comm-news-risk-badge" style="background: rgba(255, 77, 109, 0.15); border-color: rgba(255, 77, 109, 0.3); color: var(--accent-red);">
+                                <i class="fa-solid fa-shield-cat"></i> Geopolitical Risk Index: 58 / 100
+                            </span>
+                        </div>
+
+                        <!-- Global News Controls Bar -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                            <div class="filter-group" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="filter-btn active" id="comm-news-tab-all" onclick="window.filterCommodityNews('ALL')">All Global News</button>
+                                <button class="filter-btn" id="comm-news-tab-geopolitics" onclick="window.filterCommodityNews('GEOPOLITICS')">⚔️ War & Geopolitics</button>
+                                <button class="filter-btn" id="comm-news-tab-metals" onclick="window.filterCommodityNews('METALS')">🪙 Metals (Gold/Silver)</button>
+                                <button class="filter-btn" id="comm-news-tab-energy" onclick="window.filterCommodityNews('ENERGY')">⚡ Energy (Crude/Gas)</button>
+                            </div>
+                            <div class="search-box" style="position: relative; min-width: 220px; flex: 1; max-width: 320px;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.8rem;"></i>
+                                <input type="text" id="comm-news-search-input" placeholder="Search Global Catalyst..." style="width: 100%; padding: 8px 12px 8px 36px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.82rem;">
+                            </div>
+                        </div>
+
+                        <!-- Global News Cards Container Grid -->
+                        <div id="comm-news-cards-container" class="news-grid-feed" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--text-muted);">Loading global commodity & geopolitical news feed...</div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Controls, View Toggle & Search Bar -->
+                    <div class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                        <div class="filter-group" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="filter-btn active" id="comm-filter-all" onclick="window.filterCommodities('ALL')">All Commodities</button>
+                            <button class="filter-btn" id="comm-filter-metals" onclick="window.filterCommodities('METALS')">🪙 Metals (Gold/Silver)</button>
+                            <button class="filter-btn" id="comm-filter-energy" onclick="window.filterCommodities('ENERGY')">⚡ Energy (Gas/Oil)</button>
+                            <button class="filter-btn" id="comm-filter-mini" onclick="window.filterCommodities('MINI')">🔹 Mini Contracts</button>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <!-- View Mode Toggle -->
+                            <div class="view-toggle-group" style="display: flex; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2px;">
+                                <button class="view-toggle-btn active" id="comm-view-cards" onclick="window.switchPageViewMode('commodities', 'cards')" style="padding: 6px 12px; border: none; background: var(--accent-emerald); color: #000; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-border-all"></i> Cards View
+                                </button>
+                                <button class="view-toggle-btn" id="comm-view-table" onclick="window.switchPageViewMode('commodities', 'table')" style="padding: 6px 12px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-table-list"></i> Table View
+                                </button>
+                            </div>
+
+                            <div class="search-box" style="position: relative; min-width: 220px;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="text" id="comm-search-input" placeholder="Search Commodity Contract..." style="width: 100%; padding: 8px 14px 8px 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commodities Intraday Cards Grid View (Default Cards Layout) -->
+                    <div id="comm-cards-container" class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">Loading Current Month Commodities prediction cards...</div>
+                    </div>
+
+                    <!-- Commodities Intraday Table View (Secondary Toggleable View) -->
+                    <div id="comm-table-wrapper" class="table-responsive card-glass-inner" style="padding: 16px; border-radius: 12px; overflow-x: auto; display: none;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Commodity Contract</th>
+                                    <th>Spot vs Market Price (CMP)</th>
+                                    <th>Basis & CoC %</th>
+                                    <th>Lot Size & Margin</th>
+                                    <th>Intraday Entry Range</th>
+                                    <th>Intraday Exp. Range</th>
+                                    <th>Target & Stop-Loss</th>
+                                    <th>Win Prob %</th>
+                                    <th>R:R & EV %</th>
+                                    <th>Intraday Signal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comm-table-body">
+                                <tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-muted);">Loading Current Month Commodities predictions...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION: COMMODITIES FUTURES ======= -->
 
             <!-- ======= SECTION 6: POST-MARKET ANALYSIS & LEARNING ENGINE ======= -->
             <div id="page-postmarket" style="display:none;">
@@ -486,17 +653,36 @@
                         </div>
                     </div>
 
-                    <!-- Category Tab Bar & Accuracy Table -->
+                    <!-- Category Tab Bar, View Toggle & Accuracy Cards/Table -->
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
                         <div class="filter-group">
                             <button class="filter-btn active" id="post-tab-stocks" onclick="window.switchPostCategory('STOCKS')">Stocks Predictions</button>
                             <button class="filter-btn" id="post-tab-indexes" onclick="window.switchPostCategory('INDEXES')">Indexes Predictions</button>
                             <button class="filter-btn" id="post-tab-futures" onclick="window.switchPostCategory('FUTURES')">Futures Predictions</button>
                         </div>
-                        <span style="font-size: 0.78rem; color: var(--text-muted);" id="post-cat-count">Showing 0 entries</span>
+                        
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <!-- View Mode Toggle -->
+                            <div class="view-toggle-group" style="display: flex; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2px;">
+                                <button class="view-toggle-btn active" id="post-view-cards" onclick="window.switchPageViewMode('postmarket', 'cards')" style="padding: 6px 12px; border: none; background: var(--accent-emerald); color: #000; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-border-all"></i> Cards View
+                                </button>
+                                <button class="view-toggle-btn" id="post-view-table" onclick="window.switchPageViewMode('postmarket', 'table')" style="padding: 6px 12px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-table-list"></i> Table View
+                                </button>
+                            </div>
+
+                            <span style="font-size: 0.78rem; color: var(--text-muted);" id="post-cat-count">Showing 0 entries</span>
+                        </div>
                     </div>
 
-                    <div class="post-table-wrapper card-glass-inner" style="padding: 14px; border-radius: 12px; overflow-x: auto;">
+                    <!-- Post-Market Cards Grid View (Default Cards Layout) -->
+                    <div id="post-cards-container" class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">Loading post-market analysis cards...</div>
+                    </div>
+
+                    <!-- Post-Market Table View (Secondary Toggleable View) -->
+                    <div id="post-table-wrapper" class="post-table-wrapper card-glass-inner" style="padding: 14px; border-radius: 12px; overflow-x: auto; display: none;">
                         <table class="data-table post-accuracy-table">
                             <thead>
                                 <tr>
@@ -603,6 +789,88 @@
                 </section>
             </div>
             <!-- ======= END SECTION 7B: FUTURES POST-MARKET ANALYSIS ======= -->
+
+            <!-- ======= SECTION 7C: COMMODITIES POST-MARKET ANALYSIS ======= -->
+            <div id="page-comm-postmarket" style="display:none;">
+                <section class="post-market-section card-glass">
+                    <div class="post-market-header">
+                        <h2><i class="fa-solid fa-coins text-gold"></i> MCX Commodities Post-Market Analysis & 1:00 AM Validation</h2>
+                        <span class="post-market-timestamp" id="comm-postmarket-timestamp"><i class="fa-solid fa-clock text-gold"></i> Validated: Today 1:00 AM IST</span>
+                    </div>
+
+                    <!-- Summary KPIs -->
+                    <div class="post-kpi-grid">
+                        <div class="post-kpi-card card-glass-inner glow-gold">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Commodities Target Accuracy</span>
+                                <span class="post-kpi-value green-text" id="comm-post-accuracy-pct">--%</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">Target Range Retained</span>
+                                <span class="post-kpi-value green-text" id="comm-post-hit-count">-- / --</span>
+                            </div>
+                        </div>
+                        <div class="post-kpi-card card-glass-inner">
+                            <div class="post-kpi-icon"><i class="fa-solid fa-cubes"></i></div>
+                            <div class="post-kpi-data">
+                                <span class="post-kpi-label">MCX Contracts Evaluated</span>
+                                <span class="post-kpi-value cyan-text" id="comm-post-total-evaluated">8 Contracts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View Toggle Bar & Title -->
+                    <div class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+                        <div style="font-size: 0.88rem; color: var(--text-muted);" id="comm-post-cat-count">
+                            Showing MCX Commodity Contract Accuracy Evaluations
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div class="view-toggle-group" style="display: flex; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2px;">
+                                <button class="view-toggle-btn active" id="comm-post-view-cards" onclick="window.switchPageViewMode('comm-postmarket', 'cards')" style="padding: 6px 12px; border: none; background: var(--accent-emerald); color: #000; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-border-all"></i> Cards View
+                                </button>
+                                <button class="view-toggle-btn" id="comm-post-view-table" onclick="window.switchPageViewMode('comm-postmarket', 'table')" style="padding: 6px 12px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-table-list"></i> Table View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cards Grid View (Default) -->
+                    <div id="comm-post-cards-container" class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">Loading MCX Commodities post-market accuracy cards...</div>
+                    </div>
+
+                    <!-- Table View (Toggleable) -->
+                    <div id="comm-post-table-wrapper" class="table-responsive card-glass-inner" style="padding: 16px; border-radius: 12px; overflow-x: auto; display: none;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Commodity Contract</th>
+                                    <th>Actual Close</th>
+                                    <th>Predicted Close</th>
+                                    <th>Variance (Close)</th>
+                                    <th>Actual High</th>
+                                    <th>Predicted High</th>
+                                    <th>Actual Low</th>
+                                    <th>Predicted Low</th>
+                                    <th>Accuracy Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comm-post-table-body">
+                                <tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-muted);">Loading MCX Commodities post-market validation data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <!-- ======= END SECTION 7C: COMMODITIES POST-MARKET ANALYSIS ======= -->
 
             <!-- ======= SECTION 8: ABOUT & SYSTEM ARCHITECTURE ======= -->
             <div id="page-about" style="display: none;">

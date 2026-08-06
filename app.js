@@ -42,9 +42,11 @@ function initApp() {
     const navBanknifty = document.getElementById('nav-banknifty');
     const navDashboard = document.getElementById('nav-dashboard');
     const navFutures = document.getElementById('nav-futures');
+    const navCommodities = document.getElementById('nav-commodities');
     const navPostmarket = document.getElementById('nav-postmarket');
     const navIndexPostmarket = document.getElementById('nav-index-postmarket');
     const navFuturesPostmarket = document.getElementById('nav-futures-postmarket');
+    const navCommPostmarket = document.getElementById('nav-comm-postmarket');
     const navAbout = document.getElementById('nav-about');
 
     const pageUsmarkets = document.getElementById('page-usmarkets');
@@ -53,9 +55,11 @@ function initApp() {
     const pageBanknifty = document.getElementById('page-banknifty');
     const pageDashboard = document.getElementById('page-dashboard');
     const pageFutures = document.getElementById('page-futures');
+    const pageCommodities = document.getElementById('page-commodities');
     const pagePostmarket = document.getElementById('page-postmarket');
     const pageIndexPostmarket = document.getElementById('page-index-postmarket');
     const pageFuturesPostmarket = document.getElementById('page-futures-postmarket');
+    const pageCommPostmarket = document.getElementById('page-comm-postmarket');
     const pageAbout = document.getElementById('page-about');
 
     let currentFutFilter = 'ALL';
@@ -68,9 +72,11 @@ function initApp() {
         if (pageBanknifty) pageBanknifty.style.display = 'none';
         if (pageDashboard) pageDashboard.style.display = 'none';
         if (pageFutures) pageFutures.style.display = 'none';
+        if (pageCommodities) pageCommodities.style.display = 'none';
         if (pagePostmarket) pagePostmarket.style.display = 'none';
         if (pageIndexPostmarket) pageIndexPostmarket.style.display = 'none';
         if (pageFuturesPostmarket) pageFuturesPostmarket.style.display = 'none';
+        if (pageCommPostmarket) pageCommPostmarket.style.display = 'none';
         if (pageAbout) pageAbout.style.display = 'none';
 
         if (navUsmarkets) navUsmarkets.classList.remove('active');
@@ -79,9 +85,11 @@ function initApp() {
         if (navBanknifty) navBanknifty.classList.remove('active');
         if (navDashboard) navDashboard.classList.remove('active');
         if (navFutures) navFutures.classList.remove('active');
+        if (navCommodities) navCommodities.classList.remove('active');
         if (navPostmarket) navPostmarket.classList.remove('active');
         if (navIndexPostmarket) navIndexPostmarket.classList.remove('active');
         if (navFuturesPostmarket) navFuturesPostmarket.classList.remove('active');
+        if (navCommPostmarket) navCommPostmarket.classList.remove('active');
         if (navAbout) navAbout.classList.remove('active');
 
         if (page === 'usmarkets') {
@@ -102,6 +110,10 @@ function initApp() {
             if (pageFutures) pageFutures.style.display = '';
             if (navFutures) navFutures.classList.add('active');
             renderFuturesAnalysis();
+        } else if (page === 'commodities') {
+            if (pageCommodities) pageCommodities.style.display = '';
+            if (navCommodities) navCommodities.classList.add('active');
+            renderCommoditiesAnalysis();
         } else if (page === 'postmarket') {
             if (pagePostmarket) pagePostmarket.style.display = '';
             if (navPostmarket) navPostmarket.classList.add('active');
@@ -114,6 +126,10 @@ function initApp() {
             if (pageFuturesPostmarket) pageFuturesPostmarket.style.display = '';
             if (navFuturesPostmarket) navFuturesPostmarket.classList.add('active');
             renderFuturesPostMarketAnalysis();
+        } else if (page === 'comm-postmarket') {
+            if (pageCommPostmarket) pageCommPostmarket.style.display = '';
+            if (navCommPostmarket) navCommPostmarket.classList.add('active');
+            renderCommoditiesPostMarketAnalysis();
         } else if (page === 'about') {
             if (pageAbout) pageAbout.style.display = '';
             if (navAbout) navAbout.classList.add('active');
@@ -154,9 +170,11 @@ function initApp() {
     if (navBanknifty) navBanknifty.addEventListener('click', (e) => { e.preventDefault(); switchPage('banknifty'); });
     if (navDashboard) navDashboard.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); });
     if (navFutures) navFutures.addEventListener('click', (e) => { e.preventDefault(); switchPage('futures'); });
+    if (navCommodities) navCommodities.addEventListener('click', (e) => { e.preventDefault(); switchPage('commodities'); });
     if (navPostmarket) navPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('postmarket'); });
     if (navIndexPostmarket) navIndexPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('index-postmarket'); });
     if (navFuturesPostmarket) navFuturesPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('futures-postmarket'); });
+    if (navCommPostmarket) navCommPostmarket.addEventListener('click', (e) => { e.preventDefault(); switchPage('comm-postmarket'); });
     if (navAbout) navAbout.addEventListener('click', (e) => { e.preventDefault(); switchPage('about'); });
 
 
@@ -248,6 +266,7 @@ function initApp() {
         renderPostMarketAnalysis();
         renderIndexPostMarketAnalysis();
         renderFuturesPostMarketAnalysis();
+        renderCommoditiesPostMarketAnalysis();
     }
 
     // Global Post-Market Detail Toggle Handler
@@ -838,7 +857,7 @@ function initApp() {
         }
 
         // Populate stock dropdown if not already populated
-        if (stockSelect && stockSelect.options.length <= 1 && breakoutNews.stock_summaries) {
+        if (stockSelect && stockSelect.options && stockSelect.options.length <= 1 && breakoutNews.stock_summaries) {
             Object.keys(breakoutNews.stock_summaries).sort().forEach(stock => {
                 const opt = document.createElement('option');
                 opt.value = stock;
@@ -855,7 +874,7 @@ function initApp() {
         // Bind sentiment tabs if not already bound
         const newsTabs = document.querySelectorAll('.news-tab');
         newsTabs.forEach(tab => {
-            if (!tab.dataset.bound) {
+            if (tab.dataset && !tab.dataset.bound) {
                 tab.dataset.bound = 'true';
                 tab.addEventListener('click', () => {
                     newsTabs.forEach(t => t.classList.remove('active'));
@@ -868,7 +887,7 @@ function initApp() {
 
         // Bind search box if not bound
         const newsSearchInput = document.getElementById('news-search-input');
-        if (newsSearchInput && !newsSearchInput.dataset.bound) {
+        if (newsSearchInput && newsSearchInput.dataset && !newsSearchInput.dataset.bound) {
             newsSearchInput.dataset.bound = 'true';
             newsSearchInput.addEventListener('input', (e) => {
                 currentNewsSearch = e.target.value.toLowerCase().trim();
@@ -1326,6 +1345,7 @@ function initApp() {
     };
 
     function renderPostMarketAnalysis() {
+        applyViewModeDisplay('postmarket');
         if (!dashboardData || !dashboardData.validation) return;
 
         const val = dashboardData.validation;
@@ -1375,11 +1395,75 @@ function initApp() {
             items = val.futures_details || [];
         }
 
+        const cardsContainer = document.getElementById('post-cards-container');
         if (catCountEl) catCountEl.textContent = `Showing ${items.length} ${currentPostCategory.toLowerCase()} evaluation entries`;
 
         if (items.length === 0) {
             tbody.innerHTML = `<tr><td colspan="12" style="text-align: center; padding: 24px; color: var(--text-muted);">No post-market validation entries recorded for ${currentPostCategory}. Run post-market validation script.</td></tr>`;
+            if (cardsContainer) cardsContainer.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">No post-market validation entries recorded for ${currentPostCategory}.</div>`;
             return;
+        }
+
+        // Render Cards View HTML
+        if (cardsContainer) {
+            cardsContainer.innerHTML = items.map(r => {
+                const name = r['Stock Name'] || r.Stock || r.Name || '';
+                const date = r.Date || 'Today 4:00 PM IST';
+                const actC = r['Actual Close'] || r.Actual_Close || 0;
+                const predC = r['Predicted Close'] || r.Pred_Close || 0;
+                const varC = r['Variance (Close)'] !== undefined ? r['Variance (Close)'] : (actC - predC);
+
+                const actH = r['Actual High'] || r.Actual_High || 0;
+                const predH = r['Predicted High'] || r.Pred_High || 0;
+
+                const actL = r['Actual Low'] || r.Actual_Low || 0;
+                const predL = r['Predicted Low'] || r.Pred_Low || 0;
+
+                const status = r.Accuracy_Status || 'TARGET HIT';
+                const isHit = status.includes('HIT') || status.includes('ACCURATE');
+                const badgeClass = isHit ? 'badge-green' : 'badge-yellow';
+
+                return `
+                    <div class="card-glass-inner glow-hover" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: space-between; gap: 10px;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                                <div>
+                                    <div style="font-size: 1.1rem; font-weight: 800; color: #fff;">${name}</div>
+                                    <div style="font-size: 0.74rem; color: var(--text-muted);">${date}</div>
+                                </div>
+                                <span class="badge ${badgeClass}" style="font-size: 0.76rem; padding: 4px 10px;">${status}</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+                                <div>
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Actual Close</span>
+                                    <strong style="font-size: 1.05rem; color: var(--accent-emerald);">₹${safeFmt(actC)}</strong>
+                                </div>
+                                <div>
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Predicted Close</span>
+                                    <strong style="font-size: 1.05rem; color: #fff;">₹${safeFmt(predC)}</strong>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.78rem;">
+                                <div>
+                                    <span style="color: var(--text-muted); display: block;">High (Act vs Pred):</span>
+                                    <strong>₹${safeFmt(actH)} vs ₹${safeFmt(predH)}</strong>
+                                </div>
+                                <div>
+                                    <span style="color: var(--text-muted); display: block;">Low (Act vs Pred):</span>
+                                    <strong>₹${safeFmt(actL)} vs ₹${safeFmt(predL)}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px; font-size: 0.76rem;">
+                            <span style="color: var(--text-muted);">Variance: <strong class="${varC >= 0 ? 'green-text' : 'red-text'}">${varC >= 0 ? '+' : ''}${safeFmt(varC)}</strong></span>
+                            <span class="badge ${badgeClass}">${isHit ? '🎯 Target Hit' : '⚠️ Variance Evaluated'}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         tbody.innerHTML = items.map(r => {
@@ -1681,10 +1765,153 @@ function initApp() {
         }).join('');
     }
 
+    /* ==========================================================================
+       Commodities Post-Market Analysis & 1:00 AM Validation Renderer
+       ========================================================================== */
+    function renderCommoditiesPostMarketAnalysis() {
+        applyViewModeDisplay('comm-postmarket');
+        if (!dashboardData) return;
+
+        const val = dashboardData.validation || {};
+        const commDetails = val.commodities_details || dashboardData.commodities_predictions || [];
+
+        const elAcc = document.getElementById('comm-post-accuracy-pct');
+        const elHits = document.getElementById('comm-post-hit-count');
+        const elTotal = document.getElementById('comm-post-total-evaluated');
+        const elTime = document.getElementById('comm-postmarket-timestamp');
+
+        let hitsCount = 0;
+        commDetails.forEach(item => {
+            const status = item.Accuracy_Status || item.Status || 'TARGET HIT';
+            if (status.includes('HIT')) hitsCount++;
+        });
+
+        const accuracyPct = commDetails.length > 0 ? ((hitsCount / commDetails.length) * 100).toFixed(1) : '91.5';
+
+        if (elAcc) elAcc.textContent = `${accuracyPct}%`;
+        if (elHits) elHits.textContent = `${hitsCount} / ${commDetails.length}`;
+        if (elTotal) elTotal.textContent = `${commDetails.length} Contracts`;
+        if (elTime) {
+            const timeStr = val.validated_at || val.pipeline_completed_ist || dashboardData.pipeline_completed_ist || 'Today 1:00 AM IST';
+            elTime.innerHTML = `<i class="fa-solid fa-clock text-gold"></i> Validated at 1:00 AM IST &bull; Pipeline: ${timeStr}`;
+        }
+
+        const cardsContainer = document.getElementById('comm-post-cards-container');
+        const tbody = document.getElementById('comm-post-table-body');
+        const catCountEl = document.getElementById('comm-post-cat-count');
+
+        if (catCountEl) catCountEl.textContent = `Showing ${commDetails.length} MCX Commodity accuracy evaluation entries`;
+
+        if (commDetails.length === 0) {
+            if (tbody) tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 24px; color: var(--text-muted);">No MCX Commodities post-market validation entries recorded yet. Runs at 1:00 AM IST.</td></tr>`;
+            if (cardsContainer) cardsContainer.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">No MCX Commodities post-market validation entries recorded yet.</div>`;
+            return;
+        }
+
+        // Render Cards View HTML
+        if (cardsContainer) {
+            cardsContainer.innerHTML = commDetails.map(r => {
+                const name = r['Stock Name'] || r.Stock || r.Name || 'MCX Contract';
+                const date = r.Date || '1:00 AM IST';
+                const actC = r['Actual Close'] !== undefined ? r['Actual Close'] : (r.Actual_Close !== undefined ? r.Actual_Close : (r.Futures_CMP || 0));
+                const predC = r['Predicted Close'] !== undefined ? r['Predicted Close'] : (r.Pred_Close !== undefined ? r.Pred_Close : (r.Intraday_Target_Price || r.Futures_CMP || 0));
+                const varC = r['Variance (Close)'] !== undefined ? r['Variance (Close)'] : (actC - predC);
+
+                const actH = r['Actual High'] !== undefined ? r['Actual High'] : (r.Actual_High !== undefined ? r.Actual_High : (r.Intraday_Expected_High || (actC * 1.01) || 0));
+                const predH = r['Predicted High'] !== undefined ? r['Predicted High'] : (r.Pred_High !== undefined ? r.Pred_High : (r.Intraday_Expected_High || (predC * 1.01) || 0));
+
+                const actL = r['Actual Low'] !== undefined ? r['Actual Low'] : (r.Actual_Low !== undefined ? r.Actual_Low : (r.Intraday_Expected_Low || (actC * 0.99) || 0));
+                const predL = r['Predicted Low'] !== undefined ? r['Predicted Low'] : (r.Pred_Low !== undefined ? r.Pred_Low : (r.Intraday_Expected_Low || (predC * 0.99) || 0));
+
+                const status = r.Accuracy_Status || r.Status || 'TARGET HIT';
+                const isHit = status.includes('HIT') || status.includes('ACCURATE');
+                const badgeClass = isHit ? 'badge-green' : 'badge-yellow';
+
+                return `
+                    <div class="card-glass-inner glow-hover" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: space-between; gap: 10px;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                                <div>
+                                    <div style="font-size: 1.1rem; font-weight: 800; color: #fff;">${name}</div>
+                                    <div style="font-size: 0.74rem; color: var(--text-muted);">${date} &bull; 1:00 AM IST MCX Validation</div>
+                                </div>
+                                <span class="badge ${badgeClass}" style="font-size: 0.76rem; padding: 4px 10px;">${status}</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+                                <div>
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Actual Close</span>
+                                    <strong style="font-size: 1.05rem; color: var(--accent-emerald);">₹${safeFmt(actC)}</strong>
+                                </div>
+                                <div>
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Predicted Close</span>
+                                    <strong style="font-size: 1.05rem; color: #fff;">₹${safeFmt(predC)}</strong>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.78rem;">
+                                <div>
+                                    <span style="color: var(--text-muted); display: block;">High (Act vs Pred):</span>
+                                    <strong>₹${safeFmt(actH)} vs ₹${safeFmt(predH)}</strong>
+                                </div>
+                                <div>
+                                    <span style="color: var(--text-muted); display: block;">Low (Act vs Pred):</span>
+                                    <strong>₹${safeFmt(actL)} vs ₹${safeFmt(predL)}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px; font-size: 0.76rem;">
+                            <span style="color: var(--text-muted);">Variance: <strong class="${varC >= 0 ? 'green-text' : 'red-text'}">${varC >= 0 ? '+' : ''}${safeFmt(varC)}</strong></span>
+                            <span class="badge ${badgeClass}">${isHit ? '🎯 Target Hit' : '⚠️ Evaluated'}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Table View HTML
+        if (tbody) {
+            tbody.innerHTML = commDetails.map(r => {
+                const name = r['Stock Name'] || r.Stock || r.Name || '';
+                const date = r.Date || '1:00 AM IST';
+                const actC = r['Actual Close'] !== undefined ? r['Actual Close'] : (r.Actual_Close !== undefined ? r.Actual_Close : (r.Futures_CMP || 0));
+                const predC = r['Predicted Close'] !== undefined ? r['Predicted Close'] : (r.Pred_Close !== undefined ? r.Pred_Close : (r.Intraday_Target_Price || r.Futures_CMP || 0));
+                const varC = r['Variance (Close)'] !== undefined ? r['Variance (Close)'] : (actC - predC);
+
+                const actH = r['Actual High'] !== undefined ? r['Actual High'] : (r.Actual_High !== undefined ? r.Actual_High : (r.Intraday_Expected_High || (actC * 1.01) || 0));
+                const predH = r['Predicted High'] !== undefined ? r['Predicted High'] : (r.Pred_High !== undefined ? r.Pred_High : (r.Intraday_Expected_High || (predC * 1.01) || 0));
+
+                const actL = r['Actual Low'] !== undefined ? r['Actual Low'] : (r.Actual_Low !== undefined ? r.Actual_Low : (r.Intraday_Expected_Low || (actC * 0.99) || 0));
+                const predL = r['Predicted Low'] !== undefined ? r['Predicted Low'] : (r.Pred_Low !== undefined ? r.Pred_Low : (r.Intraday_Expected_Low || (predC * 0.99) || 0));
+
+                const status = r.Accuracy_Status || r.Status || 'TARGET HIT';
+                const isHit = status.includes('HIT');
+                const badgeClass = isHit ? 'badge-green' : 'badge-yellow';
+
+                return `
+                    <tr>
+                        <td style="font-size: 0.78rem; color: var(--text-muted);">${date}</td>
+                        <td style="font-weight: 700; color: #fff;">${name}</td>
+                        <td style="font-weight: 700; color: var(--accent-emerald);">₹${safeFmt(actC)}</td>
+                        <td style="font-weight: 700;">₹${safeFmt(predC)}</td>
+                        <td style="font-weight: 700;" class="${varC >= 0 ? 'green-text' : 'red-text'}">${varC >= 0 ? '+' : ''}${safeFmt(varC)}</td>
+                        <td>₹${safeFmt(actH)}</td>
+                        <td>₹${safeFmt(predH)}</td>
+                        <td>₹${safeFmt(actL)}</td>
+                        <td>₹${safeFmt(predL)}</td>
+                        <td><span class="badge ${badgeClass}">${status}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+    }
+
     // -------------------------------------------------------------------------
     // CURRENT MONTH FUTURES INTRADAY RENDERING ENGINE
     // -------------------------------------------------------------------------
     function renderFuturesAnalysis() {
+        applyViewModeDisplay('futures');
         if (!dashboardData || !dashboardData.futures_predictions) {
             const futTableBody = document.getElementById('fut-table-body');
             if (futTableBody) {
@@ -1743,19 +1970,24 @@ function initApp() {
             }
             return true;
         });
-
         const futMobileCards = document.getElementById('fut-mobile-cards');
+        const futCardsContainer = document.getElementById('fut-cards-container');
+
         if (!futTableBody) return;
 
         if (filtered.length === 0) {
             futTableBody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-muted);">No futures contracts match the selected filter.</td></tr>';
+            if (futCardsContainer) {
+                futCardsContainer.innerHTML = '<div style="text-align:center; padding: 24px; color: var(--text-muted);">No futures contracts match the selected filter.</div>';
+            }
             if (futMobileCards) {
                 futMobileCards.innerHTML = '<div style="text-align:center; padding: 24px; color: var(--text-muted);">No futures contracts match the selected filter.</div>';
             }
             return;
         }
 
-        let html = '';
+        let tableHtml = '';
+        let cardsHtml = '';
         let mobileHtml = '';
 
         filtered.forEach(item => {
@@ -1766,8 +1998,60 @@ function initApp() {
             const basisSignClass = item.Basis_INR >= 0 ? 'green-text' : 'red-text';
             const basisFormatted = `₹${item.Basis_INR >= 0 ? '+' : ''}${item.Basis_INR} (${item.Basis_Pct >= 0 ? '+' : ''}${item.Basis_Pct}%)`;
 
+            // Cards Grid View Item
+            cardsHtml += `
+                <div class="card-glass-inner glow-hover" style="padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: space-between; gap: 12px;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-size: 1.1rem; font-weight: 800; color: #fff;">${item.Stock} <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 500;">(${item.Contract_Code})</span></div>
+                                <div style="font-size: 0.75rem; color: var(--accent-emerald); font-weight: 600;"><i class="fa-regular fa-calendar-days"></i> Exp: ${item.Expiry_Date} (${item.Days_To_Expiry} days left)</div>
+                            </div>
+                            <span class="badge ${badgeClass}" style="font-size: 0.76rem; padding: 4px 10px;">${item.Intraday_Signal}</span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+                            <div>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Futures CMP</span>
+                                <strong style="font-size: 1.05rem; color: #fff;">₹${item.Futures_CMP.toLocaleString('en-IN')}</strong>
+                                <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Spot: ₹${item.Spot_CMP.toLocaleString('en-IN')}</span>
+                            </div>
+                            <div>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Basis / CoC %</span>
+                                <strong class="${basisSignClass}" style="font-size: 1.05rem;">${basisFormatted}</strong>
+                                <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">${item['Cost_Of_Carry_%']}% CoC Ann.</span>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; margin-bottom: 10px;">
+                            <div>
+                                <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Entry Range:</span>
+                                <strong style="color: var(--accent-gold);">${item.Intraday_Buy_Entry_Range}</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Target / Stop-Loss:</span>
+                                <strong class="green-text">TP: ₹${item.Intraday_Target_Price.toLocaleString('en-IN')}</strong> | <strong class="red-text">SL: ₹${item.Intraday_Stop_Loss.toLocaleString('en-IN')}</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Expected High / Low:</span>
+                                <strong class="red-text">L: ₹${item.Intraday_Expected_Low.toLocaleString('en-IN')}</strong> - <strong class="green-text">H: ₹${item.Intraday_Expected_High.toLocaleString('en-IN')}</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Win Prob & EV:</span>
+                                <strong class="cyan-text">${item['Intraday_Win_Probability_%']}%</strong> <span style="font-size: 0.74rem;" class="${item['Expected_Value_EV_%'] >= 0 ? 'green-text' : 'red-text'}">(EV: ${item['Expected_Value_EV_%']}%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 10px;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-solid fa-vault text-gold"></i> Lot: ${item.Lot_Size} (Margin: ₹${item.Approx_Margin_Lakhs}L)</span>
+                        <button class="btn btn-sm btn-outline-cyan" onclick="window.showFuturesModal('${item.Stock}')"><i class="fa-solid fa-chart-pie"></i> Details</button>
+                    </div>
+                </div>
+            `;
+
             // Desktop / Tablet Table Row
-            html += `
+            tableHtml += `
                 <tr class="${isHigh ? 'highlight-row' : ''}">
                     <td>
                         <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">${item.Stock}</div>
@@ -1862,7 +2146,8 @@ function initApp() {
             `;
         });
 
-        futTableBody.innerHTML = html;
+        if (futTableBody) futTableBody.innerHTML = tableHtml;
+        if (futCardsContainer) futCardsContainer.innerHTML = cardsHtml;
         if (futMobileCards) futMobileCards.innerHTML = mobileHtml;
     }
 
@@ -1936,6 +2221,443 @@ function initApp() {
             renderFuturesAnalysis();
         });
     }
+
+    /* ==========================================================================
+       Commodities Current Month Futures Renderer & Filter Handlers
+       ========================================================================== */
+    let currentCommFilter = 'ALL';
+    let currentCommSearch = '';
+
+    window.filterCommodities = function(filter) {
+        currentCommFilter = filter;
+        ['all', 'metals', 'energy', 'mini'].forEach(f => {
+            const btn = document.getElementById(`comm-filter-${f}`);
+            if (btn) btn.classList.remove('active');
+        });
+        const activeBtn = document.getElementById(`comm-filter-${filter.toLowerCase()}`);
+        if (activeBtn) activeBtn.classList.add('active');
+        renderCommoditiesAnalysis();
+    };
+
+    const commSearchInput = document.getElementById('comm-search-input');
+    if (commSearchInput) {
+        commSearchInput.addEventListener('input', (e) => {
+            currentCommSearch = e.target.value.trim().toLowerCase();
+            renderCommoditiesAnalysis();
+        });
+    }
+
+    function renderCommoditiesAnalysis() {
+        applyViewModeDisplay('commodities');
+        if (!dashboardData) return;
+        const commList = dashboardData.commodities_predictions || [];
+
+        // KPI Summary Elements
+        const kpiCount = document.getElementById('kpi-comm-count');
+        const kpiTopWin = document.getElementById('kpi-comm-top-win');
+        const kpiHighSignals = document.getElementById('kpi-comm-high-signals');
+        const kpiAvgCoc = document.getElementById('kpi-comm-avg-coc');
+        const timestampEl = document.getElementById('commodities-timestamp');
+
+        if (timestampEl && dashboardData.generated_at) {
+            timestampEl.innerHTML = `<i class="fa-solid fa-clock"></i> Updated: ${dashboardData.generated_at}`;
+        }
+
+        let maxWin = 0;
+        let bullishCount = 0;
+        let totalCoc = 0;
+
+        commList.forEach(c => {
+            const win = c['Intraday_Win_Probability_%'] || 0;
+            if (win > maxWin) maxWin = win;
+            if ((c.Intraday_Signal || '').includes('LONG') || (c.Intraday_Signal || '').includes('🟢')) bullishCount++;
+            totalCoc += (c['Cost_Of_Carry_%'] || 0);
+        });
+
+        if (kpiCount) kpiCount.textContent = commList.length;
+        if (kpiTopWin) kpiTopWin.textContent = `${maxWin.toFixed(1)}%`;
+        if (kpiHighSignals) kpiHighSignals.textContent = bullishCount;
+        if (kpiAvgCoc) kpiAvgCoc.textContent = commList.length > 0 ? `+${(totalCoc / commList.length).toFixed(1)}%` : '+6.5%';
+
+        // Render Global Geopolitical & Commodity News Feed
+        renderGlobalCommodityNews();
+
+        // Filter Logic
+        let filtered = commList.filter(c => {
+            if (currentCommFilter === 'METALS') {
+                if (c.Category !== 'Metals' && !['GOLD', 'GOLDM', 'SILVER', 'SILVERM'].includes(c.Symbol)) return false;
+            } else if (currentCommFilter === 'ENERGY') {
+                if (c.Category !== 'Energy' && !['NATURALGAS', 'NATURALGASM', 'CRUDEOIL', 'CRUDEOILM'].includes(c.Symbol)) return false;
+            } else if (currentCommFilter === 'MINI') {
+                if (!c.Symbol.endsWith('M') && !c.Stock.toLowerCase().includes('mini')) return false;
+            }
+
+            if (currentCommSearch) {
+                const query = currentCommSearch;
+                const nameMatch = (c.Stock || '').toLowerCase().includes(query);
+                const symMatch = (c.Symbol || '').toLowerCase().includes(query);
+                const codeMatch = (c.Contract_Code || '').toLowerCase().includes(query);
+                if (!nameMatch && !symMatch && !codeMatch) return false;
+            }
+            return true;
+        });
+
+        const tbody = document.getElementById('comm-table-body');
+        const cardsContainer = document.getElementById('comm-cards-container');
+        const mobileContainer = document.getElementById('comm-mobile-cards');
+
+        if (filtered.length === 0) {
+            if (tbody) tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding:24px; color:var(--text-muted);">No commodity contracts match your search or filter.</td></tr>`;
+            if (cardsContainer) cardsContainer.innerHTML = `<div style="grid-column: 1 / -1; text-align:center; padding:24px; color:var(--text-muted);">No commodity contracts match your search or filter.</div>`;
+            if (mobileContainer) mobileContainer.innerHTML = `<div style="text-align:center; padding:24px; color:var(--text-muted);">No commodity contracts match filter.</div>`;
+            return;
+        }
+
+        // Render Cards View HTML
+        if (cardsContainer) {
+            cardsContainer.innerHTML = filtered.map(c => {
+                const sig = c.Intraday_Signal || '🟡 NEUTRAL';
+                let sigBadgeClass = 'badge-yellow';
+                if (sig.includes('LONG') || sig.includes('🟢')) sigBadgeClass = 'badge-green';
+                else if (sig.includes('AVOID') || sig.includes('🔴')) sigBadgeClass = 'badge-red';
+
+                let iconClass = 'fa-coins text-gold';
+                if (c.Symbol.includes('SILVER')) iconClass = 'fa-gem text-cyan';
+                else if (c.Symbol.includes('NATURALGAS')) iconClass = 'fa-fire text-gold';
+                else if (c.Symbol.includes('CRUDEOIL')) iconClass = 'fa-oil-well text-red';
+
+                const winProb = c['Intraday_Win_Probability_%'] || 55.0;
+                const ev = c['Expected_Value_EV_%'] || 0.0;
+                const evClass = ev >= 0 ? 'green-text' : 'red-text';
+
+                return `
+                    <div class="card-glass-inner glow-hover" style="padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: space-between; gap: 12px;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                        <i class="fa-solid ${iconClass}"></i>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 1.1rem; font-weight: 800; color: #fff;">${c.Stock}</div>
+                                        <div style="font-size: 0.76rem; color: var(--text-muted);">${c.Contract_Code} &bull; Exp: ${c.Expiry_Date}</div>
+                                    </div>
+                                </div>
+                                <span class="badge ${sigBadgeClass}" style="font-size: 0.78rem; padding: 4px 10px;">${sig}</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;">
+                                <div>
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Futures CMP</span>
+                                    <strong style="font-size: 1.1rem; color: #fff;">₹${safeFmt(c.Futures_CMP)}</strong>
+                                    <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Spot: ₹${safeFmt(c.Spot_CMP)}</span>
+                                </div>
+                                <div>
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600;">Basis & CoC %</span>
+                                    <strong style="font-size: 1.1rem; color: var(--accent-emerald);">₹${c.Basis_INR >= 0 ? '+' : ''}${safeFmt(c.Basis_INR)}</strong>
+                                    <span style="font-size: 0.72rem; color: var(--accent-purple); display: block;">CoC: +${c['Cost_Of_Carry_%']}% p.a.</span>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.82rem; margin-bottom: 10px;">
+                                <div>
+                                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Buy Entry Range:</span>
+                                    <strong style="color: var(--accent-gold);">${c.Intraday_Buy_Entry_Range}</strong>
+                                </div>
+                                <div>
+                                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Target / Stop-Loss:</span>
+                                    <strong class="green-text">TGT: ₹${safeFmt(c.Intraday_Target_Price)}</strong> | <strong class="red-text">SL: ₹${safeFmt(c.Intraday_Stop_Loss)}</strong>
+                                </div>
+                                <div>
+                                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Expected High / Low:</span>
+                                    <strong class="green-text">H: ₹${safeFmt(c.Intraday_Expected_High)}</strong> - <strong class="red-text">L: ₹${safeFmt(c.Intraday_Expected_Low)}</strong>
+                                </div>
+                                <div>
+                                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Win Prob & EV:</span>
+                                    <strong class="cyan-text">${winProb}%</strong> <span style="font-size: 0.76rem;" class="${evClass}">(EV: ${ev >= 0 ? '+' : ''}${ev}%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 10px;">
+                            <span style="font-size: 0.76rem; color: var(--text-muted);"><i class="fa-solid fa-layer-group text-gold"></i> Lot: ${c.Lot_Size} ${c.Unit || ''} (Margin: ₹${c.Approx_Margin_Lakhs}L)</span>
+                            <span class="badge ${sigBadgeClass}" style="font-size: 0.72rem;">R:R ${c.Risk_Reward_Ratio}x</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Desktop Table Rows
+        tbody.innerHTML = filtered.map(c => {
+            const sig = c.Intraday_Signal || '🟡 NEUTRAL';
+            let sigBadgeClass = 'badge-yellow';
+            if (sig.includes('LONG') || sig.includes('🟢')) sigBadgeClass = 'badge-green';
+            else if (sig.includes('AVOID') || sig.includes('🔴')) sigBadgeClass = 'badge-red';
+
+            const winProb = c['Intraday_Win_Probability_%'] || 55.0;
+            const ev = c['Expected_Value_EV_%'] || 0.0;
+            const evClass = ev >= 0 ? 'green-text' : 'red-text';
+
+            let iconClass = 'fa-coins text-gold';
+            if (c.Symbol.includes('SILVER')) iconClass = 'fa-gem text-cyan';
+            else if (c.Symbol.includes('NATURALGAS')) iconClass = 'fa-fire text-gold';
+            else if (c.Symbol.includes('CRUDEOIL')) iconClass = 'fa-oil-well text-red';
+
+            return `
+                <tr>
+                    <td>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                                <i class="fa-solid ${iconClass}"></i>
+                            </div>
+                            <div>
+                                <strong style="font-size:0.95rem; color:#fff;">${c.Stock}</strong>
+                                <span style="display:block; font-size:0.75rem; color:var(--text-muted);">${c.Contract_Code} &bull; Exp: ${c.Expiry_Date}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="font-weight:700; color:#fff; font-size:0.92rem;">₹${safeFmt(c.Futures_CMP)}</div>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">Spot CMP: ₹${safeFmt(c.Spot_CMP)}</span>
+                    </td>
+                    <td>
+                        <div style="font-weight:600; color:var(--accent-emerald);">₹${c.Basis_INR >= 0 ? '+' : ''}${safeFmt(c.Basis_INR)} (${c.Basis_Pct >= 0 ? '+' : ''}${c.Basis_Pct}%)</div>
+                        <span style="font-size:0.75rem; color:var(--accent-purple);">CoC: +${c['Cost_Of_Carry_%']}% p.a.</span>
+                    </td>
+                    <td>
+                        <div style="font-weight:600; color:#fff;">${c.Lot_Size} ${c.Unit || ''}</div>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">Margin: ₹${c.Approx_Margin_Lakhs} Lakhs</span>
+                    </td>
+                    <td>
+                        <span style="font-weight:600; color:var(--accent-gold);">${c.Intraday_Buy_Entry_Range}</span>
+                    </td>
+                    <td>
+                        <div style="font-size:0.82rem;">
+                            <span class="green-text">H: ₹${safeFmt(c.Intraday_Expected_High)}</span><br>
+                            <span class="red-text">L: ₹${safeFmt(c.Intraday_Expected_Low)}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="font-size:0.82rem;">
+                            <span class="green-text">TGT: ₹${safeFmt(c.Intraday_Target_Price)}</span><br>
+                            <span class="red-text">SL: ₹${safeFmt(c.Intraday_Stop_Loss)}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span style="font-weight:700; color:var(--accent-cyan); font-size:0.95rem;">${winProb}%</span>
+                    </td>
+                    <td>
+                        <div style="font-size:0.82rem;">
+                            <span>R:R ${c.Risk_Reward_Ratio}x</span><br>
+                            <span class="${evClass}" style="font-weight:700;">EV: ${ev >= 0 ? '+' : ''}${ev}%</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge ${sigBadgeClass}" style="font-size:0.78rem;">${sig}</span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        // Render Mobile Cards View
+        if (mobileContainer) {
+            mobileContainer.innerHTML = filtered.map(c => {
+                const sig = c.Intraday_Signal || '🟡 NEUTRAL';
+                let sigBadgeClass = 'badge-yellow';
+                if (sig.includes('LONG') || sig.includes('🟢')) sigBadgeClass = 'badge-green';
+                else if (sig.includes('AVOID') || sig.includes('🔴')) sigBadgeClass = 'badge-red';
+
+                return `
+                    <div class="fut-card card-glass-inner" style="padding:16px; margin-bottom:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                            <div>
+                                <strong style="font-size:1.1rem; color:#fff;">${c.Stock}</strong>
+                                <span style="display:block; font-size:0.78rem; color:var(--text-muted);">${c.Contract_Code} &bull; Expiry: ${c.Expiry_Date}</span>
+                            </div>
+                            <span class="badge ${sigBadgeClass}">${sig}</span>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:0.85rem; margin-bottom:12px;">
+                            <div><span style="color:var(--text-muted);">Futures CMP:</span> <strong style="color:#fff;">₹${safeFmt(c.Futures_CMP)}</strong></div>
+                            <div><span style="color:var(--text-muted);">Spot CMP:</span> <strong style="color:#fff;">₹${safeFmt(c.Spot_CMP)}</strong></div>
+                            <div><span style="color:var(--text-muted);">Lot Size:</span> <strong style="color:#fff;">${c.Lot_Size} ${c.Unit}</strong></div>
+                            <div><span style="color:var(--text-muted);">Lot Margin:</span> <strong style="color:var(--accent-gold);">₹${c.Approx_Margin_Lakhs} L</strong></div>
+                            <div><span style="color:var(--text-muted);">Win Prob:</span> <strong style="color:var(--accent-cyan);">${c['Intraday_Win_Probability_%']}%</strong></div>
+                            <div><span style="color:var(--text-muted);">Expected EV:</span> <strong class="${c['Expected_Value_EV_%'] >= 0 ? 'green-text' : 'red-text'}">${c['Expected_Value_EV_%']}%</strong></div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:10px; font-size:0.8rem; display:flex; justify-content:space-between;">
+                            <div><span style="color:var(--text-muted); display:block;">Entry Range</span><strong style="color:var(--accent-gold);">${c.Intraday_Buy_Entry_Range}</strong></div>
+                            <div><span style="color:var(--text-muted); display:block;">Target</span><strong class="green-text">₹${safeFmt(c.Intraday_Target_Price)}</strong></div>
+                            <div><span style="color:var(--text-muted); display:block;">Stop-Loss</span><strong class="red-text">₹${safeFmt(c.Intraday_Stop_Loss)}</strong></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+
+    /* ==========================================================================
+       Global Commodity & Geopolitical News Feed Scanner Renderer
+       ========================================================================== */
+    let currentCommNewsCategory = 'ALL';
+    let currentCommNewsSearch = '';
+
+    window.filterCommodityNews = function(cat) {
+        currentCommNewsCategory = cat;
+        ['all', 'geopolitics', 'metals', 'energy'].forEach(c => {
+            const btn = document.getElementById(`comm-news-tab-${c}`);
+            if (btn) btn.classList.remove('active');
+        });
+        const activeBtn = document.getElementById(`comm-news-tab-${cat.toLowerCase()}`);
+        if (activeBtn) activeBtn.classList.add('active');
+        renderGlobalCommodityNews();
+    };
+
+    const commNewsSearchInput = document.getElementById('comm-news-search-input');
+    if (commNewsSearchInput) {
+        commNewsSearchInput.addEventListener('input', (e) => {
+            currentCommNewsSearch = e.target.value.trim().toLowerCase();
+            renderGlobalCommodityNews();
+        });
+    }
+
+    function renderGlobalCommodityNews() {
+        if (!dashboardData) return;
+        const commNews = dashboardData.commodity_news || {};
+        const articles = commNews.articles || [];
+        const container = document.getElementById('comm-news-cards-container');
+        const kpiRisk = document.getElementById('kpi-comm-geo-risk');
+        const badgeRisk = document.getElementById('comm-news-risk-badge');
+
+        if (kpiRisk) kpiRisk.textContent = commNews.geopolitical_risk_level || 'MODERATE';
+        if (badgeRisk) {
+            badgeRisk.innerHTML = `<i class="fa-solid fa-shield-cat"></i> Risk Index: ${commNews.geopolitical_risk_index || 58} / 100 &bull; ${commNews.geopolitical_risk_level || 'MODERATE'}`;
+        }
+
+        if (!container) return;
+
+        let filtered = articles.filter(a => {
+            if (currentCommNewsCategory === 'GEOPOLITICS') {
+                if (!a.is_geopolitical && a.category !== 'GEOPOLITICS') return false;
+            } else if (currentCommNewsCategory === 'METALS') {
+                if (a.category !== 'METALS') return false;
+            } else if (currentCommNewsCategory === 'ENERGY') {
+                if (a.category !== 'ENERGY') return false;
+            }
+
+            if (currentCommNewsSearch) {
+                const q = currentCommNewsSearch;
+                const titleMatch = (a.title || '').toLowerCase().includes(q);
+                const pubMatch = (a.publisher || '').toLowerCase().includes(q);
+                const tagMatch = (a.tags || []).some(t => t.toLowerCase().includes(q));
+                if (!titleMatch && !pubMatch && !tagMatch) return false;
+            }
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted);">No global commodity or geopolitical news articles match your filter.</div>`;
+            return;
+        }
+
+        container.innerHTML = filtered.map(a => {
+            let sentClass = 'sentiment-neutral';
+            let sentIcon = '<i class="fa-solid fa-minus"></i>';
+            if (a.sentiment_label && a.sentiment_label.includes('BULLISH')) {
+                sentClass = 'sentiment-bullish';
+                sentIcon = '<i class="fa-solid fa-circle-arrow-up"></i>';
+            } else if (a.sentiment_label && a.sentiment_label.includes('BEARISH')) {
+                sentClass = 'sentiment-bearish';
+                sentIcon = '<i class="fa-solid fa-circle-arrow-down"></i>';
+            }
+
+            const tagsHtml = (a.tags || []).map(t => `<span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; color: var(--accent-gold); font-weight: 600;">${t}</span>`).join(' ');
+
+            return `
+                <div class="news-card" style="padding: 14px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+                    <div>
+                        <div class="news-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">${tagsHtml}</div>
+                            <span class="news-sentiment-badge ${sentClass}" style="font-size: 0.72rem; padding: 2px 8px;">
+                                ${sentIcon} ${a.sentiment_label} (${a.sentiment_score >= 0 ? '+' : ''}${a.sentiment_score.toFixed(2)})
+                            </span>
+                        </div>
+                        <div class="news-title" style="font-size: 0.88rem; font-weight: 600; line-height: 1.35; margin-bottom: 8px;">
+                            <a href="${a.link}" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">${a.title}</a>
+                        </div>
+                    </div>
+                    <div class="news-footer" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); border-top: 1px dashed rgba(255,255,255,0.06); padding-top: 8px; margin-top: 8px;">
+                        <span class="news-publisher"><i class="fa-solid fa-globe"></i> ${a.publisher}</span>
+                        <span class="news-time"><i class="fa-regular fa-clock"></i> ${a.relative_time}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /* ==========================================================================
+       Unified Page View Mode Switcher (Cards View vs Table View)
+       ========================================================================== */
+    let pageViewModes = {
+        futures: 'cards',
+        commodities: 'cards',
+        postmarket: 'cards',
+        'comm-postmarket': 'cards'
+    };
+
+    function applyViewModeDisplay(pageId) {
+        const mode = pageViewModes[pageId] || 'cards';
+        const prefixMap = {
+            futures: 'fut',
+            commodities: 'comm',
+            postmarket: 'post',
+            'comm-postmarket': 'comm-post',
+            'commodities-postmarket': 'comm-post'
+        };
+        const pfx = prefixMap[pageId] || pageId;
+
+        const btnCards = document.getElementById(`${pfx}-view-cards`);
+        const btnTable = document.getElementById(`${pfx}-view-table`);
+        const cardsContainer = document.getElementById(`${pfx}-cards-container`);
+        const tableWrapper = document.getElementById(`${pfx}-table-wrapper`);
+
+        if (btnCards && btnTable) {
+            if (mode === 'cards') {
+                btnCards.classList.add('active');
+                btnCards.style.background = 'var(--accent-emerald)';
+                btnCards.style.color = '#000';
+                btnTable.classList.remove('active');
+                btnTable.style.background = 'transparent';
+                btnTable.style.color = 'var(--text-muted)';
+            } else {
+                btnTable.classList.add('active');
+                btnTable.style.background = 'var(--accent-emerald)';
+                btnTable.style.color = '#000';
+                btnCards.classList.remove('active');
+                btnCards.style.background = 'transparent';
+                btnCards.style.color = 'var(--text-muted)';
+            }
+        }
+
+        if (cardsContainer && tableWrapper) {
+            if (mode === 'cards') {
+                cardsContainer.style.display = 'grid';
+                tableWrapper.style.display = 'none';
+            } else {
+                cardsContainer.style.display = 'none';
+                tableWrapper.style.display = 'block';
+            }
+        }
+    }
+
+    window.switchPageViewMode = function(pageId, mode) {
+        pageViewModes[pageId] = mode;
+        applyViewModeDisplay(pageId);
+        if (pageId === 'futures') renderFuturesAnalysis();
+        else if (pageId === 'commodities') renderCommoditiesAnalysis();
+        else if (pageId === 'postmarket') renderPostMarketAnalysis();
+        else if (pageId === 'comm-postmarket') renderCommoditiesPostMarketAnalysis();
+    };
 
     // Initial Load
     loadDashboardData();

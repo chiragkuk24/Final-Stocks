@@ -1,17 +1,16 @@
-name: Morning 5:30 AM & 6:30 AM Pre-Market Scan & ML Predictions
+name: Futures Contracts ML Prediction Pipeline (5:30 AM IST)
 
 on:
   schedule:
-    # Runs Monday through Friday at 00:00 UTC (5:30 AM IST) and 01:00 UTC (6:30 AM IST)
+    # Runs Monday through Friday at 00:00 UTC (5:30 AM IST)
     - cron: '0 0 * * 1-5'
-    - cron: '0 1 * * 1-5'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  run-scanner-and-predictor:
+  run-futures-predictor:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,18 +29,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Step 1 & 2 — Run Scanner & Fetch Market Breakouts
-        run: |
-          python Initialization.py
-
-      - name: Step 3 & 4 — Run ML Quant Predictor Engine
+      - name: Run Futures Contracts ML Quant Predictor Engine (5:30 AM IST)
         run: |
           python ml_quant_predictor.py
 
-      - name: Step 5 — Commit and Push Updated Predictions & Web Dashboard Payload
+      - name: Commit and Push Updated Futures Predictions & Web Dashboard Payload
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add Final_Breakout_List.xlsx Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-Update: Morning Pre-Market Scan & Predictions [skip ci]" && git push)
-
+          git add Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "📈 Auto-Update: 5:30 AM IST Current Month Futures Predictions [skip ci]" && git push)

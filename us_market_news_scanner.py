@@ -356,22 +356,146 @@ def scan_breakout_stocks_news_30days(symbols: list = None) -> dict:
     }
 
 # -----------------------------------------------------------------------------
+# 2B. Global Geopolitical & Commodity News Feed Scanner
+# -----------------------------------------------------------------------------
+COMMODITY_NEWS_QUERIES = [
+    {"category": "GEOPOLITICS", "tag": "#Geopolitics", "query": "war+geopolitics+crude+oil+gold+market"},
+    {"category": "METALS", "tag": "#Gold", "query": "gold+price+safe+haven+inflation+central+bank"},
+    {"category": "METALS", "tag": "#Silver", "query": "silver+market+demand+industrial+metals"},
+    {"category": "ENERGY", "tag": "#CrudeOil", "query": "crude+oil+OPEC+supply+geopolitics+price"},
+    {"category": "ENERGY", "tag": "#NaturalGas", "query": "natural+gas+supply+crisis+energy+LNG"}
+]
+
+def scan_global_commodity_news() -> dict:
+    """Scan global financial news feeds for commodity catalysts, geopolitics & war risk."""
+    cutoff_date = datetime.now() - timedelta(days=30)
+    articles = []
+    seen_titles = set()
+    war_risk_keywords = ['war', 'conflict', 'sanction', 'opec', 'military', 'crisis', 'attack', 'strait', 'disruption', 'tensions', 'red sea', 'pipeline']
+    
+    war_mentions = 0
+    total_score = 0.0
+
+    for item in COMMODITY_NEWS_QUERIES:
+        category = item["category"]
+        primary_tag = item["tag"]
+        query = item["query"]
+        
+        try:
+            rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en"
+            resp = requests.get(rss_url, timeout=4)
+            if resp.status_code == 200:
+                root = ET.fromstring(resp.content)
+                items = root.findall('.//item')
+                for node in items[:12]:
+                    title = node.find('title').text if node.find('title') is not None else ''
+                    if not title or title in seen_titles:
+                        continue
+
+                    pub_date = node.find('pubDate').text if node.find('pubDate') is not None else ''
+                    link = node.find('link').text if node.find('link') is not None else '#'
+
+                    iso_date, rel_time, ts = parse_relative_time(pub_date)
+                    if datetime.fromtimestamp(ts) < cutoff_date:
+                        continue
+
+                    seen_titles.add(title)
+                    score = sentiment_analyzer.polarity_scores(title)['compound']
+                    
+                    title_lower = title.lower()
+                    has_war_keyword = any(kw in title_lower for kw in war_risk_keywords)
+                    if has_war_keyword:
+                        war_mentions += 1
+                        
+                    label = "BULLISH (Supply Risk)" if (score >= 0.02 or has_war_keyword) else ("BEARISH" if score <= -0.10 else "NEUTRAL")
+                    
+                    pub_parts = title.rsplit(' - ', 1)
+                    headline_text = pub_parts[0] if len(pub_parts) > 1 else title
+                    publisher_name = pub_parts[1] if len(pub_parts) > 1 else 'Global Market News'
+
+                    tags = [primary_tag]
+                    if has_war_keyword and primary_tag != "#Geopolitics":
+                        tags.append("#Geopolitics")
+                    if 'oil' in title_lower or 'crude' in title_lower:
+                        tags.append("#CrudeOil")
+                    if 'gold' in title_lower:
+                        tags.append("#Gold")
+                    if 'gas' in title_lower or 'lng' in title_lower:
+                        tags.append("#NaturalGas")
+                    if 'opec' in title_lower:
+                        tags.append("#OPEC")
+
+                    art_obj = {
+                        "category": category,
+                        "title": headline_text,
+                        "publisher": publisher_name,
+                        "link": link,
+                        "tags": list(set(tags)),
+                        "published_at": iso_date,
+                        "relative_time": rel_time,
+                        "timestamp": ts,
+                        "sentiment_score": round(score, 2),
+                        "sentiment_label": label,
+                        "is_geopolitical": has_war_keyword
+                    }
+                    articles.append(art_obj)
+                    total_score += score
+        except Exception as e:
+            print(f"[WARN] Commodity news scan notice for {query}: {e}")
+
+    articles.sort(key=lambda x: x['timestamp'], reverse=True)
+    
+    total_arts = len(articles)
+    avg_score = round(total_score / total_arts, 2) if total_arts > 0 else 0.05
+    
+    if war_mentions >= 8:
+        geo_risk_level = "HIGH (War / Supply Risk)"
+        risk_index = 85
+    elif war_mentions >= 3:
+        geo_risk_level = "MODERATE (Geopolitical Tension)"
+        risk_index = 58
+    else:
+        geo_risk_level = "LOW / NORMAL (Macro Stable)"
+        risk_index = 32
+
+    top_catalyst = "OPEC & Global Geopolitical Developments"
+    if articles:
+        geo_arts = [a for a in articles if a.get('is_geopolitical')]
+        if geo_arts:
+            top_catalyst = geo_arts[0]['title'][:70] + "..."
+
+    return {
+        "total_articles": total_arts,
+        "geopolitical_mentions": war_mentions,
+        "geopolitical_risk_level": geo_risk_level,
+        "geopolitical_risk_index": risk_index,
+        "avg_sentiment": avg_score,
+        "top_catalyst": top_catalyst,
+        "articles": articles,
+        "scanned_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+# -----------------------------------------------------------------------------
 # 3. Main Pipeline Entry
 # -----------------------------------------------------------------------------
 def run_full_market_news_pipeline(symbols: list = None) -> dict:
-    """Execute full US market closing feed and 30-day breakout stock news scanner."""
+    """Execute full US market closing feed, breakout stock news, and global commodity news scanner."""
     print("\n[US MARKET & NEWS SCANNER] Fetching live US market indices feed...")
     us_data = fetch_us_market_closing_feed()
     
     print("[US MARKET & NEWS SCANNER] Scanning past 30-day news feeds for breakout stocks...")
     news_data = scan_breakout_stocks_news_30days(symbols)
 
+    print("[US MARKET & NEWS SCANNER] Scanning global commodity & geopolitical news feeds...")
+    commodity_news = scan_global_commodity_news()
+
     print(f"✅ US Market Feed: {len(us_data['indices'])} indices loaded. | Summary: {us_data['summary'][:60]}...")
-    print(f"✅ News Scanner: Scanned {news_data['total_articles']} articles (Bullish: {news_data['bullish_pct']}%).")
+    print(f"✅ News Scanner: Scanned {news_data['total_articles']} stock news & {commodity_news['total_articles']} global commodity news articles.")
 
     return {
         "us_market": us_data,
-        "breakout_news": news_data
+        "breakout_news": news_data,
+        "commodity_news": commodity_news
     }
 
 if __name__ == "__main__":

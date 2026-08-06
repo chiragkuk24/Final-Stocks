@@ -50,6 +50,7 @@ def run_learning_engine():
     stock_details = val_summary.get('details', [])
     index_details = val_summary.get('index_details', [])
     futures_details = val_summary.get('futures_details', [])
+    commodities_details = val_summary.get('commodities_details', [])
 
     all_evals = []
     
@@ -59,6 +60,8 @@ def run_learning_engine():
         all_evals.append({**item, 'Category': 'Index'})
     for item in futures_details:
         all_evals.append({**item, 'Category': 'Futures'})
+    for item in commodities_details:
+        all_evals.append({**item, 'Category': 'Commodities'})
 
     if not all_evals:
         print("[WARN] No post-market validation entries found to learn from.")
@@ -92,7 +95,7 @@ def run_learning_engine():
 
     # 1. Performance Diagnostics by Category
     category_summary = {}
-    for cat in ['Stock', 'Index', 'Futures']:
+    for cat in ['Stock', 'Index', 'Futures', 'Commodities']:
         sub = df[df['Category'] == cat]
         if not sub.empty:
             mae_close = sub['Close_Abs_Err_Pct'].mean()

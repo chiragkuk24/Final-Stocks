@@ -1,0 +1,45 @@
+name: Stocks Pre-Market Prediction Pipeline (6:30 AM IST)
+
+on:
+  schedule:
+    # Runs Monday through Friday at 01:00 UTC (6:30 AM IST)
+    - cron: '0 1 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-stocks-predictor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Step 1 & 2 — Run Scanner & Fetch Market Breakouts
+        run: |
+          python Initialization.py
+
+      - name: Step 3 & 4 — Run Stocks ML Quant Predictor Engine (6:30 AM IST)
+        run: |
+          python ml_quant_predictor.py
+
+      - name: Commit and Push Updated Stocks Predictions & Web Dashboard Payload
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Final_Breakout_List.xlsx Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 Auto-Update: 6:30 AM IST Stocks Pre-Market Predictions [skip ci]" && git push)

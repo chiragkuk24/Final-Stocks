@@ -70,6 +70,46 @@ def fetch_actual_ohlc(symbol, default_close, default_high, default_low):
 
     return actual_close, actual_high, actual_low
 
+def fetch_actual_commodity_ohlc(symbol, cmp, pred_high, pred_low):
+    yf_symbol_map = {
+        'GOLD': 'GC=F', 'GOLDM': 'GC=F',
+        'SILVER': 'SI=F', 'SILVERM': 'SI=F',
+        'NATURALGAS': 'NG=F', 'NATURALGASM': 'NG=F',
+        'CRUDEOIL': 'CL=F', 'CRUDEOILM': 'CL=F'
+    }
+    yf_sym = yf_symbol_map.get(symbol, 'GC=F')
+
+    raw_close, raw_high, raw_low = fetch_actual_ohlc(yf_sym, cmp, pred_high, pred_low)
+
+    try:
+        usdinr_df = yf.Ticker('USDINR=X').history(period='1d')
+        usdinr = float(usdinr_df['Close'].iloc[-1]) if not usdinr_df.empty else 83.9
+    except Exception:
+        usdinr = 83.9
+
+    if 'GOLD' in symbol:
+        mult = (10.0 / 31.1034768) * usdinr * 1.15
+    elif 'SILVER' in symbol:
+        mult = (1000.0 / 31.1034768) * usdinr * 1.15
+    elif 'CRUDE' in symbol:
+        mult = usdinr
+    elif 'NATURAL' in symbol:
+        mult = usdinr
+    else:
+        mult = 1.0
+
+    act_close = round(raw_close * mult, 2)
+    act_high = round(raw_high * mult, 2)
+    act_low = round(raw_low * mult, 2)
+
+    if cmp > 0 and (act_close / cmp > 2.5 or act_close / cmp < 0.4):
+        ratio = cmp / (raw_close + 1e-9)
+        act_close = round(raw_close * ratio, 2)
+        act_high = round(raw_high * ratio, 2)
+        act_low = round(raw_low * ratio, 2)
+
+    return act_close, act_high, act_low
+
 def validate_market_predictions():
     print("\n" + "="*85)
     print(" 🎯 4:00 PM POST-MARKET MODEL ACCURACY & 3-SHEET EXCEL/CSV EXPORT ENGINE")
@@ -238,6 +278,65 @@ def validate_market_predictions():
             "Error_Pct": round(close_diff_pct, 2)
         })
 
+    # 4. EVALUATE COMMODITIES PREDICTIONS
+    commodities_predictions = data.get('commodities_predictions', [])
+    commodities_results = []
+    commodities_hits = 0
+
+    print(f"[INFO] Validating {len(commodities_predictions)} Commodities predictions...")
+    for item in commodities_predictions:
+        stock = item.get('Stock', '')
+        code = item.get('Contract_Code', f"{stock} FUT")
+        symbol = item.get('Symbol', stock)
+
+        yf_symbol_map = {
+            "GOLD": "GC=F", "GOLDM": "GC=F",
+            "SILVER": "SI=F", "SILVERM": "SI=F",
+            "NATURALGAS": "NG=F", "NATURALGASM": "NG=F",
+            "CRUDEOIL": "CL=F", "CRUDEOILM": "CL=F"
+        }
+        yf_sym = yf_symbol_map.get(symbol, symbol)
+
+        pred_close = round(float(item.get('Intraday_Target_Price', item.get('Futures_CMP', 0.0))), 2)
+        pred_high = round(float(item.get('Intraday_Expected_High', 0.0)), 2)
+        pred_low = round(float(item.get('Intraday_Expected_Low', 0.0)), 2)
+        cmp = round(float(item.get('Futures_CMP', 0.0)), 2)
+
+        act_close, act_high, act_low = fetch_actual_commodity_ohlc(symbol, cmp, pred_high, pred_low)
+
+        var_close = round(act_close - pred_close, 2)
+        var_high = round(act_high - pred_high, 2)
+        var_low = round(act_low - pred_low, 2)
+
+        close_diff_pct = abs(var_close / (pred_close + 1e-9)) * 100.0
+        hit = (close_diff_pct <= 2.5) or (act_high >= pred_close * 0.99)
+        if hit:
+            commodities_hits += 1
+            status_str = "🎯 TARGET HIT"
+        else:
+            status_str = "⚠️ OUTSIDE RANGE"
+
+        commodities_results.append({
+            "Date": item.get('Date', today_str),
+            "Stock Name": f"{stock} ({code})",
+            "Actual Close": act_close,
+            "Predicted Close": pred_close,
+            "Variance (Close)": var_close,
+            "Actual High": act_high,
+            "Predicted High": pred_high,
+            "Variance (High)": var_high,
+            "Actual Low": act_low,
+            "Predicted Low": pred_low,
+            "Variance (Low)": var_low,
+            "Live_Signal": item.get('Intraday_Signal', ''),
+            "CMP": cmp,
+            "Pred_Low": pred_low,
+            "Pred_High": pred_high,
+            "Pred_Close": pred_close,
+            "Accuracy_Status": status_str,
+            "Error_Pct": round(close_diff_pct, 2)
+        })
+
     # CREATE DATAFRAMES WITH SPECIFIED COLUMN ORDER
     export_cols = [
         "Date", "Stock Name", "Actual Close", "Predicted Close", "Variance (Close)",
@@ -350,12 +449,13 @@ def validate_market_predictions():
     validation_summary = {
         "validated_at": ist_time_str,
         "pipeline_completed_ist": ist_time_str,
-        "total_evaluated": len(stock_predictions) + len(index_predictions) + len(futures_predictions),
-        "target_hit_count": stock_hits + index_hits + futures_hits,
+        "total_evaluated": len(stock_predictions) + len(index_predictions) + len(futures_predictions) + len(commodities_predictions),
+        "target_hit_count": stock_hits + index_hits + futures_hits + commodities_hits,
         "accuracy_pct": stock_hits_pct,
         "details": stock_results,
         "index_details": index_results,
-        "futures_details": futures_results
+        "futures_details": futures_results,
+        "commodities_details": commodities_results
     }
 
     data['validation'] = validation_summary

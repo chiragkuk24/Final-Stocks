@@ -38,13 +38,18 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.5;
-    overflow-x: hidden;
     background-image: 
         radial-gradient(at 10% 10%, rgba(0, 230, 153, 0.08) 0px, transparent 50%),
         radial-gradient(at 90% 90%, rgba(0, 191, 255, 0.08) 0px, transparent 50%),
@@ -61,6 +66,8 @@ body {
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-md);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .card-glass-inner {
@@ -68,12 +75,18 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-sm);
     padding: 14px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* App Layout Structure */
 .app-container {
     display: flex;
     min-height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 /* Sidebar Styles */
@@ -274,8 +287,11 @@ body {
 /* Main Content Layout */
 .main-content {
     margin-left: 270px;
-    flex: 1;
-    padding: 30px 40px;
+    width: calc(100% - 270px);
+    max-width: calc(100vw - 270px);
+    box-sizing: border-box;
+    padding: 24px 28px;
+    overflow-x: clip;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -681,29 +697,82 @@ body {
     color: var(--accent-cyan);
 }
 
-/* Table View */
-.table-container {
-    padding: 10px;
-    overflow-x: auto;
+/* Table View Containers & Smooth Horizontal Scrolling */
+.table-container,
+.table-responsive,
+.post-table-wrapper,
+.idx-table-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    display: block !important;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box !important;
+    border-radius: 12px;
+}
+
+/* Custom Smooth Horizontal Scrollbar for Data Tables */
+.table-container::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar,
+.post-table-wrapper::-webkit-scrollbar,
+.idx-table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track,
+.post-table-wrapper::-webkit-scrollbar-track,
+.idx-table-wrapper::-webkit-scrollbar-track {
+    background: rgba(10, 15, 26, 0.6);
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb,
+.post-table-wrapper::-webkit-scrollbar-thumb,
+.idx-table-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(0, 230, 153, 0.4);
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover,
+.post-table-wrapper::-webkit-scrollbar-thumb:hover,
+.idx-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 230, 153, 0.7);
 }
 
 .data-table {
     width: 100%;
+    min-width: 980px;
     border-collapse: collapse;
     text-align: left;
+    table-layout: auto;
 }
 
-.data-table th, .data-table td {
-    padding: 14px 16px;
+.data-table th, 
+.data-table td {
+    padding: 12px 10px;
+    white-space: nowrap;
     border-bottom: 1px solid var(--border-glass);
 }
 
 .data-table th {
     font-family: var(--font-heading);
-    font-size: 12px;
+    font-size: 11.5px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--text-muted);
+}
+
+.data-table th:first-child,
+.data-table td:first-child {
+    padding-left: 14px;
+}
+
+.data-table th:last-child,
+.data-table td:last-child {
+    padding-right: 18px;
 }
 
 .data-table tbody tr:hover {
@@ -1607,8 +1676,11 @@ body {
 /* News Cards Grid */
 .news-grid-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .news-card {
@@ -2108,22 +2180,6 @@ body {
 
 @media (max-width: 900px) {
     .mobile-nav-bar { display: flex; }
-
-    .sidebar {
-        position: fixed;
-        top: 0; left: -280px;
-        width: 260px;
-        height: 100vh;
-        z-index: 1000;
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 6px 0 32px rgba(0, 0, 0, 0.7);
-        padding: 24px 18px;
-        background: #0b1120;
-    }
-
-    .sidebar.mobile-open {
-        left: 0;
-    }
 
     .brand-text, .widget-header, .regime-item .lbl, .sidebar-footer {
         display: block !important;
@@ -2889,17 +2945,21 @@ body {
     .sidebar {
         position: fixed !important;
         top: 0 !important;
-        left: -290px !important;
+        left: 0 !important;
         width: 280px !important;
+        max-width: 85vw !important;
         height: 100vh !important;
-        z-index: 1000 !important;
+        z-index: 1200 !important;
+        transform: translateX(-100%) !important;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        box-shadow: none;
+        box-shadow: none !important;
         background: #0b1120 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     
     .sidebar.mobile-open {
-        transform: translateX(290px) !important;
+        transform: translateX(0) !important;
         box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8) !important;
     }
 
@@ -3212,5 +3272,232 @@ body {
         padding: 12px 8px !important;
     }
 }
+
+/* ==========================================================================
+   Comprehensive Mobile & Tablet Responsiveness System (Screen <= 768px & <= 480px)
+   ========================================================================== */
+
+/* Universal Touch & Mobile Container Fixes */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .app-container {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    /* Mobile Sticky Top Header */
+    .mobile-nav-bar {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1100 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 12px 16px !important;
+        background: rgba(9, 13, 22, 0.92) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid var(--border-glass) !important;
+    }
+
+    .mobile-toggle-btn {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 10px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #fff !important;
+        font-size: 1.2rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+    }
+
+    /* Off-Canvas Sidebar Drawer Handled by Unified 992px Query */
+
+    .sidebar-overlay {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(0, 0, 0, 0.7) !important;
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        z-index: 1150 !important;
+        display: none !important;
+        opacity: 0 !important;
+        transition: opacity 0.3s ease !important;
+    }
+
+    .sidebar-overlay.active {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    /* Navigation Links Touch Target Optimization */
+    .nav-menu {
+        gap: 4px !important;
+    }
+
+    .nav-item {
+        padding: 12px 14px !important;
+        min-height: 44px !important;
+        font-size: 0.92rem !important;
+        border-radius: 10px !important;
+    }
+
+    /* Main Content Spacing */
+    .main-content {
+        margin-left: 0 !important;
+        padding: 12px 10px 30px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Top Disclaimer Banner */
+    .top-header {
+        margin-bottom: 14px !important;
+        padding: 10px 12px !important;
+    }
+
+    .disclaimer-text {
+        font-size: 0.75rem !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Section Headers */
+    .us-market-header,
+    .news-scanner-header,
+    .futures-header,
+    .commodities-header,
+    .post-market-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .us-market-header h2,
+    .news-scanner-header h2,
+    .futures-header h2,
+    .commodities-header h2,
+    .post-market-header h2 {
+        font-size: 1.15rem !important;
+        line-height: 1.3 !important;
+    }
+
+    .subtitle {
+        font-size: 0.8rem !important;
+    }
+
+    /* Filter Controls & Search Box Stack */
+    .controls-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .filter-group {
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        padding-bottom: 6px !important;
+        width: 100% !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-snap-type: x mandatory !important;
+    }
+
+    .filter-btn {
+        flex: 0 0 auto !important;
+        padding: 8px 14px !important;
+        font-size: 0.8rem !important;
+        min-height: 38px !important;
+        scroll-snap-align: start !important;
+    }
+
+    .search-box {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .search-box input {
+        font-size: 0.88rem !important;
+        padding: 10px 14px 10px 38px !important;
+        min-height: 42px !important;
+    }
+
+    /* Mobile Data Tables Smooth Scroll */
+    .table-responsive,
+    .post-table-wrapper,
+    .idx-table-wrapper {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin-bottom: 14px !important;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 8px !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap !important;
+    }
+
+    /* KPI Summary Grids */
+    .kpi-grid,
+    .post-kpi-grid,
+    .news-kpi-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .kpi-card,
+    .post-kpi-card,
+    .news-kpi-card {
+        padding: 12px 10px !important;
+    }
+}
+
+/* Extra Small Mobile Devices (<= 480px) */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 8px 6px 24px 6px !important;
+    }
+
+    .kpi-grid,
+    .post-kpi-grid,
+    .news-kpi-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .us-market-header h2,
+    .news-scanner-header h2,
+    .futures-header h2,
+    .commodities-header h2 {
+        font-size: 1.05rem !important;
+    }
+
+    .modal-card.tier-3-modal {
+        width: 99vw !important;
+        max-width: 99vw !important;
+        padding: 10px 6px !important;
+        border-radius: 10px !important;
+    }
+
+    .tier-tab-btn {
+        padding: 6px 10px !important;
+        font-size: 0.72rem !important;
+    }
+}
+
 
 
