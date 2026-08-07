@@ -1,67 +1,67 @@
 {
-  "updated_at": "2026-08-06 12:27:51",
+  "updated_at": "2026-08-07 00:47:02",
   "total_evaluations_analyzed": 54,
-  "overall_accuracy_pct": 61.1,
-  "overall_mae_close_pct": 2.32,
+  "overall_accuracy_pct": 66.7,
+  "overall_mae_close_pct": 2.19,
   "category_summary": {
     "Stock": {
       "count": 22,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 1.22,
-      "bias_close_pct": -1.17,
-      "mae_high_pct": 0.61,
+      "mae_close_pct": 1.09,
+      "bias_close_pct": -1.03,
+      "mae_high_pct": 0.63,
       "mae_low_pct": 1.32
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.0,
-      "bias_close_pct": 0.0,
-      "mae_high_pct": 0.1,
-      "mae_low_pct": 0.1
+      "mae_close_pct": 0.3,
+      "bias_close_pct": -0.3,
+      "mae_high_pct": 0.23,
+      "mae_low_pct": 0.53
     },
     "Futures": {
       "count": 22,
-      "accuracy_pct": 13.6,
-      "mae_close_pct": 3.85,
-      "bias_close_pct": -3.85,
+      "accuracy_pct": 18.2,
+      "mae_close_pct": 3.71,
+      "bias_close_pct": -3.71,
       "mae_high_pct": 1.7,
-      "mae_low_pct": 0.87
+      "mae_low_pct": 0.88
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 75.0,
-      "mae_close_pct": 1.69,
-      "bias_close_pct": -1.69,
-      "mae_high_pct": 1.13,
-      "mae_low_pct": 0.13
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 1.49,
+      "bias_close_pct": -1.49,
+      "mae_high_pct": 2.04,
+      "mae_low_pct": 1.38
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b958063.65 landed within 0.00% variance of Predicted Close \u20b958063.65.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b924636.0 landed within 0.00% variance of Predicted Close \u20b924636.0.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b924624.65 landed within 0.05% variance of Predicted Close \u20b924636.0.",
       "High Directional Precision in Stock setup 'CIPLA': Actual Close \u20b91477.0 landed within 0.05% variance of Predicted Close \u20b91476.19.",
+      "High Directional Precision in Stock setup 'ULTRACEMCO': Actual Close \u20b912190.0 landed within 0.07% variance of Predicted Close \u20b912181.82.",
       "High Directional Precision in Stock setup 'M&M': Actual Close \u20b93406.0 landed within 0.14% variance of Predicted Close \u20b93410.87.",
-      "High Directional Precision in Stock setup 'ETERNAL': Actual Close \u20b9316.25 landed within 0.44% variance of Predicted Close \u20b9317.64."
+      "High Directional Precision in Commodities setup 'Crude Oil (AUG-2026 FUT)': Actual Close \u20b97443.7 landed within 0.17% variance of Predicted Close \u20b97456.2."
     ],
     "what_went_wrong": [
       "Variance Outlier in Futures setup 'GODREJPROP (AUG-2026 FUT)': Overestimated target by 6.09% (Actual \u20b92081.9 vs Predicted \u20b92216.97).",
       "Variance Outlier in Futures setup 'COFORGE (AUG-2026 FUT)': Overestimated target by 5.79% (Actual \u20b91772.8 vs Predicted \u20b91881.68).",
-      "Variance Outlier in Futures setup 'DIXON (AUG-2026 FUT)': Overestimated target by 5.47% (Actual \u20b914200.0 vs Predicted \u20b915022.36).",
       "Variance Outlier in Futures setup 'IEX (AUG-2026 FUT)': Overestimated target by 5.26% (Actual \u20b9128.83 vs Predicted \u20b9135.98).",
-      "Variance Outlier in Futures setup 'TECHM (AUG-2026 FUT)': Overestimated target by 5.10% (Actual \u20b91632.2 vs Predicted \u20b91719.93)."
+      "Variance Outlier in Futures setup 'NAUKRI (AUG-2026 FUT)': Overestimated target by 5.04% (Actual \u20b91240.0 vs Predicted \u20b91305.82).",
+      "Variance Outlier in Futures setup 'PGEL (AUG-2026 FUT)': Overestimated target by 4.91% (Actual \u20b9609.75 vs Predicted \u20b9641.22)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.29% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.11%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 0.91%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.17% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.26%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.12%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -2.294,
-    "overall_high_bias_pct": -0.927,
-    "overall_low_bias_pct": 0.786,
+    "overall_close_bias_pct": -2.165,
+    "overall_high_bias_pct": -1.063,
+    "overall_low_bias_pct": 0.88,
     "symbol_bias_offsets": {
       "360ONE": -0.697,
       "360ONE (AUG-2026 FUT)": -3.654,
@@ -69,7 +69,7 @@
       "ASIANPAINT (AUG-2026 FUT)": -3.773,
       "BAJAJFINSV": 0.504,
       "BAJAJFINSV (AUG-2026 FUT)": -1.767,
-      "BANK NIFTY": 0.0,
+      "BANK NIFTY": -0.557,
       "CAMS": -0.705,
       "CAMS (AUG-2026 FUT)": -3.508,
       "CIPLA": 0.055,
@@ -78,18 +78,18 @@
       "COFORGE (AUG-2026 FUT)": -5.786,
       "CONCOR": -0.746,
       "CONCOR (AUG-2026 FUT)": -3.398,
-      "Crude Oil (AUG-2026 FUT)": -2.928,
-      "Crude Oil Mini (AUG-2026 FUT)": -2.928,
-      "DIXON": -2.421,
-      "DIXON (AUG-2026 FUT)": -5.474,
-      "EICHERMOT": -2.228,
-      "EICHERMOT (AUG-2026 FUT)": -4.084,
+      "Crude Oil (AUG-2026 FUT)": -0.168,
+      "Crude Oil Mini (AUG-2026 FUT)": -0.168,
+      "DIXON": -1.665,
+      "DIXON (AUG-2026 FUT)": -4.742,
+      "EICHERMOT": -1.995,
+      "EICHERMOT (AUG-2026 FUT)": -3.856,
       "ETERNAL": -0.438,
       "ETERNAL (AUG-2026 FUT)": -3.65,
       "GODREJPROP": -2.455,
       "GODREJPROP (AUG-2026 FUT)": -6.093,
-      "Gold (SEP-2026 FUT)": -1.201,
-      "Gold Mini (SEP-2026 FUT)": -1.201,
+      "Gold (SEP-2026 FUT)": -1.614,
+      "Gold Mini (SEP-2026 FUT)": -1.614,
       "IEX": -2.083,
       "IEX (AUG-2026 FUT)": -5.258,
       "INDHOTEL": -1.018,
@@ -100,9 +100,9 @@
       "M&M (AUG-2026 FUT)": -2.714,
       "NAUKRI": -2.082,
       "NAUKRI (AUG-2026 FUT)": -5.041,
-      "NIFTY 50": 0.0,
-      "Natural Gas (AUG-2026 FUT)": -0.795,
-      "Natural Gas Mini (AUG-2026 FUT)": -0.795,
+      "NIFTY 50": -0.046,
+      "Natural Gas (AUG-2026 FUT)": -2.013,
+      "Natural Gas Mini (AUG-2026 FUT)": -2.013,
       "PERSISTENT": -0.566,
       "PERSISTENT (AUG-2026 FUT)": -3.944,
       "PGEL": -1.226,
@@ -111,12 +111,12 @@
       "PNB (AUG-2026 FUT)": -2.124,
       "RECLTD": -0.75,
       "RECLTD (AUG-2026 FUT)": -2.901,
-      "Silver (SEP-2026 FUT)": -1.853,
-      "Silver Mini (SEP-2026 FUT)": -1.853,
-      "TECHM": -2.522,
-      "TECHM (AUG-2026 FUT)": -5.101,
-      "ULTRACEMCO": -0.877,
-      "ULTRACEMCO (AUG-2026 FUT)": -2.506
+      "Silver (SEP-2026 FUT)": -2.158,
+      "Silver Mini (SEP-2026 FUT)": -2.158,
+      "TECHM": -1.459,
+      "TECHM (AUG-2026 FUT)": -4.066,
+      "ULTRACEMCO": 0.067,
+      "ULTRACEMCO (AUG-2026 FUT)": -1.577
     }
   }
 }
