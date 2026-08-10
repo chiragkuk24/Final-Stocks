@@ -1651,8 +1651,32 @@ def main():
         results, index_predictions, futures_results, commodities_results
     )
 
+    def get_signal_category_rank(sig):
+        if not sig:
+            return 3
+        s = str(sig).upper()
+        if 'LONG BREAKOUT' in s or 'LONGBREAKOUT' in s or 'HIGH CONVICTION' in s or 'HIGH' in s:
+            return 1
+        elif 'SCALP' in s or 'NEUTRAL' in s or 'MODERATE' in s:
+            return 2
+        else:
+            return 3
+
+    # Sort stock predictions by signal rank and highest win probability
+    for r in results:
+        r['_rank'] = get_signal_category_rank(r.get('Live_Signal', ''))
+    results.sort(key=lambda x: (x['_rank'], -float(x.get('Final_Win_Probability_%', 0))))
+    for r in results:
+        r.pop('_rank', None)
+
+    # Sort futures predictions by signal rank and highest win probability
+    for f in futures_results:
+        f['_rank'] = get_signal_category_rank(f.get('Intraday_Signal', ''))
+    futures_results.sort(key=lambda x: (x['_rank'], -float(x.get('Intraday_Win_Probability_%', 0))))
+    for f in futures_results:
+        f.pop('_rank', None)
+
     df_results = pd.DataFrame(results)
-    df_results = df_results.sort_values(by=['Expected_Value_EV_%', 'Final_Win_Probability_%'], ascending=[False, False])
 
     print("\n" + "="*110)
     print(" 🎯 LIVE TRADING ORDER EXECUTION & PRECISION REPORT")

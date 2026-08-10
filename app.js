@@ -395,15 +395,49 @@ function initApp() {
         }).join('');
     }
 
+    // Signal Category Rank & Probability Sorting Helper
+    function getSignalCategoryRank(signalStr) {
+        if (!signalStr) return 3;
+        const sig = String(signalStr).toUpperCase();
+        if (sig.includes('LONG BREAKOUT') || sig.includes('LONGBREAKOUT') || sig.includes('HIGH CONVICTION') || sig.includes('HIGH')) {
+            return 1; // 1st Priority: INTRADAY LONGBREAKOUT / HIGH CONVICTION
+        } else if (sig.includes('SCALP') || sig.includes('NEUTRAL') || sig.includes('MODERATE')) {
+            return 2; // 2nd Priority: Intraday Scalp / Neutral / Moderate
+        } else {
+            return 3; // 3rd Priority: Intraday Avoid / Hold
+        }
+    }
+
+    function sortPredictionsBySignalAndProb(list) {
+        if (!Array.isArray(list)) return [];
+        return [...list].sort((a, b) => {
+            const sigA = a.Live_Signal || a.Intraday_Signal || a.Signal || '';
+            const sigB = b.Live_Signal || b.Intraday_Signal || b.Signal || '';
+            const rankA = getSignalCategoryRank(sigA);
+            const rankB = getSignalCategoryRank(sigB);
+
+            if (rankA !== rankB) {
+                return rankA - rankB; // Category Order: 1 (Long Breakout), 2 (Scalp/Neutral), 3 (Avoid)
+            }
+
+            const probA = Number(a['Final_Win_Probability_%'] ?? a['Intraday_Win_Probability_%'] ?? a['Win_Probability_%'] ?? 0);
+            const probB = Number(b['Final_Win_Probability_%'] ?? b['Intraday_Win_Probability_%'] ?? b['Win_Probability_%'] ?? 0);
+
+            return probB - probA; // Within same category: Highest probability 1st
+        });
+    }
+
     // Filter & Search Logic
     function getFilteredPredictions() {
         if (!dashboardData || !dashboardData.predictions) return [];
 
-        return dashboardData.predictions.filter(p => {
-            const matchesFilter = currentFilter === 'ALL' || p.Live_Signal.includes(currentFilter.replace('🟢 ', '').replace('🟡 ', '').replace('🔴 ', ''));
-            const matchesSearch = p.Stock.toLowerCase().includes(currentSearch.toLowerCase());
+        const filtered = dashboardData.predictions.filter(p => {
+            const matchesFilter = currentFilter === 'ALL' || (p.Live_Signal || '').includes(currentFilter.replace('🟢 ', '').replace('🟡 ', '').replace('🔴 ', ''));
+            const matchesSearch = (p.Stock || '').toLowerCase().includes(currentSearch.toLowerCase());
             return matchesFilter && matchesSearch;
         });
+
+        return sortPredictionsBySignalAndProb(filtered);
     }
 
     function renderFilteredView() {
@@ -1970,6 +2004,8 @@ function initApp() {
             }
             return true;
         });
+
+        filtered = sortPredictionsBySignalAndProb(filtered);
         const futMobileCards = document.getElementById('fut-mobile-cards');
         const futCardsContainer = document.getElementById('fut-cards-container');
 
@@ -2033,7 +2069,7 @@ function initApp() {
                                 <strong class="green-text">TP: ₹${item.Intraday_Target_Price.toLocaleString('en-IN')}</strong> | <strong class="red-text">SL: ₹${item.Intraday_Stop_Loss.toLocaleString('en-IN')}</strong>
                             </div>
                             <div>
-                                <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Expected High / Low:</span>
+                                <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Expected Low / High:</span>
                                 <strong class="red-text">L: ₹${item.Intraday_Expected_Low.toLocaleString('en-IN')}</strong> - <strong class="green-text">H: ₹${item.Intraday_Expected_High.toLocaleString('en-IN')}</strong>
                             </div>
                             <div>
@@ -2369,8 +2405,8 @@ function initApp() {
                                     <strong class="green-text">TGT: ₹${safeFmt(c.Intraday_Target_Price)}</strong> | <strong class="red-text">SL: ₹${safeFmt(c.Intraday_Stop_Loss)}</strong>
                                 </div>
                                 <div>
-                                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Expected High / Low:</span>
-                                    <strong class="green-text">H: ₹${safeFmt(c.Intraday_Expected_High)}</strong> - <strong class="red-text">L: ₹${safeFmt(c.Intraday_Expected_Low)}</strong>
+                                    <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Expected Low / High:</span>
+                                    <strong class="red-text">L: ₹${safeFmt(c.Intraday_Expected_Low)}</strong> - <strong class="green-text">H: ₹${safeFmt(c.Intraday_Expected_High)}</strong>
                                 </div>
                                 <div>
                                     <span style="color: var(--text-muted); font-size: 0.72rem; display: block;">Win Prob & EV:</span>
