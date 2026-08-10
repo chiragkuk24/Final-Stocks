@@ -46,10 +46,14 @@ import warnings
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
-import yfinance as yf
-from scipy import stats
+import numpy as np  # type: ignore # pyright: ignore[reportMissingImports]
+import pandas as pd  # type: ignore # pyright: ignore[reportMissingImports]
+import yfinance as yf  # type: ignore # pyright: ignore[reportMissingImports]
+try:
+    from scipy import stats  # type: ignore # pyright: ignore[reportMissingImports]
+    HAS_SCIPY = True
+except ImportError:
+    HAS_SCIPY = False
 from sklearn.ensemble import (ExtraTreesClassifier, ExtraTreesRegressor,
                               GradientBoostingClassifier,
                               GradientBoostingRegressor, RandomForestClassifier,
@@ -60,7 +64,11 @@ from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.neural_network import MLPClassifier, MLPRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC, SVR
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+try:
+    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  # type: ignore # pyright: ignore[reportMissingImports]
+    HAS_VADER = True
+except ImportError:
+    HAS_VADER = False
 
 # Suppress noisy warnings
 logging.getLogger('yfinance').setLevel(logging.CRITICAL)
@@ -68,12 +76,50 @@ warnings.filterwarnings('ignore')
 
 # PyTorch Deep Learning Imports
 try:
-    import torch
-    import torch.nn as nn
-    import torch.optim as optim
+    import torch  # type: ignore # pyright: ignore[reportMissingImports]
+    import torch.nn as nn  # type: ignore # pyright: ignore[reportMissingImports]
+    import torch.optim as optim  # type: ignore # pyright: ignore[reportMissingImports]
     HAS_TORCH = True
 except ImportError:
     HAS_TORCH = False
+
+if HAS_TORCH:
+    class StockLSTM(nn.Module):
+        def __init__(self, input_dim, hidden_dim=32, num_layers=1):
+            super(StockLSTM, self).__init__()
+            self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
+            self.fc = nn.Linear(hidden_dim, 1)
+
+        def forward(self, x):
+            out, _ = self.lstm(x)
+            out = self.fc(out[:, -1, :])
+            return out.squeeze(-1)
+
+    def train_pytorch_lstm(X_train_scaled, y_train_vals, X_test_scaled, X_latest_scaled, epochs=20):
+        X_train_t = torch.tensor(X_train_scaled, dtype=torch.float32).unsqueeze(1)
+        y_train_t = torch.tensor(y_train_vals, dtype=torch.float32)
+        X_test_t = torch.tensor(X_test_scaled, dtype=torch.float32).unsqueeze(1)
+        X_latest_t = torch.tensor(X_latest_scaled, dtype=torch.float32).unsqueeze(1)
+
+        model = StockLSTM(input_dim=X_train_scaled.shape[1])
+        criterion = nn.MSELoss()
+        optimizer = optim.Adam(model.parameters(), lr=0.01)
+
+        model.train()
+        for epoch in range(epochs):
+            optimizer.zero_grad()
+            outputs = model(X_train_t)
+            loss = criterion(outputs, y_train_t)
+            loss.backward()
+            optimizer.step()
+
+        model.eval()
+        with torch.no_grad():
+            test_preds = model(X_test_t).numpy()
+            latest_pred = model(X_latest_t).numpy()[0]
+
+        return test_preds, float(latest_pred)
+
 
 BASE_DIR = Path(__file__).parent
 DB_PATH = BASE_DIR / "news.db"
@@ -306,8 +352,12 @@ def build_technical_and_quant_features(df: pd.DataFrame, india_vix_val: float) -
         if len(series) < 10 or series.isnull().any():
             return 0.0
         x = np.arange(len(series))
-        slope, _, _, _, _ = stats.linregress(x, series.values)
-        return slope
+        if HAS_SCIPY:
+            slope, _, _, _, _ = stats.linregress(x, series.values)
+            return slope
+        else:
+            poly = np.polyfit(x, series.values, 1)
+            return poly[0]
 
     data['Slope_10d'] = close.rolling(10).apply(calc_slope, raw=False)
 
