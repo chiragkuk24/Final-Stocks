@@ -1,16 +1,16 @@
-name: Stocks Pre-Market Prediction Pipeline (6:30 AM IST)
+name: Pre-Market Pipeline (5:30 AM IST)
 
 on:
   schedule:
-    # Runs Monday through Friday at 01:00 UTC (6:30 AM IST)
-    - cron: '0 1 * * 1-5'
+    # Runs Monday through Saturday at 00:00 UTC (5:30 AM IST)
+    - cron: '0 0 * * 1-6'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  run-stocks-predictor:
+  run-premarket-530am:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,17 +29,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Step 1 & 2 — Run Scanner & Fetch Market Breakouts
+      - name: Run Initialization Scanner
         run: |
           python Initialization.py
 
-      - name: Step 3 & 4 — Run Stocks ML Quant Predictor Engine (6:30 AM IST)
+      - name: Run US Market News Scanner
+        run: |
+          python us_market_news_scanner.py
+
+      - name: Run Stocks & Futures ML Quant Predictor Engine
         run: |
           python ml_quant_predictor.py
 
-      - name: Commit and Push Updated Stocks Predictions & Web Dashboard Payload
+      - name: Commit and Push Updated Predictions & Web Payload
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add Final_Breakout_List.xlsx Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 Auto-Update: 6:30 AM IST Stocks Pre-Market Predictions [skip ci]" && git pull --rebase origin main && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 Auto-Update: 5:30 AM IST Pre-Market Predictions & Scanner [skip ci]" && git pull --rebase origin main && git push)

@@ -1,16 +1,16 @@
-name: MCX Commodities ML Prediction & News Pipeline (3:30 PM IST)
+name: MCX Commodities ML Prediction (3:30 PM IST)
 
 on:
   schedule:
-    # Runs Monday through Friday at 10:00 UTC (3:30 PM IST)
-    - cron: '0 10 * * 1-5'
+    # Runs Monday through Saturday at 10:00 UTC (3:30 PM IST)
+    - cron: '0 10 * * 1-6'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  run-commodities-predictor:
+  run-mcx-prediction-330pm:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,13 +29,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Commodities ML Quant Predictor & Global News Engine (3:30 PM IST)
+      - name: Run MCX Commodities ML Quant Predictor Engine
         run: |
           python ml_quant_predictor.py
 
-      - name: Commit and Push Updated Commodities Predictions & Web Dashboard Payload
+      - name: Commit and Push Updated MCX Predictions & Payload
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add Breakout_ML_Quant_Predictions.xlsx dashboard_data.json data.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🪙 Auto-Update: 3:30 PM IST MCX Commodities Predictions & Geopolitical Risk News [skip ci]" && git pull --rebase origin main && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🪙 Auto-Update: 3:30 PM IST MCX Commodities ML Predictions [skip ci]" && git pull --rebase origin main && git push)
