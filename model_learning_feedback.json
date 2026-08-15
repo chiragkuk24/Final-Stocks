@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-08-15 10:49:22",
+  "updated_at": "2026-08-15 19:48:28",
   "total_evaluations_analyzed": 70,
   "overall_accuracy_pct": 80.0,
-  "overall_mae_close_pct": 2.4,
+  "overall_mae_close_pct": 2.44,
   "category_summary": {
     "Stock": {
       "count": 30,
-      "accuracy_pct": 96.7,
-      "mae_close_pct": 1.88,
-      "bias_close_pct": -0.73,
-      "mae_high_pct": 1.35,
-      "mae_low_pct": 1.21
+      "accuracy_pct": 93.3,
+      "mae_close_pct": 2.1,
+      "bias_close_pct": -0.44,
+      "mae_high_pct": 1.63,
+      "mae_low_pct": 1.46
     },
     "Index": {
       "count": 2,
@@ -22,11 +22,11 @@
     },
     "Futures": {
       "count": 30,
-      "accuracy_pct": 56.7,
-      "mae_close_pct": 3.35,
-      "bias_close_pct": -3.04,
-      "mae_high_pct": 1.2,
-      "mae_low_pct": 0.81
+      "accuracy_pct": 60.0,
+      "mae_close_pct": 3.24,
+      "bias_close_pct": -2.76,
+      "mae_high_pct": 1.39,
+      "mae_low_pct": 1.03
     },
     "Commodities": {
       "count": 8,
@@ -42,31 +42,31 @@
       "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b957491.1 landed within 0.00% variance of Predicted Close \u20b957491.1.",
       "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b924366.0 landed within 0.00% variance of Predicted Close \u20b924366.0.",
       "High Directional Precision in Stock setup '360ONE': Actual Close \u20b91180.0 landed within 0.02% variance of Predicted Close \u20b91180.22.",
-      "High Directional Precision in Futures setup 'HINDALCO (AUG-2026 FUT)': Actual Close \u20b91029.5 landed within 0.13% variance of Predicted Close \u20b91028.21.",
-      "High Directional Precision in Stock setup 'ABB': Actual Close \u20b97649.0 landed within 0.13% variance of Predicted Close \u20b97639.02."
+      "High Directional Precision in Stock setup 'UNIONBANK': Actual Close \u20b9186.5 landed within 0.06% variance of Predicted Close \u20b9186.39.",
+      "High Directional Precision in Futures setup 'HEROMOTOCO (AUG-2026 FUT)': Actual Close \u20b95850.0 landed within 0.09% variance of Predicted Close \u20b95844.85."
     ],
     "what_went_wrong": [
       "Variance Outlier in Futures setup 'PGEL (AUG-2026 FUT)': Overestimated target by 9.19% (Actual \u20b9601.0 vs Predicted \u20b9661.83).",
       "Variance Outlier in Futures setup 'CONCOR (AUG-2026 FUT)': Overestimated target by 9.03% (Actual \u20b9527.0 vs Predicted \u20b9579.31).",
       "Variance Outlier in Futures setup 'ETERNAL (AUG-2026 FUT)': Overestimated target by 8.75% (Actual \u20b9318.5 vs Predicted \u20b9349.05).",
-      "Variance Outlier in Futures setup 'M&M (AUG-2026 FUT)': Overestimated target by 5.89% (Actual \u20b93428.3 vs Predicted \u20b93642.9).",
-      "Variance Outlier in Futures setup 'PERSISTENT (AUG-2026 FUT)': Overestimated target by 5.55% (Actual \u20b95580.0 vs Predicted \u20b95907.99)."
+      "Variance Outlier in Stock setup 'NATIONALUM': Underestimated target by 6.01% (Actual \u20b9400.5 vs Predicted \u20b9377.79).",
+      "Variance Outlier in Futures setup 'M&M (AUG-2026 FUT)': Overestimated target by 5.89% (Actual \u20b93428.3 vs Predicted \u20b93642.9)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.77% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.22%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 0.95%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.52% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.42%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.15%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -1.772,
-    "overall_high_bias_pct": -0.729,
-    "overall_low_bias_pct": 0.151,
+    "overall_close_bias_pct": -1.524,
+    "overall_high_bias_pct": -0.513,
+    "overall_low_bias_pct": 0.329,
     "symbol_bias_offsets": {
       "360ONE": -0.019,
       "360ONE (AUG-2026 FUT)": -2.723,
-      "ABB": 0.131,
-      "ABB (AUG-2026 FUT)": -2.452,
+      "ABB": 0.929,
+      "ABB (AUG-2026 FUT)": -1.674,
       "ASHOKLEY": -2.261,
       "ASHOKLEY (AUG-2026 FUT)": -4.935,
       "BAJAJFINSV": 0.939,
@@ -78,8 +78,8 @@
       "BHARTIARTL (AUG-2026 FUT)": 2.61,
       "CIPLA": 0.2,
       "CIPLA (AUG-2026 FUT)": -1.121,
-      "COFORGE": -0.621,
-      "COFORGE (AUG-2026 FUT)": -3.839,
+      "COFORGE": 0.312,
+      "COFORGE (AUG-2026 FUT)": -2.937,
       "CONCOR": -6.511,
       "CONCOR (AUG-2026 FUT)": -9.03,
       "Crude Oil (AUG-2026 FUT)": -2.096,
@@ -92,8 +92,8 @@
       "ETERNAL (AUG-2026 FUT)": -8.752,
       "Gold (SEP-2026 FUT)": -0.915,
       "Gold Mini (SEP-2026 FUT)": -0.915,
-      "HEROMOTOCO": 1.505,
-      "HEROMOTOCO (AUG-2026 FUT)": -0.938,
+      "HEROMOTOCO": 2.557,
+      "HEROMOTOCO (AUG-2026 FUT)": 0.088,
       "HINDALCO": 2.536,
       "HINDALCO (AUG-2026 FUT)": 0.125,
       "HYUNDAI": -0.759,
@@ -106,8 +106,8 @@
       "LT (AUG-2026 FUT)": -2.46,
       "M&M": -3.67,
       "M&M (AUG-2026 FUT)": -5.891,
-      "NATIONALUM": -0.474,
-      "NATIONALUM (AUG-2026 FUT)": -3.812,
+      "NATIONALUM": 6.011,
+      "NATIONALUM (AUG-2026 FUT)": 2.456,
       "NAUKRI": -1.926,
       "NAUKRI (AUG-2026 FUT)": -5.168,
       "NIFTY 50": 0.0,
@@ -129,8 +129,8 @@
       "Silver Mini (SEP-2026 FUT)": -1.185,
       "TECHM": -1.968,
       "TECHM (AUG-2026 FUT)": -4.189,
-      "UNIONBANK": 0.531,
-      "UNIONBANK (AUG-2026 FUT)": -1.213,
+      "UNIONBANK": 0.059,
+      "UNIONBANK (AUG-2026 FUT)": -1.677,
       "UNOMINDA": -1.633,
       "UNOMINDA (AUG-2026 FUT)": -4.118
     }
