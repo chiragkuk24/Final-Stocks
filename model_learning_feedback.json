@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-09-14 16:28:40",
+  "updated_at": "2026-09-14 22:41:44",
   "total_evaluations_analyzed": 32,
-  "overall_accuracy_pct": 81.2,
-  "overall_mae_close_pct": 4.06,
+  "overall_accuracy_pct": 68.8,
+  "overall_mae_close_pct": 4.12,
   "category_summary": {
     "Stock": {
       "count": 11,
@@ -30,11 +30,11 @@
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 100.0,
-      "mae_close_pct": 2.37,
-      "bias_close_pct": -2.37,
-      "mae_high_pct": 0.98,
-      "mae_low_pct": 0.55
+      "accuracy_pct": 50.0,
+      "mae_close_pct": 2.64,
+      "bias_close_pct": -2.64,
+      "mae_high_pct": 2.55,
+      "mae_low_pct": 1.46
     }
   },
   "diagnostics": {
@@ -50,30 +50,30 @@
       "Variance Outlier in Futures setup 'MOTILALOFS (SEP-2026 FUT)': Overestimated target by 9.93% (Actual \u20b91026.5 vs Predicted \u20b91139.61).",
       "Variance Outlier in Futures setup 'PETRONET (SEP-2026 FUT)': Overestimated target by 4.91% (Actual \u20b9287.2 vs Predicted \u20b9302.02).",
       "Variance Outlier in Futures setup 'LICHSGFIN (SEP-2026 FUT)': Overestimated target by 4.39% (Actual \u20b9562.9 vs Predicted \u20b9588.73).",
-      "Variance Outlier in Futures setup 'APLAPOLLO (SEP-2026 FUT)': Overestimated target by 3.16% (Actual \u20b92153.5 vs Predicted \u20b92223.85)."
+      "Variance Outlier in Commodities setup 'Crude Oil (SEP-2026 FUT)': Overestimated target by 3.76% (Actual \u20b99738.39 vs Predicted \u20b910118.47)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.35% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 2.23%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 0.71%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.42% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 2.62%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 0.94%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -2.352,
-    "overall_high_bias_pct": -2.023,
-    "overall_low_bias_pct": 0.286,
+    "overall_close_bias_pct": -2.418,
+    "overall_high_bias_pct": -2.414,
+    "overall_low_bias_pct": 0.514,
     "symbol_bias_offsets": {
       "APLAPOLLO": -0.527,
       "APLAPOLLO (SEP-2026 FUT)": -3.163,
       "BANK NIFTY": 0.0,
       "BHEL": -0.506,
       "BHEL (SEP-2026 FUT)": -3.135,
-      "Crude Oil (SEP-2026 FUT)": -3.331,
-      "Crude Oil Mini (SEP-2026 FUT)": -3.331,
+      "Crude Oil (SEP-2026 FUT)": -3.756,
+      "Crude Oil Mini (SEP-2026 FUT)": -3.756,
       "ETERNAL": 10.837,
       "ETERNAL (SEP-2026 FUT)": 8.685,
-      "Gold (OCT-2026 FUT)": -1.956,
-      "Gold Mini (OCT-2026 FUT)": -1.956,
+      "Gold (OCT-2026 FUT)": -1.999,
+      "Gold Mini (OCT-2026 FUT)": -1.999,
       "KOTAKBANK": 1.335,
       "KOTAKBANK (SEP-2026 FUT)": -0.086,
       "LICHSGFIN": -1.624,
@@ -83,8 +83,8 @@
       "MOTILALOFS": -7.452,
       "MOTILALOFS (SEP-2026 FUT)": -9.925,
       "NIFTY 50": 0.0,
-      "Natural Gas (SEP-2026 FUT)": -1.894,
-      "Natural Gas Mini (SEP-2026 FUT)": -1.894,
+      "Natural Gas (SEP-2026 FUT)": -2.234,
+      "Natural Gas Mini (SEP-2026 FUT)": -2.234,
       "OIL": 3.846,
       "OIL (SEP-2026 FUT)": 1.295,
       "PETRONET": -3.15,
@@ -93,8 +93,8 @@
       "PNB (SEP-2026 FUT)": -0.74,
       "POLICYBZR": 0.469,
       "POLICYBZR (SEP-2026 FUT)": -2.082,
-      "Silver (OCT-2026 FUT)": -2.31,
-      "Silver Mini (OCT-2026 FUT)": -2.31
+      "Silver (OCT-2026 FUT)": -2.555,
+      "Silver Mini (OCT-2026 FUT)": -2.555
     }
   }
 }
