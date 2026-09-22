@@ -1,96 +1,96 @@
 {
-  "updated_at": "2026-09-21 22:47:13",
+  "updated_at": "2026-09-22 15:08:13",
   "total_evaluations_analyzed": 28,
-  "overall_accuracy_pct": 28.6,
-  "overall_mae_close_pct": 9.5,
+  "overall_accuracy_pct": 71.4,
+  "overall_mae_close_pct": 7.94,
   "category_summary": {
     "Stock": {
       "count": 9,
-      "accuracy_pct": 55.6,
-      "mae_close_pct": 9.61,
-      "bias_close_pct": -9.61,
-      "mae_high_pct": 9.45,
-      "mae_low_pct": 1.82
+      "accuracy_pct": 11.1,
+      "mae_close_pct": 9.97,
+      "bias_close_pct": 9.97,
+      "mae_high_pct": 6.95,
+      "mae_low_pct": 2.56
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.24,
-      "bias_close_pct": -0.24,
-      "mae_high_pct": 0.35,
-      "mae_low_pct": 0.27
+      "mae_close_pct": 0.0,
+      "bias_close_pct": 0.0,
+      "mae_high_pct": 0.19,
+      "mae_low_pct": 0.19
     },
     "Futures": {
       "count": 9,
-      "accuracy_pct": 11.1,
-      "mae_close_pct": 11.47,
-      "bias_close_pct": -11.47,
-      "mae_high_pct": 5.86,
-      "mae_low_pct": 2.03
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 7.52,
+      "bias_close_pct": 7.41,
+      "mae_high_pct": 4.99,
+      "mae_low_pct": 2.57
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 0.0,
-      "mae_close_pct": 9.46,
-      "bias_close_pct": -9.46,
-      "mae_high_pct": 5.93,
-      "mae_low_pct": 0.72
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 8.13,
+      "bias_close_pct": 8.13,
+      "mae_high_pct": 6.43,
+      "mae_low_pct": 0.84
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b956358.7 landed within 0.20% variance of Predicted Close \u20b956470.65.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b923346.4 landed within 0.29% variance of Predicted Close \u20b923414.3.",
-      "High Directional Precision in Stock setup 'KOTAKBANK': Actual Close \u20b9412.5 landed within 1.37% variance of Predicted Close \u20b9418.25.",
-      "High Directional Precision in Futures setup 'KOTAKBANK (SEP-2026 FUT)': Actual Close \u20b9412.5 landed within 2.47% variance of Predicted Close \u20b9422.93.",
-      "High Directional Precision in Stock setup 'PNB': Actual Close \u20b9117.27 landed within 7.44% variance of Predicted Close \u20b9126.69."
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b923329.0 landed within 0.00% variance of Predicted Close \u20b923329.0.",
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b956215.55 landed within 0.00% variance of Predicted Close \u20b956215.55.",
+      "High Directional Precision in Futures setup 'KOTAKBANK (SEP-2026 FUT)': Actual Close \u20b9412.65 landed within 0.49% variance of Predicted Close \u20b9414.7.",
+      "High Directional Precision in Stock setup 'KOTAKBANK': Actual Close \u20b9412.65 landed within 0.59% variance of Predicted Close \u20b9410.23.",
+      "High Directional Precision in Futures setup 'APLAPOLLO (SEP-2026 FUT)': Actual Close \u20b92195.0 landed within 5.61% variance of Predicted Close \u20b92078.32."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Futures setup 'MCX (SEP-2026 FUT)': Overestimated target by 23.89% (Actual \u20b93260.0 vs Predicted \u20b94283.34).",
-      "Variance Outlier in Futures setup 'MOTILALOFS (SEP-2026 FUT)': Overestimated target by 12.29% (Actual \u20b91010.0 vs Predicted \u20b91151.52).",
-      "Variance Outlier in Futures setup 'LICHSGFIN (SEP-2026 FUT)': Overestimated target by 11.71% (Actual \u20b9548.15 vs Predicted \u20b9620.83).",
-      "Variance Outlier in Futures setup 'BAJAJHLDNG (SEP-2026 FUT)': Overestimated target by 11.69% (Actual \u20b911217.0 vs Predicted \u20b912702.02).",
-      "Variance Outlier in Futures setup 'APLAPOLLO (SEP-2026 FUT)': Overestimated target by 11.37% (Actual \u20b92270.1 vs Predicted \u20b92561.31)."
+      "Variance Outlier in Stock setup 'MCX': Underestimated target by 26.20% (Actual \u20b93262.6 vs Predicted \u20b92585.25).",
+      "Variance Outlier in Stock setup 'MOTILALOFS': Underestimated target by 10.10% (Actual \u20b91007.0 vs Predicted \u20b9914.61).",
+      "Variance Outlier in Stock setup 'ETERNAL': Underestimated target by 9.90% (Actual \u20b9342.0 vs Predicted \u20b9311.19).",
+      "Variance Outlier in Stock setup 'POLICYBZR': Underestimated target by 9.62% (Actual \u20b91805.0 vs Predicted \u20b91646.63).",
+      "Variance Outlier in Stock setup 'LICHSGFIN': Underestimated target by 9.17% (Actual \u20b9565.0 vs Predicted \u20b9517.55)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 9.50% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 6.64%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.46%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -7.91% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 5.69%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.90%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -9.498,
-    "overall_high_bias_pct": -6.642,
-    "overall_low_bias_pct": -1.246,
+    "overall_close_bias_pct": 7.909,
+    "overall_high_bias_pct": 5.687,
+    "overall_low_bias_pct": 1.902,
     "symbol_bias_offsets": {
-      "APLAPOLLO": -8.83,
-      "APLAPOLLO (SEP-2026 FUT)": -11.37,
-      "BAJAJHLDNG": -10.43,
-      "BAJAJHLDNG (SEP-2026 FUT)": -11.691,
-      "BANK NIFTY": -0.198,
-      "Crude Oil (OCT-2026 FUT)": -10.65,
-      "Crude Oil Mini (OCT-2026 FUT)": -10.65,
-      "ETERNAL": -9.732,
-      "ETERNAL (SEP-2026 FUT)": -11.23,
-      "Gold (OCT-2026 FUT)": -8.831,
-      "Gold Mini (OCT-2026 FUT)": -8.831,
-      "INDHOTEL": -8.279,
-      "INDHOTEL (SEP-2026 FUT)": -9.822,
-      "KOTAKBANK": -1.375,
-      "KOTAKBANK (SEP-2026 FUT)": -2.466,
-      "LICHSGFIN": -9.126,
-      "LICHSGFIN (SEP-2026 FUT)": -11.707,
-      "MCX": -21.39,
-      "MCX (SEP-2026 FUT)": -23.891,
-      "MOTILALOFS": -9.896,
-      "MOTILALOFS (SEP-2026 FUT)": -12.29,
-      "NIFTY 50": -0.29,
-      "Natural Gas (SEP-2026 FUT)": -9.224,
-      "Natural Gas Mini (SEP-2026 FUT)": -9.224,
-      "PNB": -7.435,
-      "PNB (SEP-2026 FUT)": -8.796,
-      "Silver (OCT-2026 FUT)": -9.147,
-      "Silver Mini (OCT-2026 FUT)": -9.147
+      "APLAPOLLO": 8.815,
+      "APLAPOLLO (SEP-2026 FUT)": 5.614,
+      "BANK NIFTY": 0.0,
+      "Crude Oil (OCT-2026 FUT)": 6.973,
+      "Crude Oil Mini (OCT-2026 FUT)": 6.973,
+      "ETERNAL": 9.901,
+      "ETERNAL (SEP-2026 FUT)": 7.975,
+      "Gold (OCT-2026 FUT)": 8.202,
+      "Gold Mini (OCT-2026 FUT)": 8.202,
+      "INDHOTEL": 8.161,
+      "INDHOTEL (SEP-2026 FUT)": 6.371,
+      "KOTAKBANK": 0.59,
+      "KOTAKBANK (SEP-2026 FUT)": -0.494,
+      "LICHSGFIN": 9.168,
+      "LICHSGFIN (SEP-2026 FUT)": 5.754,
+      "MCX": 26.201,
+      "MCX (SEP-2026 FUT)": 22.368,
+      "MOTILALOFS": 10.102,
+      "MOTILALOFS (SEP-2026 FUT)": 7.434,
+      "NIFTY 50": 0.0,
+      "Natural Gas (SEP-2026 FUT)": 9.328,
+      "Natural Gas Mini (SEP-2026 FUT)": 9.328,
+      "PNB": 7.172,
+      "PNB (SEP-2026 FUT)": 5.615,
+      "POLICYBZR": 9.618,
+      "POLICYBZR (SEP-2026 FUT)": 6.054,
+      "Silver (OCT-2026 FUT)": 8.02,
+      "Silver Mini (OCT-2026 FUT)": 8.02
     }
   }
 }
