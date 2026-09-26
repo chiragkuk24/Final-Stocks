@@ -5,8 +5,8 @@
     "VIX_Regime": "LOW_FEAR (Bullish Breakouts)",
     "Macro_Multiplier": 0.97
   },
-  "generated_at": "26-Sep-2026 11:35:09 AM IST",
-  "pipeline_completed_ist": "26-Sep-2026 11:35:09 AM IST",
+  "generated_at": "26-Sep-2026 07:33:24 PM IST",
+  "pipeline_completed_ist": "26-Sep-2026 07:33:24 PM IST",
   "index_predictions": [
     {
       "Index_Name": "NIFTY 50",
@@ -15,7 +15,7 @@
       "Change": 77.4,
       "Change_Pct": 0.34,
       "Bias": "\ud83d\udd34 BEARISH PULLBACK",
-      "Final_Win_Probability_%": 47.1,
+      "Final_Win_Probability_%": 46.1,
       "Target_5D": 23418.19,
       "Support_5D": 22836.41,
       "Next_Day_Expected_Low": 22917.5,
@@ -39,10 +39,10 @@
       "Pivot_R2": 23249.8,
       "Pivot_S1": 23053.4,
       "Pivot_S2": 22966.3,
-      "MC_Expected_High_95CI": 23648.25,
-      "MC_Median_Price": 23154.33,
-      "MC_Expected_Low_95CI": 22702.65,
-      "MC_Win_Probability_%": 52.0,
+      "MC_Expected_High_95CI": 23618.36,
+      "MC_Median_Price": 23153.85,
+      "MC_Expected_Low_95CI": 22700.74,
+      "MC_Win_Probability_%": 51.8,
       "Forecast_5D_Close": [
         23140.5,
         23063.21,
@@ -67,9 +67,9 @@
         23212.1,
         23244.98
       ],
-      "AI_Synthesis": "11 ML & Deep Learning Models project a 5-day \ud83d\udd34 bearish pullback for NIFTY 50 (^NSEI). Current Index Level is 23,140.50 (+0.34%), trading -5.62% relative to 200-day DMA (24,437.40). RSI(14) is at 27.2. Model consensus predicts a 5-day upside target of 23,418.19 with key support at 22,836.41 and a model win probability of 47.1%.",
+      "AI_Synthesis": "11 ML & Deep Learning Models project a 5-day \ud83d\udd34 bearish pullback for NIFTY 50 (^NSEI). Current Index Level is 23,140.50 (+0.34%), trading -5.62% relative to 200-day DMA (24,437.40). RSI(14) is at 27.2. Model consensus predicts a 5-day upside target of 23,418.19 with key support at 22,836.41 and a model win probability of 46.1%.",
       "Technical_Synthesis": "NIFTY 50 (^NSEI) Technical Stack: RSI(14) is currently at 27.22 (Bearish Zone). MACD Line (-240.88) trades below Signal (-222.19) with histogram of -18.69. Index Level (23,140.50) trades -5.62% relative to the 200-day DMA (24,437.40), 50-day DMA (24,013.10), and 30-day DMA (23,818.14). Daily Volatility Envelope ATR(14) is 202.73 pts with Pivot PP at 23,108.05 (R1: 23,195.15, S1: 23,053.40).",
-      "Quant_Synthesis": "1,000 Empirical Monte Carlo Paths for NIFTY 50: 95% Confidence Interval spans from \u20b922,702.65 to \u20b923,648.25 with a median path of \u20b923,154.33. Annualized 20-Day Volatility is 143.7%, 10-Day Slope is -10.14, Sharpe Ratio is -7.41, and TTM Squeeze state is OFF. 11 ML & Deep Learning Ensemble win probability is 47.1%.",
+      "Quant_Synthesis": "1,000 Empirical Monte Carlo Paths for NIFTY 50: 95% Confidence Interval spans from \u20b922,700.74 to \u20b923,618.36 with a median path of \u20b923,153.85. Annualized 20-Day Volatility is 143.7%, 10-Day Slope is -10.14, Sharpe Ratio is -7.41, and TTM Squeeze state is OFF. 11 ML & Deep Learning Ensemble win probability is 46.1%.",
       "Date": "2026-09-25",
       "Next_Day_Expected_Close": 23063.21
     },
@@ -80,7 +80,7 @@
       "Change": 141.9,
       "Change_Pct": 0.26,
       "Bias": "\ud83d\udd34 BEARISH PULLBACK",
-      "Final_Win_Probability_%": 49.3,
+      "Final_Win_Probability_%": 48.4,
       "Target_5D": 56247.36,
       "Support_5D": 54696.48,
       "Next_Day_Expected_Low": 54932.19,
@@ -104,10 +104,10 @@
       "Pivot_R2": 55961.1,
       "Pivot_S1": 55381.9,
       "Pivot_S2": 55183.4,
-      "MC_Expected_High_95CI": 57199.91,
-      "MC_Median_Price": 55607.75,
-      "MC_Expected_Low_95CI": 54252.81,
-      "MC_Win_Probability_%": 51.0,
+      "MC_Expected_High_95CI": 57073.9,
+      "MC_Median_Price": 55580.12,
+      "MC_Expected_Low_95CI": 54053.98,
+      "MC_Win_Probability_%": 50.0,
       "Forecast_5D_Close": [
         55580.4,
         55438.67,
@@ -132,9 +132,9 @@
         55695.05,
         55767.26
       ],
-      "AI_Synthesis": "11 ML & Deep Learning Models project a 5-day \ud83d\udd34 bearish pullback for BANK NIFTY (^NSEBANK). Current Index Level is 55,580.40 (+0.26%), trading -3.16% relative to 200-day DMA (57,246.95). RSI(14) is at 30.8. Model consensus predicts a 5-day upside target of 56,247.36 with key support at 54,696.48 and a model win probability of 49.3%.",
+      "AI_Synthesis": "11 ML & Deep Learning Models project a 5-day \ud83d\udd34 bearish pullback for BANK NIFTY (^NSEBANK). Current Index Level is 55,580.40 (+0.26%), trading -3.16% relative to 200-day DMA (57,246.95). RSI(14) is at 30.8. Model consensus predicts a 5-day upside target of 56,247.36 with key support at 54,696.48 and a model win probability of 48.4%.",
       "Technical_Synthesis": "BANK NIFTY (^NSEBANK) Technical Stack: RSI(14) is currently at 30.79 (Bearish Zone). MACD Line (-371.48) trades below Signal (-299.96) with histogram of -71.53. Index Level (55,580.40) trades -3.16% relative to the 200-day DMA (57,246.95), 50-day DMA (57,209.36), and 30-day DMA (56,999.54). Daily Volatility Envelope ATR(14) is 589.28 pts with Pivot PP at 55,572.25 (R1: 55,770.75, S1: 55,381.90).",
-      "Quant_Synthesis": "1,000 Empirical Monte Carlo Paths for BANK NIFTY: 95% Confidence Interval spans from \u20b954,252.81 to \u20b957,199.91 with a median path of \u20b955,607.75. Annualized 20-Day Volatility is 190.4%, 10-Day Slope is -40.99, Sharpe Ratio is -4.83, and TTM Squeeze state is OFF. 11 ML & Deep Learning Ensemble win probability is 49.3%.",
+      "Quant_Synthesis": "1,000 Empirical Monte Carlo Paths for BANK NIFTY: 95% Confidence Interval spans from \u20b954,053.98 to \u20b957,073.90 with a median path of \u20b955,580.12. Annualized 20-Day Volatility is 190.4%, 10-Day Slope is -40.99, Sharpe Ratio is -4.83, and TTM Squeeze state is OFF. 11 ML & Deep Learning Ensemble win probability is 48.4%.",
       "Date": "2026-09-25",
       "Next_Day_Expected_Close": 55438.67
     }
@@ -158,11 +158,11 @@
       "MACD_Hist": -0.01,
       "ATR_14": 2.03,
       "India_VIX": 12.16,
-      "Final_Win_Probability_%": 47.9,
+      "Final_Win_Probability_%": 47.7,
       "Risk_Reward_Ratio": 0.39,
-      "Expected_Value_EV_%": -0.76,
+      "Expected_Value_EV_%": -0.77,
       "Hist_Backtest_Win_Rate_%": 52.5,
-      "Model_MAE_%": 2.32,
+      "Model_MAE_%": 2.33,
       "Out_Sample_R2": -0.77,
       "Next_Day_Expected_Low": 113.51,
       "Next_Day_Expected_High": 110.44,
@@ -179,9 +179,9 @@
       "Revenue_Growth_%": -6.4,
       "Profit_Margin_%": 38.1,
       "ROE_%": 15.0,
-      "MC_Expected_High_95CI": 119.74,
-      "MC_Expected_Low_95CI": 113.44,
-      "Fundamental_Synthesis": "PNB operates in the Financial Services sector. With an estimated Market Cap of \u20b9134,007.71 Cr., a P/E ratio of 6.10, and YoY Revenue Growth of -6.4%, the company demonstrates strong institutional backing, solid operating profit margins (38.15%), and healthy Return on Equity (14.97%).",
+      "MC_Expected_High_95CI": 119.9,
+      "MC_Expected_Low_95CI": 113.53,
+      "Fundamental_Synthesis": "PNB operates in the Financial Services sector. With an estimated Market Cap of \u20b9134,007.71 Cr., a P/E ratio of 6.07, and YoY Revenue Growth of -6.4%, the company demonstrates strong institutional backing, solid operating profit margins (38.15%), and healthy Return on Equity (14.97%).",
       "Technical_Synthesis": "Technical indicators confirm a Positive CAR Super Breakout. RSI(14) is currently at 50.46 (Consolidation Zone), while MACD Line (0.73) trades below Signal (0.74) with an expanding histogram (-0.01). Moving Averages are aligned in perfect Golden Stack (CMP > 30 DMA > 50 DMA > 200 DMA) with price trading +4.24% above the 200-day DMA (\u20b9112.35). Daily volatility envelope is bounded by ATR(14) of \u20b92.03.",
       "CAR_Synthesis": "Initialization.py scanner logic confirms a CAR (Cumulative Average Return) Super Breakout for PNB. Current Market Price (\u20b9116.60) is positioned above the 30-day DMA (\u20b9116.54), 50-day DMA (\u20b9114.99), and 200-day DMA (\u20b9112.35). The price distance from 200 DMA is +4.24%, indicating a high-conviction institutional momentum stack across short, medium, and long-term trend horizons.",
       "Forecast_5D_Close": [
@@ -228,14 +228,14 @@
       "MACD_Hist": -7.71,
       "ATR_14": 55.71,
       "India_VIX": 12.16,
-      "Final_Win_Probability_%": 46.4,
+      "Final_Win_Probability_%": 46.6,
       "Risk_Reward_Ratio": 0.21,
       "Expected_Value_EV_%": -1.51,
       "Hist_Backtest_Win_Rate_%": 54.1,
       "Model_MAE_%": 4.03,
       "Out_Sample_R2": -0.77,
-      "Next_Day_Expected_Low": 2109.93,
-      "Next_Day_Expected_High": 2062.44,
+      "Next_Day_Expected_Low": 2109.91,
+      "Next_Day_Expected_High": 2062.42,
       "Target_Price": 2011.21,
       "Stop_Loss": 2131.13,
       "Pivot_PP": 2203.4,
@@ -249,8 +249,8 @@
       "Revenue_Growth_%": 8.5,
       "Profit_Margin_%": 5.2,
       "ROE_%": 15.0,
-      "MC_Expected_High_95CI": 2274.49,
-      "MC_Expected_Low_95CI": 2152.83,
+      "MC_Expected_High_95CI": 2283.95,
+      "MC_Expected_Low_95CI": 2155.81,
       "Fundamental_Synthesis": "APLAPOLLO operates in the Basic Materials sector. With an estimated Market Cap of \u20b961,493.01 Cr., a P/E ratio of 49.95, and YoY Revenue Growth of +8.5%, the company demonstrates strong institutional backing, solid operating profit margins (5.23%), and healthy Return on Equity (15.00%).",
       "Technical_Synthesis": "Technical indicators confirm a Positive CAR Super Breakout. RSI(14) is currently at 43.57 (Consolidation Zone), while MACD Line (31.14) trades below Signal (38.84) with an expanding histogram (-7.71). Moving Averages are aligned in perfect Golden Stack (CMP > 30 DMA > 50 DMA > 200 DMA) with price trading +10.88% above the 200-day DMA (\u20b91970.33). Daily volatility envelope is bounded by ATR(14) of \u20b955.71.",
       "CAR_Synthesis": "Initialization.py scanner logic confirms a CAR (Cumulative Average Return) Super Breakout for APLAPOLLO. Current Market Price (\u20b92,214.70) is positioned above the 30-day DMA (\u20b92,166.54), 50-day DMA (\u20b92,057.09), and 200-day DMA (\u20b91,970.33). The price distance from 200 DMA is +10.88%, indicating a high-conviction institutional momentum stack across short, medium, and long-term trend horizons.",
@@ -279,6 +279,76 @@
         2210.55
       ],
       "Next_Day_Expected_Close": 2011.21
+    },
+    {
+      "Date": "2026-09-25",
+      "Stock": "MOTILALOFS",
+      "Sector": "Financial Services",
+      "Market_Cap_Cr": 62046.36,
+      "Live_Signal": "\ud83d\udfe1 MODERATE BUY",
+      "CMP": 1029.0,
+      "Buy_Entry_Range": "\u20b91023.36 - \u20b91037.46",
+      "Max_Chase_Price": 1051.57,
+      "30_DMA": 1005.95,
+      "50_DMA": 960.59,
+      "200_DMA": 854.66,
+      "200_DMA_Dist_%": 19.58,
+      "MACD_Line": 12.13,
+      "MACD_Signal": 15.35,
+      "MACD_Hist": -3.23,
+      "ATR_14": 28.21,
+      "India_VIX": 12.16,
+      "Final_Win_Probability_%": 45.2,
+      "Risk_Reward_Ratio": 0.19,
+      "Expected_Value_EV_%": -1.74,
+      "Hist_Backtest_Win_Rate_%": 50.8,
+      "Model_MAE_%": 3.47,
+      "Out_Sample_R2": -0.77,
+      "Next_Day_Expected_Low": 995.54,
+      "Next_Day_Expected_High": 972.63,
+      "Target_Price": 885.48,
+      "Stop_Loss": 986.69,
+      "Pivot_PP": 1031.8,
+      "Pivot_R1": 1044.2,
+      "Pivot_R2": 1059.4,
+      "RSI_14": 46.8,
+      "CMF_20": 0.17,
+      "Key_Drivers": "Inst. Buying (CMF+) | Low VIX (12.16) | LSTM Deep Net",
+      "News_Sentiment": 0.15,
+      "PE_Ratio": 31.9,
+      "Revenue_Growth_%": 23.9,
+      "Profit_Margin_%": 23.0,
+      "ROE_%": 15.0,
+      "MC_Expected_High_95CI": 1069.65,
+      "MC_Expected_Low_95CI": 991.11,
+      "Fundamental_Synthesis": "MOTILALOFS operates in the Financial Services sector. With an estimated Market Cap of \u20b962,046.36 Cr., a P/E ratio of 31.95, and YoY Revenue Growth of +23.9%, the company demonstrates strong institutional backing, solid operating profit margins (22.96%), and healthy Return on Equity (15.00%).",
+      "Technical_Synthesis": "Technical indicators confirm a Positive CAR Super Breakout. RSI(14) is currently at 46.82 (Consolidation Zone), while MACD Line (12.13) trades below Signal (15.35) with an expanding histogram (-3.23). Moving Averages are aligned in perfect Golden Stack (CMP > 30 DMA > 50 DMA > 200 DMA) with price trading +19.58% above the 200-day DMA (\u20b9854.66). Daily volatility envelope is bounded by ATR(14) of \u20b928.21.",
+      "CAR_Synthesis": "Initialization.py scanner logic confirms a CAR (Cumulative Average Return) Super Breakout for MOTILALOFS. Current Market Price (\u20b91,029.00) is positioned above the 30-day DMA (\u20b91,005.95), 50-day DMA (\u20b9960.59), and 200-day DMA (\u20b9854.66). The price distance from 200 DMA is +19.58%, indicating a high-conviction institutional momentum stack across short, medium, and long-term trend horizons.",
+      "Forecast_5D_Close": [
+        1029.0,
+        1033.14,
+        1037.27,
+        1041.41,
+        1045.54,
+        1049.68
+      ],
+      "Forecast_5D_High": [
+        1029.0,
+        1044.42,
+        1053.23,
+        1060.95,
+        1068.11,
+        1074.91
+      ],
+      "Forecast_5D_Low": [
+        1029.0,
+        1024.67,
+        1025.3,
+        1026.75,
+        1028.62,
+        1030.76
+      ],
+      "Next_Day_Expected_Close": 885.48
     },
     {
       "Date": "2026-09-25",
@@ -319,8 +389,8 @@
       "Revenue_Growth_%": 182.0,
       "Profit_Margin_%": 0.6,
       "ROE_%": 15.0,
-      "MC_Expected_High_95CI": 346.42,
-      "MC_Expected_Low_95CI": 323.75,
+      "MC_Expected_High_95CI": 346.78,
+      "MC_Expected_Low_95CI": 323.89,
       "Fundamental_Synthesis": "ETERNAL operates in the Consumer Cyclical sector. With an estimated Market Cap of \u20b9308,380.67 Cr., a P/E ratio of 712.77, and YoY Revenue Growth of +182.0%, the company demonstrates strong institutional backing, solid operating profit margins (0.64%), and healthy Return on Equity (15.00%).",
       "Technical_Synthesis": "Technical indicators confirm a Positive CAR Super Breakout. RSI(14) is currently at 62.89 (Bullish Momentum Zone), while MACD Line (5.34) trades above Signal (4.18) with an expanding histogram (+1.16). Moving Averages are aligned in perfect Golden Stack (CMP > 30 DMA > 50 DMA > 200 DMA) with price trading +21.76% above the 200-day DMA (\u20b9275.54). Daily volatility envelope is bounded by ATR(14) of \u20b97.03.",
       "CAR_Synthesis": "Initialization.py scanner logic confirms a CAR (Cumulative Average Return) Super Breakout for ETERNAL. Current Market Price (\u20b9335.00) is positioned above the 30-day DMA (\u20b9325.68), 50-day DMA (\u20b9316.72), and 200-day DMA (\u20b9275.54). The price distance from 200 DMA is +21.76%, indicating a high-conviction institutional momentum stack across short, medium, and long-term trend horizons.",
@@ -368,14 +438,14 @@
       "MACD_Hist": 0.66,
       "ATR_14": 16.08,
       "India_VIX": 12.16,
-      "Final_Win_Probability_%": 42.1,
+      "Final_Win_Probability_%": 42.3,
       "Risk_Reward_Ratio": 0.19,
-      "Expected_Value_EV_%": -1.98,
+      "Expected_Value_EV_%": -1.97,
       "Hist_Backtest_Win_Rate_%": 49.2,
       "Model_MAE_%": 4.46,
       "Out_Sample_R2": -0.77,
       "Next_Day_Expected_Low": 534.8,
-      "Next_Day_Expected_High": 513.41,
+      "Next_Day_Expected_High": 513.4,
       "Target_Price": 500.09,
       "Stop_Loss": 541.88,
       "Pivot_PP": 564.72,
@@ -389,9 +459,9 @@
       "Revenue_Growth_%": 14.5,
       "Profit_Margin_%": 65.2,
       "ROE_%": 15.0,
-      "MC_Expected_High_95CI": 580.55,
-      "MC_Expected_Low_95CI": 551.02,
-      "Fundamental_Synthesis": "LICHSGFIN operates in the Financial Services sector. With an estimated Market Cap of \u20b931,133.56 Cr., a P/E ratio of 5.41, and YoY Revenue Growth of +14.5%, the company demonstrates strong institutional backing, solid operating profit margins (65.18%), and healthy Return on Equity (15.00%).",
+      "MC_Expected_High_95CI": 581.58,
+      "MC_Expected_Low_95CI": 551.19,
+      "Fundamental_Synthesis": "LICHSGFIN operates in the Financial Services sector. With an estimated Market Cap of \u20b931,133.56 Cr., a P/E ratio of 5.43, and YoY Revenue Growth of +14.5%, the company demonstrates strong institutional backing, solid operating profit margins (65.18%), and healthy Return on Equity (15.00%).",
       "Technical_Synthesis": "Technical indicators confirm a Positive CAR Super Breakout. RSI(14) is currently at 51.02 (Consolidation Zone), while MACD Line (11.03) trades above Signal (10.37) with an expanding histogram (+0.66). Moving Averages are aligned in perfect Golden Stack (CMP > 30 DMA > 50 DMA > 200 DMA) with price trading +7.56% above the 200-day DMA (\u20b9524.57). Daily volatility envelope is bounded by ATR(14) of \u20b916.08.",
       "CAR_Synthesis": "Initialization.py scanner logic confirms a CAR (Cumulative Average Return) Super Breakout for LICHSGFIN. Current Market Price (\u20b9566.00) is positioned above the 30-day DMA (\u20b9535.66), 50-day DMA (\u20b9528.07), and 200-day DMA (\u20b9524.57). The price distance from 200 DMA is +7.56%, indicating a high-conviction institutional momentum stack across short, medium, and long-term trend horizons.",
       "Forecast_5D_Close": [
@@ -437,7 +507,7 @@
       "Contract_Value_Lakhs": 5.02,
       "Approx_Margin_Lakhs": 1.15,
       "Intraday_Signal": "\ud83d\udfe2 INTRADAY LONG BREAKOUT",
-      "Intraday_Win_Probability_%": 51.9,
+      "Intraday_Win_Probability_%": 51.7,
       "Intraday_Buy_Entry_Range": "\u20b9116.67 - \u20b9117.48",
       "Intraday_Max_Chase_Price": 118.2,
       "Intraday_Expected_Low": 112.84,
@@ -445,7 +515,7 @@
       "Intraday_Target_Price": 107.61,
       "Intraday_Stop_Loss": 115.66,
       "Risk_Reward_Ratio": 1.67,
-      "Expected_Value_EV_%": 0.5,
+      "Expected_Value_EV_%": 0.49,
       "Per_Lot_Risk_INR": 6517.76,
       "Per_Lot_Reward_INR": 10891.52,
       "Pivot_PP": 117.53,
@@ -460,7 +530,7 @@
       "CMF_20": -0.08,
       "TTM_Squeeze": 0,
       "Volume_Ratio": 1.0,
-      "Intraday_Synthesis": "Intraday Futures Forecast for PNB (OCT-2026 FUT): Current Futures CMP is \u20b9117.18 with a Spot vs Fut Basis of \u20b9+0.58 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b9119.62 and Intraday Low of \u20b9115.35. Optimal Intraday Limit Entry range is \u20b9116.67 - \u20b9117.48 with Target at \u20b9119.72 and Stop-Loss at \u20b9115.66. Intraday Win Probability is 51.9% with an Expected Value (EV) of +0.50% per trade."
+      "Intraday_Synthesis": "Intraday Futures Forecast for PNB (OCT-2026 FUT): Current Futures CMP is \u20b9117.18 with a Spot vs Fut Basis of \u20b9+0.58 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b9119.62 and Intraday Low of \u20b9115.35. Optimal Intraday Limit Entry range is \u20b9116.67 - \u20b9117.48 with Target at \u20b9119.72 and Stop-Loss at \u20b9115.66. Intraday Win Probability is 51.7% with an Expected Value (EV) of +0.49% per trade."
     },
     {
       "Date": "2026-09-25",
@@ -477,7 +547,7 @@
       "Contract_Value_Lakhs": 5.03,
       "Approx_Margin_Lakhs": 1.16,
       "Intraday_Signal": "\ud83d\udfe2 INTRADAY LONG BREAKOUT",
-      "Intraday_Win_Probability_%": 50.4,
+      "Intraday_Win_Probability_%": 50.6,
       "Intraday_Buy_Entry_Range": "\u20b92211.81 - \u20b92234.1",
       "Intraday_Max_Chase_Price": 2253.59,
       "Intraday_Expected_Low": 2128.24,
@@ -485,7 +555,7 @@
       "Intraday_Target_Price": 2067.93,
       "Intraday_Stop_Loss": 2183.96,
       "Risk_Reward_Ratio": 1.67,
-      "Expected_Value_EV_%": 0.65,
+      "Expected_Value_EV_%": 0.66,
       "Per_Lot_Risk_INR": 9442.28,
       "Per_Lot_Reward_INR": 15738.64,
       "Pivot_PP": 2214.44,
@@ -500,7 +570,47 @@
       "CMF_20": 0.13,
       "TTM_Squeeze": 0,
       "Volume_Ratio": 1.0,
-      "Intraday_Synthesis": "Intraday Futures Forecast for APLAPOLLO (OCT-2026 FUT): Current Futures CMP is \u20b92,225.74 with a Spot vs Fut Basis of \u20b9+11.04 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b92,292.59 and Intraday Low of \u20b92,175.60. Optimal Intraday Limit Entry range is \u20b92,211.81 - \u20b92,234.10 with Target at \u20b92,295.38 and Stop-Loss at \u20b92,183.96. Intraday Win Probability is 50.4% with an Expected Value (EV) of +0.65% per trade."
+      "Intraday_Synthesis": "Intraday Futures Forecast for APLAPOLLO (OCT-2026 FUT): Current Futures CMP is \u20b92,225.74 with a Spot vs Fut Basis of \u20b9+11.04 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b92,292.59 and Intraday Low of \u20b92,175.60. Optimal Intraday Limit Entry range is \u20b92,211.81 - \u20b92,234.10 with Target at \u20b92,295.38 and Stop-Loss at \u20b92,183.96. Intraday Win Probability is 50.6% with an Expected Value (EV) of +0.66% per trade."
+    },
+    {
+      "Date": "2026-09-25",
+      "Stock": "MOTILALOFS",
+      "Contract_Code": "OCT-2026 FUT",
+      "Expiry_Date": "29-OCT-2026",
+      "Days_To_Expiry": 33,
+      "Spot_CMP": 1029.0,
+      "Futures_CMP": 1034.13,
+      "Basis_INR": 5.13,
+      "Basis_Pct": 0.5,
+      "Cost_Of_Carry_%": 5.53,
+      "Lot_Size": 486,
+      "Contract_Value_Lakhs": 5.03,
+      "Approx_Margin_Lakhs": 1.16,
+      "Intraday_Signal": "\ud83d\udfe1 INTRADAY SCALP / NEUTRAL",
+      "Intraday_Win_Probability_%": 49.2,
+      "Intraday_Buy_Entry_Range": "\u20b91027.08 - \u20b91038.36",
+      "Intraday_Max_Chase_Price": 1048.24,
+      "Intraday_Expected_Low": 986.78,
+      "Intraday_Expected_High": 985.79,
+      "Intraday_Target_Price": 912.94,
+      "Intraday_Stop_Loss": 1012.97,
+      "Risk_Reward_Ratio": 1.67,
+      "Expected_Value_EV_%": 0.64,
+      "Per_Lot_Risk_INR": 10283.76,
+      "Per_Lot_Reward_INR": 17136.36,
+      "Pivot_PP": 1036.93,
+      "Pivot_R1": 1049.33,
+      "Pivot_R2": 1064.53,
+      "Pivot_S1": 1024.53,
+      "Pivot_S2": 1024.53,
+      "VWAP_Est": 1032.72,
+      "ATR_14": 28.21,
+      "RSI_14": 46.8,
+      "MACD_Hist": -3.23,
+      "CMF_20": 0.17,
+      "TTM_Squeeze": 0,
+      "Volume_Ratio": 1.0,
+      "Intraday_Synthesis": "Intraday Futures Forecast for MOTILALOFS (OCT-2026 FUT): Current Futures CMP is \u20b91,034.13 with a Spot vs Fut Basis of \u20b9+5.13 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b91,067.98 and Intraday Low of \u20b91,008.74. Optimal Intraday Limit Entry range is \u20b91,027.08 - \u20b91,038.36 with Target at \u20b91,069.39 and Stop-Loss at \u20b91,012.97. Intraday Win Probability is 49.2% with an Expected Value (EV) of +0.64% per trade."
     },
     {
       "Date": "2026-09-25",
@@ -557,7 +667,7 @@
       "Contract_Value_Lakhs": 5.02,
       "Approx_Margin_Lakhs": 1.15,
       "Intraday_Signal": "\ud83d\udfe1 INTRADAY SCALP / NEUTRAL",
-      "Intraday_Win_Probability_%": 46.0,
+      "Intraday_Win_Probability_%": 46.2,
       "Intraday_Buy_Entry_Range": "\u20b9564.8 - \u20b9571.23",
       "Intraday_Max_Chase_Price": 576.86,
       "Intraday_Expected_Low": 542.28,
@@ -565,7 +675,7 @@
       "Intraday_Target_Price": 516.21,
       "Intraday_Stop_Loss": 556.76,
       "Risk_Reward_Ratio": 1.67,
-      "Expected_Value_EV_%": 0.48,
+      "Expected_Value_EV_%": 0.49,
       "Per_Lot_Risk_INR": 10648.98,
       "Per_Lot_Reward_INR": 17748.3,
       "Pivot_PP": 567.54,
@@ -580,7 +690,7 @@
       "CMF_20": 0.11,
       "TTM_Squeeze": 0,
       "Volume_Ratio": 1.0,
-      "Intraday_Synthesis": "Intraday Futures Forecast for LICHSGFIN (OCT-2026 FUT): Current Futures CMP is \u20b9568.82 with a Spot vs Fut Basis of \u20b9+2.82 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b9588.12 and Intraday Low of \u20b9554.35. Optimal Intraday Limit Entry range is \u20b9564.80 - \u20b9571.23 with Target at \u20b9588.92 and Stop-Loss at \u20b9556.76. Intraday Win Probability is 46.0% with an Expected Value (EV) of +0.48% per trade."
+      "Intraday_Synthesis": "Intraday Futures Forecast for LICHSGFIN (OCT-2026 FUT): Current Futures CMP is \u20b9568.82 with a Spot vs Fut Basis of \u20b9+2.82 (+0.50%, 5.5% CoC annualized). For Intraday Traders, the 11 ML & Deep Learning ensemble projects an expected Intraday High of \u20b9588.12 and Intraday Low of \u20b9554.35. Optimal Intraday Limit Entry range is \u20b9564.80 - \u20b9571.23 with Target at \u20b9588.92 and Stop-Loss at \u20b9556.76. Intraday Win Probability is 46.2% with an Expected Value (EV) of +0.49% per trade."
     }
   ],
   "commodities_predictions": [
@@ -976,14 +1086,27 @@
       }
     ],
     "summary": "Bullish Rally: US markets closed higher with NASDAQ (+0.48%) and S&P 500 (+0.51%) advancing strong on tech momentum. US Volatility Index (CBOE VIX) settled at 14.87, reflecting calm risk-on conditions.",
-    "updated_at": "2026-09-26 06:05:09"
+    "updated_at": "2026-09-26 14:03:24"
   },
   "breakout_news": {
-    "total_articles": 10,
-    "bullish_pct": 60.0,
-    "avg_sentiment": 0.24,
-    "top_covered_stock": "LICHSGFIN",
+    "total_articles": 12,
+    "bullish_pct": 50.0,
+    "avg_sentiment": 0.15,
+    "top_covered_stock": "PNB",
     "articles": [
+      {
+        "stock": "ETERNAL",
+        "symbol": "ETERNAL.NS",
+        "title": "Greed and Fear index: BEL, Adani Energy to Eternal | Chris Wood's Jefferies India portfolio has 22 stocks for long term",
+        "publisher": "Livemint",
+        "link": "https://news.google.com/rss/articles/CBMikgJBVV95cUxObS1aX0NDZy1Ld3ctQnlnemk1MDlwTFZ1ZXNhMDU1SnZROUgwV1lHdkFVTV9QZ05BVDFQZGNMblNTU0RxMEtoZDZ1NFdsTEVjb3VlNk0tTHU1Uzg3Tmx0V0JsalF1Sjh2eS1uRk5KS1NUSEduUG1QR2lFeFFvS0cyckJnbzFBN0FSN3J5UEN4cFotWW4yS0Z2dmZGcnk5TkxQejBka2x4SHh6ejdEMkVxaFVwWmZqdmpoNEQyUXF2ckFvZFlhd2hJUGpmT0VUdDVFMFhyNDdmTllGdU9sZGdfekhTVk1tejdHLVd2N3Jpc2ZueEhGalZlU1RrLUhXaWxjRGxYbTJSOVViYVR4N2w4Y1N30gGXAkFVX3lxTE5JZzZ4V2NiSFNObk8tQjVBaDFSVHZnLXZUTjctV3NVMlRSSXB6WldOWWQ0a0NkWU8wWV9VRklnYS1XdGZUQzVtTWw5amxMaWVPSGhDMFVHZ3dOdWtCZDBqbXBtVlhYQ2RxSWI3d1UxdjNpX0toUnZFa3MzUDQxcnlEU2lmbTR3ZWRDTHNicWQ5ZU01NjJFYkdEaHIxelIwalhZT0ZxQUoxaXEycTNfSXFYXzQ4LWsxXzdSVmNyV3JZd1FBXzQ4MFdvZDRGYlc1MEljYV90Y1hrMEx1OU9Ca1VIZEtUeWRvaFB6S2tLYWxxWmdJWnhYbjhSb1c0UVU3WDBuYmI1OEd2RWQ5UGl6UkZQY3lFQWVXcw?oc=5",
+        "snippet": "News updates and technical/fundamental catalyst scanner feed for ETERNAL stock.",
+        "published_at": "2026-09-26 06:33",
+        "relative_time": "7 hrs ago",
+        "timestamp": 1790404406.0,
+        "sentiment_score": -0.59,
+        "sentiment_label": "BEARISH"
+      },
       {
         "stock": "PNB",
         "symbol": "PNB.NS",
@@ -998,6 +1121,19 @@
         "sentiment_label": "BULLISH"
       },
       {
+        "stock": "MOTILALOFS",
+        "symbol": "MOTILALOFS.NS",
+        "title": "Motilal Oswal Financial Services Share Price Rises 3.87%",
+        "publisher": "Univest",
+        "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQMlNudHFBYUJLMmpEdnpPTXhoYlRkWGFFR3ZMNUJLTGNFMThidURrSkRwdFpobGZsbFBtTlV1dVhqMWdjUjZEU0NFYnVqTjhvVGV1WUdZSzFoSlViMmNfbkc5REdJcnNlTzFtbm9yNTJpU3locldHeFdqNExJNm0xYVE0b29qNGoyb3ZaaFZqVDZzaE9VS2hlSExGLU1rU3Vh?oc=5",
+        "snippet": "News updates and technical/fundamental catalyst scanner feed for MOTILALOFS stock.",
+        "published_at": "2026-09-23 04:19",
+        "relative_time": "3 days ago",
+        "timestamp": 1790137159.0,
+        "sentiment_score": 0.3,
+        "sentiment_label": "BULLISH"
+      },
+      {
         "stock": "ETERNAL",
         "symbol": "ETERNAL.NS",
         "title": "Market wrap: Coal India, Eternal, Tata Consumer, Nestle India top gainers and losers on Nifty and Sensex o",
@@ -1005,7 +1141,7 @@
         "link": "https://news.google.com/rss/articles/CBMikwJBVV95cUxNNWJMM2RlSTVBZ1ZzZW01R1JwNzM4cDlJbXk2TzBGZFRjaV9KNzRhVXlJQVV5YTE5VzBLdHdNcjQzM0V5LTBaaW8wUDFXWGRaTmtBdC1EcnpPNzJNR3Z0SDIyMG5QRFVZRndWZ2NVZUNORmFCcC0tam8wdTV6enlXU3hxS251SU5BWllOVGI3TU9sWjZMQWZmVjYteDlXc3hiaGNGS2JiTVNCS3ZlQVlTSGo4cnQ1Y3I1ZUlNMTE0eXdUWHBTbHkyQWJtR3JfSUtmZV9aeG1kcnduT016OXVaV2FjV1lvTS04RWJ5YVR2VTNFRE02THFsa2xvcGg0WUh2M0FPeFM5OUFqbm9GS09mbFJiUdIBmAJBVV95cUxQbnh3UU5fQkxBSWxlTzBFa2hRVk5EWTByT0NFRHZiX0FlU3l0dlQyN000X0xrclFISkVUaldndHdnaXlqcUg5N0lZWkd1RXNuX2d5OWxhaDNWTXprd2xKTTB4M2NSb3k5Z1lKbnFpbUtTSnNmQVpPNE8tYkp3a2hBTVAxdFRIaUhPS1cwaERBamJSTER1bEdOUF9GV29VRjFZd2tfQ2lUaUlkSDd2cFpPZmx3bzQxYzUwWHZEcERCdUlvcDJVcmFfMGprTUlvbXVyR2NfdElZeHVFWkYyazhhMWxIRWtXLWN1bHBaTDJFNi0wV19IS1pvZTViZTczN0VtNWVpUG9RbUQ5dS03bzVidm9mTVBzUjV1?oc=5",
         "snippet": "News updates and technical/fundamental catalyst scanner feed for ETERNAL stock.",
         "published_at": "2026-09-22 11:08",
-        "relative_time": "3 days ago",
+        "relative_time": "4 days ago",
         "timestamp": 1790075281.0,
         "sentiment_score": 0.03,
         "sentiment_label": "NEUTRAL"
@@ -1018,23 +1154,23 @@
         "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNMzVsYV9pME5BZXdRb0FleDVHOGtxWG5fWFZfc0RYel9paHRDZkY1ajc1LWcyUHk0bWlmTklaczVBb2tDNklXYXBjVjV4MzJpdUM4Z3NBdk5NWnhMZzF4ZnpoMXpaTU9IRDE1eXQ1dDJCTW5Reklyb3hVbE0tRnB5UU0yYkw1amxFZjZ4ZXd0bFZfamg0Zm13VmdtSWJ4TDNEWW5BMWU0RmxJVDh6bUtUMFdIazlHdDlLUUkxR2N3RS02cndFTmN5SXhnWnBrVWNSNnfSAdcBQVVfeXFMUExWVHVyaXRKaVNQZ2FNcjJEM3AzWnU3YkxYUW9KUUtKeXMwd1RkMUR4d2xYcUM5ZkRrX0szMGRxc01JQjVpWWZzanNqcGJObjl1ZXpiSDJVX1dLQkgtX1p6bVEwNlJ2YXJYdWJsQnZnYy1LcGJYTzdVSDl0NlVyVjV2V0tkVnJVVXkyUnMwckwzLW1YWGZCSjRIeG9qNDFRZExybGthd1NNLWdTN2RIZlFZWWdIYzY1R0lHUElweFE3M1YtS0xKbFEzSmlZNGFOaGYxQzc0TDA?oc=5",
         "snippet": "News updates and technical/fundamental catalyst scanner feed for ETERNAL stock.",
         "published_at": "2026-09-22 07:57",
-        "relative_time": "3 days ago",
+        "relative_time": "4 days ago",
         "timestamp": 1790063833.0,
         "sentiment_score": -0.05,
         "sentiment_label": "BEARISH"
       },
       {
-        "stock": "ETERNAL",
-        "symbol": "ETERNAL.NS",
-        "title": "Eternal Shares Rise Over 5% Today: Market Performance Update",
-        "publisher": "HDFC Sky",
-        "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1kYkNmUlRYV1BMeFJZWURYeTNCbnB2YzlOUk5OMkxnTzRCWmxCTF9hMThDTmtHd0ZOYmlPZk5NNzRnU2wtQ1otd1oteUlkVkpzbU85TGpHcHJzSUhsZGsyM3BDUzV6UnhILWxlLU5CcDVldjUwZGJHWEhR?oc=5",
-        "snippet": "News updates and technical/fundamental catalyst scanner feed for ETERNAL stock.",
-        "published_at": "2026-09-21 07:00",
-        "relative_time": "4 days ago",
-        "timestamp": 1789974000.0,
-        "sentiment_score": 0.3,
-        "sentiment_label": "BULLISH"
+        "stock": "PNB",
+        "symbol": "PNB.NS",
+        "title": "SBI, PNB to Bank of Maharashtra: Why are PSU bank stocks rising today?",
+        "publisher": "Livemint",
+        "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNb2RKb3JzSUp1SGtOa3diSWxFTkZ5NTQzbkxiVlU0b0xFNHc5U0JpMHAxZThwNzlsR3VKR1BXMWtMX2pGM2dfcGFLLTU3bGQ5aGhabExyLTZQVEdkMmdSLW8wTWFHTXNjSTF1X19aUkg5ZGVaZjVpWFhUV3FYeFNRSWhucXlrMmx4YUxRZzFYa0J2ZVNPZndPN2lqNzQ2RjNNWkx1cXc5U2h1bzFxd19pSlFVdlhGNmZxQmdrNUtfTXpnTXlXME9EVmNGc3dQQUMxaE9BNkxLVDVqOGZYeTY2Z1BGRUcwdG1L0gHuAUFVX3lxTE84d2c3X2xoYlJPU0NzRzN2RjAzblBBM2NSeUxYWFFfOHMtYnpfaG9PaHZROUZ0Y3V0N3N5ZXlESlkzUC1tczhHeGp6Tnc0X1dTZklQbTRRN0RXNjlZZk1maG9wWXFualhiUjlpMzJURktOak5CTTE0MENsbFRfUThzZFRfdWlKY0dpLWtyaEMyT0J3WVppcVIxSUlGZjExZ3c1c3lfUmdyMVFUaTRpeEpja3VZbVB5MVdJOUFQczVVakEwTk5aVDZDN3d0RGFaUWQ5RVBCOFlJbWlJY09HSlZDWXZIamxPRTBZQUFDY1E?oc=5",
+        "snippet": "News updates and technical/fundamental catalyst scanner feed for PNB stock.",
+        "published_at": "2026-09-18 07:00",
+        "relative_time": "8 days ago",
+        "timestamp": 1789714800.0,
+        "sentiment_score": 0.0,
+        "sentiment_label": "NEUTRAL"
       },
       {
         "stock": "PNB",
@@ -1044,7 +1180,7 @@
         "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPbXFiXzZfMmZQOTc1OFJuT1NEemdCbHU0dGxpSmhyMzd2dm9zN18xNEV1UDFBM01hQXNkc05IdC1jbkR4TmpJekhhdm9rbkNMX3hEejd1VTBOUFVfTTBZWTlHUWpqemZfekdGbC1ZY1ZpQ3g2djZCbUl6cTVXaVJfX3E3SXJuLWdsRmpONS1kb19xem1VVkFaVVdlbmQ0aUQ4LXlHWk1hUDI4X2ZhMWJMTzRjSVFXeVlLS2NQNVJsNW40cldGQTExLU530gHPAUFVX3lxTE5mZmN1Ymh3Q3htbU5heXlXZ1kxLXJTTm5vbTNWNVNOZF91Q2JuT1VHVFpMODFfR3ZBUkFWaDA4YmVsbkdtc2wyNmlFSDlJOEM2WFJYYU82N29TLVE5TlRoZmg2aFdta2NZbXp5Uzc3dEZCaFFwSjJrWHJzSm1WUW5QZ2dISThLNW1mVWo2SWszLUlDYUcwRDlMRXNaSTI1d3ZUVjFUTmkzMERlcmFPeV9VM0hEU0diWUM1cTNFWWF3Ylc5QXhTYkI1WVQ2V3ZJUQ?oc=5",
         "snippet": "News updates and technical/fundamental catalyst scanner feed for PNB stock.",
         "published_at": "2026-09-11 07:00",
-        "relative_time": "14 days ago",
+        "relative_time": "15 days ago",
         "timestamp": 1789110000.0,
         "sentiment_score": 0.53,
         "sentiment_label": "BULLISH"
@@ -1057,23 +1193,10 @@
         "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPdXNiaTFScGNKR056Yk5DMTVkQ0dhWUp3Z21lZU95Tkg3bms2bzF4Rk5ZMGRlTnEzVGpaRko3Y2FvS0l0LUFhcnBzOXlpMS13a2ZGWW5FS3MtVHV3VEsyQkh4MVNQR0tRYzZkSzY1MzhJc0pvYTgwbnFTZldRSUZaT0Y0aXlnQVE?oc=5",
         "snippet": "News updates and technical/fundamental catalyst scanner feed for LICHSGFIN stock.",
         "published_at": "2026-09-11 07:00",
-        "relative_time": "14 days ago",
+        "relative_time": "15 days ago",
         "timestamp": 1789110000.0,
         "sentiment_score": 0.3,
         "sentiment_label": "BULLISH"
-      },
-      {
-        "stock": "LICHSGFIN",
-        "symbol": "LICHSGFIN.NS",
-        "title": "LICHSGFIN Stock Price and Chart \u2014 NSE:LICHSGFIN",
-        "publisher": "TradingView",
-        "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1HTDl5NjZqZ3Z5NmtHcVFuTWRLTFR5eFlRY3YzWXpDR3NSWU1ET2xWN2xfMEkzNWZjMVNBbmpSMjhuSDlIMG1LYndiWnZjMEduQ2tBcXd5UnlJV19BNmFv?oc=5",
-        "snippet": "News updates and technical/fundamental catalyst scanner feed for LICHSGFIN stock.",
-        "published_at": "2026-09-10 07:00",
-        "relative_time": "15 days ago",
-        "timestamp": 1789023600.0,
-        "sentiment_score": 0.0,
-        "sentiment_label": "NEUTRAL"
       },
       {
         "stock": "PNB",
@@ -1083,74 +1206,111 @@
         "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQcVdIUTJjZTVRZGVnQmZuc3hQX1hoVV9fZmNhN01TRHk4MUpDMk5RTzRDZ2c5NV9oR0h3bFBVNE5lYU9jcUdJOWZSbG9VUVkta1hyMkF3VHZZdjlpQ21LaTBQazNEUU5MeUhXLURVTFMwNjFPdk50bl94N2hoV05aa2RLOXJlS1NGMHpZSlM5c2JyYXhGcVU5REdySGc5V1lWYk1yZUlGeWNHYVo5S2VOLURORHgyQUEtbEZMR1dVbWhuY1J3SHRaVWRxaFlmRjRxT2tCeFR3ODNLTXYzMnfSAeYBQVVfeXFMUGdtaE5LMkNfQUhIa3VGQ1RZT1p4NEdYZjNxdEp0bmRmdkFoemZjY05CUG8yb3VOdUtVankzN2VGbDhMQm80bmE4NGEtRkViU2FPM3U3X0pRSnB6SnE0Wm83T2hUajc4VzB5R0ZXYVVOaEl5TDV5NnlyUU5wOEY4ZV9HbFJ4eWxKMlB1SF9IcDJFcjhadUF1aWM1bW43QmxaR1BWbEFYcDE2VHB4N3dEZm5DQmdCbi1GWENZa09saGdsVVVmYmRZSUJIek5CTGZvLWtSNlV3RHBvdjlyTjNqeGNzcUpvV1E?oc=5",
         "snippet": "News updates and technical/fundamental catalyst scanner feed for PNB stock.",
         "published_at": "2026-09-07 07:00",
-        "relative_time": "18 days ago",
+        "relative_time": "19 days ago",
         "timestamp": 1788764400.0,
         "sentiment_score": 0.7,
         "sentiment_label": "BULLISH"
       },
       {
+        "stock": "MOTILALOFS",
+        "symbol": "MOTILALOFS.NS",
+        "title": "Motilal Oswal Financial Services Share Price Rises 2.13%",
+        "publisher": "Univest",
+        "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPZXJkOTZGdnN0TWk0bGNFSTc0RWlDOEJGcVJTUGt4RjZ2NzYtWlktUUZYU2xfaEVHSDNzZkk2OVIyT2ZLd1BvR3NhSUQ1eHozc05qeXFEczVqZldseUxBSmpWMjhkV3hCalhDbzVQVlN2dDliV0JzSVFyRWlzUFpnQi1lZldJRVRuVXZySDBnQ0toekYtVk52eQ?oc=5",
+        "snippet": "News updates and technical/fundamental catalyst scanner feed for MOTILALOFS stock.",
+        "published_at": "2026-09-07 07:00",
+        "relative_time": "19 days ago",
+        "timestamp": 1788764400.0,
+        "sentiment_score": 0.3,
+        "sentiment_label": "BULLISH"
+      },
+      {
+        "stock": "MOTILALOFS",
+        "symbol": "MOTILALOFS.NS",
+        "title": "Motilal OFS, CRISIL, CUB among 4 breakout stocks identified by analysts",
+        "publisher": "Business Standard",
+        "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQNlI1YmJTQlhURkptbXA0WGdXcUlaSHNCYWF2Zm1uVFJ4RjNoVjZKYkwzN3F6THRCRExZd0dmX1hmcTdrQTZEZk1RUGVib3NDVmFKd1pIR1phbWVXUmExT19lb2x0cElTVE1SamhrSWFNNVhzSmtKbjBSUU5uMThyUml5Ykw1SGEySzhKakpTalhaOGd4OV96bXVwUFduRWZrU3c4emRrNm1CN3JLQXVxMV92UE5Xa1FkQWhpZmRJUk9nWnRTOEpiYmpYZWRXMG9BY3l5SE5NX2VzVktIM3Y5aGxoYW9wZ9IB6wFBVV95cUxQejN5cU95NEFYd292U2VpbkVEak1nMGxrTmtZNVR1UVBiNEpkNUNLT01jelBZdE1qa1RCSXFmSkxSWGhYT3B6TEdVdU90NmNmSFQ4R0tUN1JGenlPeUVpbjVkeHdnVEFoNUs2cVdDV1psNGpUY2RKRUxYa2wwLTZkVEkxaUI5NmNMS2xfa2NpVnlwRGk2Tmo2U0wyd29qQXBZY1FfekVqNDBlUTR4LW53Vk1aSmlCMmxQTURzVTEyLXl6OTdZakxBSlZnb2NMX2pEOEVublI4WDF6TjM0VkVScUZpQmRTZ0JpLUJ3?oc=5",
+        "snippet": "News updates and technical/fundamental catalyst scanner feed for MOTILALOFS stock.",
+        "published_at": "2026-09-04 07:00",
+        "relative_time": "22 days ago",
+        "timestamp": 1788505200.0,
+        "sentiment_score": 0.0,
+        "sentiment_label": "NEUTRAL"
+      },
+      {
         "stock": "LICHSGFIN",
         "symbol": "LICHSGFIN.NS",
         "title": "LIC Housing Finance Ltd. Shareholding Pattern \u2013 Promoters, FIIs & DIIs",
-        "publisher": "Value Research",
+        "publisher": "valueresearchonline.com",
         "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOaHY0TEY0UGliM29YZXdiVEZROHhfNU9pYUNGZTA3V1diY1kxUVJOSmF2WnczZDctYzhKNWlxYXpMZ0dWLVdKRGJfSi02c2VkRTZwYVpESFMtLWQ4eGZrbm9vdWVKODJ2YUlFYmxVNHpvUFhFaFVvTUhYZFlaZTZUZVRWWFFmU1VYbUdrNXB4Yw?oc=5",
         "snippet": "News updates and technical/fundamental catalyst scanner feed for LICHSGFIN stock.",
         "published_at": "2026-08-29 17:28",
         "relative_time": "27 days ago",
         "timestamp": 1788024519.0,
-        "sentiment_score": 0.34,
-        "sentiment_label": "BULLISH"
-      },
-      {
-        "stock": "LICHSGFIN",
-        "symbol": "LICHSGFIN.NS",
-        "title": "5 Housing Finance Companies Stocks India 2026: Future Roadmaps",
-        "publisher": "Univest",
-        "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOa2hQVm0xYVBhS3Z4Yll0eEhBUmpxZy1nT3RXWmU0UDIyTkI0SkFDcWpwQmx6VndiRTZodC1NT1J2b01LQTY5YmtWbnIzU283eEZaczVMN1JGMkdoOFBGV0dyeV93dXAtdFZaTzJDVURuSVV0Y3NzekhwNmV6MUNZb2hkWW9HMjFlSkloMg?oc=5",
-        "snippet": "News updates and technical/fundamental catalyst scanner feed for LICHSGFIN stock.",
-        "published_at": "2026-08-27 07:00",
-        "relative_time": "29 days ago",
-        "timestamp": 1787814000.0,
         "sentiment_score": 0.0,
         "sentiment_label": "NEUTRAL"
       }
     ],
     "stock_summaries": {
       "PNB": {
-        "total_articles": 3,
+        "total_articles": 4,
         "bullish_count": 3,
-        "neutral_count": 0,
+        "neutral_count": 1,
         "bearish_count": 0,
-        "avg_sentiment": 0.51,
+        "avg_sentiment": 0.38,
         "overall_label": "BULLISH"
       },
       "LICHSGFIN": {
-        "total_articles": 4,
-        "bullish_count": 2,
-        "neutral_count": 2,
+        "total_articles": 2,
+        "bullish_count": 1,
+        "neutral_count": 1,
         "bearish_count": 0,
-        "avg_sentiment": 0.16,
+        "avg_sentiment": 0.15,
+        "overall_label": "BULLISH"
+      },
+      "MOTILALOFS": {
+        "total_articles": 3,
+        "bullish_count": 2,
+        "neutral_count": 1,
+        "bearish_count": 0,
+        "avg_sentiment": 0.2,
         "overall_label": "BULLISH"
       },
       "ETERNAL": {
         "total_articles": 3,
-        "bullish_count": 1,
+        "bullish_count": 0,
         "neutral_count": 1,
-        "bearish_count": 1,
-        "avg_sentiment": 0.09,
-        "overall_label": "BULLISH"
+        "bearish_count": 2,
+        "avg_sentiment": -0.2,
+        "overall_label": "BEARISH"
       }
     },
-    "scanned_at": "2026-09-26 06:05:10"
+    "scanned_at": "2026-09-26 14:03:28"
   },
   "commodity_news": {
     "total_articles": 12,
-    "geopolitical_mentions": 5,
+    "geopolitical_mentions": 4,
     "geopolitical_risk_level": "MODERATE (Geopolitical Tension)",
     "geopolitical_risk_index": 58,
-    "avg_sentiment": -0.12,
-    "top_catalyst": "Gas supply returns to pre-crisis level...",
+    "avg_sentiment": -0.16,
+    "top_catalyst": "EU warns of energy price crisis, asks countries to consider curbing de...",
     "articles": [
+      {
+        "category": "ENERGY",
+        "title": "EU warns of energy price crisis, asks countries to consider curbing demand, letter shows",
+        "publisher": "AZ\u018fRTAC \u2013 Az\u0259rbaycan D\u00f6vl\u0259t \u0130nformasiya Agentliyi",
+        "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQQldFQ0FRaFVraWpPMmdwVVhoVDZkWEZWTXp3dWtMc1pLTGdxRWdHXzRXSjlDWl9jcnpPRXVyTURSMUQ2Tmh0cHFwQms4RllPazR3dXZiaThBdDdVcmFjZ0ktMHE2dWo0ajhrVTJiT1V4NjlUZDRrTXUtNERVWXdLMkt5T1gyb0ltbmRlQ3ZIWGpmaHpJeHJURVEyVm5vN0NkMEVvWllQTFJSZWhodFZZWU9jTWpzajV1TXJFTG5lWQ?oc=5",
+        "tags": [
+          "#Geopolitics",
+          "#NaturalGas"
+        ],
+        "published_at": "2026-09-26 10:24",
+        "relative_time": "3 hrs ago",
+        "timestamp": 1790418240.0,
+        "sentiment_score": -0.6,
+        "sentiment_label": "BULLISH (Supply Risk)",
+        "is_geopolitical": true
+      },
       {
         "category": "ENERGY",
         "title": "Gas supply begins to rise, says Petrobangla",
@@ -1160,7 +1320,7 @@
           "#NaturalGas"
         ],
         "published_at": "2026-09-25 08:05",
-        "relative_time": "22 hrs ago",
+        "relative_time": "Yesterday",
         "timestamp": 1790323503.0,
         "sentiment_score": 0.0,
         "sentiment_label": "NEUTRAL",
@@ -1168,19 +1328,18 @@
       },
       {
         "category": "ENERGY",
-        "title": "Gas supply returns to pre-crisis level",
+        "title": "Bangladesh LNG supply drops 300 mmcfd due to bad weather at Moheshkhali",
         "publisher": "The Daily Star",
-        "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQTUJhZUxweGJGMC0wLXlZMVBldk92Ql90c2ZVUG8xNnMwdzdReGJyd1Vkb1lWVVhMZzNCcFcybm11dHRFUC1oQ1RzTmgwMjdiNHdYYTNfRkFDbTlGOXJyOXJPM0kxclVDang2aDFTdmxhUmEwU09WQ0h2OERkSHMyWHJYWXprQUQ5LW5PUGVPZTY3c0FtekZaTA?oc=5",
+        "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQR21teHZCazVaM1JVNkgxdmtQSnZXZEFuSDdwS2Q3RDYzMTB3OEY2dUE1ZlZUUTRBQUVrTVhkSFZJWjBlM0FEclVIeGJ3UHBaQUxWTzlMS0RZUS01OEFwQ3pKZHNibXc2VHpZbFVIVzFqTTJPSFBJeTdicTZ5Y09SdU5YMUZodDJFSE44QlBlWDNiTExYUnZlc0tENGl3V19yNGNuNTM2MjliWF9SV0xoeV9MNWQ1c21Ib3VQejJ2SmNoMzVCd0NPNw?oc=5",
         "tags": [
-          "#NaturalGas",
-          "#Geopolitics"
+          "#NaturalGas"
         ],
-        "published_at": "2026-09-24 04:33",
-        "relative_time": "2 days ago",
-        "timestamp": 1790224434.0,
-        "sentiment_score": 0.0,
-        "sentiment_label": "BULLISH (Supply Risk)",
-        "is_geopolitical": true
+        "published_at": "2026-09-24 14:15",
+        "relative_time": "Yesterday",
+        "timestamp": 1790259314.0,
+        "sentiment_score": -0.54,
+        "sentiment_label": "BEARISH",
+        "is_geopolitical": false
       },
       {
         "category": "ENERGY",
@@ -1188,9 +1347,9 @@
         "publisher": "Crude Oil Prices Today | OilPrice.com",
         "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPRkY0VzhCcEduRGRDc1JyVkhCQWdHcDlJbVNNWFFFTmJKeURQdHR6blBJQ18wNjJ5YlUzZU8tTk5IdGd1bGpwMGtSbG1TWi1SZkpBaDNfbV9aZ016aHdJeE1qZ2tERWQ4TWdVR2RTMUFHbml5ck5vUDRrZVRYQ1J4b3hwbjQ3a2tzUXpaSERPQUhGTHhFR2ZYSFNR0gGfAUFVX3lxTE5mX2JyLXJMVk1TMkQzX2RJSElXRVh5WGhwU0RyNVdPUWVqWVZ2cUlsaERwaXlpT0ZFZ25iWVNVZzgzODdBWTZET2pJSU96Wl9tZWQ4bTAxUEhxMHNqRnFsd3FpeEtTV0JiNkV2YU11YmJzZHNGYnU5UU90N2tqWDJONWMyUEJBN0lQeGxaMXFIYnVGajlSR2JaeXdvWmFlaw?oc=5",
         "tags": [
-          "#CrudeOil",
+          "#Geopolitics",
           "#NaturalGas",
-          "#Geopolitics"
+          "#CrudeOil"
         ],
         "published_at": "2026-09-23 19:00",
         "relative_time": "2 days ago",
@@ -1205,8 +1364,8 @@
         "publisher": "Nation Thailand",
         "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBzQ2RObGVKQksweFczd0haRXhNRE5uSGRFd1pnVEUyVXdxMnVVc2JsY0FsLVNxOWMxQVdncVF6Si1wWGt0VjV2cGMyMjJuTGgxaktFTE8tTEFBY2tIVGVacWlxRElvUUk?oc=5",
         "tags": [
-          "#NaturalGas",
-          "#Geopolitics"
+          "#Geopolitics",
+          "#NaturalGas"
         ],
         "published_at": "2026-09-22 00:44",
         "relative_time": "4 days ago",
@@ -1218,7 +1377,7 @@
       {
         "category": "METALS",
         "title": "Gold shrugs off Fed rate hike as deeper forces drive safe-haven demand",
-        "publisher": "Kitco",
+        "publisher": "kitco.com",
         "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNLUhaQWVKMFNWdlo1UG9Kc0Z0VnkxdVJIQVBCQmtxcXg0Z3NOcTNDYXJXNkRpazhnbUFVRVc2NTd6WXVzdXc3SG50SWFYeGRvX1g1SEhYUV9lczVad3h6cjczZDUyZzZST21fSXZjREd2MTdvcVQ2N0NrQ0hoWGxPNkxUVXRiMzlSQWtIX1VpNFNsdElWTU9QYmcxNllkT0xPS2REWWU1bzY0aUF1RWc?oc=5",
         "tags": [
           "#Gold"
@@ -1251,8 +1410,8 @@
         "publisher": "EnergyNow.com",
         "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOYWgyWkxyVFhPSzJINlljZ3I3OXlKSDF3UzV4MzdqOWxQUkxBN2VWbnppd180ZGZ2cjlaeTB0QlQ1ZTRYZmtGU0drSFNtVlg0eVV2TWhPQVZ3SnVvUGlmNEVzZzNBVzBpd1g0OVFDWWM0dUdzVm9iUUFIVW9vVzBGeVAyVQ?oc=5",
         "tags": [
-          "#NaturalGas",
-          "#Geopolitics"
+          "#Geopolitics",
+          "#NaturalGas"
         ],
         "published_at": "2026-09-15 22:17",
         "relative_time": "10 days ago",
@@ -1267,11 +1426,11 @@
         "publisher": "GoldSilver",
         "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4yLUp0bldkWGpDZGJxMXpLWmc2bWtkeW9vWVN1TTRMUmZzUXNpZEtSc2labnpjWUZiWWR3RjAyeXhDQ3U2N1ROSlp2VGh4SjZpSTJnMW1iZnJYTmowakFEVU1ZYjNYajZXRVlxYlp0Q0hiNEJNMTliZ3pVOGJjeGM?oc=5",
         "tags": [
-          "#Silver",
-          "#Gold"
+          "#Gold",
+          "#Silver"
         ],
         "published_at": "2026-09-14 07:00",
-        "relative_time": "11 days ago",
+        "relative_time": "12 days ago",
         "timestamp": 1789369200.0,
         "sentiment_score": -0.2,
         "sentiment_label": "BEARISH",
@@ -1283,11 +1442,11 @@
         "publisher": "NAI500",
         "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQYk5NX0pPZGlFV2N4Z0piQWlabTJsdFcyTnplV21sUnd2M09NR1huRDRnRU9xcURWckhmSUExLVFtRHdRLVhWVU1lM1dibDdaeG1aXzhKSWdKbFFFSzVyYUNMY3B4NTZicEhYWFBjX3ptSzVVQ0djSUJPbExWS090M0ZyQm40aXRaTGlpeVhoZmd5U3JTb2h6RjBDOUJtS0p0bGpwUGthdDZaQVdDSnc?oc=5",
         "tags": [
-          "#Silver",
-          "#Gold"
+          "#Gold",
+          "#Silver"
         ],
         "published_at": "2026-09-14 07:00",
-        "relative_time": "11 days ago",
+        "relative_time": "12 days ago",
         "timestamp": 1789369200.0,
         "sentiment_score": 0.49,
         "sentiment_label": "BULLISH (Supply Risk)",
@@ -1302,7 +1461,7 @@
           "#NaturalGas"
         ],
         "published_at": "2026-09-09 07:00",
-        "relative_time": "16 days ago",
+        "relative_time": "17 days ago",
         "timestamp": 1788937200.0,
         "sentiment_score": 0.0,
         "sentiment_label": "NEUTRAL",
@@ -1317,31 +1476,14 @@
           "#NaturalGas"
         ],
         "published_at": "2026-09-08 07:00",
-        "relative_time": "17 days ago",
+        "relative_time": "18 days ago",
         "timestamp": 1788850800.0,
         "sentiment_score": -0.05,
         "sentiment_label": "NEUTRAL",
         "is_geopolitical": false
-      },
-      {
-        "category": "ENERGY",
-        "title": "The Strait of Hormuz crisis threatened Asia's oil and gas lifeline. Here's how the region is rewriting its energy playbook",
-        "publisher": "fortune.com",
-        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPWHhCVlVlUTU5N29RSU9Qb2puLVZJR19kSlhUNC0xMkFGTDBvaWhoZG8yVTJ5NWQybXlXZllsS3Roa2tlSmNkR1ppUXBiT08wamhkYXpPLVkxdU5VdE41Zmo3WWJ5ZGl5eVJ2SlZDTnl2TjJKWm53Z013dE41ZUZ3LUZqSjlVQzhReUE?oc=5",
-        "tags": [
-          "#CrudeOil",
-          "#NaturalGas",
-          "#Geopolitics"
-        ],
-        "published_at": "2026-08-28 07:00",
-        "relative_time": "28 days ago",
-        "timestamp": 1787900400.0,
-        "sentiment_score": -0.72,
-        "sentiment_label": "BULLISH (Supply Risk)",
-        "is_geopolitical": true
       }
     ],
-    "scanned_at": "2026-09-26 06:05:10"
+    "scanned_at": "2026-09-26 14:03:30"
   },
   "validation": {
     "validated_at": "26-Sep-2026 04:13:19 AM IST",
