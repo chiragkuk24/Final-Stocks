@@ -1,88 +1,88 @@
 {
-  "updated_at": "2026-09-25 22:43:19",
+  "updated_at": "2026-09-26 14:40:06",
   "total_evaluations_analyzed": 20,
-  "overall_accuracy_pct": 30.0,
-  "overall_mae_close_pct": 10.47,
+  "overall_accuracy_pct": 75.0,
+  "overall_mae_close_pct": 8.79,
   "category_summary": {
     "Stock": {
       "count": 5,
-      "accuracy_pct": 80.0,
-      "mae_close_pct": 11.41,
-      "bias_close_pct": -11.41,
-      "mae_high_pct": 9.95,
-      "mae_low_pct": 1.04
+      "accuracy_pct": 0.0,
+      "mae_close_pct": 11.98,
+      "bias_close_pct": 11.98,
+      "mae_high_pct": 8.29,
+      "mae_low_pct": 3.16
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.29,
-      "bias_close_pct": -0.29,
-      "mae_high_pct": 0.32,
-      "mae_low_pct": 0.05
+      "mae_close_pct": 0.0,
+      "bias_close_pct": 0.0,
+      "mae_high_pct": 0.08,
+      "mae_low_pct": 0.08
     },
     "Futures": {
       "count": 5,
-      "accuracy_pct": 0.0,
-      "mae_close_pct": 13.67,
-      "bias_close_pct": -13.67,
-      "mae_high_pct": 8.86,
-      "mae_low_pct": 2.8
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 9.12,
+      "bias_close_pct": 9.12,
+      "mae_high_pct": 5.91,
+      "mae_low_pct": 2.85
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 0.0,
-      "mae_close_pct": 10.42,
-      "bias_close_pct": -10.42,
-      "mae_high_pct": 7.56,
-      "mae_low_pct": 3.13
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 8.78,
+      "bias_close_pct": 8.78,
+      "mae_high_pct": 6.71,
+      "mae_low_pct": 2.15
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955438.5 landed within 0.26% variance of Predicted Close \u20b955580.4.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b923063.1 landed within 0.33% variance of Predicted Close \u20b923140.5.",
-      "High Directional Precision in Stock setup 'ETERNAL': Actual Close \u20b9335.5 landed within 10.05% variance of Predicted Close \u20b9372.97.",
-      "High Directional Precision in Stock setup 'PNB': Actual Close \u20b9117.12 landed within 10.12% variance of Predicted Close \u20b9130.3.",
-      "High Directional Precision in Stock setup 'LICHSGFIN': Actual Close \u20b9564.25 landed within 12.35% variance of Predicted Close \u20b9643.73."
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b923140.5 landed within 0.00% variance of Predicted Close \u20b923140.5.",
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955580.4 landed within 0.00% variance of Predicted Close \u20b955580.4.",
+      "High Directional Precision in Futures setup 'APLAPOLLO (OCT-2026 FUT)': Actual Close \u20b92214.7 landed within 7.10% variance of Predicted Close \u20b92067.93.",
+      "High Directional Precision in Commodities setup 'Crude Oil Mini (OCT-2026 FUT)': Actual Close \u20b98854.73 landed within 7.75% variance of Predicted Close \u20b98218.19.",
+      "High Directional Precision in Commodities setup 'Crude Oil (OCT-2026 FUT)': Actual Close \u20b98854.73 landed within 7.75% variance of Predicted Close \u20b98218.19."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Futures setup 'MOTILALOFS (OCT-2026 FUT)': Overestimated target by 17.21% (Actual \u20b91022.0 vs Predicted \u20b91234.44).",
-      "Variance Outlier in Futures setup 'LICHSGFIN (OCT-2026 FUT)': Overestimated target by 15.10% (Actual \u20b9564.25 vs Predicted \u20b9664.58).",
-      "Variance Outlier in Commodities setup 'Crude Oil Mini (OCT-2026 FUT)': Overestimated target by 12.92% (Actual \u20b98855.94 vs Predicted \u20b910169.69).",
-      "Variance Outlier in Commodities setup 'Crude Oil (OCT-2026 FUT)': Overestimated target by 12.92% (Actual \u20b98855.94 vs Predicted \u20b910169.69).",
-      "Variance Outlier in Futures setup 'APLAPOLLO (OCT-2026 FUT)': Overestimated target by 12.39% (Actual \u20b92184.8 vs Predicted \u20b92493.86)."
+      "Variance Outlier in Stock setup 'MOTILALOFS': Underestimated target by 16.21% (Actual \u20b91029.0 vs Predicted \u20b9885.48).",
+      "Variance Outlier in Stock setup 'LICHSGFIN': Underestimated target by 13.18% (Actual \u20b9566.0 vs Predicted \u20b9500.09).",
+      "Variance Outlier in Stock setup 'ETERNAL': Underestimated target by 10.28% (Actual \u20b9335.0 vs Predicted \u20b9303.76).",
+      "Variance Outlier in Stock setup 'PNB': Underestimated target by 10.12% (Actual \u20b9116.6 vs Predicted \u20b9105.88).",
+      "Variance Outlier in Stock setup 'APLAPOLLO': Underestimated target by 10.12% (Actual \u20b92214.7 vs Predicted \u20b92011.21)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 10.47% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 7.76%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 2.22%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -8.79% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 6.25%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 2.37%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -10.469,
-    "overall_high_bias_pct": -7.696,
-    "overall_low_bias_pct": -2.177,
+    "overall_close_bias_pct": 8.789,
+    "overall_high_bias_pct": 6.23,
+    "overall_low_bias_pct": 2.357,
     "symbol_bias_offsets": {
-      "APLAPOLLO": -9.909,
-      "APLAPOLLO (OCT-2026 FUT)": -12.393,
-      "BANK NIFTY": -0.255,
-      "Crude Oil (OCT-2026 FUT)": -12.918,
-      "Crude Oil Mini (OCT-2026 FUT)": -12.918,
-      "ETERNAL": -10.046,
-      "ETERNAL (OCT-2026 FUT)": -12.085,
-      "Gold (OCT-2026 FUT)": -10.027,
-      "Gold Mini (OCT-2026 FUT)": -10.027,
-      "LICHSGFIN": -12.347,
-      "LICHSGFIN (OCT-2026 FUT)": -15.097,
-      "MOTILALOFS": -14.63,
-      "MOTILALOFS (OCT-2026 FUT)": -17.209,
-      "NIFTY 50": -0.334,
-      "Natural Gas (SEP-2026 FUT)": -8.609,
-      "Natural Gas Mini (SEP-2026 FUT)": -8.609,
-      "PNB": -10.115,
-      "PNB (OCT-2026 FUT)": -11.581,
-      "Silver (OCT-2026 FUT)": -10.138,
-      "Silver Mini (OCT-2026 FUT)": -10.138
+      "APLAPOLLO": 10.118,
+      "APLAPOLLO (OCT-2026 FUT)": 7.097,
+      "BANK NIFTY": 0.0,
+      "Crude Oil (OCT-2026 FUT)": 7.746,
+      "Crude Oil Mini (OCT-2026 FUT)": 7.746,
+      "ETERNAL": 10.284,
+      "ETERNAL (OCT-2026 FUT)": 7.8,
+      "Gold (OCT-2026 FUT)": 9.559,
+      "Gold Mini (OCT-2026 FUT)": 9.559,
+      "LICHSGFIN": 13.18,
+      "LICHSGFIN (OCT-2026 FUT)": 9.645,
+      "MOTILALOFS": 16.208,
+      "MOTILALOFS (OCT-2026 FUT)": 12.713,
+      "NIFTY 50": 0.0,
+      "Natural Gas (OCT-2026 FUT)": 8.365,
+      "Natural Gas Mini (OCT-2026 FUT)": 8.365,
+      "PNB": 10.125,
+      "PNB (OCT-2026 FUT)": 8.354,
+      "Silver (OCT-2026 FUT)": 9.46,
+      "Silver Mini (OCT-2026 FUT)": 9.46
     }
   }
 }
