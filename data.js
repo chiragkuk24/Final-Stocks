@@ -1486,8 +1486,8 @@ window.DASHBOARD_DATA = {
     "scanned_at": "2026-09-26 14:03:30"
   },
   "validation": {
-    "validated_at": "26-Sep-2026 08:10:05 PM IST",
-    "pipeline_completed_ist": "26-Sep-2026 08:10:05 PM IST",
+    "validated_at": "27-Sep-2026 03:39:08 AM IST",
+    "pipeline_completed_ist": "27-Sep-2026 03:39:08 AM IST",
     "total_evaluated": 20,
     "target_hit_count": 15,
     "accuracy_pct": 0.0,
@@ -1901,7 +1901,7 @@ window.DASHBOARD_DATA = {
     ]
   },
   "learning_feedback": {
-    "updated_at": "2026-09-26 14:40:05",
+    "updated_at": "2026-09-26 22:09:08",
     "total_evaluations_analyzed": 20,
     "overall_accuracy_pct": 75.0,
     "overall_mae_close_pct": 8.79,
