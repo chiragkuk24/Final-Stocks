@@ -1,83 +1,83 @@
 {
-  "updated_at": "2026-09-30 16:29:28",
+  "updated_at": "2026-09-30 23:11:18",
   "total_evaluations_analyzed": 16,
   "overall_accuracy_pct": 25.0,
-  "overall_mae_close_pct": 8.36,
+  "overall_mae_close_pct": 8.54,
   "category_summary": {
     "Stock": {
       "count": 3,
       "accuracy_pct": 66.7,
-      "mae_close_pct": 8.4,
-      "bias_close_pct": -8.4,
-      "mae_high_pct": 6.87,
-      "mae_low_pct": 0.99
+      "mae_close_pct": 8.16,
+      "bias_close_pct": -8.16,
+      "mae_high_pct": 6.75,
+      "mae_low_pct": 1.48
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.0,
-      "bias_close_pct": 0.0,
-      "mae_high_pct": 0.13,
-      "mae_low_pct": 0.13
+      "mae_close_pct": 0.55,
+      "bias_close_pct": -0.13,
+      "mae_high_pct": 0.65,
+      "mae_low_pct": 0.41
     },
     "Futures": {
       "count": 3,
       "accuracy_pct": 0.0,
-      "mae_close_pct": 11.1,
-      "bias_close_pct": -11.1,
-      "mae_high_pct": 7.65,
-      "mae_low_pct": 1.61
+      "mae_close_pct": 10.87,
+      "bias_close_pct": -10.87,
+      "mae_high_pct": 7.54,
+      "mae_low_pct": 1.93
     },
     "Commodities": {
       "count": 8,
       "accuracy_pct": 0.0,
-      "mae_close_pct": 9.41,
-      "bias_close_pct": -9.41,
-      "mae_high_pct": 6.67,
-      "mae_low_pct": 2.21
+      "mae_close_pct": 9.8,
+      "bias_close_pct": -9.8,
+      "mae_high_pct": 8.16,
+      "mae_low_pct": 1.39
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b954633.05 landed within 0.00% variance of Predicted Close \u20b954633.05.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922620.45 landed within 0.00% variance of Predicted Close \u20b922620.45.",
-      "High Directional Precision in Stock setup 'BANDHANBNK': Actual Close \u20b9178.23 landed within 7.83% variance of Predicted Close \u20b9193.38.",
-      "High Directional Precision in Stock setup 'APLAPOLLO': Actual Close \u20b92190.1 landed within 9.53% variance of Predicted Close \u20b92420.81."
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922716.2 landed within 0.42% variance of Predicted Close \u20b922620.45.",
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b954259.95 landed within 0.68% variance of Predicted Close \u20b954633.05.",
+      "High Directional Precision in Stock setup 'BANDHANBNK': Actual Close \u20b9185.31 landed within 4.17% variance of Predicted Close \u20b9193.38.",
+      "High Directional Precision in Stock setup 'APLAPOLLO': Actual Close \u20b92188.6 landed within 9.59% variance of Predicted Close \u20b92420.81."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Futures setup 'APLAPOLLO (OCT-2026 FUT)': Overestimated target by 11.98% (Actual \u20b92190.1 vs Predicted \u20b92488.18).",
-      "Variance Outlier in Futures setup 'BANDHANBNK (OCT-2026 FUT)': Overestimated target by 11.13% (Actual \u20b9178.23 vs Predicted \u20b9200.55).",
-      "Variance Outlier in Futures setup 'DLF (OCT-2026 FUT)': Overestimated target by 10.19% (Actual \u20b9674.0 vs Predicted \u20b9750.44).",
-      "Variance Outlier in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Overestimated target by 10.04% (Actual \u20b9289.38 vs Predicted \u20b9321.66).",
-      "Variance Outlier in Commodities setup 'Natural Gas (OCT-2026 FUT)': Overestimated target by 10.04% (Actual \u20b9289.38 vs Predicted \u20b9321.66)."
+      "Variance Outlier in Futures setup 'DLF (OCT-2026 FUT)': Overestimated target by 12.98% (Actual \u20b9653.0 vs Predicted \u20b9750.44).",
+      "Variance Outlier in Futures setup 'APLAPOLLO (OCT-2026 FUT)': Overestimated target by 12.04% (Actual \u20b92188.6 vs Predicted \u20b92488.18).",
+      "Variance Outlier in Commodities setup 'Crude Oil Mini (OCT-2026 FUT)': Overestimated target by 11.19% (Actual \u20b98633.38 vs Predicted \u20b99721.31).",
+      "Variance Outlier in Commodities setup 'Crude Oil (OCT-2026 FUT)': Overestimated target by 11.19% (Actual \u20b98633.38 vs Predicted \u20b99721.31).",
+      "Variance Outlier in Stock setup 'DLF': Overestimated target by 10.71% (Actual \u20b9653.0 vs Predicted \u20b9731.29)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 8.36% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 6.07%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.61%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 8.48% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 6.84%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.39%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -8.358,
-    "overall_high_bias_pct": -6.04,
-    "overall_low_bias_pct": -1.578,
+    "overall_close_bias_pct": -8.483,
+    "overall_high_bias_pct": -6.841,
+    "overall_low_bias_pct": -1.13,
     "symbol_bias_offsets": {
-      "APLAPOLLO": -9.53,
-      "APLAPOLLO (OCT-2026 FUT)": -11.98,
-      "BANDHANBNK": -7.834,
-      "BANDHANBNK (OCT-2026 FUT)": -11.129,
-      "BANK NIFTY": 0.0,
-      "Crude Oil (OCT-2026 FUT)": -9.959,
-      "Crude Oil Mini (OCT-2026 FUT)": -9.959,
-      "DLF": -7.834,
-      "DLF (OCT-2026 FUT)": -10.186,
-      "Gold (OCT-2026 FUT)": -8.798,
-      "Gold Mini (OCT-2026 FUT)": -8.798,
-      "NIFTY 50": 0.0,
-      "Natural Gas (OCT-2026 FUT)": -10.035,
-      "Natural Gas Mini (OCT-2026 FUT)": -10.035,
-      "Silver (OCT-2026 FUT)": -8.828,
-      "Silver Mini (OCT-2026 FUT)": -8.828
+      "APLAPOLLO": -9.592,
+      "APLAPOLLO (OCT-2026 FUT)": -12.04,
+      "BANDHANBNK": -4.173,
+      "BANDHANBNK (OCT-2026 FUT)": -7.599,
+      "BANK NIFTY": -0.683,
+      "Crude Oil (OCT-2026 FUT)": -11.191,
+      "Crude Oil Mini (OCT-2026 FUT)": -11.191,
+      "DLF": -10.706,
+      "DLF (OCT-2026 FUT)": -12.984,
+      "Gold (OCT-2026 FUT)": -8.935,
+      "Gold Mini (OCT-2026 FUT)": -8.935,
+      "NIFTY 50": 0.423,
+      "Natural Gas (OCT-2026 FUT)": -10.334,
+      "Natural Gas Mini (OCT-2026 FUT)": -10.334,
+      "Silver (OCT-2026 FUT)": -8.723,
+      "Silver Mini (OCT-2026 FUT)": -8.723
     }
   }
 }
