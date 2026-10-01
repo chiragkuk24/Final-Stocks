@@ -1,76 +1,76 @@
 {
-  "updated_at": "2026-10-01 17:06:58",
+  "updated_at": "2026-10-01 23:23:41",
   "total_evaluations_analyzed": 12,
   "overall_accuracy_pct": 91.7,
-  "overall_mae_close_pct": 5.49,
+  "overall_mae_close_pct": 5.73,
   "category_summary": {
     "Stock": {
       "count": 1,
       "accuracy_pct": 0.0,
-      "mae_close_pct": 8.4,
-      "bias_close_pct": 8.4,
-      "mae_high_pct": 5.33,
-      "mae_low_pct": 0.39
+      "mae_close_pct": 7.07,
+      "bias_close_pct": 7.07,
+      "mae_high_pct": 6.03,
+      "mae_low_pct": 0.47
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.0,
-      "bias_close_pct": 0.0,
-      "mae_high_pct": 0.09,
-      "mae_low_pct": 0.09
+      "mae_close_pct": 0.61,
+      "bias_close_pct": 0.61,
+      "mae_high_pct": 0.55,
+      "mae_low_pct": 1.02
     },
     "Futures": {
       "count": 1,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 5.5,
-      "bias_close_pct": 5.5,
-      "mae_high_pct": 3.77,
-      "mae_low_pct": 0.68
+      "mae_close_pct": 4.2,
+      "bias_close_pct": 4.2,
+      "mae_high_pct": 4.46,
+      "mae_low_pct": 0.18
     },
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 6.5,
-      "bias_close_pct": 6.5,
-      "mae_high_pct": 6.09,
-      "mae_low_pct": 1.5
+      "mae_close_pct": 7.03,
+      "bias_close_pct": 7.03,
+      "mae_high_pct": 5.41,
+      "mae_low_pct": 2.84
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922421.95 landed within 0.00% variance of Predicted Close \u20b922421.95.",
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b954450.75 landed within 0.00% variance of Predicted Close \u20b954450.75.",
-      "High Directional Precision in Commodities setup 'Natural Gas (OCT-2026 FUT)': Actual Close \u20b9285.06 landed within 5.43% variance of Predicted Close \u20b9270.38.",
-      "High Directional Precision in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Actual Close \u20b9285.06 landed within 5.43% variance of Predicted Close \u20b9270.38.",
-      "High Directional Precision in Futures setup 'MANKIND (OCT-2026 FUT)': Actual Close \u20b92535.0 landed within 5.50% variance of Predicted Close \u20b92402.86."
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b954633.05 landed within 0.33% variance of Predicted Close \u20b954450.75.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922620.45 landed within 0.89% variance of Predicted Close \u20b922421.95.",
+      "High Directional Precision in Futures setup 'MANKIND (OCT-2026 FUT)': Actual Close \u20b92503.8 landed within 4.20% variance of Predicted Close \u20b92402.86.",
+      "High Directional Precision in Commodities setup 'Natural Gas (OCT-2026 FUT)': Actual Close \u20b9284.11 landed within 5.08% variance of Predicted Close \u20b9270.38.",
+      "High Directional Precision in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Actual Close \u20b9284.11 landed within 5.08% variance of Predicted Close \u20b9270.38."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Stock setup 'MANKIND': Underestimated target by 8.40% (Actual \u20b92535.0 vs Predicted \u20b92338.52)."
+      "Variance Outlier in Stock setup 'MANKIND': Underestimated target by 7.07% (Actual \u20b92503.8 vs Predicted \u20b92338.52)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -5.49% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 4.83%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.11%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -5.73% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 4.57%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 2.12%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": 5.492,
-    "overall_high_bias_pct": 4.831,
-    "overall_low_bias_pct": 0.871,
+    "overall_close_bias_pct": 5.73,
+    "overall_high_bias_pct": 4.571,
+    "overall_low_bias_pct": 2.012,
     "symbol_bias_offsets": {
-      "BANK NIFTY": 0.0,
-      "Crude Oil (OCT-2026 FUT)": 6.524,
-      "Crude Oil Mini (OCT-2026 FUT)": 6.524,
-      "Gold (OCT-2026 FUT)": 7.122,
-      "Gold Mini (OCT-2026 FUT)": 7.122,
-      "MANKIND": 8.402,
-      "MANKIND (OCT-2026 FUT)": 5.499,
-      "NIFTY 50": 0.0,
-      "Natural Gas (OCT-2026 FUT)": 5.429,
-      "Natural Gas Mini (OCT-2026 FUT)": 5.429,
-      "Silver (OCT-2026 FUT)": 6.927,
-      "Silver Mini (OCT-2026 FUT)": 6.927
+      "BANK NIFTY": 0.335,
+      "Crude Oil (OCT-2026 FUT)": 7.442,
+      "Crude Oil Mini (OCT-2026 FUT)": 7.442,
+      "Gold (OCT-2026 FUT)": 7.611,
+      "Gold Mini (OCT-2026 FUT)": 7.611,
+      "MANKIND": 7.068,
+      "MANKIND (OCT-2026 FUT)": 4.201,
+      "NIFTY 50": 0.885,
+      "Natural Gas (OCT-2026 FUT)": 5.078,
+      "Natural Gas Mini (OCT-2026 FUT)": 5.078,
+      "Silver (OCT-2026 FUT)": 8.005,
+      "Silver Mini (OCT-2026 FUT)": 8.005
     }
   }
 }
