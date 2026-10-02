@@ -1015,8 +1015,8 @@
     "scanned_at": "2026-10-02 16:06:38"
   },
   "validation": {
-    "validated_at": "02-Oct-2026 09:51:06 PM IST",
-    "pipeline_completed_ist": "02-Oct-2026 09:51:06 PM IST",
+    "validated_at": "03-Oct-2026 04:42:38 AM IST",
+    "pipeline_completed_ist": "03-Oct-2026 04:42:38 AM IST",
     "total_evaluated": 12,
     "target_hit_count": 2,
     "accuracy_pct": 0.0,
@@ -1110,9 +1110,9 @@
       {
         "Date": "2026-10-02",
         "Stock Name": "Gold (OCT-2026 FUT)",
-        "Actual Close": 148246.42,
+        "Actual Close": 148549.06,
         "Predicted Close": 159455.54,
-        "Variance (Close)": -11209.12,
+        "Variance (Close)": -10906.48,
         "Actual High": 151643.17,
         "Predicted High": 157591.47,
         "Variance (High)": -5948.3,
@@ -1125,14 +1125,14 @@
         "Pred_High": 157591.47,
         "Pred_Close": 159455.54,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 7.03
+        "Error_Pct": 6.84
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Gold Mini (OCT-2026 FUT)",
-        "Actual Close": 148246.42,
+        "Actual Close": 148549.06,
         "Predicted Close": 159455.54,
-        "Variance (Close)": -11209.12,
+        "Variance (Close)": -10906.48,
         "Actual High": 151643.17,
         "Predicted High": 157591.47,
         "Variance (High)": -5948.3,
@@ -1145,14 +1145,14 @@
         "Pred_High": 157591.47,
         "Pred_Close": 159455.54,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 7.03
+        "Error_Pct": 6.84
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Silver (OCT-2026 FUT)",
-        "Actual Close": 214557.81,
+        "Actual Close": 216160.05,
         "Predicted Close": 230529.6,
-        "Variance (Close)": -15971.79,
+        "Variance (Close)": -14369.55,
         "Actual High": 222390.99,
         "Predicted High": 227834.66,
         "Variance (High)": -5443.67,
@@ -1165,14 +1165,14 @@
         "Pred_High": 227834.66,
         "Pred_Close": 230529.6,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 6.93
+        "Error_Pct": 6.23
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Silver Mini (OCT-2026 FUT)",
-        "Actual Close": 214557.81,
+        "Actual Close": 216160.05,
         "Predicted Close": 230529.6,
-        "Variance (Close)": -15971.79,
+        "Variance (Close)": -14369.55,
         "Actual High": 222390.99,
         "Predicted High": 227834.66,
         "Variance (High)": -5443.67,
@@ -1185,17 +1185,17 @@
         "Pred_High": 227834.66,
         "Pred_Close": 230529.6,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 6.93
+        "Error_Pct": 6.23
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Natural Gas (OCT-2026 FUT)",
-        "Actual Close": 288.9,
+        "Actual Close": 292.75,
         "Predicted Close": 315.33,
-        "Variance (Close)": -26.43,
-        "Actual High": 291.79,
+        "Variance (Close)": -22.58,
+        "Actual High": 293.72,
         "Predicted High": 311.51,
-        "Variance (High)": -19.72,
+        "Variance (High)": -17.79,
         "Actual Low": 280.23,
         "Predicted Low": 289.68,
         "Variance (Low)": -9.45,
@@ -1205,17 +1205,17 @@
         "Pred_High": 311.51,
         "Pred_Close": 315.33,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 8.38
+        "Error_Pct": 7.16
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Natural Gas Mini (OCT-2026 FUT)",
-        "Actual Close": 288.9,
+        "Actual Close": 292.75,
         "Predicted Close": 315.33,
-        "Variance (Close)": -26.43,
-        "Actual High": 291.79,
+        "Variance (Close)": -22.58,
+        "Actual High": 293.72,
         "Predicted High": 311.51,
-        "Variance (High)": -19.72,
+        "Variance (High)": -17.79,
         "Actual Low": 280.23,
         "Predicted Low": 289.68,
         "Variance (Low)": -9.45,
@@ -1225,14 +1225,14 @@
         "Pred_High": 311.51,
         "Pred_Close": 315.33,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 8.38
+        "Error_Pct": 7.16
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Crude Oil (OCT-2026 FUT)",
-        "Actual Close": 8734.41,
+        "Actual Close": 8788.34,
         "Predicted Close": 9535.41,
-        "Variance (Close)": -801.0,
+        "Variance (Close)": -747.07,
         "Actual High": 9005.01,
         "Predicted High": 9420.19,
         "Variance (High)": -415.18,
@@ -1245,14 +1245,14 @@
         "Pred_High": 9420.19,
         "Pred_Close": 9535.41,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 8.4
+        "Error_Pct": 7.83
       },
       {
         "Date": "2026-10-02",
         "Stock Name": "Crude Oil Mini (OCT-2026 FUT)",
-        "Actual Close": 8734.41,
+        "Actual Close": 8788.34,
         "Predicted Close": 9535.41,
-        "Variance (Close)": -801.0,
+        "Variance (Close)": -747.07,
         "Actual High": 9005.01,
         "Predicted High": 9420.19,
         "Variance (High)": -415.18,
@@ -1265,15 +1265,15 @@
         "Pred_High": 9420.19,
         "Pred_Close": 9535.41,
         "Accuracy_Status": "\u26a0\ufe0f OUTSIDE RANGE",
-        "Error_Pct": 8.4
+        "Error_Pct": 7.83
       }
     ]
   },
   "learning_feedback": {
-    "updated_at": "2026-10-02 16:21:06",
+    "updated_at": "2026-10-02 23:12:38",
     "total_evaluations_analyzed": 12,
     "overall_accuracy_pct": 16.7,
-    "overall_mae_close_pct": 6.55,
+    "overall_mae_close_pct": 6.11,
     "category_summary": {
       "Stock": {
         "count": 1,
@@ -1302,9 +1302,9 @@
       "Commodities": {
         "count": 8,
         "accuracy_pct": 0.0,
-        "mae_close_pct": 7.68,
-        "bias_close_pct": -7.68,
-        "mae_high_pct": 4.23,
+        "mae_close_pct": 7.02,
+        "bias_close_pct": -7.02,
+        "mae_high_pct": 4.07,
         "mae_low_pct": 2.11
       }
     },
@@ -1315,34 +1315,34 @@
       ],
       "what_went_wrong": [
         "Variance Outlier in Futures setup 'MANKIND (OCT-2026 FUT)': Overestimated target by 9.81% (Actual \u20b92535.0 vs Predicted \u20b92810.76).",
-        "Variance Outlier in Commodities setup 'Crude Oil (OCT-2026 FUT)': Overestimated target by 8.40% (Actual \u20b98734.41 vs Predicted \u20b99535.41).",
-        "Variance Outlier in Commodities setup 'Crude Oil Mini (OCT-2026 FUT)': Overestimated target by 8.40% (Actual \u20b98734.41 vs Predicted \u20b99535.41).",
-        "Variance Outlier in Commodities setup 'Natural Gas (OCT-2026 FUT)': Overestimated target by 8.38% (Actual \u20b9288.9 vs Predicted \u20b9315.33).",
-        "Variance Outlier in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Overestimated target by 8.38% (Actual \u20b9288.9 vs Predicted \u20b9315.33)."
+        "Variance Outlier in Commodities setup 'Crude Oil (OCT-2026 FUT)': Overestimated target by 7.83% (Actual \u20b98788.34 vs Predicted \u20b99535.41).",
+        "Variance Outlier in Commodities setup 'Crude Oil Mini (OCT-2026 FUT)': Overestimated target by 7.83% (Actual \u20b98788.34 vs Predicted \u20b99535.41).",
+        "Variance Outlier in Stock setup 'MANKIND': Overestimated target by 7.34% (Actual \u20b92535.0 vs Predicted \u20b92735.89).",
+        "Variance Outlier in Commodities setup 'Natural Gas (OCT-2026 FUT)': Overestimated target by 7.16% (Actual \u20b9292.75 vs Predicted \u20b9315.33)."
       ],
       "how_to_minimize_variance": [
-        "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 6.55% to compensate for mean market drift.",
-        "Calibrate High Target Volatility: High prediction variance averaged 4.07%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+        "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 6.11% to compensate for mean market drift.",
+        "Calibrate High Target Volatility: High prediction variance averaged 3.97%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
         "Tighten Low Support Bounds: Low prediction variance averaged 1.82%. Applying dynamic floor pivot weighting to anchor stop losses."
       ]
     },
     "bias_corrections": {
-      "overall_close_bias_pct": -6.553,
-      "overall_high_bias_pct": -4.047,
+      "overall_close_bias_pct": -6.108,
+      "overall_high_bias_pct": -3.943,
       "overall_low_bias_pct": -1.791,
       "symbol_bias_offsets": {
         "BANK NIFTY": 0.0,
-        "Crude Oil (OCT-2026 FUT)": -8.4,
-        "Crude Oil Mini (OCT-2026 FUT)": -8.4,
-        "Gold (OCT-2026 FUT)": -7.03,
-        "Gold Mini (OCT-2026 FUT)": -7.03,
+        "Crude Oil (OCT-2026 FUT)": -7.835,
+        "Crude Oil Mini (OCT-2026 FUT)": -7.835,
+        "Gold (OCT-2026 FUT)": -6.84,
+        "Gold Mini (OCT-2026 FUT)": -6.84,
         "MANKIND": -7.343,
         "MANKIND (OCT-2026 FUT)": -9.811,
         "NIFTY 50": 0.0,
-        "Natural Gas (OCT-2026 FUT)": -8.382,
-        "Natural Gas Mini (OCT-2026 FUT)": -8.382,
-        "Silver (OCT-2026 FUT)": -6.928,
-        "Silver Mini (OCT-2026 FUT)": -6.928
+        "Natural Gas (OCT-2026 FUT)": -7.161,
+        "Natural Gas Mini (OCT-2026 FUT)": -7.161,
+        "Silver (OCT-2026 FUT)": -6.233,
+        "Silver Mini (OCT-2026 FUT)": -6.233
       }
     }
   }
