@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-08 17:30:43",
+  "updated_at": "2026-10-08 23:53:33",
   "total_evaluations_analyzed": 12,
   "overall_accuracy_pct": 100.0,
-  "overall_mae_close_pct": 1.35,
+  "overall_mae_close_pct": 1.71,
   "category_summary": {
     "Stock": {
       "count": 1,
@@ -15,10 +15,10 @@
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.0,
-      "bias_close_pct": 0.0,
-      "mae_high_pct": 0.35,
-      "mae_low_pct": 0.36
+      "mae_close_pct": 1.33,
+      "bias_close_pct": 1.33,
+      "mae_high_pct": 0.89,
+      "mae_low_pct": 1.42
     },
     "Futures": {
       "count": 1,
@@ -31,46 +31,46 @@
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 1.76,
-      "bias_close_pct": 1.76,
-      "mae_high_pct": 3.01,
-      "mae_low_pct": 1.19
+      "mae_close_pct": 1.95,
+      "bias_close_pct": 1.88,
+      "mae_high_pct": 1.32,
+      "mae_low_pct": 0.16
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922231.8 landed within 0.00% variance of Predicted Close \u20b922231.8.",
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b954515.05 landed within 0.00% variance of Predicted Close \u20b954515.05.",
       "High Directional Precision in Futures setup 'PETRONET (OCT-2026 FUT)': Actual Close \u20b9288.5 landed within 0.06% variance of Predicted Close \u20b9288.66.",
-      "High Directional Precision in Commodities setup 'Natural Gas (OCT-2026 FUT)': Actual Close \u20b9303.86 landed within 0.16% variance of Predicted Close \u20b9303.36.",
-      "High Directional Precision in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Actual Close \u20b9303.86 landed within 0.16% variance of Predicted Close \u20b9303.36."
+      "High Directional Precision in Commodities setup 'Natural Gas (OCT-2026 FUT)': Actual Close \u20b9302.92 landed within 0.15% variance of Predicted Close \u20b9303.36.",
+      "High Directional Precision in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Actual Close \u20b9302.92 landed within 0.15% variance of Predicted Close \u20b9303.36.",
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955055.55 landed within 0.99% variance of Predicted Close \u20b954515.05.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922603.05 landed within 1.67% variance of Predicted Close \u20b922231.8."
     ],
     "what_went_wrong": [
       "Zero major variance breaches detected. All predictions stayed within 2.5% tolerance."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -1.35% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 2.63%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 0.89%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -1.65% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.60%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 0.38%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": 1.346,
-    "overall_high_bias_pct": 2.634,
-    "overall_low_bias_pct": -0.727,
+    "overall_close_bias_pct": 1.648,
+    "overall_high_bias_pct": 1.255,
+    "overall_low_bias_pct": 0.275,
     "symbol_bias_offsets": {
-      "BANK NIFTY": 0.0,
-      "Crude Oil (OCT-2026 FUT)": 1.649,
-      "Crude Oil Mini (OCT-2026 FUT)": 1.649,
-      "Gold (NOV-2026 FUT)": 2.54,
-      "Gold Mini (NOV-2026 FUT)": 2.54,
-      "NIFTY 50": 0.0,
-      "Natural Gas (OCT-2026 FUT)": 0.165,
-      "Natural Gas Mini (OCT-2026 FUT)": 0.165,
+      "BANK NIFTY": 0.991,
+      "Crude Oil (OCT-2026 FUT)": 1.939,
+      "Crude Oil Mini (OCT-2026 FUT)": 1.939,
+      "Gold (NOV-2026 FUT)": 2.563,
+      "Gold Mini (NOV-2026 FUT)": 2.563,
+      "NIFTY 50": 1.67,
+      "Natural Gas (OCT-2026 FUT)": -0.145,
+      "Natural Gas Mini (OCT-2026 FUT)": -0.145,
       "PETRONET": 2.109,
       "PETRONET (OCT-2026 FUT)": -0.055,
-      "Silver (NOV-2026 FUT)": 2.693,
-      "Silver Mini (NOV-2026 FUT)": 2.693
+      "Silver (NOV-2026 FUT)": 3.17,
+      "Silver Mini (NOV-2026 FUT)": 3.17
     }
   }
 }
