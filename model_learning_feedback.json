@@ -1,84 +1,82 @@
 {
-  "updated_at": "2026-10-14 22:33:04",
-  "total_evaluations_analyzed": 16,
-  "overall_accuracy_pct": 56.2,
-  "overall_mae_close_pct": 2.61,
+  "updated_at": "2026-10-15 15:14:06",
+  "total_evaluations_analyzed": 18,
+  "overall_accuracy_pct": 100.0,
+  "overall_mae_close_pct": 0.99,
   "category_summary": {
     "Stock": {
-      "count": 3,
+      "count": 4,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 2.35,
-      "bias_close_pct": -2.35,
-      "mae_high_pct": 1.91,
-      "mae_low_pct": 1.32
+      "mae_close_pct": 2.01,
+      "bias_close_pct": 1.62,
+      "mae_high_pct": 1.32,
+      "mae_low_pct": 0.88
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.37,
-      "bias_close_pct": 0.37,
-      "mae_high_pct": 0.06,
-      "mae_low_pct": 0.88
+      "mae_close_pct": 0.0,
+      "bias_close_pct": 0.0,
+      "mae_high_pct": 0.3,
+      "mae_low_pct": 0.3
     },
     "Futures": {
-      "count": 3,
-      "accuracy_pct": 0.0,
-      "mae_close_pct": 4.75,
-      "bias_close_pct": -4.75,
-      "mae_high_pct": 2.28,
-      "mae_low_pct": 0.65
+      "count": 4,
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 1.76,
+      "bias_close_pct": -0.99,
+      "mae_high_pct": 1.1,
+      "mae_low_pct": 0.8
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 50.0,
-      "mae_close_pct": 2.47,
-      "bias_close_pct": -2.4,
-      "mae_high_pct": 2.07,
-      "mae_low_pct": 1.68
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 0.35,
+      "bias_close_pct": 0.21,
+      "mae_high_pct": 0.28,
+      "mae_low_pct": 1.61
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Stock setup 'PERSISTENT': Actual Close \u20b95988.0 landed within 0.03% variance of Predicted Close \u20b95989.53.",
-      "High Directional Precision in Commodities setup 'Natural Gas (OCT-2026 FUT)': Actual Close \u20b9313.01 landed within 0.13% variance of Predicted Close \u20b9312.61.",
-      "High Directional Precision in Commodities setup 'Natural Gas Mini (OCT-2026 FUT)': Actual Close \u20b9313.01 landed within 0.13% variance of Predicted Close \u20b9312.61.",
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955481.05 landed within 0.30% variance of Predicted Close \u20b955316.0.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922721.95 landed within 0.44% variance of Predicted Close \u20b922622.7."
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955810.5 landed within 0.00% variance of Predicted Close \u20b955810.5.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922997.35 landed within 0.00% variance of Predicted Close \u20b922997.35.",
+      "High Directional Precision in Commodities setup 'Silver (NOV-2026 FUT)': Actual Close \u20b9201219.24 landed within 0.22% variance of Predicted Close \u20b9200779.06.",
+      "High Directional Precision in Commodities setup 'Silver Mini (NOV-2026 FUT)': Actual Close \u20b9201219.24 landed within 0.22% variance of Predicted Close \u20b9200779.06.",
+      "High Directional Precision in Commodities setup 'Natural Gas (OCT-2026 FUT)': Actual Close \u20b9312.7 landed within 0.29% variance of Predicted Close \u20b9313.61."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Futures setup 'PETRONET (OCT-2026 FUT)': Overestimated target by 6.09% (Actual \u20b9290.0 vs Predicted \u20b9308.82).",
-      "Variance Outlier in Futures setup 'KOTAKBANK (OCT-2026 FUT)': Overestimated target by 5.14% (Actual \u20b9439.0 vs Predicted \u20b9462.78).",
-      "Variance Outlier in Commodities setup 'Silver Mini (NOV-2026 FUT)': Overestimated target by 4.58% (Actual \u20b9196319.78 vs Predicted \u20b9205736.76).",
-      "Variance Outlier in Commodities setup 'Silver (NOV-2026 FUT)': Overestimated target by 4.58% (Actual \u20b9196319.78 vs Predicted \u20b9205736.76).",
-      "Variance Outlier in Futures setup 'PERSISTENT (OCT-2026 FUT)': Overestimated target by 3.01% (Actual \u20b95988.0 vs Predicted \u20b96174.12)."
+      "Zero major variance breaches detected. All predictions stayed within 2.5% tolerance."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.49% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.83%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.32%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -0.23% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 0.70%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.12%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -2.487,
-    "overall_high_bias_pct": -1.489,
-    "overall_low_bias_pct": 0.584,
+    "overall_close_bias_pct": 0.232,
+    "overall_high_bias_pct": -0.156,
+    "overall_low_bias_pct": -0.776,
     "symbol_bias_offsets": {
-      "BANK NIFTY": 0.298,
-      "Crude Oil (OCT-2026 FUT)": -2.392,
-      "Crude Oil Mini (OCT-2026 FUT)": -2.392,
-      "Gold (NOV-2026 FUT)": -2.771,
-      "Gold Mini (NOV-2026 FUT)": -2.771,
-      "KOTAKBANK": -2.809,
-      "KOTAKBANK (OCT-2026 FUT)": -5.139,
-      "NIFTY 50": 0.439,
-      "Natural Gas (OCT-2026 FUT)": 0.128,
-      "Natural Gas Mini (OCT-2026 FUT)": 0.128,
-      "PERSISTENT": -0.026,
-      "PERSISTENT (OCT-2026 FUT)": -3.015,
-      "PETRONET": -4.215,
-      "PETRONET (OCT-2026 FUT)": -6.094,
-      "Silver (NOV-2026 FUT)": -4.577,
-      "Silver Mini (NOV-2026 FUT)": -4.577
+      "BANK NIFTY": 0.0,
+      "Crude Oil (OCT-2026 FUT)": 0.556,
+      "Crude Oil Mini (OCT-2026 FUT)": 0.556,
+      "Gold (NOV-2026 FUT)": 0.346,
+      "Gold Mini (NOV-2026 FUT)": 0.346,
+      "KOTAKBANK": 2.074,
+      "KOTAKBANK (OCT-2026 FUT)": -0.327,
+      "MPHASIS": 1.61,
+      "MPHASIS (OCT-2026 FUT)": -1.426,
+      "NIFTY 50": 0.0,
+      "Natural Gas (OCT-2026 FUT)": -0.29,
+      "Natural Gas Mini (OCT-2026 FUT)": -0.29,
+      "PERSISTENT": -0.768,
+      "PERSISTENT (OCT-2026 FUT)": -3.749,
+      "PETRONET": 3.572,
+      "PETRONET (OCT-2026 FUT)": 1.534,
+      "Silver (NOV-2026 FUT)": 0.219,
+      "Silver Mini (NOV-2026 FUT)": 0.219
     }
   }
 }
