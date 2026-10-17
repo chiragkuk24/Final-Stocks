@@ -1878,8 +1878,8 @@
     "scanned_at": "2026-10-17 13:28:18"
   },
   "validation": {
-    "validated_at": "17-Oct-2026 07:21:52 PM IST",
-    "pipeline_completed_ist": "17-Oct-2026 07:21:52 PM IST",
+    "validated_at": "18-Oct-2026 03:10:28 AM IST",
+    "pipeline_completed_ist": "18-Oct-2026 03:10:28 AM IST",
     "total_evaluated": 20,
     "target_hit_count": 19,
     "accuracy_pct": 100.0,
@@ -2293,7 +2293,7 @@
     ]
   },
   "learning_feedback": {
-    "updated_at": "2026-10-17 13:51:53",
+    "updated_at": "2026-10-17 21:40:28",
     "total_evaluations_analyzed": 20,
     "overall_accuracy_pct": 95.0,
     "overall_mae_close_pct": 0.91,
