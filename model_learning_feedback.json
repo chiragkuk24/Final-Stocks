@@ -1,84 +1,84 @@
 {
-  "updated_at": "2026-10-17 21:40:28",
-  "total_evaluations_analyzed": 20,
-  "overall_accuracy_pct": 95.0,
-  "overall_mae_close_pct": 0.91,
+  "updated_at": "2026-10-19 17:05:42",
+  "total_evaluations_analyzed": 18,
+  "overall_accuracy_pct": 83.3,
+  "overall_mae_close_pct": 2.33,
   "category_summary": {
     "Stock": {
-      "count": 5,
+      "count": 4,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 1.5,
-      "bias_close_pct": 0.91,
-      "mae_high_pct": 0.76,
-      "mae_low_pct": 0.97
+      "mae_close_pct": 2.13,
+      "bias_close_pct": -1.78,
+      "mae_high_pct": 2.68,
+      "mae_low_pct": 1.94
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
       "mae_close_pct": 0.0,
       "bias_close_pct": 0.0,
-      "mae_high_pct": 0.22,
-      "mae_low_pct": 0.22
+      "mae_high_pct": 0.25,
+      "mae_low_pct": 0.25
     },
     "Futures": {
-      "count": 5,
-      "accuracy_pct": 80.0,
-      "mae_close_pct": 1.91,
-      "bias_close_pct": -1.89,
-      "mae_high_pct": 2.49,
-      "mae_low_pct": 0.83
+      "count": 4,
+      "accuracy_pct": 25.0,
+      "mae_close_pct": 4.53,
+      "bias_close_pct": -4.53,
+      "mae_high_pct": 1.04,
+      "mae_low_pct": 1.44
     },
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.15,
-      "bias_close_pct": -0.15,
-      "mae_high_pct": 1.36,
-      "mae_low_pct": 1.27
+      "mae_close_pct": 1.92,
+      "bias_close_pct": -1.92,
+      "mae_high_pct": 1.03,
+      "mae_low_pct": 0.66
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955844.0 landed within 0.00% variance of Predicted Close \u20b955844.0.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b923146.15 landed within 0.00% variance of Predicted Close \u20b923146.15.",
-      "High Directional Precision in Commodities setup 'Gold Mini (NOV-2026 FUT)': Actual Close \u20b9146798.01 landed within 0.02% variance of Predicted Close \u20b9146823.64.",
-      "High Directional Precision in Commodities setup 'Gold (NOV-2026 FUT)': Actual Close \u20b9146798.01 landed within 0.02% variance of Predicted Close \u20b9146823.64.",
-      "High Directional Precision in Futures setup 'PETRONET (OCT-2026 FUT)': Actual Close \u20b9293.0 landed within 0.03% variance of Predicted Close \u20b9292.9."
+      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b955488.1 landed within 0.00% variance of Predicted Close \u20b955488.1.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922888.95 landed within 0.00% variance of Predicted Close \u20b922888.95.",
+      "High Directional Precision in Stock setup 'PERSISTENT': Actual Close \u20b95690.0 landed within 0.70% variance of Predicted Close \u20b95650.63.",
+      "High Directional Precision in Stock setup 'PNB': Actual Close \u20b9121.9 landed within 1.58% variance of Predicted Close \u20b9123.86.",
+      "High Directional Precision in Commodities setup 'Crude Oil (OCT-2026 FUT)': Actual Close \u20b99379.5 landed within 1.68% variance of Predicted Close \u20b99539.35."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Futures setup 'PERSISTENT (OCT-2026 FUT)': Overestimated target by 4.56% (Actual \u20b95741.0 vs Predicted \u20b96015.22)."
+      "Variance Outlier in Futures setup 'MPHASIS (OCT-2026 FUT)': Overestimated target by 6.48% (Actual \u20b92500.0 vs Predicted \u20b92673.2).",
+      "Variance Outlier in Futures setup 'PETRONET (OCT-2026 FUT)': Overestimated target by 4.65% (Actual \u20b9293.65 vs Predicted \u20b9307.98).",
+      "Variance Outlier in Futures setup 'PNB (OCT-2026 FUT)': Overestimated target by 4.26% (Actual \u20b9121.9 vs Predicted \u20b9127.32)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 0.30% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.38%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 0.98%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.26% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.31%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.07%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -0.305,
-    "overall_high_bias_pct": -0.933,
-    "overall_low_bias_pct": -0.299,
+    "overall_close_bias_pct": -2.256,
+    "overall_high_bias_pct": 0.231,
+    "overall_low_bias_pct": 1.049,
     "symbol_bias_offsets": {
       "BANK NIFTY": 0.0,
-      "Crude Oil (OCT-2026 FUT)": -0.201,
-      "Crude Oil Mini (OCT-2026 FUT)": -0.201,
-      "ETERNAL": 0.423,
-      "ETERNAL (OCT-2026 FUT)": -2.491,
-      "Gold (NOV-2026 FUT)": -0.017,
-      "Gold Mini (NOV-2026 FUT)": -0.017,
-      "MPHASIS": 2.794,
-      "MPHASIS (OCT-2026 FUT)": -0.351,
+      "Crude Oil (OCT-2026 FUT)": -1.676,
+      "Crude Oil Mini (OCT-2026 FUT)": -1.676,
+      "Gold (NOV-2026 FUT)": -1.783,
+      "Gold Mini (NOV-2026 FUT)": -1.783,
+      "MPHASIS": -3.49,
+      "MPHASIS (OCT-2026 FUT)": -6.479,
       "NIFTY 50": 0.0,
-      "Natural Gas (OCT-2026 FUT)": -0.135,
-      "Natural Gas Mini (OCT-2026 FUT)": -0.135,
-      "PERSISTENT": -1.48,
-      "PERSISTENT (OCT-2026 FUT)": -4.559,
-      "PETRONET": 2.016,
-      "PETRONET (OCT-2026 FUT)": 0.034,
-      "PNB": 0.797,
-      "PNB (OCT-2026 FUT)": -2.104,
-      "Silver (NOV-2026 FUT)": -0.234,
-      "Silver Mini (NOV-2026 FUT)": -0.234
+      "Natural Gas (OCT-2026 FUT)": -2.219,
+      "Natural Gas Mini (OCT-2026 FUT)": -2.219,
+      "PERSISTENT": 0.697,
+      "PERSISTENT (OCT-2026 FUT)": -2.723,
+      "PETRONET": -2.755,
+      "PETRONET (OCT-2026 FUT)": -4.653,
+      "PNB": -1.582,
+      "PNB (OCT-2026 FUT)": -4.257,
+      "Silver (NOV-2026 FUT)": -2.009,
+      "Silver Mini (NOV-2026 FUT)": -2.009
     }
   }
 }
