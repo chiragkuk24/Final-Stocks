@@ -1,96 +1,96 @@
 {
-  "updated_at": "2026-10-29 17:03:09",
+  "updated_at": "2026-10-29 23:31:49",
   "total_evaluations_analyzed": 28,
-  "overall_accuracy_pct": 67.9,
-  "overall_mae_close_pct": 2.96,
+  "overall_accuracy_pct": 71.4,
+  "overall_mae_close_pct": 2.91,
   "category_summary": {
     "Stock": {
       "count": 9,
-      "accuracy_pct": 33.3,
-      "mae_close_pct": 4.22,
-      "bias_close_pct": 3.19,
-      "mae_high_pct": 2.41,
-      "mae_low_pct": 1.64
+      "accuracy_pct": 55.6,
+      "mae_close_pct": 3.31,
+      "bias_close_pct": 1.79,
+      "mae_high_pct": 2.28,
+      "mae_low_pct": 1.8
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.0,
-      "bias_close_pct": 0.0,
-      "mae_high_pct": 0.42,
-      "mae_low_pct": 0.43
+      "mae_close_pct": 1.1,
+      "bias_close_pct": -1.1,
+      "mae_high_pct": 1.31,
+      "mae_low_pct": 1.17
     },
     "Futures": {
       "count": 9,
-      "accuracy_pct": 66.7,
-      "mae_close_pct": 2.74,
-      "bias_close_pct": -0.34,
-      "mae_high_pct": 0.68,
-      "mae_low_pct": 1.13
+      "accuracy_pct": 55.6,
+      "mae_close_pct": 3.3,
+      "bias_close_pct": -1.69,
+      "mae_high_pct": 1.44,
+      "mae_low_pct": 2.16
     },
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 2.52,
-      "bias_close_pct": 2.52,
-      "mae_high_pct": 3.22,
-      "mae_low_pct": 0.69
+      "mae_close_pct": 2.48,
+      "bias_close_pct": 2.15,
+      "mae_high_pct": 1.64,
+      "mae_low_pct": 1.16
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b922936.75 landed within 0.00% variance of Predicted Close \u20b922936.75.",
-      "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b954909.65 landed within 0.00% variance of Predicted Close \u20b954909.65.",
-      "High Directional Precision in Futures setup 'COFORGE (NOV-2026 FUT)': Actual Close \u20b91962.0 landed within 0.18% variance of Predicted Close \u20b91958.54.",
-      "High Directional Precision in Stock setup 'HCLTECH': Actual Close \u20b91403.9 landed within 0.35% variance of Predicted Close \u20b91408.8.",
-      "High Directional Precision in Futures setup 'MPHASIS (NOV-2026 FUT)': Actual Close \u20b92561.3 landed within 0.57% variance of Predicted Close \u20b92546.87."
+      "High Directional Precision in Futures setup 'COFORGE (NOV-2026 FUT)': Actual Close \u20b91961.9 landed within 0.17% variance of Predicted Close \u20b91958.54.",
+      "High Directional Precision in Futures setup 'PERSISTENT (NOV-2026 FUT)': Actual Close \u20b95848.0 landed within 0.25% variance of Predicted Close \u20b95833.67.",
+      "High Directional Precision in Stock setup 'PNB': Actual Close \u20b9120.31 landed within 0.49% variance of Predicted Close \u20b9119.72.",
+      "High Directional Precision in Stock setup 'HCLTECH': Actual Close \u20b91400.5 landed within 0.59% variance of Predicted Close \u20b91408.8.",
+      "High Directional Precision in Stock setup 'TCS': Actual Close \u20b92460.0 landed within 0.61% variance of Predicted Close \u20b92445.12."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Stock setup 'DRREDDY': Underestimated target by 10.53% (Actual \u20b91345.0 vs Predicted \u20b91216.88).",
-      "Variance Outlier in Futures setup 'APLAPOLLO (NOV-2026 FUT)': Overestimated target by 7.48% (Actual \u20b92195.0 vs Predicted \u20b92372.43).",
-      "Variance Outlier in Stock setup 'PERSISTENT': Underestimated target by 5.15% (Actual \u20b95880.0 vs Predicted \u20b95591.81).",
-      "Variance Outlier in Stock setup 'MPHASIS': Underestimated target by 4.84% (Actual \u20b92561.3 vs Predicted \u20b92443.07).",
-      "Variance Outlier in Stock setup 'COFORGE': Underestimated target by 4.49% (Actual \u20b91962.0 vs Predicted \u20b91877.73)."
+      "Variance Outlier in Stock setup 'DRREDDY': Underestimated target by 9.74% (Actual \u20b91335.4 vs Predicted \u20b91216.88).",
+      "Variance Outlier in Futures setup 'APLAPOLLO (NOV-2026 FUT)': Overestimated target by 8.73% (Actual \u20b92165.3 vs Predicted \u20b92372.43).",
+      "Variance Outlier in Stock setup 'PERSISTENT': Underestimated target by 4.58% (Actual \u20b95848.0 vs Predicted \u20b95591.81).",
+      "Variance Outlier in Stock setup 'COFORGE': Underestimated target by 4.48% (Actual \u20b91961.9 vs Predicted \u20b91877.73).",
+      "Variance Outlier in Futures setup 'HCLTECH (NOV-2026 FUT)': Overestimated target by 4.00% (Actual \u20b91400.5 vs Predicted \u20b91458.79)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -1.64% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.94%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.12%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -0.57% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.76%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.69%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": 1.636,
-    "overall_high_bias_pct": 1.463,
-    "overall_low_bias_pct": -0.498,
+    "overall_close_bias_pct": 0.568,
+    "overall_high_bias_pct": -0.116,
+    "overall_low_bias_pct": -1.38,
     "symbol_bias_offsets": {
-      "APLAPOLLO": -4.306,
-      "APLAPOLLO (NOV-2026 FUT)": -7.479,
-      "BANK NIFTY": 0.0,
-      "COFORGE": 4.488,
-      "COFORGE (NOV-2026 FUT)": 0.177,
-      "Crude Oil (NOV-2026 FUT)": 2.403,
-      "Crude Oil Mini (NOV-2026 FUT)": 2.403,
-      "DLF": 3.515,
-      "DLF (NOV-2026 FUT)": 1.013,
-      "DRREDDY": 10.529,
-      "DRREDDY (NOV-2026 FUT)": 7.585,
-      "Gold (NOV-2026 FUT)": 3.332,
-      "Gold Mini (NOV-2026 FUT)": 3.332,
-      "HCLTECH": -0.348,
-      "HCLTECH (NOV-2026 FUT)": -3.763,
-      "MPHASIS": 4.839,
-      "MPHASIS (NOV-2026 FUT)": 0.567,
-      "NIFTY 50": 0.0,
-      "Natural Gas (NOV-2026 FUT)": 1.45,
-      "Natural Gas Mini (NOV-2026 FUT)": 1.45,
-      "PERSISTENT": 5.154,
-      "PERSISTENT (NOV-2026 FUT)": 0.794,
-      "PNB": 3.491,
-      "PNB (NOV-2026 FUT)": 0.707,
-      "Silver (NOV-2026 FUT)": 2.879,
-      "Silver Mini (NOV-2026 FUT)": 2.879,
-      "TCS": 1.345,
-      "TCS (NOV-2026 FUT)": -2.615
+      "APLAPOLLO": -5.6,
+      "APLAPOLLO (NOV-2026 FUT)": -8.731,
+      "BANK NIFTY": -1.17,
+      "COFORGE": 4.483,
+      "COFORGE (NOV-2026 FUT)": 0.172,
+      "Crude Oil (NOV-2026 FUT)": 3.928,
+      "Crude Oil Mini (NOV-2026 FUT)": 3.928,
+      "DLF": -0.666,
+      "DLF (NOV-2026 FUT)": -3.068,
+      "DRREDDY": 9.74,
+      "DRREDDY (NOV-2026 FUT)": 6.817,
+      "Gold (NOV-2026 FUT)": 3.276,
+      "Gold Mini (NOV-2026 FUT)": 3.276,
+      "HCLTECH": -0.589,
+      "HCLTECH (NOV-2026 FUT)": -3.996,
+      "MPHASIS": 3.067,
+      "MPHASIS (NOV-2026 FUT)": -1.134,
+      "NIFTY 50": -1.037,
+      "Natural Gas (NOV-2026 FUT)": -0.648,
+      "Natural Gas Mini (NOV-2026 FUT)": -0.648,
+      "PERSISTENT": 4.582,
+      "PERSISTENT (NOV-2026 FUT)": 0.246,
+      "PNB": 0.493,
+      "PNB (NOV-2026 FUT)": -2.211,
+      "Silver (NOV-2026 FUT)": 2.05,
+      "Silver Mini (NOV-2026 FUT)": 2.05,
+      "TCS": 0.609,
+      "TCS (NOV-2026 FUT)": -3.323
     }
   }
 }
