@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-09 20:57:27",
+  "updated_at": "2026-11-10 02:22:39",
   "total_evaluations_analyzed": 32,
-  "overall_accuracy_pct": 65.6,
-  "overall_mae_close_pct": 3.45,
+  "overall_accuracy_pct": 53.1,
+  "overall_mae_close_pct": 3.56,
   "category_summary": {
     "Stock": {
       "count": 11,
@@ -15,10 +15,10 @@
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.0,
-      "bias_close_pct": 0.0,
-      "mae_high_pct": 0.92,
-      "mae_low_pct": 0.94
+      "mae_close_pct": 0.03,
+      "bias_close_pct": 0.03,
+      "mae_high_pct": 0.81,
+      "mae_low_pct": 0.99
     },
     "Futures": {
       "count": 11,
@@ -30,17 +30,17 @@
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 50.0,
-      "mae_close_pct": 2.97,
-      "bias_close_pct": -2.97,
-      "mae_high_pct": 2.63,
-      "mae_low_pct": 1.91
+      "accuracy_pct": 0.0,
+      "mae_close_pct": 3.4,
+      "bias_close_pct": -3.4,
+      "mae_high_pct": 2.92,
+      "mae_low_pct": 2.45
     }
   },
   "diagnostics": {
     "what_went_right": [
       "High Directional Precision in Index setup 'BANK NIFTY': Actual Close \u20b959086.0 landed within 0.00% variance of Predicted Close \u20b959086.0.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b925030.35 landed within 0.00% variance of Predicted Close \u20b925030.35.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b925044.65 landed within 0.06% variance of Predicted Close \u20b925030.35.",
       "High Directional Precision in Stock setup 'HAL': Actual Close \u20b94999.0 landed within 0.25% variance of Predicted Close \u20b94986.69.",
       "High Directional Precision in Stock setup 'MPHASIS': Actual Close \u20b92455.0 landed within 0.25% variance of Predicted Close \u20b92461.18.",
       "High Directional Precision in Futures setup 'TCS (NOV-2026 FUT)': Actual Close \u20b92475.4 landed within 0.69% variance of Predicted Close \u20b92492.55."
@@ -53,15 +53,15 @@
       "Variance Outlier in Futures setup 'MPHASIS (NOV-2026 FUT)': Overestimated target by 4.66% (Actual \u20b92455.0 vs Predicted \u20b92575.1)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 3.10% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 2.98%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 2.05%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 3.21% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 3.04%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 2.19%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -3.102,
-    "overall_high_bias_pct": -2.346,
-    "overall_low_bias_pct": 0.869,
+    "overall_close_bias_pct": -3.209,
+    "overall_high_bias_pct": -2.67,
+    "overall_low_bias_pct": 1.698,
     "symbol_bias_offsets": {
       "APLAPOLLO": -3.976,
       "APLAPOLLO (NOV-2026 FUT)": -6.778,
@@ -70,27 +70,27 @@
       "BANK NIFTY": 0.0,
       "BHARTIARTL": -7.213,
       "BHARTIARTL (NOV-2026 FUT)": -9.355,
-      "Crude Oil (NOV-2026 FUT)": -2.639,
-      "Crude Oil Mini (NOV-2026 FUT)": -2.639,
+      "Crude Oil (NOV-2026 FUT)": -3.534,
+      "Crude Oil Mini (NOV-2026 FUT)": -3.534,
       "DLF": 1.432,
       "DLF (NOV-2026 FUT)": -0.967,
       "DRREDDY": -9.33,
       "DRREDDY (NOV-2026 FUT)": -11.22,
-      "Gold (DEC-2026 FUT)": -2.26,
-      "Gold Mini (DEC-2026 FUT)": -2.26,
+      "Gold (DEC-2026 FUT)": -2.701,
+      "Gold Mini (DEC-2026 FUT)": -2.701,
       "HAL": 0.247,
       "HAL (NOV-2026 FUT)": -2.408,
       "HCLTECH": 1.628,
       "HCLTECH (NOV-2026 FUT)": -1.314,
       "MPHASIS": -0.251,
       "MPHASIS (NOV-2026 FUT)": -4.664,
-      "NIFTY 50": 0.0,
+      "NIFTY 50": 0.057,
       "Natural Gas (NOV-2026 FUT)": -3.622,
       "Natural Gas Mini (NOV-2026 FUT)": -3.622,
       "PERSISTENT": -5.83,
       "PERSISTENT (NOV-2026 FUT)": -8.713,
-      "Silver (DEC-2026 FUT)": -3.358,
-      "Silver Mini (DEC-2026 FUT)": -3.358,
+      "Silver (DEC-2026 FUT)": -3.757,
+      "Silver Mini (DEC-2026 FUT)": -3.757,
       "TCS": 2.224,
       "TCS (NOV-2026 FUT)": -0.688,
       "UNIONBANK": -1.372,
