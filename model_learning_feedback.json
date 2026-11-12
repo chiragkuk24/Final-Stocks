@@ -1,100 +1,100 @@
 {
-  "updated_at": "2026-11-12 01:39:24",
+  "updated_at": "2026-11-12 18:31:04",
   "total_evaluations_analyzed": 32,
-  "overall_accuracy_pct": 59.4,
-  "overall_mae_close_pct": 3.81,
+  "overall_accuracy_pct": 81.2,
+  "overall_mae_close_pct": 2.38,
   "category_summary": {
     "Stock": {
       "count": 11,
-      "accuracy_pct": 90.9,
-      "mae_close_pct": 3.74,
-      "bias_close_pct": -1.65,
-      "mae_high_pct": 3.5,
-      "mae_low_pct": 2.25
+      "accuracy_pct": 63.6,
+      "mae_close_pct": 3.57,
+      "bias_close_pct": 2.64,
+      "mae_high_pct": 1.88,
+      "mae_low_pct": 1.33
     },
     "Index": {
       "count": 2,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 1.28,
-      "bias_close_pct": -1.28,
-      "mae_high_pct": 1.96,
-      "mae_low_pct": 1.7
+      "mae_close_pct": 0.68,
+      "bias_close_pct": -0.68,
+      "mae_high_pct": 0.36,
+      "mae_low_pct": 0.64
     },
     "Futures": {
       "count": 11,
-      "accuracy_pct": 45.5,
-      "mae_close_pct": 4.38,
-      "bias_close_pct": -4.25,
-      "mae_high_pct": 2.51,
-      "mae_low_pct": 2.1
+      "accuracy_pct": 81.8,
+      "mae_close_pct": 2.67,
+      "bias_close_pct": 0.11,
+      "mae_high_pct": 0.93,
+      "mae_low_pct": 0.73
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 25.0,
-      "mae_close_pct": 3.74,
-      "bias_close_pct": -3.74,
-      "mae_high_pct": 3.39,
-      "mae_low_pct": 0.94
+      "accuracy_pct": 100.0,
+      "mae_close_pct": 0.75,
+      "bias_close_pct": 0.42,
+      "mae_high_pct": 2.1,
+      "mae_low_pct": 1.32
     }
   },
   "diagnostics": {
     "what_went_right": [
-      "High Directional Precision in Futures setup 'TCS (NOV-2026 FUT)': Actual Close \u20b92475.4 landed within 0.48% variance of Predicted Close \u20b92487.35.",
-      "High Directional Precision in Futures setup 'HCLTECH (NOV-2026 FUT)': Actual Close \u20b91407.0 landed within 0.50% variance of Predicted Close \u20b91414.04.",
-      "High Directional Precision in Futures setup 'DLF (NOV-2026 FUT)': Actual Close \u20b9755.0 landed within 0.68% variance of Predicted Close \u20b9749.89.",
-      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b925044.65 landed within 0.83% variance of Predicted Close \u20b925255.05.",
-      "High Directional Precision in Futures setup 'NHPC (NOV-2026 FUT)': Actual Close \u20b980.39 landed within 0.99% variance of Predicted Close \u20b981.19."
+      "High Directional Precision in Futures setup 'APLAPOLLO (NOV-2026 FUT)': Actual Close \u20b92198.0 landed within 0.15% variance of Predicted Close \u20b92194.71.",
+      "High Directional Precision in Index setup 'NIFTY 50': Actual Close \u20b925255.05 landed within 0.18% variance of Predicted Close \u20b925299.35.",
+      "High Directional Precision in Commodities setup 'Silver (DEC-2026 FUT)': Actual Close \u20b9174218.22 landed within 0.35% variance of Predicted Close \u20b9173609.7.",
+      "High Directional Precision in Commodities setup 'Silver Mini (DEC-2026 FUT)': Actual Close \u20b9174218.22 landed within 0.35% variance of Predicted Close \u20b9173609.7.",
+      "High Directional Precision in Futures setup 'PERSISTENT (NOV-2026 FUT)': Actual Close \u20b95973.5 landed within 0.36% variance of Predicted Close \u20b95952.1."
     ],
     "what_went_wrong": [
-      "Variance Outlier in Futures setup 'BHARTIARTL (NOV-2026 FUT)': Overestimated target by 10.87% (Actual \u20b92072.1 vs Predicted \u20b92324.9).",
-      "Variance Outlier in Futures setup 'DRREDDY (NOV-2026 FUT)': Overestimated target by 10.71% (Actual \u20b91385.0 vs Predicted \u20b91551.11).",
-      "Variance Outlier in Futures setup 'PERSISTENT (NOV-2026 FUT)': Overestimated target by 7.53% (Actual \u20b96040.0 vs Predicted \u20b96532.08).",
-      "Variance Outlier in Futures setup 'APLAPOLLO (NOV-2026 FUT)': Overestimated target by 7.44% (Actual \u20b92181.3 vs Predicted \u20b92356.62).",
-      "Variance Outlier in Commodities setup 'Crude Oil (NOV-2026 FUT)': Overestimated target by 4.69% (Actual \u20b98025.57 vs Predicted \u20b98420.36)."
+      "Variance Outlier in Stock setup 'BHARTIARTL': Underestimated target by 9.50% (Actual \u20b92109.0 vs Predicted \u20b91926.09).",
+      "Variance Outlier in Stock setup 'DRREDDY': Underestimated target by 8.03% (Actual \u20b91377.0 vs Predicted \u20b91274.65).",
+      "Variance Outlier in Futures setup 'HCLTECH (NOV-2026 FUT)': Overestimated target by 5.09% (Actual \u20b91395.0 vs Predicted \u20b91469.8).",
+      "Variance Outlier in Futures setup 'TCS (NOV-2026 FUT)': Overestimated target by 4.62% (Actual \u20b92472.1 vs Predicted \u20b92591.89).",
+      "Variance Outlier in Stock setup 'TRENT': Underestimated target by 3.70% (Actual \u20b93222.7 vs Predicted \u20b93107.77)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 3.05% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 3.04%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.83%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by -1.01% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.51%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.07%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -3.047,
-    "overall_high_bias_pct": -2.596,
-    "overall_low_bias_pct": 1.308,
+    "overall_close_bias_pct": 1.011,
+    "overall_high_bias_pct": 1.359,
+    "overall_low_bias_pct": -0.369,
     "symbol_bias_offsets": {
-      "APLAPOLLO": -4.705,
-      "APLAPOLLO (NOV-2026 FUT)": -7.439,
-      "APOLLOHOSP": -1.456,
-      "APOLLOHOSP (NOV-2026 FUT)": -3.906,
-      "BANK NIFTY": -1.729,
-      "BHARTIARTL": -8.836,
-      "BHARTIARTL (NOV-2026 FUT)": -10.874,
-      "Crude Oil (NOV-2026 FUT)": -4.689,
-      "Crude Oil Mini (NOV-2026 FUT)": -4.689,
-      "DLF": 3.118,
-      "DLF (NOV-2026 FUT)": 0.681,
-      "DRREDDY": -8.803,
-      "DRREDDY (NOV-2026 FUT)": -10.709,
-      "Gold (DEC-2026 FUT)": -2.486,
-      "Gold Mini (DEC-2026 FUT)": -2.486,
-      "HAL": 1.26,
-      "HAL (NOV-2026 FUT)": -1.576,
-      "HCLTECH": 2.502,
-      "HCLTECH (NOV-2026 FUT)": -0.498,
-      "INDIANB": -1.092,
-      "INDIANB (NOV-2026 FUT)": -3.485,
-      "NHPC": 2.264,
-      "NHPC (NOV-2026 FUT)": -0.985,
-      "NIFTY 50": -0.833,
-      "Natural Gas (NOV-2026 FUT)": -4.05,
-      "Natural Gas Mini (NOV-2026 FUT)": -4.05,
-      "PERSISTENT": -4.782,
-      "PERSISTENT (NOV-2026 FUT)": -7.533,
-      "Silver (DEC-2026 FUT)": -3.755,
-      "Silver Mini (DEC-2026 FUT)": -3.755,
-      "TCS": 2.36,
-      "TCS (NOV-2026 FUT)": -0.48
+      "APLAPOLLO": 2.809,
+      "APLAPOLLO (NOV-2026 FUT)": 0.15,
+      "APOLLOHOSP": 1.724,
+      "APOLLOHOSP (NOV-2026 FUT)": -0.729,
+      "BANK NIFTY": -1.18,
+      "BHARTIARTL": 9.496,
+      "BHARTIARTL (NOV-2026 FUT)": 7.054,
+      "CIPLA": 3.166,
+      "CIPLA (NOV-2026 FUT)": 1.293,
+      "Crude Oil (NOV-2026 FUT)": 0.862,
+      "Crude Oil Mini (NOV-2026 FUT)": 0.862,
+      "DRREDDY": 8.03,
+      "DRREDDY (NOV-2026 FUT)": 5.76,
+      "Gold (DEC-2026 FUT)": 1.128,
+      "Gold Mini (DEC-2026 FUT)": 1.123,
+      "HCLTECH": -2.22,
+      "HCLTECH (NOV-2026 FUT)": -5.089,
+      "INDIANB": -0.993,
+      "INDIANB (NOV-2026 FUT)": -3.19,
+      "INDIGO": 2.348,
+      "INDIGO (NOV-2026 FUT)": -0.461,
+      "NIFTY 50": -0.175,
+      "Natural Gas (NOV-2026 FUT)": -0.643,
+      "Natural Gas Mini (NOV-2026 FUT)": -0.643,
+      "PERSISTENT": 2.929,
+      "PERSISTENT (NOV-2026 FUT)": 0.36,
+      "Silver (DEC-2026 FUT)": 0.351,
+      "Silver Mini (DEC-2026 FUT)": 0.351,
+      "TCS": -1.902,
+      "TCS (NOV-2026 FUT)": -4.622,
+      "TRENT": 3.698,
+      "TRENT (NOV-2026 FUT)": 0.717
     }
   }
 }
