@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17 19:17:51",
+  "updated_at": "2026-11-18 01:50:15",
   "total_evaluations_analyzed": 54,
   "overall_accuracy_pct": 75.9,
   "overall_mae_close_pct": 2.15,
@@ -31,17 +31,17 @@
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 1.19,
-      "bias_close_pct": 0.75,
-      "mae_high_pct": 1.63,
-      "mae_low_pct": 0.55
+      "mae_close_pct": 1.17,
+      "bias_close_pct": -0.26,
+      "mae_high_pct": 0.86,
+      "mae_low_pct": 1.85
     }
   },
   "diagnostics": {
     "what_went_right": [
       "High Directional Precision in Futures setup 'PERSISTENT (NOV-2026 FUT)': Actual Close \u20b95978.5 landed within 0.14% variance of Predicted Close \u20b95970.39.",
-      "High Directional Precision in Commodities setup 'Gold (DEC-2026 FUT)': Actual Close \u20b9133272.88 landed within 0.24% variance of Predicted Close \u20b9132953.99.",
-      "High Directional Precision in Commodities setup 'Gold Mini (DEC-2026 FUT)': Actual Close \u20b9133272.88 landed within 0.24% variance of Predicted Close \u20b9132953.99.",
+      "High Directional Precision in Commodities setup 'Crude Oil (NOV-2026 FUT)': Actual Close \u20b97980.55 landed within 0.16% variance of Predicted Close \u20b97993.7.",
+      "High Directional Precision in Commodities setup 'Crude Oil Mini (NOV-2026 FUT)': Actual Close \u20b97980.55 landed within 0.16% variance of Predicted Close \u20b97993.7.",
       "High Directional Precision in Stock setup 'ULTRACEMCO': Actual Close \u20b912270.0 landed within 0.29% variance of Predicted Close \u20b912235.02.",
       "High Directional Precision in Futures setup 'TRENT (NOV-2026 FUT)': Actual Close \u20b93203.7 landed within 0.33% variance of Predicted Close \u20b93193.3."
     ],
@@ -53,15 +53,15 @@
       "Variance Outlier in Futures setup 'INDIANB (NOV-2026 FUT)': Overestimated target by 5.02% (Actual \u20b9932.95 vs Predicted \u20b9982.28)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 0.74% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.38%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.07%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 0.89% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.27%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.26%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -0.743,
-    "overall_high_bias_pct": 0.307,
-    "overall_low_bias_pct": -0.414,
+    "overall_close_bias_pct": -0.893,
+    "overall_high_bias_pct": 0.146,
+    "overall_low_bias_pct": -0.286,
     "symbol_bias_offsets": {
       "ADANIGREEN": -2.097,
       "ADANIGREEN (NOV-2026 FUT)": -4.886,
@@ -74,14 +74,14 @@
       "BSE (NOV-2026 FUT)": -1.725,
       "CIPLA": 2.272,
       "CIPLA (NOV-2026 FUT)": 0.593,
-      "Crude Oil (NOV-2026 FUT)": 1.168,
-      "Crude Oil Mini (NOV-2026 FUT)": 1.168,
+      "Crude Oil (NOV-2026 FUT)": -0.165,
+      "Crude Oil Mini (NOV-2026 FUT)": -0.165,
       "DIXON": -0.664,
       "DIXON (NOV-2026 FUT)": -3.89,
       "DRREDDY": 6.942,
       "DRREDDY (NOV-2026 FUT)": 5.412,
-      "Gold (DEC-2026 FUT)": 0.24,
-      "Gold Mini (DEC-2026 FUT)": 0.24,
+      "Gold (DEC-2026 FUT)": -0.74,
+      "Gold Mini (DEC-2026 FUT)": -0.74,
       "HCLTECH": -1.082,
       "HCLTECH (NOV-2026 FUT)": -3.742,
       "HEROMOTOCO": -0.808,
@@ -99,14 +99,14 @@
       "NIFTY 50": -0.638,
       "NUVAMA": -0.693,
       "NUVAMA (NOV-2026 FUT)": -5.794,
-      "Natural Gas (NOV-2026 FUT)": 2.46,
-      "Natural Gas Mini (NOV-2026 FUT)": 2.46,
+      "Natural Gas (NOV-2026 FUT)": 1.819,
+      "Natural Gas Mini (NOV-2026 FUT)": 1.819,
       "PERSISTENT": 2.33,
       "PERSISTENT (NOV-2026 FUT)": 0.136,
       "PRESTIGE": -2.269,
       "PRESTIGE (NOV-2026 FUT)": -5.71,
-      "Silver (DEC-2026 FUT)": -0.885,
-      "Silver Mini (DEC-2026 FUT)": -0.885,
+      "Silver (DEC-2026 FUT)": -1.974,
+      "Silver Mini (DEC-2026 FUT)": -1.974,
       "TCS": -4.211,
       "TCS (NOV-2026 FUT)": -6.614,
       "TITAN": 2.133,
