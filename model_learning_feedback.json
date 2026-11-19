@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-18 18:58:49",
+  "updated_at": "2026-11-19 01:24:59",
   "total_evaluations_analyzed": 60,
-  "overall_accuracy_pct": 78.3,
-  "overall_mae_close_pct": 2.52,
+  "overall_accuracy_pct": 75.0,
+  "overall_mae_close_pct": 2.48,
   "category_summary": {
     "Stock": {
       "count": 25,
@@ -30,11 +30,11 @@
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 75.0,
-      "mae_close_pct": 3.33,
-      "bias_close_pct": -1.84,
-      "mae_high_pct": 1.4,
-      "mae_low_pct": 0.7
+      "accuracy_pct": 50.0,
+      "mae_close_pct": 3.03,
+      "bias_close_pct": -1.23,
+      "mae_high_pct": 3.48,
+      "mae_low_pct": 2.51
     }
   },
   "diagnostics": {
@@ -50,18 +50,18 @@
       "Variance Outlier in Futures setup 'CIPLA (NOV-2026 FUT)': Overestimated target by 7.04% (Actual \u20b91388.0 vs Predicted \u20b91493.08).",
       "Variance Outlier in Futures setup 'TRENT (NOV-2026 FUT)': Overestimated target by 6.75% (Actual \u20b93176.3 vs Predicted \u20b93406.08).",
       "Variance Outlier in Futures setup 'UNITDSPR (NOV-2026 FUT)': Overestimated target by 5.00% (Actual \u20b91444.0 vs Predicted \u20b91519.97).",
-      "Variance Outlier in Commodities setup 'Crude Oil (NOV-2026 FUT)': Overestimated target by 4.99% (Actual \u20b97644.21 vs Predicted \u20b98045.68)."
+      "Variance Outlier in Futures setup 'PERSISTENT (NOV-2026 FUT)': Overestimated target by 4.90% (Actual \u20b95911.0 vs Predicted \u20b96215.86)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.62% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.78%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 2.01%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.54% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 2.06%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 2.25%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -1.624,
-    "overall_high_bias_pct": -0.658,
-    "overall_low_bias_pct": 1.663,
+    "overall_close_bias_pct": -1.542,
+    "overall_high_bias_pct": -0.929,
+    "overall_low_bias_pct": 1.944,
     "symbol_bias_offsets": {
       "ABCAPITAL": 0.466,
       "ABCAPITAL (NOV-2026 FUT)": -2.749,
@@ -78,14 +78,14 @@
       "CDSL (NOV-2026 FUT)": -2.009,
       "CIPLA": -5.774,
       "CIPLA (NOV-2026 FUT)": -7.038,
-      "Crude Oil (NOV-2026 FUT)": -4.99,
-      "Crude Oil Mini (NOV-2026 FUT)": -4.99,
+      "Crude Oil (NOV-2026 FUT)": -4.399,
+      "Crude Oil Mini (NOV-2026 FUT)": -4.399,
       "DRREDDY": -7.983,
       "DRREDDY (NOV-2026 FUT)": -9.27,
       "EICHERMOT": 1.771,
       "EICHERMOT (NOV-2026 FUT)": -0.976,
-      "Gold (DEC-2026 FUT)": -1.87,
-      "Gold Mini (DEC-2026 FUT)": -1.87,
+      "Gold (DEC-2026 FUT)": -1.51,
+      "Gold Mini (DEC-2026 FUT)": -1.51,
       "HDFCAMC": 2.163,
       "HDFCAMC (NOV-2026 FUT)": -0.757,
       "HEROMOTOCO": 1.182,
@@ -107,14 +107,14 @@
       "NIFTY 50": 0.646,
       "NUVAMA": 0.128,
       "NUVAMA (NOV-2026 FUT)": -4.832,
-      "Natural Gas (NOV-2026 FUT)": 2.985,
-      "Natural Gas Mini (NOV-2026 FUT)": 2.985,
+      "Natural Gas (NOV-2026 FUT)": 3.608,
+      "Natural Gas Mini (NOV-2026 FUT)": 3.608,
       "PERSISTENT": -2.648,
       "PERSISTENT (NOV-2026 FUT)": -4.905,
       "PRESTIGE": 2.088,
       "PRESTIGE (NOV-2026 FUT)": -1.348,
-      "Silver (DEC-2026 FUT)": -3.485,
-      "Silver Mini (DEC-2026 FUT)": -3.485,
+      "Silver (DEC-2026 FUT)": -2.599,
+      "Silver Mini (DEC-2026 FUT)": -2.599,
       "TATACONSUM": -0.614,
       "TATACONSUM (NOV-2026 FUT)": -2.672,
       "TRENT": -4.223,
