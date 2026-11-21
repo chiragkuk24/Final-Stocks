@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-20 18:44:21",
+  "updated_at": "2026-11-21 00:56:26",
   "total_evaluations_analyzed": 74,
   "overall_accuracy_pct": 78.4,
-  "overall_mae_close_pct": 2.15,
+  "overall_mae_close_pct": 2.28,
   "category_summary": {
     "Stock": {
       "count": 32,
@@ -31,10 +31,10 @@
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 0.78,
-      "bias_close_pct": -0.12,
-      "mae_high_pct": 2.0,
-      "mae_low_pct": 2.26
+      "mae_close_pct": 2.03,
+      "bias_close_pct": 2.03,
+      "mae_high_pct": 2.81,
+      "mae_low_pct": 2.8
     }
   },
   "diagnostics": {
@@ -43,7 +43,7 @@
       "High Directional Precision in Stock setup 'ABCAPITAL': Actual Close \u20b9417.05 landed within 0.11% variance of Predicted Close \u20b9417.49.",
       "High Directional Precision in Futures setup 'INDIANB (NOV-2026 FUT)': Actual Close \u20b9947.0 landed within 0.12% variance of Predicted Close \u20b9948.13.",
       "High Directional Precision in Stock setup 'HINDPETRO': Actual Close \u20b9390.0 landed within 0.14% variance of Predicted Close \u20b9389.47.",
-      "High Directional Precision in Commodities setup 'Silver Mini (DEC-2026 FUT)': Actual Close \u20b9140342.11 landed within 0.23% variance of Predicted Close \u20b9140666.15."
+      "High Directional Precision in Stock setup 'CANBK': Actual Close \u20b9136.03 landed within 0.24% variance of Predicted Close \u20b9135.71."
     ],
     "what_went_wrong": [
       "Variance Outlier in Futures setup 'TRENT (NOV-2026 FUT)': Overestimated target by 7.15% (Actual \u20b93225.0 vs Predicted \u20b93473.34).",
@@ -53,15 +53,15 @@
       "Variance Outlier in Futures setup 'LODHA (NOV-2026 FUT)': Overestimated target by 5.37% (Actual \u20b91202.7 vs Predicted \u20b91270.9)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 0.99% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.83%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.90%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 0.75% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.92%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 1.95%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -0.986,
-    "overall_high_bias_pct": -0.869,
-    "overall_low_bias_pct": 0.957,
+    "overall_close_bias_pct": -0.754,
+    "overall_high_bias_pct": -0.703,
+    "overall_low_bias_pct": 1.016,
     "symbol_bias_offsets": {
       "ABCAPITAL": -0.105,
       "ABCAPITAL (NOV-2026 FUT)": -3.156,
@@ -88,14 +88,14 @@
       "CHOLAFIN (NOV-2026 FUT)": -4.226,
       "CIPLA": -5.234,
       "CIPLA (NOV-2026 FUT)": -6.528,
-      "Crude Oil (DEC-2026 FUT)": 0.712,
-      "Crude Oil Mini (DEC-2026 FUT)": 0.712,
+      "Crude Oil (DEC-2026 FUT)": 2.235,
+      "Crude Oil Mini (DEC-2026 FUT)": 2.235,
       "DIXON": 1.481,
       "DIXON (NOV-2026 FUT)": -2.112,
       "EICHERMOT": 5.665,
       "EICHERMOT (NOV-2026 FUT)": 2.721,
-      "Gold (DEC-2026 FUT)": 0.607,
-      "Gold Mini (DEC-2026 FUT)": 0.613,
+      "Gold (DEC-2026 FUT)": 1.986,
+      "Gold Mini (DEC-2026 FUT)": 1.986,
       "HDFCAMC": 1.983,
       "HDFCAMC (NOV-2026 FUT)": -1.01,
       "HINDPETRO": 0.136,
@@ -119,8 +119,8 @@
       "NIFTY 50": -1.11,
       "NUVAMA": -0.569,
       "NUVAMA (NOV-2026 FUT)": -5.559,
-      "Natural Gas (NOV-2026 FUT)": -1.579,
-      "Natural Gas Mini (NOV-2026 FUT)": -1.579,
+      "Natural Gas (NOV-2026 FUT)": 3.169,
+      "Natural Gas Mini (NOV-2026 FUT)": 3.169,
       "PERSISTENT": -2.988,
       "PERSISTENT (NOV-2026 FUT)": -3.712,
       "PRESTIGE": 0.599,
@@ -129,8 +129,8 @@
       "SBIN (NOV-2026 FUT)": -0.606,
       "SUNPHARMA": 1.182,
       "SUNPHARMA (NOV-2026 FUT)": -1.392,
-      "Silver (DEC-2026 FUT)": -0.23,
-      "Silver Mini (DEC-2026 FUT)": -0.23,
+      "Silver (DEC-2026 FUT)": 0.737,
+      "Silver Mini (DEC-2026 FUT)": 0.737,
       "TATACONSUM": -0.758,
       "TATACONSUM (NOV-2026 FUT)": -2.535,
       "TRENT": -4.841,
