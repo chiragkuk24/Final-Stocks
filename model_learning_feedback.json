@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-24 20:47:12",
+  "updated_at": "2026-11-25 03:09:12",
   "total_evaluations_analyzed": 80,
-  "overall_accuracy_pct": 76.2,
-  "overall_mae_close_pct": 2.77,
+  "overall_accuracy_pct": 71.2,
+  "overall_mae_close_pct": 2.81,
   "category_summary": {
     "Stock": {
       "count": 35,
@@ -30,11 +30,11 @@
     },
     "Commodities": {
       "count": 8,
-      "accuracy_pct": 75.0,
-      "mae_close_pct": 2.33,
-      "bias_close_pct": -2.33,
-      "mae_high_pct": 2.39,
-      "mae_low_pct": 1.99
+      "accuracy_pct": 25.0,
+      "mae_close_pct": 2.72,
+      "bias_close_pct": -2.72,
+      "mae_high_pct": 3.52,
+      "mae_low_pct": 1.29
     }
   },
   "diagnostics": {
@@ -53,15 +53,15 @@
       "Variance Outlier in Futures setup 'SUNPHARMA (NOV-2026 FUT)': Overestimated target by 5.40% (Actual \u20b91860.0 vs Predicted \u20b91966.22)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.20% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 1.72%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 0.75%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 2.24% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 1.83%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 0.68%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -2.2,
-    "overall_high_bias_pct": -0.469,
-    "overall_low_bias_pct": -0.327,
+    "overall_close_bias_pct": -2.238,
+    "overall_high_bias_pct": -0.735,
+    "overall_low_bias_pct": -0.209,
     "symbol_bias_offsets": {
       "ABCAPITAL": -1.934,
       "ABCAPITAL (NOV-2026 FUT)": -4.655,
@@ -88,14 +88,14 @@
       "CHOLAFIN (NOV-2026 FUT)": -0.928,
       "CIPLA": 3.664,
       "CIPLA (NOV-2026 FUT)": 2.274,
-      "Crude Oil (DEC-2026 FUT)": -1.604,
-      "Crude Oil Mini (DEC-2026 FUT)": -1.604,
+      "Crude Oil (DEC-2026 FUT)": -2.508,
+      "Crude Oil Mini (DEC-2026 FUT)": -2.508,
       "DIXON": -2.109,
       "DIXON (NOV-2026 FUT)": -5.269,
       "FORCEMOT": -2.346,
       "FORCEMOT (NOV-2026 FUT)": -5.806,
-      "Gold (DEC-2026 FUT)": -1.394,
-      "Gold Mini (DEC-2026 FUT)": -1.394,
+      "Gold (DEC-2026 FUT)": -1.307,
+      "Gold Mini (DEC-2026 FUT)": -1.307,
       "HDFCAMC": -2.262,
       "HDFCAMC (NOV-2026 FUT)": -5.158,
       "HDFCBANK": -1.766,
@@ -121,8 +121,8 @@
       "M&M": -3.5,
       "M&M (NOV-2026 FUT)": -6.2,
       "NIFTY 50": 0.0,
-      "Natural Gas (NOV-2026 FUT)": -3.461,
-      "Natural Gas Mini (NOV-2026 FUT)": -3.461,
+      "Natural Gas (NOV-2026 FUT)": -4.258,
+      "Natural Gas Mini (NOV-2026 FUT)": -4.258,
       "PERSISTENT": 1.702,
       "PERSISTENT (NOV-2026 FUT)": -0.531,
       "PRESTIGE": -1.442,
@@ -133,8 +133,8 @@
       "SBIN (NOV-2026 FUT)": -4.102,
       "SUNPHARMA": -3.248,
       "SUNPHARMA (NOV-2026 FUT)": -5.402,
-      "Silver (DEC-2026 FUT)": -2.875,
-      "Silver Mini (DEC-2026 FUT)": -2.875,
+      "Silver (DEC-2026 FUT)": -2.79,
+      "Silver Mini (DEC-2026 FUT)": -2.79,
       "TATACONSUM": 0.751,
       "TATACONSUM (NOV-2026 FUT)": -1.045,
       "TCS": -2.404,
