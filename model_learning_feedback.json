@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-25 20:03:42",
+  "updated_at": "2026-11-26 02:24:51",
   "total_evaluations_analyzed": 86,
   "overall_accuracy_pct": 75.6,
-  "overall_mae_close_pct": 2.72,
+  "overall_mae_close_pct": 2.77,
   "category_summary": {
     "Stock": {
       "count": 38,
@@ -31,10 +31,10 @@
     "Commodities": {
       "count": 8,
       "accuracy_pct": 100.0,
-      "mae_close_pct": 1.23,
-      "bias_close_pct": 0.1,
-      "mae_high_pct": 0.66,
-      "mae_low_pct": 1.88
+      "mae_close_pct": 1.83,
+      "bias_close_pct": 1.11,
+      "mae_high_pct": 1.19,
+      "mae_low_pct": 3.8
     }
   },
   "diagnostics": {
@@ -53,15 +53,15 @@
       "Variance Outlier in Futures setup 'UNITDSPR (NOV-2026 FUT)': Overestimated target by 7.09% (Actual \u20b91478.0 vs Predicted \u20b91590.71)."
     ],
     "how_to_minimize_variance": [
-      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.69% to compensate for mean market drift.",
-      "Calibrate High Target Volatility: High prediction variance averaged 2.06%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
-      "Tighten Low Support Bounds: Low prediction variance averaged 1.87%. Applying dynamic floor pivot weighting to anchor stop losses."
+      "Apply Market-Wide Bias Offset Correction: Adjust future predictions by 1.60% to compensate for mean market drift.",
+      "Calibrate High Target Volatility: High prediction variance averaged 2.11%. Applying 0.85x ATR volatility shrinkage factor on gap-up setups.",
+      "Tighten Low Support Bounds: Low prediction variance averaged 2.05%. Applying dynamic floor pivot weighting to anchor stop losses."
     ]
   },
   "bias_corrections": {
-    "overall_close_bias_pct": -1.691,
-    "overall_high_bias_pct": 0.166,
-    "overall_low_bias_pct": 1.116,
+    "overall_close_bias_pct": -1.597,
+    "overall_high_bias_pct": 0.185,
+    "overall_low_bias_pct": 1.514,
     "symbol_bias_offsets": {
       "ABCAPITAL": 0.128,
       "ABCAPITAL (NOV-2026 FUT)": -2.504,
@@ -88,16 +88,16 @@
       "CHOLAFIN (NOV-2026 FUT)": -6.697,
       "CIPLA": -6.484,
       "CIPLA (NOV-2026 FUT)": -7.686,
-      "Crude Oil (DEC-2026 FUT)": 2.177,
-      "Crude Oil Mini (DEC-2026 FUT)": 2.177,
+      "Crude Oil (DEC-2026 FUT)": 2.666,
+      "Crude Oil Mini (DEC-2026 FUT)": 2.666,
       "DIXON": 4.44,
       "DIXON (NOV-2026 FUT)": 1.677,
       "FORCEMOT": 0.174,
       "FORCEMOT (NOV-2026 FUT)": -3.294,
       "GODREJPROP": 1.372,
       "GODREJPROP (NOV-2026 FUT)": -1.95,
-      "Gold (DEC-2026 FUT)": 0.491,
-      "Gold Mini (DEC-2026 FUT)": 0.491,
+      "Gold (DEC-2026 FUT)": 1.531,
+      "Gold Mini (DEC-2026 FUT)": 1.528,
       "HDFCAMC": 1.419,
       "HDFCAMC (NOV-2026 FUT)": -1.599,
       "HDFCBANK": -2.204,
@@ -125,8 +125,8 @@
       "MPHASIS": -1.2,
       "MPHASIS (NOV-2026 FUT)": -4.724,
       "NIFTY 50": -1.712,
-      "Natural Gas (NOV-2026 FUT)": -1.975,
-      "Natural Gas Mini (NOV-2026 FUT)": -1.975,
+      "Natural Gas (NOV-2026 FUT)": -1.44,
+      "Natural Gas Mini (NOV-2026 FUT)": -1.44,
       "PERSISTENT": -0.109,
       "PERSISTENT (NOV-2026 FUT)": -2.459,
       "PRESTIGE": 0.831,
@@ -139,8 +139,8 @@
       "SBIN (NOV-2026 FUT)": -1.972,
       "SUNPHARMA": 0.611,
       "SUNPHARMA (NOV-2026 FUT)": -1.543,
-      "Silver (DEC-2026 FUT)": -0.278,
-      "Silver Mini (DEC-2026 FUT)": -0.278,
+      "Silver (DEC-2026 FUT)": 1.692,
+      "Silver Mini (DEC-2026 FUT)": 1.692,
       "TATACONSUM": -5.455,
       "TATACONSUM (NOV-2026 FUT)": -7.124,
       "TCS": -0.272,
